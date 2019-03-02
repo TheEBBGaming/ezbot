@@ -36,6 +36,7 @@ client.on("message", (message) => {
 						.setColor([255, 0, 0])
 					return message.channel.send(errEmbed);
 				} else {
+          firstMentionedMember.removeRole("550550415767502851").then(() => {
 					const player = await bsClient.getPlayer(args[0]);
 					caembed = new Discord.RichEmbed()
 						.setTitle(`Assigned ${player.tag} to ${firstMentionedMember.displayName}!`)
