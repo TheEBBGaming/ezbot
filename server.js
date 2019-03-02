@@ -19,12 +19,14 @@ client.on("message", (message) => {
   const mainchat = client.channels.find('name', '🌐global_chat');
   let firstMentioned = message.mentions.members.first() || message.author;
   let fmid = firstMentioned.id;
+  let maMember = message.guild.members.get(message.author.id);
   let firstMentionedMember = message.guild.members.get(firstMentioned.id);
 	let theBank = db.fetch(`${firstMentioned.id}.money`);
   let caembed;
 	if (theBank === null) theBank = 0;
   
   if (msg.startsWith(`${prefix}LINK`)) {
+    if (messsage.author.roles.find("name", "Royal Servant") || messsage.author.roles.find("name", "Mod") || messsage.author.roles.find("name", "Admin") || messsage.author.roles.find("name", "Head Admin") || maMember.hasPermission)
 			async function getPlayer() {
 				if (!args[0] || !args[1]) {
 					let errEmbed = new Discord.RichEmbed()
