@@ -26,7 +26,7 @@ client.on("message", (message) => {
 	if (theBank === null) theBank = 0;
   
   if (msg.startsWith(`${prefix}LINK`)) {
-    if (messsage.author.roles.find("name", "Royal Servant") || messsage.author.roles.find("name", "Mod") || messsage.author.roles.find("name", "Admin") || messsage.author.roles.find("name", "Head Admin") || maMember.hasPermission)
+    if (message.author.roles.find("name", "Royal Servant") || message.author.roles.find("name", "Mod") || message.author.roles.find("name", "Admin") || message.author.roles.find("name", "Head Admin") || message.author.roles.find("name", "Viscount") || message.author.roles.find("name", "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
 			async function getPlayer() {
 				if (!args[0] || !args[1]) {
 					let errEmbed = new Discord.RichEmbed()
@@ -322,7 +322,8 @@ client.on("message", (message) => {
 				};
 			};
 			getPlayer().catch(e => console.log(e));
-		};
+    };
+	};
 
   if (msg.startsWith(`${prefix}RESET`)) {
     if (message.author.id === "288853176210161666") {
@@ -438,177 +439,14 @@ client.on("message", (message) => {
     purge();
   };
 
-	if(msg.startsWith(`${prefix}MEMBER`)) {
-    if (message.member.roles.find("name", "Moderator") || message.member.roles.find("name", "Board of Directors") || message.member.roles.find("name", "Admin") || message.member.roles.find("name", "Chairman")) {
-	    if(!args[0]) {
-				let errEmbed = new Discord.RichEmbed()
-					.setTitle(":warning: ERROR :warning:")
-					.addField("Member not specified", "Please specify a user to give/remove the role of Member.\n**Command Format:** `/member @user`")
-					.setColor([255, 0, 0])
-				return message.channel.send(errEmbed);
-      } else {
-	       
-	      if (firstMentioned.roles.find("name", "Member")) {
-	        firstMentioned.removeRole("518277787115847702").then(() => {
-						setTimeout(function() {
-							if(!firstMentioned.roles.find("name", "Member")) {
-								firstMentioned.addRole("518277447419035648");
-                let modEmbed = new Discord.RichEmbed()
-									.setTitle("Success!")
-									.addField("Role change successful", `I have changed ${firstMentioned.displayName} (${firstMentioned.id})'s role from Member to Newcomer!`)
-									.setColor([0, 255, 0])
-								return logchannel.send(modEmbed)
-								let succEmbed = new Discord.RichEmbed()
-									.setTitle("Success!")
-									.addField("Role change successful", "I have changed that user's role from Member to Newcomer!")
-									.setColor([0, 255, 0])
-								return message.channel.send(succEmbed);
-							};
-						});
-					});
-        } else if (firstMentioned.roles.find("name", "Newcomer")) {
-          firstMentioned.addRole("518277787115847702").then(() => {
-            setTimeout(function() {
-					  	if(firstMentioned.roles.find("name", "Newcomer")) {
-								firstMentioned.removeRole("518277447419035648");
-								let modEmbed = new Discord.RichEmbed()
-									.setTitle("Success!")
-									.addField("Role change successful", `I have given the Member role to ${firstMentioned.displayName} (${firstMentioned.id})!`)
-									.setColor([0, 255, 0])
-								return logchannel.send(modEmbed).then(() => {
-                  let welcomeEmbed = new Discord.RichEmbed()
-                    .setTitle(`Welcome, ${firstMentioned.displayName}!`)
-                    .addField(`${firstMentioned.displayName} has joined the server!`, `Feel free to ping a Moderator if you have any questions or concerns.`, true)
-                    .setThumbnail(firstMentioned.user.avatarURL)
-                    .setFooter(`We hope you enjoy your time with the Royalty family!`, `https://i.imgur.com/7Ut6i8F.jpg`)
-                  return mainchat.send(welcomeEmbed).then(() => {
-                    message.delete();
-                    let succEmbed = new Discord.RichEmbed()
-                      .setTitle("Success!")
-                      .addField("Role change successful", "I have given the Member role to that user! Welcome to the Royalty family!")
-                      .setColor([0, 255, 0])
-                    return message.channel.send(succEmbed)
-                  });
-                });
-					    };
-            });
-          });
-        } else if (firstMentioned.roles.find("name", "Guest")) {
-          firstMentioned.addRole("518277787115847702").then(() => {
-            setTimeout(function() {
-					  	if(firstMentioned.roles.find("name", "Guest")) {
-								firstMentioned.removeRole("518548750411628544");
-                message.delete();
-								let modEmbed = new Discord.RichEmbed()
-									.setTitle("Success!")
-									.addField("Role change successful", `I have changed ${firstMentioned.displayName} (${firstMentioned.id})'s role from Guest to Member!`)
-									.setColor([0, 255, 0])
-								return logchannel.send(modEmbed).then(() => {
-                  let succEmbed = new Discord.RichEmbed()
-                    .setTitle("Success!")
-                    .addField("Role change successful", "I have changed that user's role from Guest to Member! Welcome to the Royalty family!")
-                    .setColor([0, 255, 0])
-                  return message.channel.send(succEmbed)
-                });
-							};
-						});
-					});
-				};
-      };
-  	};
-  };
-
-	if(msg.startsWith(`${prefix}GUEST`)) {
-    if (message.member.roles.find("name", "Moderator") || message.member.roles.find("name", "Board of Directors") || message.member.roles.find("name", "Admin") || message.member.roles.find("name", "Chairman")) {
-	    if(!args[0]) {
-				let errEmbed = new Discord.RichEmbed()
-					.setTitle(":warning: ERROR :warning:")
-					.addField("Member not specified", "Please specify a user to give/remove the role of Guest.\n**Command Format:** `/guest @user`")
-					.setColor([255, 0, 0])
-				return message.channel.send(errEmbed);
-      } else {
-	       
-	      if (firstMentioned.roles.find("name", "Guest")) {
-	        firstMentioned.removeRole("518548750411628544").then(() => {
-            setTimeout(function() {
-					  	if(!firstMentioned.roles.find("name", "Guest")) {
-								firstMentioned.addRole("518277447419035648");
-                message.delete();
-								let modEmbed = new Discord.RichEmbed()
-									.setTitle("Success!")
-									.addField("Role change successful", `I have changed ${firstMentioned.displayName} (${firstMentioned.id})'s role from Guest to Newcomer!`)
-									.setColor([0, 255, 0])
-								return logchannel.send(modEmbed).then(() => {
-                  let succEmbed = new Discord.RichEmbed()
-                    .setTitle("Success!")
-                    .addField("Role change successful", "I have changed that user's role from Guest to Newcomer!")
-                    .setColor([0, 255, 0])
-                  return message.channel.send(succEmbed)
-                });
-							};
-						});
-					});
-        } else if (firstMentioned.roles.find("name", "Newcomer")) {
-          firstMentioned.addRole("518548750411628544").then(() => {
-            setTimeout(function() {
-					  	if(firstMentioned.roles.find("name", "Newcomer")) {
-								firstMentioned.removeRole("518277447419035648");
-                message.delete();
-								let modEmbed = new Discord.RichEmbed()
-									.setTitle("Success!")
-									.addField("Role change successful", `I have given the Guest role to ${firstMentioned.displayName} (${firstMentioned.id})!`)
-									.setColor([0, 255, 0])
-								return logchannel.send(modEmbed).then(() => {
-                  let welcomeEmbed = new Discord.RichEmbed()
-                    .setTitle(`Welcome, ${firstMentioned.displayName}!`)
-                    .addField(`${firstMentioned.displayName} has joined the server!`, `Feel free to ping a Moderator if you have any questions or concerns.`)
-                    .setImage(firstMentioned.user.avatarURL)
-                    .setFooter(`We hope you enjoy your time with the Royalty family!`, `https://i.imgur.com/7Ut6i8F.jpg`)
-                  return mainchat.send(welcomeEmbed).then(() => {
-                    let succEmbed = new Discord.RichEmbed()
-                      .setTitle("Success!")
-                      .addField("Role change successful", "I have given the Guest role to that user!")
-                      .setColor([0, 255, 0])
-                    return message.channel.send(succEmbed)
-                  });
-                });
-							};
-            });
-          });
-        } else if (firstMentioned.roles.find("name", "Member")) {
-          firstMentioned.addRole("518548750411628544").then(() => {
-            setTimeout(function() {
-					  	if(firstMentioned.roles.find("name", "Member")) {
-								firstMentioned.removeRole("518277787115847702");
-                message.delete();
-								let modEmbed = new Discord.RichEmbed()
-									.setTitle("Success!")
-									.addField("Role change successful", `I have changed ${firstMentioned.displayName} (${firstMentioned.id})'s role from Member to Guest!`)
-									.setColor([0, 255, 0])
-								return logchannel.send(modEmbed).then(() => {
-                  let succEmbed = new Discord.RichEmbed()
-                    .setTitle("Success!")
-                    .addField("Role change successful", "I have changed that user's role from Member to Guest!")
-                    .setColor([0, 255, 0])
-                  return message.channel.send(succEmbed)
-                });
-							};
-						});
-					});
-				};
-      };
-  	};
-  };
-
 	if (msg.startsWith(`${prefix}HELP`)) {
 		if(!args[0]) {
 			const helpEmbed = new Discord.RichEmbed()
 				.setTitle("Command List")
 				.setAuthor(`Requested by ${message.author.username}`, message.author.avatarURL)
-				.setDescription("Type `/help [command]` for more information on the command. (i.e. `/help vice`)")
-				.addField("/vice", "Assigns the mentioned user the role of Vice President.")
-				.addField("/member", "Assigns or removes the mentioned user's role of Member.")
-				.addField("/guest", "Assigns or removes the mentioned user's role of Guest.")
+				.setDescription("Type `/help [command]` for more information on the command. (i.e. `/help link`)")
+        .addField("NOTE: /MUTE AND /PURGE ARE CURRENTLY DOWN. DO NOT USE THESE COMMANDS.", "\u200B")
+				.addField("/link", "Links a Discord user to their Brawl Stars tag, assigning any roles needed.")
         .addField("/mute", "Mutes the mentioned user for a specified amount of time.")
         .addField("/purge", "Purges the specified number of messages from the chat.")
 				.addField("/help", "Do you really need to ask?")
@@ -616,34 +454,14 @@ client.on("message", (message) => {
 			return message.channel.send(helpEmbed);
 		} else if (args[0] === "vice") {
 			const viceEmbed = new Discord.RichEmbed()
-				.setTitle("/vice Command")
+				.setTitle("/link Command")
 				.setAuthor(`Requested by ${message.author.username}`, message.author.avatarURL)
-				.setDescription("Information on the `/vice` command")
-				.addField("Syntax", "`/vice` @user")
-				.addField("Function", "Assigns the mentioned user the Vice President role of the message author's Club")
-				.addField("Requirements", "You must have one of the Club President roles")
+				.setDescription("Information on the `/link` command")
+				.addField("Syntax", "`/link` @user")
+				.addField("Function", "Links a Discord user to their Brawl Stars tag, assigning any roles needed")
+				.addField("Requirements", "You must be Royal Servant or above")
 				.setFooter("This help message is brought to you by the Royalty family", "https://i.imgur.com/7Ut6i8F.jpg")
 			return message.channel.send(viceEmbed);
-		} else if (args[0] === "member") {
-			const memberEmbed = new Discord.RichEmbed()
-				.setTitle("/member Command")
-				.setAuthor(`Requested by ${message.author.username}`, message.author.avatarURL)
-				.setDescription("Information on the `/member` command")
-				.addField("Syntax", "`/member` @user")
-				.addField("Functions", "a) Removes the mentioned user's Newcomer role and assigns them the Member role\nb) Removes the mentioned user's Guest role and assigns them the Member role\nc) Removes the mentioned user's Member role and assigns them the Newcomer role")
-				.addField("Requirements", "You must be a Moderator or above")
-				.setFooter("This help message is brought to you by the Royalty family", "https://i.imgur.com/7Ut6i8F.jpg")
-			return message.channel.send(memberEmbed);
-		} else if (args[0] === "guest") {
-				const guestEmbed = new Discord.RichEmbed()
-					.setTitle("/guest Command")
-					.setAuthor(`Requested by ${message.author.username}`, message.author.avatarURL)
-					.setDescription("Information on the `/guest` command")
-					.addField("Syntax", "`/guest` @user")
-					.addField("Functions", "a) Removes the mentioned user's Newcomer role and assigns them the Guest role\nb) Removes the mentioned user's Member role and assigns them the Guest role\nc) Removes the mentioned user's Guest role and assigns them the Newcomer role")
-					.addField("Requirements", "You must be a Moderator or above")
-					.setFooter("This help message is brought to you by the Royalty family", "https://i.imgur.com/7Ut6i8F.jpg")
-				return message.channel.send(guestEmbed);
 			} else if (args[0] === "help") {
 					return message.channel.send("Oh, come on. Did you really think that would work?");
 			} else if (args[0] === "mute") {
