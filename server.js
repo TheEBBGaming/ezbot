@@ -22,6 +22,7 @@ client.on("message", (message) => {
   let maMember = message.guild.members.get(message.author.id);
   let firstMentionedMember = message.guild.members.get(firstMentioned.id);
 	let theBank = db.fetch(`${firstMentioned.id}.money`);
+  let mmmf = message.mentions.members.first();
   let caembed;
 	if (theBank === null) theBank = 0;
   
@@ -29,7 +30,7 @@ client.on("message", (message) => {
     if (message.author.roles.find("name", "Royal Servant") || message.author.roles.find("name", "Mod") || message.author.roles.find("name", "Admin") || message.author.roles.find("name", "Head Admin") || message.author.roles.find("name", "Viscount") || message.author.roles.find("name", "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
 			
       async function getPlayer() {
-				if (!args[0] || !args[1]) {
+				if (!args[0] || !args[1] || !message.mentions.members.first()) {
 					let errEmbed = new Discord.RichEmbed()
 						.setTitle(":warning: ERROR :warning:")
 						.addField("Tag or user not specified", "Please specify a Discord user and Brawl Stars tag to link.\n**Command Format:** `/link #tag @user`")
@@ -37,7 +38,6 @@ client.on("message", (message) => {
 					return message.channel.send(errEmbed);
 				} else {
           const player = await bsClient.getPlayer(args[0]);
-          firstMentionedMember.removeRole("550550415767502851").then(() => { 
             caembed = new Discord.RichEmbed()
               .setTitle(`Assigned ${player.tag} to ${firstMentionedMember.displayName}!`)
               .addField(`In-Game Name`, player.name, true)
@@ -321,9 +321,10 @@ client.on("message", (message) => {
                 };
               });
             };
-          });
 				};
 			};
+      if (mmmf.roles.find("name", "SS") {
+      
 			getPlayer().catch(e => console.log(e));
     };
 	};
