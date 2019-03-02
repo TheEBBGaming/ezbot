@@ -27,7 +27,7 @@ client.on("message", (message) => {
 	if (theBank === null) theBank = 0;
   
   if (msg.startsWith(`${prefix}LINK`)) {
-    if (message.author.roles.find("name", "Royal Servant") || message.author.roles.find("name", "Mod") || message.author.roles.find("name", "Admin") || message.author.roles.find("name", "Head Admin") || message.author.roles.find("name", "Viscount") || message.author.roles.find("name", "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
+    if (message.member.roles.find("name", "Royal Servant") || message.member.roles.find("name", "Mod") || message.member.roles.find("name", "Admin") || message.member.roles.find("name", "Head Admin") || message.member.roles.find("name", "Viscount") || message.member.roles.find("name", "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
 			
       async function getPlayer() {
 				if (!args[0] || !args[1] || !message.mentions.members.first()) {
