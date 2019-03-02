@@ -15,7 +15,8 @@
     "express": "^4.16.4",
     "node": "^11.10.0",
     "quick.db": "^7.0.0-b21",
-    "parse-ms": "^2.0.0"
+    "parse-ms": "^2.0.0",
+    "brawlstars": "^1.2.0"
   },
   "engines": {
     "node": "8.x"
