@@ -323,9 +323,12 @@ client.on("message", (message) => {
             };
 				};
 			};
-      if (mmmf.roles.find("name", "SS") {
-      
-			getPlayer().catch(e => console.log(e));
+      if (mmmf.roles.find("name", "SS")) {
+        firstMentioned.removeRole("550550415767502851");
+			  getPlayer().catch(e => console.log(e));
+      } else {
+        getPlayer().catch(e => console.log(e));
+      };
     };
 	};
 
