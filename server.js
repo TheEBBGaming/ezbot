@@ -3,27 +3,6 @@ const client = new Discord.Client();
 const db = require('quick.db');
 const http = require('http'); const express = require('express'); const app = express(); app.get("/", (request, response) => { console.log(Date.now() + " Ping Received"); response.sendStatus(200); }); app.listen(process.env.PORT); setInterval(() => { http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`); }, 280000)
 
-let apexPres = 533474799129853953;
-let gloryPres = 533474803185877013;
-let valorPres = 533474807921246248;
-let reignPres = 533474811612233730;
-let rushPres = 533474815726583828;
-let nationPres = 533474819250061316;
-let blissPres = 533474823263879181;
-let academyPres = 533474827005329411;
-let firePres = 533474834827575296;
-
-let apexVice = 533492171119263745;
-let gloryVice = 533492178551308302;
-let valorVice = 533492185417515008;
-let reignVice = 533492191453118484;
-let rushVice = 533492194678407198;
-let nationVice = 533492197178343437;
-let blissVice = 533492181999026182;
-let academyVice = 533492188819095564;
-let fireVice = 533492174592147486;
-
-
 client.on("ready", () => {
   console.log("RoyaltyBot is ready to roll!");
 });
@@ -34,7 +13,7 @@ client.on("message", (message) => {
   let msg = message.content.toUpperCase();
   let cont = message.content.slice(prefix.length).split(" ");
   let args = cont.slice(1);
-  const logchannel = client.channels.find('name', '🔰mod_logs');
+  const logchannel = client.channels.find('name', '🚨mod_logs');
   const mainchat = client.channels.find('name', '🌐global_chat');
   let firstMentioned = message.mentions.members.first() || message.author;
   let fmid = firstMentioned.id;
@@ -121,121 +100,6 @@ client.on("message", (message) => {
 			return message.channel.send(errEmbed);
 		};
 	};
-  
-  if (msg.startsWith(`${prefix}VICE`)) {
-     if (message.member.roles.find("name", "Apex President")) {
-        if (!args[0]) {
-          return message.channel.send("Error. Please mention a user to give the role of 'Apex Vice President' to.\n**Command Format**: `/vice @user`");
-        } else {
-          if (message.mentions.members.first()) {
-             
-            firstMentioned.addRole("533492171119263745");
-          } else {
-            return message.channel.send("Error. Please mention a user to give the role of 'Apex Vice President' to.\n**Command Format**: `/vice @user`")
-          };
-        };
-     } else if (message.member.roles.find("name", "Glory President")) {
-        if (!args[0]) {
-          return message.channel.send("Error. Please mention a user to give the role of 'Glory Vice President' to.\n**Command Format**: `/vice @user`");
-        } else {
-          if (message.mentions.members.first()) {
-             
-            firstMentioned.addRole("533492178551308302");
-            return message.channel.send(`Done! The user now has the Vice President role for your Club!`);
-          } else {
-            return message.channel.send("Error. Please mention a user to give the role of 'Glory Vice President' to.\n**Command Format**: `/vice @user`")
-          };
-        };
-     } else if (message.member.roles.find("name", "Valor President")) {
-        if (!args[0]) {
-          return message.channel.send("Error. Please mention a user to give the role of 'Valor Vice President' to.\n**Command Format**: `/vice @user`");
-        } else {
-          if (message.mentions.members.first()) {
-             
-            firstMentioned.addRole("533492185417515008");
-            return message.channel.send(`Done! The user now has the Vice President role for your Club!`);
-          } else {
-            return message.channel.send("Error. Please mention a user to give the role of 'Valor Vice President' to.\n**Command Format**: `/vice @user`")
-          };
-        };
-     } else if (message.member.roles.find("name", "Reign President")) {
-        if (!args[0]) {
-          return message.channel.send("Error. Please mention a user to give the role of 'Reign Vice President' to.\n**Command Format**: `/vice @user`");
-        } else {
-          if (message.mentions.members.first()) {
-             
-            firstMentioned.addRole("533492191453118484");
-          } else {
-            return message.channel.send("Error. Please mention a user to give the role of 'Reign Vice President' to.\n**Command Format**: `/vice @user`")
-          };
-        };
-     } else if (message.member.roles.find("name", "Rush President")) {
-        if (!args[0]) {
-          return message.channel.send("Error. Please mention a user to give the role of 'Rush Vice President' to.\n**Command Format**: `/vice @user`");
-        } else {
-          if (message.mentions.members.first()) {
-             
-            firstMentioned.addRole("533492194678407198");
-          } else {
-            return message.channel.send("Error. Please mention a user to give the role of 'Rush Vice President' to.\n**Command Format**: `/vice @user`")
-          };
-        };
-     } else if (message.member.roles.find("name", "Nation President")) {
-        if (!args[0]) {
-          return message.channel.send("Error. Please mention a user to give the role of 'Nation Vice President' to.\n**Command Format**: `/vice @user`");
-        } else {
-          if (message.mentions.members.first()) {
-             
-            firstMentioned.addRole("533492197178343437");
-          } else {
-            return message.channel.send("Error. Please mention a user to give the role of 'Nation Vice President' to.\n**Command Format**: `/vice @user`")
-          };
-        };
-     } else if (message.member.roles.find("name", "Bliss President")) {
-        if (!args[0]) {
-          return message.channel.send("Error. Please mention a user to give the role of 'Bliss Vice President' to.\n**Command Format**: `/vice @user`");
-        } else {
-          if (message.mentions.members.first()) {
-             
-            firstMentioned.addRole("533492181999026182");
-          } else {
-            return message.channel.send("Error. Please mention a user to give the role of 'Bliss Vice President' to.\n**Command Format**: `/vice @user`")
-          };
-        };
-      } else if (message.member.roles.find("name", "Academy President")) {
-         if (!args[0]) {
-           return message.channel.send("Error. Please mention a user to give the role of 'Academy Vice President' to.\n**Command Format**: `/vice @user`");
-         } else {
-           if (message.mentions.members.first()) {
-              
-             firstMentioned.addRole("533492188819095564");
-           } else {
-             return message.channel.send("Error. Please mention a user to give the role of 'Academy Vice President' to.\n**Command Format**: `/vice @user`")
-           };
-         };
-      } else if (message.member.roles.find("name", "Fire President")) {
-         if (!args[0]) {
-           return message.channel.send("Error. Please mention a user to give the role of 'Fire Vice President' to.\n**Command Format**: `/vice @user`");
-         } else {
-           if (message.mentions.members.first()) {
-              
-             firstMentioned.addRole("533492174592147486");
-           } else {
-             return message.channel.send("Error. Please mention a user to give the role of 'Fire Vice President' to.\n**Command Format**: `/vice @user`")
-           };
-         };
-      } else {
-        return message.channel.send("Error. You must have the President role of your respective Club in order to use this command. If you believe this is a mistake, please Direct Message the Modmail bot immediately.")
-      };
-  };
-
-  if (msg.startsWith("BOTSHUTDOWNSHH")) {
-    if (message.author.id === "288853176210161666") {
-      dosomestuffidk();
-    } else {
-      return message.channel.send("You're not Mooose... <@&288853176210161666>! IMPOSTOR ALERT!");
-    };
-  };
   
   if (msg.startsWith(`${prefix}PURGE`)) {
     message.delete();
