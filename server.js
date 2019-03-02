@@ -27,7 +27,8 @@ client.on("message", (message) => {
   
   if (msg.startsWith(`${prefix}LINK`)) {
     if (message.author.roles.find("name", "Royal Servant") || message.author.roles.find("name", "Mod") || message.author.roles.find("name", "Admin") || message.author.roles.find("name", "Head Admin") || message.author.roles.find("name", "Viscount") || message.author.roles.find("name", "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
-			async function getPlayer() {
+			
+      async function getPlayer() {
 				if (!args[0] || !args[1]) {
 					let errEmbed = new Discord.RichEmbed()
 						.setTitle(":warning: ERROR :warning:")
