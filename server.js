@@ -36,291 +36,292 @@ client.on("message", (message) => {
 						.setColor([255, 0, 0])
 					return message.channel.send(errEmbed);
 				} else {
-          firstMentionedMember.removeRole("550550415767502851").then(() => {
-					const player = await bsClient.getPlayer(args[0]);
-					caembed = new Discord.RichEmbed()
-						.setTitle(`Assigned ${player.tag} to ${firstMentionedMember.displayName}!`)
-						.addField(`In-Game Name`, player.name, true)
-						.addField(`Club Name`, player.club.name, true)
-						.addField(`Club Role`, player.club.role, true);
-					if (player.club.name.startsWith("Royalty")) {
-						caembed.addField(`In Royalty`, `True`, true)
-					} else {
-						caembed.addField(`In Royalty`, `False`, true)
-					};
-					if (player.club.role === "President") {
-						firstMentionedMember.addRole("550516837234901039").then(() => {
-							if (player.club.name === "Royalty eSports") {
-								firstMentionedMember.addRole("551457440143638538").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Angels") {
-								firstMentionedMember.addRole("550831851921735683").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Rush") {
-								firstMentionedMember.addRole("550555961006358537").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty III") {
-								firstMentionedMember.addRole("550556107836489729").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Dark") {
-								firstMentionedMember.addRole("550721443541942283").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Legacy") {
-								firstMentionedMember.addRole("551213916005597187").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Light") {
-								firstMentionedMember.addRole("550806038492872716").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Reign") {
-								firstMentionedMember.addRole("550842881640890378").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Bliss") {
-								firstMentionedMember.addRole("550921201099210755").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Academy") {
-								firstMentionedMember.addRole("550556453308596225").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Nation") {
-								firstMentionedMember.addRole("550556614579716096").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Legends") {
-								firstMentionedMember.addRole("550557048580997123").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Champs") {
-								firstMentionedMember.addRole("550557190121848843").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Mystic") {
-								firstMentionedMember.addRole("550557533882941441").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Tactic") {
-								firstMentionedMember.addRole("550557663532941312").then(() => {
-									message.channel.send(caembed);
-								});
-							} else {
-								firstMentionedMember.addRole("550521408799768587").then(() => {
-									message.channel.send(caembed);
-								});
-							};
-						});
-					} else if (player.club.role === "Vice President") {
-						firstMentionedMember.addRole("550517562623000589").then(() => {
-							if (player.club.name === "Royalty eSports") {
-								firstMentionedMember.addRole("551457440143638538").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Angels") {
-								firstMentionedMember.addRole("550831851921735683").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Rush") {
-								firstMentionedMember.addRole("550555961006358537").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty III") {
-								firstMentionedMember.addRole("550556107836489729").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Dark") {
-								firstMentionedMember.addRole("550721443541942283").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Legacy") {
-								firstMentionedMember.addRole("551213916005597187").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Light") {
-								firstMentionedMember.addRole("550806038492872716").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Reign") {
-								firstMentionedMember.addRole("550842881640890378").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Bliss") {
-								firstMentionedMember.addRole("550921201099210755").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Academy") {
-								firstMentionedMember.addRole("550556453308596225").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Nation") {
-								firstMentionedMember.addRole("550556614579716096").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Legends") {
-								firstMentionedMember.addRole("550557048580997123").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Champs") {
-								firstMentionedMember.addRole("550557190121848843").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Mystic") {
-								firstMentionedMember.addRole("550557533882941441").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Tactic") {
-								firstMentionedMember.addRole("550557663532941312").then(() => {
-									message.channel.send(caembed);
-								});
-							} else {
-								firstMentionedMember.addRole("550521408799768587").then(() => {
-									message.channel.send(caembed);
-								});
-							};
-						});
-					} else if (player.club.role === "Senior") {
-						firstMentionedMember.addRole("550518022939344896").then(() => {
-							if (player.club.name === "Royalty eSports") {
-								firstMentionedMember.addRole("551457440143638538").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Angels") {
-								firstMentionedMember.addRole("550831851921735683").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Rush") {
-								firstMentionedMember.addRole("550555961006358537").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty III") {
-								firstMentionedMember.addRole("550556107836489729").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Dark") {
-								firstMentionedMember.addRole("550721443541942283").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Legacy") {
-								firstMentionedMember.addRole("551213916005597187").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Light") {
-								firstMentionedMember.addRole("550806038492872716").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Reign") {
-								firstMentionedMember.addRole("550842881640890378").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Bliss") {
-								firstMentionedMember.addRole("550921201099210755").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Academy") {
-								firstMentionedMember.addRole("550556453308596225").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Nation") {
-								firstMentionedMember.addRole("550556614579716096").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Legends") {
-								firstMentionedMember.addRole("550557048580997123").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Champs") {
-								firstMentionedMember.addRole("550557190121848843").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Mystic") {
-								firstMentionedMember.addRole("550557533882941441").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Tactic") {
-								firstMentionedMember.addRole("550557663532941312").then(() => {
-									message.channel.send(caembed);
-								});
-							} else {
-								firstMentionedMember.addRole("550521408799768587").then(() => {
-									message.channel.send(caembed);
-								});
-							};
-						});
-					} else if (player.club.role === "Member") {
-						firstMentionedMember.addRole("550518379149131776").then(() => {
-							if (player.club.name === "Royalty eSports") {
-								firstMentionedMember.addRole("551457440143638538").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Angels") {
-								firstMentionedMember.addRole("550831851921735683").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Rush") {
-								firstMentionedMember.addRole("550555961006358537").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty III") {
-								firstMentionedMember.addRole("550556107836489729").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Dark") {
-								firstMentionedMember.addRole("550721443541942283").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Legacy") {
-								firstMentionedMember.addRole("551213916005597187").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Light") {
-								firstMentionedMember.addRole("550806038492872716").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Reign") {
-								firstMentionedMember.addRole("550842881640890378").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Bliss") {
-								firstMentionedMember.addRole("550921201099210755").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Academy") {
-								firstMentionedMember.addRole("550556453308596225").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Nation") {
-								firstMentionedMember.addRole("550556614579716096").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Legends") {
-								firstMentionedMember.addRole("550557048580997123").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Champs") {
-								firstMentionedMember.addRole("550557190121848843").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Mystic") {
-								firstMentionedMember.addRole("550557533882941441").then(() => {
-									message.channel.send(caembed);
-								});
-							} else if (player.club.name === "Royalty Tactic") {
-								firstMentionedMember.addRole("550557663532941312").then(() => {
-									message.channel.send(caembed);
-								});
-							} else {
-								firstMentionedMember.addRole("550521408799768587").then(() => {
-									message.channel.send(caembed);
-								});
-							};
-						});
-					};
+          const player = await bsClient.getPlayer(args[0]);
+          firstMentionedMember.removeRole("550550415767502851").then(() => { 
+            caembed = new Discord.RichEmbed()
+              .setTitle(`Assigned ${player.tag} to ${firstMentionedMember.displayName}!`)
+              .addField(`In-Game Name`, player.name, true)
+              .addField(`Club Name`, player.club.name, true)
+              .addField(`Club Role`, player.club.role, true);
+            if (player.club.name.startsWith("Royalty")) {
+              caembed.addField(`In Royalty`, `True`, true)
+            } else {
+              caembed.addField(`In Royalty`, `False`, true)
+            };
+            if (player.club.role === "President") {
+              firstMentionedMember.addRole("550516837234901039").then(() => {
+                if (player.club.name === "Royalty eSports") {
+                  firstMentionedMember.addRole("551457440143638538").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Angels") {
+                  firstMentionedMember.addRole("550831851921735683").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Rush") {
+                  firstMentionedMember.addRole("550555961006358537").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty III") {
+                  firstMentionedMember.addRole("550556107836489729").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Dark") {
+                  firstMentionedMember.addRole("550721443541942283").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Legacy") {
+                  firstMentionedMember.addRole("551213916005597187").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Light") {
+                  firstMentionedMember.addRole("550806038492872716").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Reign") {
+                  firstMentionedMember.addRole("550842881640890378").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Bliss") {
+                  firstMentionedMember.addRole("550921201099210755").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Academy") {
+                  firstMentionedMember.addRole("550556453308596225").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Nation") {
+                  firstMentionedMember.addRole("550556614579716096").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Legends") {
+                  firstMentionedMember.addRole("550557048580997123").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Champs") {
+                  firstMentionedMember.addRole("550557190121848843").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Mystic") {
+                  firstMentionedMember.addRole("550557533882941441").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Tactic") {
+                  firstMentionedMember.addRole("550557663532941312").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else {
+                  firstMentionedMember.addRole("550521408799768587").then(() => {
+                    message.channel.send(caembed);
+                  });
+                };
+              });
+            } else if (player.club.role === "Vice President") {
+              firstMentionedMember.addRole("550517562623000589").then(() => {
+                if (player.club.name === "Royalty eSports") {
+                  firstMentionedMember.addRole("551457440143638538").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Angels") {
+                  firstMentionedMember.addRole("550831851921735683").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Rush") {
+                  firstMentionedMember.addRole("550555961006358537").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty III") {
+                  firstMentionedMember.addRole("550556107836489729").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Dark") {
+                  firstMentionedMember.addRole("550721443541942283").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Legacy") {
+                  firstMentionedMember.addRole("551213916005597187").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Light") {
+                  firstMentionedMember.addRole("550806038492872716").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Reign") {
+                  firstMentionedMember.addRole("550842881640890378").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Bliss") {
+                  firstMentionedMember.addRole("550921201099210755").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Academy") {
+                  firstMentionedMember.addRole("550556453308596225").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Nation") {
+                  firstMentionedMember.addRole("550556614579716096").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Legends") {
+                  firstMentionedMember.addRole("550557048580997123").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Champs") {
+                  firstMentionedMember.addRole("550557190121848843").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Mystic") {
+                  firstMentionedMember.addRole("550557533882941441").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Tactic") {
+                  firstMentionedMember.addRole("550557663532941312").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else {
+                  firstMentionedMember.addRole("550521408799768587").then(() => {
+                    message.channel.send(caembed);
+                  });
+                };
+              });
+            } else if (player.club.role === "Senior") {
+              firstMentionedMember.addRole("550518022939344896").then(() => {
+                if (player.club.name === "Royalty eSports") {
+                  firstMentionedMember.addRole("551457440143638538").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Angels") {
+                  firstMentionedMember.addRole("550831851921735683").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Rush") {
+                  firstMentionedMember.addRole("550555961006358537").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty III") {
+                  firstMentionedMember.addRole("550556107836489729").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Dark") {
+                  firstMentionedMember.addRole("550721443541942283").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Legacy") {
+                  firstMentionedMember.addRole("551213916005597187").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Light") {
+                  firstMentionedMember.addRole("550806038492872716").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Reign") {
+                  firstMentionedMember.addRole("550842881640890378").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Bliss") {
+                  firstMentionedMember.addRole("550921201099210755").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Academy") {
+                  firstMentionedMember.addRole("550556453308596225").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Nation") {
+                  firstMentionedMember.addRole("550556614579716096").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Legends") {
+                  firstMentionedMember.addRole("550557048580997123").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Champs") {
+                  firstMentionedMember.addRole("550557190121848843").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Mystic") {
+                  firstMentionedMember.addRole("550557533882941441").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Tactic") {
+                  firstMentionedMember.addRole("550557663532941312").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else {
+                  firstMentionedMember.addRole("550521408799768587").then(() => {
+                    message.channel.send(caembed);
+                  });
+                };
+              });
+            } else if (player.club.role === "Member") {
+              firstMentionedMember.addRole("550518379149131776").then(() => {
+                if (player.club.name === "Royalty eSports") {
+                  firstMentionedMember.addRole("551457440143638538").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Angels") {
+                  firstMentionedMember.addRole("550831851921735683").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Rush") {
+                  firstMentionedMember.addRole("550555961006358537").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty III") {
+                  firstMentionedMember.addRole("550556107836489729").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Dark") {
+                  firstMentionedMember.addRole("550721443541942283").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Legacy") {
+                  firstMentionedMember.addRole("551213916005597187").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Light") {
+                  firstMentionedMember.addRole("550806038492872716").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Reign") {
+                  firstMentionedMember.addRole("550842881640890378").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Bliss") {
+                  firstMentionedMember.addRole("550921201099210755").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Academy") {
+                  firstMentionedMember.addRole("550556453308596225").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Nation") {
+                  firstMentionedMember.addRole("550556614579716096").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Legends") {
+                  firstMentionedMember.addRole("550557048580997123").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Champs") {
+                  firstMentionedMember.addRole("550557190121848843").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Mystic") {
+                  firstMentionedMember.addRole("550557533882941441").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else if (player.club.name === "Royalty Tactic") {
+                  firstMentionedMember.addRole("550557663532941312").then(() => {
+                    message.channel.send(caembed);
+                  });
+                } else {
+                  firstMentionedMember.addRole("550521408799768587").then(() => {
+                    message.channel.send(caembed);
+                  });
+                };
+              });
+            };
+          });
 				};
 			};
 			getPlayer().catch(e => console.log(e));
