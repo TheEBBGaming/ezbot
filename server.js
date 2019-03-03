@@ -416,7 +416,7 @@ client.on("message", (message) => {
     message.delete();
     async function purge() {
 
-      if (!message.member.roles.find("name", "Moderator")) {
+      if (!message.member.roles.find("name", "Mod")) {
         message.channel.send('Must be mod, nab');
         return;
       };
@@ -452,14 +452,13 @@ client.on("message", (message) => {
 				.setTitle("Command List")
 				.setAuthor(`Requested by ${message.author.username}`, message.author.avatarURL)
 				.setDescription("Type `/help [command]` for more information on the command. (i.e. `/help link`)")
-        .addField("NOTE: /MUTE AND /PURGE ARE CURRENTLY DOWN. DO NOT USE THESE COMMANDS.", "\u200B")
 				.addField("/link", "Links a Discord user to their Brawl Stars tag, assigning any roles needed.")
         .addField("/mute", "Mutes the mentioned user for a specified amount of time.")
         .addField("/purge", "Purges the specified number of messages from the chat.")
 				.addField("/help", "Do you really need to ask?")
 				.setFooter("This help message is brought to you by the Royalty family", "https://i.imgur.com/7Ut6i8F.jpg")
 			return message.channel.send(helpEmbed);
-		} else if (args[0] === "vice") {
+		} else if (args[0] === "link") {
 			const viceEmbed = new Discord.RichEmbed()
 				.setTitle("/link Command")
 				.setAuthor(`Requested by ${message.author.username}`, message.author.avatarURL)
@@ -495,7 +494,7 @@ client.on("message", (message) => {
 	};
 
 	if (msg.startsWith(`${prefix}MUTE`)) {
-		if (message.member.roles.find("name", "Moderator") || message.member.roles.find("name", "Board of Directors") || message.member.roles.find("name", "Admin") || message.member.roles.find("name", "Chairman")) {
+		if (message.member.roles.find("name", "Mod") || message.member.roles.find("name", "Viscount") || message.member.roles.find("name", "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
 			if (!args[0]) {
 				let errEmbed = new Discord.RichEmbed()
 					.setTitle(":warning: ERROR :warning:")
