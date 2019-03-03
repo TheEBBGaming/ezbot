@@ -25,10 +25,10 @@ client.on("message", (message) => {
   let mmmf = message.mentions.members.first();
   let caembed;
 	if (theBank === null) theBank = 0;
-  
+
   if (msg.startsWith(`${prefix}LINK`)) {
-    if (message.member.roles.find("name", "Royal Servant") || message.member.roles.find("name", "Mod") || message.member.roles.find("name", "Admin") || message.member.roles.find("name", "Head Admin") || message.member.roles.find("name", "Viscount") || message.member.roles.find("name", "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
-			
+    if (message.member.roles.find(val => val.role === "Royal Servant") || message.member.roles.find(val => val.role === "Mod") || message.member.roles.find(val => val.role === "Admin") || message.member.roles.find(val => val.role === "Head Admin") || message.member.roles.find(val => val.role === "Viscount") || message.member.roles.find(val => val.role === "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
+
       async function getPlayer() {
 				if (!args[0] || !args[1] || !message.mentions.members.first()) {
 					let errEmbed = new Discord.RichEmbed()
@@ -316,7 +316,7 @@ client.on("message", (message) => {
             };
 				};
 			};
-      if (mmmf.roles.find("name", "SS")) {
+      if (mmmf.roles.find(val => val.role === "SS")) {
         firstMentioned.removeRole("550550415767502851");
 			  getPlayer().catch(e => console.log(e));
       } else {
@@ -404,12 +404,12 @@ client.on("message", (message) => {
 			return message.channel.send(errEmbed);
 		};
 	};
-  
+
   if (msg.startsWith(`${prefix}PURGE`)) {
     message.delete();
     async function purge() {
 
-      if (!message.member.roles.find("name", "Mod")) {
+      if (!message.member.roles.find(val => val.role === "Mod")) {
         message.channel.send('Must be mod, nab');
         return;
       };
@@ -487,7 +487,7 @@ client.on("message", (message) => {
 	};
 
 	if (msg.startsWith(`${prefix}MUTE`)) {
-		if (message.member.roles.find("name", "Mod") || message.member.roles.find("name", "Viscount") || message.member.roles.find("name", "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
+		if (message.member.roles.find(val => val.role === "Mod") || message.member.roles.find(val => val.role === "Viscount") || message.member.roles.find(val => val.role === "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
 			if (!args[0]) {
 				let errEmbed = new Discord.RichEmbed()
 					.setTitle(":warning: ERROR :warning:")
@@ -507,7 +507,7 @@ client.on("message", (message) => {
 					.setColor([255, 0, 0])
 				return message.channel.send(errEmbed);
 			} else {
-				 
+
 				firstMentioned.addRole("518892881382080512");
 				if (!isNaN(args[1])) {
 					setTimeout(() => {firstMentioned.removeRole("518892881382080512");}, args[1] * 60000);
