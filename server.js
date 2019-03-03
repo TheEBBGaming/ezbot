@@ -15,8 +15,8 @@ client.on("message", (message) => {
   let msg = message.content.toUpperCase();
   let cont = message.content.slice(prefix.length).split(" ");
   let args = cont.slice(1);
-  const logchannel = client.channels.find('name', '🚨mod_logs');
-  const mainchat = client.channels.find('name', '🌐global_chat');
+  const logchannel = client.channels.find(val => val.channel === '🚨mod_logs');
+  const mainchat = client.channels.find(val => val.channel === '🌐global_chat');
   let firstMentioned = message.mentions.members.first() || message.author;
   let fmid = firstMentioned.id;
   let maMember = message.guild.members.get(message.author.id);
