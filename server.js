@@ -45,10 +45,7 @@ client.on("message", (message) => {
               .addField(`Club Role`, player.club.role, true);
             if (player.club.name.startsWith("Royalty")) {
               caembed.addField(`In Royalty`, `True`, true)
-            } else {
-              caembed.addField(`In Royalty`, `False`, true)
-            };
-            if (player.club.role === "President") {
+              if (player.club.role === "President") {
               firstMentionedMember.addRole("550516837234901039").then(() => {
                 if (player.club.name === "Royalty eSports") {
                   firstMentionedMember.addRole("551457440143638538").then(() => {
@@ -111,9 +108,7 @@ client.on("message", (message) => {
                     message.channel.send(caembed);
                   });
                 } else {
-                  firstMentionedMember.addRole("550521408799768587").then(() => {
-                    message.channel.send(caembed);
-                  });
+                  message.channel.send(caembed);
                 };
               });
             } else if (player.club.role === "Vice President") {
@@ -179,9 +174,7 @@ client.on("message", (message) => {
                     message.channel.send(caembed);
                   });
                 } else {
-                  firstMentionedMember.addRole("550521408799768587").then(() => {
-                    message.channel.send(caembed);
-                  });
+                  message.channel.send(caembed);
                 };
               });
             } else if (player.club.role === "Senior") {
@@ -247,9 +240,7 @@ client.on("message", (message) => {
                     message.channel.send(caembed);
                   });
                 } else {
-                  firstMentionedMember.addRole("550521408799768587").then(() => {
-                    message.channel.send(caembed);
-                  });
+                  message.channel.send(caembed);
                 };
               });
             } else if (player.club.role === "Member") {
@@ -315,11 +306,13 @@ client.on("message", (message) => {
                     message.channel.send(caembed);
                   });
                 } else {
-                  firstMentionedMember.addRole("550521408799768587").then(() => {
-                    message.channel.send(caembed);
-                  });
+                  message.channel.send(caembed);
                 };
               });
+            };
+            } else {
+              firstMentioned.addRole("550550415767502851");
+              caembed.addField(`In Royalty`, `False`, true)
             };
 				};
 			};
