@@ -316,12 +316,16 @@ client.on("message", (message) => {
             };
 				};
 			};
+      /*
       if (mmmf.roles.find(val => val.role === "SS")) {
         firstMentioned.removeRole("550550415767502851");
 			  getPlayer().catch(e => console.log(e));
       } else {
         getPlayer().catch(e => console.log(e));
       };
+      */
+      
+      return message.channel.send("Sorry, but due to a change in permissions, this command is currently out of service, and will be until Mooose decides to actually get to work. \n \n In the meantime, please use `*role @user +Member, +[whatever their role in the club is], -SS` to assign roles.");
     };
 	};
 
