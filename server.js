@@ -25,7 +25,11 @@ client.on("message", (message) => {
   let mmmf = message.mentions.members.first();
   let caembed;
 	if (theBank === null) theBank = 0;
-
+  
+  if (msg.startsWith(prefix)) {
+    return message.channel.send("sorry, but because leadership can't seem to decide on the hierarchy, mooose is bringing this bot down to rework it until further notice");
+  };
+/*
   if (msg.startsWith(`${prefix}LINK`)) {
     if (message.member.roles.find(val => val.role === "Royal Servant") || message.member.roles.find(val => val.role === "Mod") || message.member.roles.find(val => val.role === "Admin") || message.member.roles.find(val => val.role === "Head Admin") || message.member.roles.find(val => val.role === "Viscount") || message.member.roles.find(val => val.role === "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
 
@@ -316,14 +320,12 @@ client.on("message", (message) => {
             };
 				};
 			};
-      /*
       if (mmmf.roles.find(val => val.role === "SS")) {
         firstMentioned.removeRole("550550415767502851");
 			  getPlayer().catch(e => console.log(e));
       } else {
         getPlayer().catch(e => console.log(e));
       };
-      */
       
       return message.channel.send("Sorry, but due to a change in permissions, this command is currently out of service, and will be until Mooose decides to actually get to work. \n \n In the meantime, please use `*role @user +Member, +[whatever their role in the club is], -SS` to assign roles.");
     };
@@ -536,6 +538,7 @@ client.on("message", (message) => {
 			return message.channel.send(errEmbed);
 		};
 	};
+  */
 });
 
 client.login(process.env.TOKEN);
