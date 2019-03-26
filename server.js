@@ -28,6 +28,7 @@ client.on("message", (message) => {
   
   if (msg.startsWith(`${prefix}SHOP`)) {
     let categories = [];
+    let catDescs = ["Spice up your name with a nifty color role!", "Get access to hidden sections of the Discord server  with special roles."];
     
     for (var i in items) {
       if (!categories.includes(items[i].type)) {
@@ -36,11 +37,13 @@ client.on("message", (message) => {
     };
     
     const shopEmbed = new Discord.RichEmbed()
+    .setColor(0x7851a9)
     
     for (var i in categories) {
-      if (args[0] === i {
+      if (args[0].toUpperCase === categories[i].toUpperCase) {
+        shopEmbed.addField(categories[i], catDescs
       }
-    }
+    };
   };
 
 /*
