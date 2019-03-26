@@ -2,31 +2,49 @@
   "Yellow": {
     "name":"Yellow Color Role",
     "type":"Color Role",
-    "price":"50",
+    "price":50,
     "desc":"Gives you the `Yellow` color role."
   },
   "Orange": {
     "name":"Orange Color Role",
     "type":"Color Role",
-    "price":"50",
+    "price":50,
     "desc":"Gives you the `Orange` color role."
   },
   "Red": {
     "name":"Red Color Role",
     "type":"Color Role",
-    "price":"50",
+    "price":50,
     "desc":"Gives you the `Red` color role."
   },
-  "Red": {
+  "Green": {
     "name":"Green Color Role",
     "type":"Color Role",
-    "price":"50",
+    "price":50,
     "desc":"Gives you the `Green` color role."
   },
   "Blue": {
-    "name":"Red Color Role",
+    "name":"Blue Color Role",
     "type":"Color Role",
-    "price":"50",
-    "desc":"Gives you the `Red` color role."
+    "price":50,
+    "desc":"Gives you the `Blue` color role."
   },
+  "Indigo": {
+    "name":"Indigo Color Role",
+    "type":"Color Role",
+    "price":50,
+    "desc":"Gives you the `Indigo` color role."
+  },
+  "Violet": {
+    "name":"Violet Color Role",
+    "type":"Color Role",
+    "price":50,
+    "desc":"Gives you the `Violet` color role."
+  },
+  "Student": {
+    "name":"Student Role",
+    "type":"Role",
+    "price":0,
+    "desc":"Gives you the `Student` role for access to the Academy channels on the Discord server."
+  }
 }
