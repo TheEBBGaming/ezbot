@@ -2,8 +2,9 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const db = require('quick.db');
 const BrawlStars = require('brawlstars');
+const fs = require('fs');
 const bsClient = new BrawlStars.Client({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJpYXQiOjE1NTE0OTAzMTV9.ahSIX-b6ZjWPI2EdtyoGXAK-brDW9fx6vpociyCW8jw" });
-const http = require('http'); const express = require('express'); const app = express(); app.get("/", (request, response) => { console.log(Date.now() + " Ping Received"); response.sendStatus(200); }); app.listen(process.env.PORT); setInterval(() => { http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`); }, 280000)
+// const http = require('http'); const express = require('express'); const app = express(); app.get("/", (request, response) => { console.log(Date.now() + " Ping Received"); response.sendStatus(200); }); app.listen(process.env.PORT); setInterval(() => { http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`); }, 280000)
 
 client.on("ready", () => {
   console.log("RoyaltyBot is ready to roll!");
@@ -17,18 +18,15 @@ client.on("message", (message) => {
   let args = cont.slice(1);
   const logchannel = client.channels.find(val => val.channel === '🚨mod_logs');
   const mainchat = client.channels.find(val => val.channel === '🌐global_chat');
-  let firstMentioned = message.mentions.members.first() || message.author;
+  let firstMentioned = message.mentions.members.first();
   let fmid = firstMentioned.id;
   let maMember = message.guild.members.get(message.author.id);
   let firstMentionedMember = message.guild.members.get(firstMentioned.id);
 	let theBank = db.fetch(`${firstMentioned.id}.money`);
-  let mmmf = message.mentions.members.first();
   let caembed;
 	if (theBank === null) theBank = 0;
+  const items = JSON.parse(fs.readFileSync('items.json', 'utf8'));
   
-  if (msg.startsWith(prefix)) {
-    return message.channel.send("sorry, but because leadership can't seem to decide on the hierarchy, mooose is bringing this bot down to rework it until further notice");
-  };
 /*
   if (msg.startsWith(`${prefix}LINK`)) {
     if (message.member.roles.find(val => val.role === "Royal Servant") || message.member.roles.find(val => val.role === "Mod") || message.member.roles.find(val => val.role === "Admin") || message.member.roles.find(val => val.role === "Head Admin") || message.member.roles.find(val => val.role === "Viscount") || message.member.roles.find(val => val.role === "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
