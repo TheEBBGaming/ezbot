@@ -18,11 +18,13 @@ client.on("message", (message) => {
   let args = cont.slice(1);
   const logchannel = client.channels.find(val => val.channel === '🚨mod_logs');
   const mainchat = client.channels.find(val => val.channel === '🌐global_chat');
-  let firstMentioned = message.mentions.members.first();
+  if (message.mentions.members.first()) {
+    let firstMentioned = message.mentions.members.first();
+    let theBank = db.fetch(`${firstMentioned.id}.money`);
+    if (theBank === null) theBank = 0;
+  };
   let maMember = message.guild.members.get(message.author.id);
-	let theBank = db.fetch(`${firstMentioned.id}.money`);
   let caembed;
-	if (theBank === null) theBank = 0;
   const items = JSON.parse(fs.readFileSync('items.json', 'utf8'));
   
   
@@ -30,10 +32,11 @@ client.on("message", (message) => {
     let categories = [];
     let catDescs = ["Spice up your name with a nifty color role!", "Get access to hidden sections of the Discord server  with special roles."];
     
-    for (var i in items) {
+    for (let i = 0; i < items.length; i++) {
       if (!categories.includes(items[i].type)) {
         categories.push(items[i].type);
       };
+      return message.channel.send("Current item is " + items[i].name);
     };
     
     if (!args[0]) {
@@ -43,6 +46,8 @@ client.on("message", (message) => {
       for (let i = 0; i < categories.length; i++) {
         shopEmbed.addField(categories[i], catDescs[i], true)
       };
+      
+      return message.channel.send(shopEmbed);
     } else {
       const shopEmbed = new Discord.RichEmbed()
         .setColor(0xffbd1b)
@@ -53,11 +58,13 @@ client.on("message", (message) => {
           
           for (var c in items) {
             if (categories[i] === items[c].type) {
-              shopEmbed.addField(`**${items[c].name} - ${items[c].type}`, `${
+              shopEmbed.addField(`**${items[c].name} - ${items[c].type}`, items[c].description, false)
             };
           };
-        }
+        };
       };
+      
+      return message.channel.send(shopEmbed);
     };
   };
 
