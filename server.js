@@ -19,13 +19,15 @@ client.on("message", (message) => {
   const logchannel = client.channels.find(val => val.channel === '🚨mod_logs');
   const mainchat = client.channels.find(val => val.channel === '🌐global_chat');
   let firstMentioned = message.mentions.members.first();
-  let fmid = firstMentioned.id;
+  let fmid = firstMentionedMember.id;
   let maMember = message.guild.members.get(message.author.id);
   let firstMentionedMember = message.guild.members.get(firstMentioned.id);
 	let theBank = db.fetch(`${firstMentioned.id}.money`);
   let caembed;
 	if (theBank === null) theBank = 0;
   const items = JSON.parse(fs.readFileSync('items.json', 'utf8'));
+  
+  // Store variables
   
 /*
   if (msg.startsWith(`${prefix}LINK`)) {
