@@ -4,7 +4,7 @@ const db = require('quick.db');
 const BrawlStars = require('brawlstars');
 const fs = require('fs');
 const bsClient = new BrawlStars.Client({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJpYXQiOjE1NTE0OTAzMTV9.ahSIX-b6ZjWPI2EdtyoGXAK-brDW9fx6vpociyCW8jw" });
-// const http = require('http'); const express = require('express'); const app = express(); app.get("/", (request, response) => { console.log(Date.now() + " Ping Received"); response.sendStatus(200); }); app.listen(process.env.PORT); setInterval(() => { http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`); }, 280000)
+const http = require('http'); const express = require('express'); const app = express(); app.get("/", (request, response) => { response.sendStatus(200); }); app.listen(process.env.PORT); setInterval(() => { http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`); }, 280000)
 
 client.on("ready", () => {
   console.log("RoyaltyBot is ready to roll!");
@@ -25,9 +25,24 @@ client.on("message", (message) => {
 	if (theBank === null) theBank = 0;
   const items = JSON.parse(fs.readFileSync('items.json', 'utf8'));
   
-  // Store variables
-  let categories = [["Color Roles", "Spice up your name with some fancy colors!"], ["Roles", "Get access to different parts of the Discord server."]];
   
+  if (msg.startsWith(`${prefix}SHOP`)) {
+    let categories = [];
+    
+    for (var i in items) {
+      if (!categories.includes(items[i].type)) {
+        categories.push(items[i].type);
+      };
+    };
+    
+    const shopEmbed = new Discord.RichEmbed()
+    
+    for (var i in categories) {
+      if (args[0] === i {
+      }
+    }
+  };
+
 /*
   if (msg.startsWith(`${prefix}LINK`)) {
     if (message.member.roles.find(val => val.role === "Royal Servant") || message.member.roles.find(val => val.role === "Mod") || message.member.roles.find(val => val.role === "Admin") || message.member.roles.find(val => val.role === "Head Admin") || message.member.roles.find(val => val.role === "Viscount") || message.member.roles.find(val => val.role === "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
