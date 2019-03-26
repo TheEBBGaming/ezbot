@@ -36,13 +36,28 @@ client.on("message", (message) => {
       };
     };
     
-    const shopEmbed = new Discord.RichEmbed()
-    .setColor(0x7851a9)
-    
-    for (var i in categories) {
-      if (args[0].toUpperCase === categories[i].toUpperCase) {
-        shopEmbed.addField(categories[i], catDescs
-      }
+    if (!args[0]) {
+      const shopEmbed = new Discord.RichEmbed()
+      .setColor(0xffbd1b)
+
+      for (let i = 0; i < categories.length; i++) {
+        shopEmbed.addField(categories[i], catDescs[i], true)
+      };
+    } else {
+      const shopEmbed = new Discord.RichEmbed()
+        .setColor(0xffbd1b)
+      
+      for (let i = 0; i < categories.length; i++) {
+        if (args[0].toUpperCase === categories[i].toUpperCase) {
+          let tempDesc = '';
+          
+          for (var c in items) {
+            if (categories[i] === items[c].type) {
+              shopEmbed.addField(`**${items[c].name} - ${items[c].type}`, `${
+            };
+          };
+        }
+      };
     };
   };
 
