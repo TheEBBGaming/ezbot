@@ -10,13 +10,15 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "better-sqlite3": "^5.4.0",
     "brawlstars": "^1.2.0",
     "discord": "^0.8.2",
     "discord.js": "^11.4.2",
     "express": "^4.16.4",
     "node": "^11.12.0",
+    "node-gyp": "^3.8.0",
     "parse-ms": "^2.0.0",
-    "quick.db": "^6.3.2"
+    "quick.db": "^7.0.0-b21"
   },
   "engines": {
     "node": "8.x"

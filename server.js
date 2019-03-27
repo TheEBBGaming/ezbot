@@ -30,50 +30,47 @@ client.on("message", (message) => {
   
   
   if (msg.startsWith(`${prefix}SHOP`)) {
-    async function shopCheck() {
-      let categories = ["Color", "Role"];
-      let catDescs = ["Spice up your name with a nifty color role!", "Get access to hidden sections of the Discord server  with special roles."];
+    let categories = ["Color", "Role"];
+    let catDescs = ["Spice up your name with a nifty color role!", "Get access to hidden sections of the Discord server  with special roles."];
 
-      for (let i = 0; i < items.length; i++) {
-        if (!categories.includes(items[i].type)) {
-          categories.push(items[i].type);
-        };
-
+    for (let i = 0; i < items.length; i++) {
+      if (!categories.includes(items[i].type)) {
+        categories.push(items[i].type);
       };
 
-      if (!args[0]) {
-        const shopEmbed = new Discord.RichEmbed()
-        .setAuthor(`You currently have ${maBal} Royal Gold!`, message.author.avatar.url)
+    };
+
+    if (!args[0]) {
+      const shopEmbed = new Discord.RichEmbed()
+      .setAuthor(`You currently have ${maBal} Royal Gold!`, message.author.avatarURL)
+      .addField("Royal Store", "Looking to spend your hard-earned Royal Gold? You've come to the right place!\nThe Royal Store has everything you would ever want!\nI guarantee you will walk out with not a speck of gold in your pocket!")
+      .setColor(0xffbd1b)
+
+      for (let i = 0; i < categories.length; i++) {
+        shopEmbed.addField(categories[i], catDescs[i], true)
+      };
+
+      return message.channel.send(shopEmbed);
+    } else {
+      const shopEmbed = new Discord.RichEmbed()
+        .setAuthor(`You currently have ${maBal} Royal Gold!`, message.author.avatarURL)
         .addField("Royal Store", "Looking to spend your hard-earned Royal Gold? You've come to the right place!\nThe Royal Store has everything you would ever want!\nI guarantee you will walk out with not a speck of gold in your pocket!")
         .setColor(0xffbd1b)
 
-        for (let i = 0; i < categories.length; i++) {
-          shopEmbed.addField(categories[i], catDescs[i], true)
-        };
+      for (let i = 0; i < categories.length; i++) {
+        if (args[0].toUpperCase === categories[i].toUpperCase) {
+          let tempDesc = '';
 
-        return message.channel.send(shopEmbed);
-      } else {
-        const shopEmbed = new Discord.RichEmbed()
-          .setAuthor(message.author.avatar.url, `You currently have ${maBal} Royal Gold!`)
-          .addField("Royal Store", "Looking to spend your hard-earned Royal Gold? You've come to the right place!\nThe Royal Store has everything you would ever want!\nI guarantee you will walk out with not a speck of gold in your pocket!")
-          .setColor(0xffbd1b)
-
-        for (let i = 0; i < categories.length; i++) {
-          if (args[0].toUpperCase === categories[i].toUpperCase) {
-            let tempDesc = '';
-
-            for (var c in items) {
-              if (categories[i] === items[c].type) {
-                shopEmbed.addField(`**${items[c].name} - ${items[c].type}`, items[c].description, false)
-              };
+          for (var c in items) {
+            if (categories[i] === items[c].type) {
+              shopEmbed.addField(`**${items[c].name} - ${items[c].type}`, items[c].description, false)
             };
           };
         };
-
-        return message.channel.send(shopEmbed);
       };
+
+      return message.channel.send(shopEmbed);
     };
-    shopCheck();
   };
 
 /*
