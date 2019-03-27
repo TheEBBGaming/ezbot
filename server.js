@@ -18,6 +18,7 @@ client.on("message", (message) => {
   let args = cont.slice(1);
   const logchannel = client.channels.find(val => val.channel === '🚨mod_logs');
   const mainchat = client.channels.find(val => val.channel === '🌐global_chat');
+  let maBal = db.fetch(`${message.author.id}.money`);
   if (message.mentions.members.first()) {
     let firstMentioned = message.mentions.members.first();
     let theBank = db.fetch(`${firstMentioned.id}.money`);
@@ -29,7 +30,7 @@ client.on("message", (message) => {
   
   
   if (msg.startsWith(`${prefix}SHOP`)) {
-    let categories = [];
+    let categories = ["Color", "Role"];
     let catDescs = ["Spice up your name with a nifty color role!", "Get access to hidden sections of the Discord server  with special roles."];
     
     for (let i = 0; i < items.length; i++) {
@@ -41,6 +42,8 @@ client.on("message", (message) => {
     
     if (!args[0]) {
       const shopEmbed = new Discord.RichEmbed()
+      .setAuthor(message.author.avatar.url, `You currently have ${maBal} Royal Gold!`)
+      .addField("Royal Store", "Looking to spend your hard-earned Royal Gold? You've come to the right place!\nThe Royal Store has everything you would ever want!\nI guarantee you will walk out with not a speck of gold in your pocket!")
       .setColor(0xffbd1b)
 
       for (let i = 0; i < categories.length; i++) {
@@ -50,6 +53,8 @@ client.on("message", (message) => {
       return message.channel.send(shopEmbed);
     } else {
       const shopEmbed = new Discord.RichEmbed()
+        .setAuthor(message.author.avatar.url, `You currently have ${maBal} Royal Gold!`)
+        .addField("Royal Store", "Looking to spend your hard-earned Royal Gold? You've come to the right place!\nThe Royal Store has everything you would ever want!\nI guarantee you will walk out with not a speck of gold in your pocket!")
         .setColor(0xffbd1b)
       
       for (let i = 0; i < categories.length; i++) {
