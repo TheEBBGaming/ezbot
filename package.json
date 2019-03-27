@@ -10,13 +10,13 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "brawlstars": "^1.2.0",
     "discord": "^0.8.2",
     "discord.js": "^11.4.2",
     "express": "^4.16.4",
     "node": "^11.12.0",
-    "quick.db": "^6.3.2",
     "parse-ms": "^2.0.0",
-    "brawlstars": "^1.2.0"
+    "quick.db": "^6.3.2"
   },
   "engines": {
     "node": "8.x"
