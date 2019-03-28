@@ -19,6 +19,7 @@ client.on("message", (message) => {
   const logchannel = client.channels.find(val => val.channel === '🚨mod_logs');
   const mainchat = client.channels.find(val => val.channel === '🌐global_chat');
     let maBal = db.fetch(`${message.author.id}.money`);
+    if (maBal === null) maBal = 0;
     if (message.mentions.members.first()) {
       let firstMentioned = message.mentions.members.first();
       let theBank = db.fetch(`${firstMentioned.id}.money`);
@@ -32,49 +33,50 @@ client.on("message", (message) => {
   if (msg.startsWith(`${prefix}SHOP`)) {
     async function getBal() {
       maBal = await db.fetch(`${message.author.id}.money`);
+      if (maBal === null) maBal = 0;
     };
-    getBal();
-    let categories = ["Color", "Role"];
-    let catDescs = ["Spice up your name with a nifty color role!", "Get access to hidden sections of the Discord server  with special roles."];
+    getBal().then(() => {
+      let categories = ["Color", "Role"];
+      let catDescs = ["Spice up your name with a nifty color role!", "Get access to hidden sections of the Discord server  with special roles."];
 
-    for (let i = 0; i < items.length; i++) {
-      if (!categories.includes(items[i].type)) {
-        categories.push(items[i].type);
+      for (let i = 0; i < items.length; i++) {
+        if (!categories.includes(items[i].type)) {
+          categories.push(items[i].type);
+        };
+
       };
 
-    };
-
-    if (!args[0]) {
-      const shopEmbed = new Discord.RichEmbed()
-      .setAuthor(`You currently have ${maBal} Royal Gold!`, message.author.avatarURL)
-      .addField("Royal Store", "Looking to spend your hard-earned Royal Gold? You've come to the right place!\nThe Royal Store has everything you would ever want!\nI guarantee you will walk out with not a speck of gold in your pocket!")
-      .setColor(0xffbd1b)
-
-      for (let i = 0; i < categories.length; i++) {
-        shopEmbed.addField(categories[i], catDescs[i], true)
-      };
-
-      return message.channel.send(shopEmbed);
-    } else {
-      const shopEmbed = new Discord.RichEmbed()
+      if (!args[0]) {
+        const shopEmbed = new Discord.RichEmbed()
         .setAuthor(`You currently have ${maBal} Royal Gold!`, message.author.avatarURL)
         .addField("Royal Store", "Looking to spend your hard-earned Royal Gold? You've come to the right place!\nThe Royal Store has everything you would ever want!\nI guarantee you will walk out with not a speck of gold in your pocket!")
         .setColor(0xffbd1b)
 
-      for (let i = 0; i < categories.length; i++) {
-        if (args[0].toUpperCase === categories[i].toUpperCase) {
-          let tempDesc = '';
+        for (let i = 0; i < categories.length; i++) {
+          shopEmbed.addField(categories[i], catDescs[i], true)
+        };
 
-          for (var c in items) {
-            if (categories[i] === items[c].type) {
-              shopEmbed.addField(`**${items[c].name} - ${items[c].type}`, items[c].description, false)
+        return message.channel.send(shopEmbed);
+      } else {
+        const shopEmbed = new Discord.RichEmbed()
+          .setAuthor(`You currently have ${maBal} Royal Gold!`, message.author.avatarURL)
+          .addField("Royal Store", "Looking to spend your hard-earned Royal Gold? You've come to the right place!\nThe Royal Store has everything you would ever want!\nI guarantee you will walk out with not a speck of gold in your pocket!")
+          .setColor(0xffbd1b)
+
+        for (let i = 0; i < categories.length; i++) {
+          if (args[0].toUpperCase === categories[i].toUpperCase) {
+
+            for (let c = 0; c < items.length; c++) {
+              if (args[0].toUpperCase === items[c].type.toUpperCase) {
+                shopEmbed.addField(`**${items[c].name} - ${items[c].type}**`, items[c].description, false)
+              };
             };
           };
         };
-      };
 
-      return message.channel.send(shopEmbed);
-    };
+        return message.channel.send(shopEmbed);
+      };
+    });
   };
 
 /*
