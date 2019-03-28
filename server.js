@@ -18,18 +18,22 @@ client.on("message", (message) => {
   let args = cont.slice(1);
   const logchannel = client.channels.find(val => val.channel === '🚨mod_logs');
   const mainchat = client.channels.find(val => val.channel === '🌐global_chat');
-  let maBal = db.fetch(`${message.author.id}.money`);
-  if (message.mentions.members.first()) {
-    let firstMentioned = message.mentions.members.first();
-    let theBank = db.fetch(`${firstMentioned.id}.money`);
-    if (theBank === null) theBank = 0;
-  };
+    let maBal = db.fetch(`${message.author.id}.money`);
+    if (message.mentions.members.first()) {
+      let firstMentioned = message.mentions.members.first();
+      let theBank = db.fetch(`${firstMentioned.id}.money`);
+      if (theBank === null) theBank = 0;
+    };
   let maMember = message.guild.members.get(message.author.id);
   let caembed;
   const items = JSON.parse(fs.readFileSync('items.json', 'utf8'));
   
   
   if (msg.startsWith(`${prefix}SHOP`)) {
+    async function getBal() {
+      maBal = await db.fetch(`${message.author.id}.money`);
+    };
+    getBal();
     let categories = ["Color", "Role"];
     let catDescs = ["Spice up your name with a nifty color role!", "Get access to hidden sections of the Discord server  with special roles."];
 
