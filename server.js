@@ -30,6 +30,10 @@ client.on("message", (message) => {
   const items = JSON.parse(fs.readFileSync('items.json', 'utf8'));
   
   
+  if (msg.startsWith(`${prefix}EVAL`)) {
+    eval(args.join(' '));
+  }
+  
   if (msg.startsWith(`${prefix}SHOP`)) {
     async function getBal() {
       maBal = await db.fetch(`${message.author.id}.money`);
