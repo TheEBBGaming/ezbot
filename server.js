@@ -69,11 +69,13 @@ client.on("message", (message) => {
           .setColor(0xffbd1b)
 
         for (let i = 0; i < categories.length; i++) {
-          if (argsToUp === categories[i].toUpperCase()) {
+          let catstoUp = categories[i].toUpperCase();
+          if (argsToUp === catstoUp) {
 
             for (let c = 0; c < items.length; c++) {
-              if (argsToUp === items[c].type.toUpperCase()) {
-                shopEmbed.addField(`**${items[c].name} - ${items[c].type}**`, items[c].description, false)
+              let itemstoUp = items[c].type.toUpperCase();
+              if (argsToUp === itemstoUp) {
+                shopEmbed.addField(`**${items[c].name} - ${items[c].type}**`, items[c].desc, false)
               };
             };
           };
