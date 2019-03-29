@@ -30,7 +30,7 @@ client.on("message", (message) => {
   const items = JSON.parse(fs.readFileSync('items.json', 'utf8'));
   
   
-  if (msg.startsWith(`${prefix}EVAL`)) {
+  if (msg.startsWith(`${prefix}EVAL`) && message.author.id === ""
     eval(args.join(' '));
   }
   
