@@ -30,7 +30,7 @@ client.on("message", (message) => {
   const items = JSON.parse(fs.readFileSync('items.json', 'utf8'));
   
   
-  if (msg.startsWith(`${prefix}EVAL`) && message.author.id === ""
+  if (msg.startsWith(`${prefix}EVAL`) && message.author.id === "288853176210161666") {
     eval(args.join(' '));
   }
   
@@ -62,16 +62,17 @@ client.on("message", (message) => {
 
         return message.channel.send(shopEmbed);
       } else {
+        let argsToUp = args[0].toUpperCase();
         const shopEmbed = new Discord.RichEmbed()
           .setAuthor(`You currently have ${maBal} Royal Gold!`, message.author.avatarURL)
           .addField("Royal Store", "Looking to spend your hard-earned Royal Gold? You've come to the right place!\nThe Royal Store has everything you would ever want!\nI guarantee you will walk out with not a speck of gold in your pocket!")
           .setColor(0xffbd1b)
 
         for (let i = 0; i < categories.length; i++) {
-          if (args[0].toUpperCase === categories[i].toUpperCase) {
+          if (argsToUp === categories[i].toUpperCase()) {
 
             for (let c = 0; c < items.length; c++) {
-              if (args[0].toUpperCase === items[c].type.toUpperCase) {
+              if (argsToUp === items[c].type.toUpperCase()) {
                 shopEmbed.addField(`**${items[c].name} - ${items[c].type}**`, items[c].description, false)
               };
             };
