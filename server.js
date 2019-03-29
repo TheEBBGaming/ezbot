@@ -7,7 +7,7 @@ const bsClient = new BrawlStars.Client({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6Ikp
 const http = require('http'); const express = require('express'); const app = express(); app.get("/", (request, response) => { response.sendStatus(200); }); app.listen(process.env.PORT); setInterval(() => { http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`); }, 280000)
 
 client.on("ready", () => {
-  console.log("RoyaltyBot is ready to roll!");
+  console.log("DARUK'S PROTECTION IS READY TO ROLL");
 });
 
 client.on("message", (message) => {
@@ -29,9 +29,10 @@ client.on("message", (message) => {
   let caembed;
   const items = JSON.parse(fs.readFileSync('items.json', 'utf8'));
   
-  
   if (msg.startsWith(`${prefix}EVAL`) && message.author.id === "288853176210161666") {
     eval(args.join(' '));
+  } else if (!message.author.id === "288853176210161666") {
+     return message.channel.send("hey, how do you even know this command.. <@288853176210161666>!");
   }
   
   if (msg.startsWith(`${prefix}SHOP`)) {
