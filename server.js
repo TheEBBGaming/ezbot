@@ -90,7 +90,6 @@ client.on("message", (message) => {
     }
   };
   
-  let items = Object.entries(itemList);
   
   if (msg.startsWith(`${prefix}EVAL`) && message.author.id === "288853176210161666") {
     eval(args.join(' '));
@@ -105,13 +104,18 @@ client.on("message", (message) => {
     };
     getBal().then(() => {
       let categories = ["Color", "Role"];
+      let items = [itemList["Yellow"], itemList["Orange"], itemList["Red"], itemList["Green"], itemList["Blue"], itemList["Indigo"], itemList["Violet"], itemList["Student"]];
       let catDescs = ["Spice up your name with a nifty color role!", "Get access to hidden sections of the Discord server  with special roles."];
 
-      for (let i = 0; i < items.length; i++) {
+      for (let i = 0; i !== null; i++) {
         if (!categories.includes(items[i][1])) {
           categories.push(items[i][1]);
         };
-
+      };
+      
+      for (let i = 0; i !== null; i++) {
+        if (!items.includes(`itemsList[${Object.keys(itemList)[i]}]`)) {
+          items.push(itemsList[${Object.keys(itemList)[i]}]);
       };
 
       if (!args[0]) {
