@@ -152,7 +152,7 @@ client.on("message", (message) => {
             for (let c = 0; c < itemList.length; c++) {
               let itemstoUp = typeList[c].toUpperCase();
               if (argsToUp === itemstoUp) {
-                shopEmbed.addField(`${nameList[c]} - ${priceList[c]}`, descList[c], false)
+                shopEmbed.addField(`${nameList[c]} - ${priceList[c]} Gold`, descList[c], false)
               };
             };
           };
