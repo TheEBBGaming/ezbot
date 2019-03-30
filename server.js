@@ -95,11 +95,13 @@ client.on("message", (message) => {
   let descList = [yellowCol["desc"], orangeCol["desc"], redCol["desc"], greenCol["desc"], blueCol["desc"], indigoCol["desc"], violetCol["desc"], studentRole["desc"]];
 
   
-  if (msg.startsWith(`${prefix}EVAL`) && message.author.id === "288853176210161666") {
+  if (msg.startsWith(`${prefix}EVAL`)) {
+    if (message.author.id === "288853176210161666") {
     eval(args.join(' '));
-  } else if (!message.author.id === "288853176210161666") {
-     return message.channel.send("hey, how do you even know this command.. <@288853176210161666>!");
-  }
+    } else {
+      return message.channel.send("hey, how do you even know this command.. <@288853176210161666>!");
+    }
+  };
   
   if (msg.startsWith(`${prefix}SHOP`)) {
     async function getBal() {
