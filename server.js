@@ -118,19 +118,19 @@ client.on("message", (message) => {
       };
       
       for (let i = 0; i < itemList.length; i++) {
-        if (!nameList.includes(itemList[i]) || !typeList.includes(itemList[i]) || !priceList.includes(itemList[i]) || !ridList.includes(itemList[i]) || !descList.includes(itemList[i])) {
-            nameList.push(itemList[i]);
-            typeList.push(itemList[i]);
-            priceList.push(itemList[i]);
-            ridList.push(itemList[i]);
-            descList.push(itemList[i]);
+        if (!nameList.includes(itemList[i]["name"]) || !typeList.includes(itemList[i]["type"]) || !priceList.includes(itemList[i]["price"]) || !ridList.includes(itemList[i]["rid"]) || !descList.includes(itemList[i]["desc"])) {
+            nameList.push(itemList[i]["name"]);
+            typeList.push(itemList[i]["type"]);
+            priceList.push(itemList[i]["price"]);
+            ridList.push(itemList[i]["rid"]);
+            descList.push(itemList[i]["desc"]);
         };
       };
 
       if (!args[0]) {
         const shopEmbed = new Discord.RichEmbed()
         .setAuthor(`You currently have ${maBal} Royal Gold!`, message.author.avatarURL)
-        .addField("Royal Store", "Looking to spend your hard-earned Royal Gold? You've come to the right place!\nThe Royal Store has everything you would ever want!\nI guarantee you will walk out with not a speck of gold in your pocket!")
+        .addField("Royal Store", "Looking to spend your hard-earned Royal Gold? You've come to the right place!\nI guarantee you will walk out with not a speck of gold in your pocket!")
         .setColor(0xffbd1b)
 
         for (let i = 0; i < categories.length; i++) {
@@ -142,17 +142,17 @@ client.on("message", (message) => {
         let argsToUp = args[0].toUpperCase();
         const shopEmbed = new Discord.RichEmbed()
           .setAuthor(`You currently have ${maBal} Royal Gold!`, message.author.avatarURL)
-          .addField("Royal Store", "Looking to spend your hard-earned Royal Gold? You've come to the right place!\nThe Royal Store has everything you would ever want!\nI guarantee you will walk out with not a speck of gold in your pocket!")
+          .addField("Royal Store", "Looking to spend your hard-earned Royal Gold? You've come to the right place!\nI guarantee you will walk out with not a speck of gold in your pocket!")
           .setColor(0xffbd1b)
 
         for (let i = 0; i < categories.length; i++) {
           let catstoUp = categories[i].toUpperCase();
           if (argsToUp === catstoUp) {
 
-            for (let c = 0; c !== null; c++) {
+            for (let c = 0; c < itemList.length; c++) {
               let itemstoUp = typeList[c].toUpperCase();
               if (argsToUp === itemstoUp) {
-                shopEmbed.addField(`**${nameList[c]} - ${priceList[c]}**`, descList[c], false)
+                shopEmbed.addField(`${nameList[c]} - ${priceList[c]}`, descList[c], false)
               };
             };
           };
