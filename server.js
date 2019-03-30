@@ -31,64 +31,63 @@ client.on("message", (message) => {
   let caembed;  
   // Shop
   
-  let itemList = {
-    "Yellow": {
+  let itemList = [yellowCol, orangeCol, redCol, greenCol, blueCol, indigoCol, violetCol, studentRole];
+    let yellowCol = {
       "name":"Yellow Color Role",
       "type":"Color",
       "price":50,
       "rid":"518805180381396992",
       "desc":"Gives you the `Yellow` color role."
-    },
-    "Orange": {
+    };
+    let orangeCol = {
       "name":"Orange Color Role",
       "type":"Color",
       "price":50,
       "rid":"518894036195606544",
       "desc":"Gives you the `Orange` color role."
-    },
-    "Red": {
+    };
+    let redCol = {
       "name":"Red Color Role",
       "type":"Color",
       "price":50,
       "rid":"518893989206949900",
       "desc":"Gives you the `Red` color role."
-    },
-    "Green": {
+    };
+    let greenCol = {
       "name":"Green Color Role",
       "type":"Color",
       "price":50,
       "rid":"518805112928600076",
       "desc":"Gives you the `Green` color role."
-    },
-    "Blue": {
+    };
+    let blueCol = {
       "name":"Blue Color Role",
       "type":"Color",
       "price":50,
       "rid":"518804981948612608",
       "desc":"Gives you the `Blue` color role."
-    },
-    "Indigo": {
+    };
+    let indigoCol = {
       "name":"Indigo Color Role",
       "type":"Color",
       "price":50,
       "rid":"518894095708585995",
       "desc":"Gives you the `Indigo` color role."
-    },
-    "Violet": {
+    };
+    let violetCol = {
       "name":"Violet Color Role",
       "type":"Color",
       "price":50,
       "rid":"518894137538248705",
       "desc":"Gives you the `Violet` color role."
-    },
-    "Student": {
+    };
+    let studentRole = {
       "name":"Student Role",
       "type":"Role",
       "price":0,
       "rid":"530232386009563146",
       "desc":"Gives you the `Student` role for access to the Academy channels on the Discord server."
-    }
-  };
+    };
   
   
   if (msg.startsWith(`${prefix}EVAL`) && message.author.id === "288853176210161666") {
@@ -106,16 +105,19 @@ client.on("message", (message) => {
       let categories = ["Color", "Role"];
       let items = [itemList["Yellow"], itemList["Orange"], itemList["Red"], itemList["Green"], itemList["Blue"], itemList["Indigo"], itemList["Violet"], itemList["Student"]];
       let catDescs = ["Spice up your name with a nifty color role!", "Get access to hidden sections of the Discord server  with special roles."];
+      let tingie;
 
       for (let i = 0; i !== null; i++) {
-        if (!categories.includes(items[i][1])) {
-          categories.push(items[i][1]);
+        if (!categories.includes(items[i]["type"])) {
+          categories.push(items[i]["type"]);
         };
       };
       
       for (let i = 0; i !== null; i++) {
-        if (!items.includes(`itemsList[${Object.keys(itemList)[i]}]`)) {
-          items.push(itemsList[${Object.keys(itemList)[i]}]);
+        tingie = Object.keys(itemList)[i];
+        if (!items.includes(itemList[tingie])) {
+          items.push(itemList[tingie]);
+        };
       };
 
       if (!args[0]) {
