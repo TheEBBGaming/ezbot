@@ -31,64 +31,69 @@ client.on("message", (message) => {
   let caembed;  
   // Shop
   
-  let itemList = [yellowCol, orangeCol, redCol, greenCol, blueCol, indigoCol, violetCol, studentRole];
-    let yellowCol = {
+  let yellowCol = {
       "name":"Yellow Color Role",
       "type":"Color",
       "price":50,
       "rid":"518805180381396992",
       "desc":"Gives you the `Yellow` color role."
     };
-    let orangeCol = {
+  let orangeCol = {
       "name":"Orange Color Role",
       "type":"Color",
       "price":50,
       "rid":"518894036195606544",
       "desc":"Gives you the `Orange` color role."
     };
-    let redCol = {
+  let redCol = {
       "name":"Red Color Role",
       "type":"Color",
       "price":50,
       "rid":"518893989206949900",
       "desc":"Gives you the `Red` color role."
     };
-    let greenCol = {
+  let greenCol = {
       "name":"Green Color Role",
       "type":"Color",
       "price":50,
       "rid":"518805112928600076",
       "desc":"Gives you the `Green` color role."
     };
-    let blueCol = {
+  let blueCol = {
       "name":"Blue Color Role",
       "type":"Color",
       "price":50,
       "rid":"518804981948612608",
       "desc":"Gives you the `Blue` color role."
     };
-    let indigoCol = {
+  let indigoCol = {
       "name":"Indigo Color Role",
       "type":"Color",
       "price":50,
       "rid":"518894095708585995",
       "desc":"Gives you the `Indigo` color role."
     };
-    let violetCol = {
+  let violetCol = {
       "name":"Violet Color Role",
       "type":"Color",
       "price":50,
       "rid":"518894137538248705",
       "desc":"Gives you the `Violet` color role."
     };
-    let studentRole = {
+  let studentRole = {
       "name":"Student Role",
       "type":"Role",
       "price":0,
       "rid":"530232386009563146",
       "desc":"Gives you the `Student` role for access to the Academy channels on the Discord server."
     };
-  
+  let itemList = [yellowCol, orangeCol, redCol, greenCol, blueCol, indigoCol, violetCol, studentRole];
+  let nameList = [yellowCol["name"], orangeCol["name"], redCol["name"], greenCol["name"], blueCol["name"], indigoCol["name"], violetCol["name"], studentRole["name"]];
+  let typeList = [yellowCol["type"], orangeCol["type"], redCol["type"], greenCol["type"], blueCol["type"], indigoCol["type"], violetCol["type"], studentRole["type"]];
+  let priceList = [yellowCol["price"], orangeCol["price"], redCol["price"], greenCol["price"], blueCol["price"], indigoCol["price"], violetCol["price"], studentRole["price"]];
+  let ridList = [yellowCol["rid"], orangeCol["rid"], redCol["rid"], greenCol["rid"], blueCol["rid"], indigoCol["rid"], violetCol["rid"], studentRole["rid"]];
+  let descList = [yellowCol["desc"], orangeCol["desc"], redCol["desc"], greenCol["desc"], blueCol["desc"], indigoCol["desc"], violetCol["desc"], studentRole["desc"]];
+
   
   if (msg.startsWith(`${prefix}EVAL`) && message.author.id === "288853176210161666") {
     eval(args.join(' '));
@@ -103,20 +108,29 @@ client.on("message", (message) => {
     };
     getBal().then(() => {
       let categories = ["Color", "Role"];
-      let items = [itemList["Yellow"], itemList["Orange"], itemList["Red"], itemList["Green"], itemList["Blue"], itemList["Indigo"], itemList["Violet"], itemList["Student"]];
       let catDescs = ["Spice up your name with a nifty color role!", "Get access to hidden sections of the Discord server  with special roles."];
       let tingie;
 
       for (let i = 0; i !== null; i++) {
-        if (!categories.includes(items[i]["type"])) {
-          categories.push(items[i]["type"]);
+        if (!categories.includes(typeList[i])) {
+          categories.push(typeList[i]);
         };
       };
       
       for (let i = 0; i !== null; i++) {
-        tingie = Object.keys(itemList)[i];
-        if (!items.includes(itemList[tingie])) {
-          items.push(itemList[tingie]);
+        if (!nameList.includes(itemList[i]) || !typeList.includes(itemList[i]) || !priceList.includes(itemList[i]) || !ridList.includes(itemList[i]) || !descList.includes(itemList[i])) {
+          async function thePush() {
+            await nameList.push(itemList[i]).then(() => {
+              typeList.push(itemList[i]).then(() => {
+                priceList.push(itemList[i]).then(() => {
+                  ridList.push(itemList[i]).then(() => {
+                    descList.push(itemList[i]);
+                  });
+                });
+              });
+            });
+          };
+          thePush();
         };
       };
 
