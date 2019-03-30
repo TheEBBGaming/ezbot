@@ -111,26 +111,19 @@ client.on("message", (message) => {
       let catDescs = ["Spice up your name with a nifty color role!", "Get access to hidden sections of the Discord server  with special roles."];
       let tingie;
 
-      for (let i = 0; i !== null; i++) {
+      for (let i = 0; i < categories.length; i++) {
         if (!categories.includes(typeList[i])) {
           categories.push(typeList[i]);
         };
       };
       
-      for (let i = 0; i !== null; i++) {
+      for (let i = 0; i < itemList.length; i++) {
         if (!nameList.includes(itemList[i]) || !typeList.includes(itemList[i]) || !priceList.includes(itemList[i]) || !ridList.includes(itemList[i]) || !descList.includes(itemList[i])) {
-          async function thePush() {
-            await nameList.push(itemList[i]).then(() => {
-              typeList.push(itemList[i]).then(() => {
-                priceList.push(itemList[i]).then(() => {
-                  ridList.push(itemList[i]).then(() => {
-                    descList.push(itemList[i]);
-                  });
-                });
-              });
-            });
-          };
-          thePush();
+            nameList.push(itemList[i]);
+            typeList.push(itemList[i]);
+            priceList.push(itemList[i]);
+            ridList.push(itemList[i]);
+            descList.push(itemList[i]);
         };
       };
 
@@ -157,9 +150,9 @@ client.on("message", (message) => {
           if (argsToUp === catstoUp) {
 
             for (let c = 0; c !== null; c++) {
-              let itemstoUp = items[c][1].toUpperCase();
+              let itemstoUp = typeList[c].toUpperCase();
               if (argsToUp === itemstoUp) {
-                shopEmbed.addField(`**${items[c][0]} - ${items[c][1]}**`, items[c][4], false)
+                shopEmbed.addField(`**${nameList[c]} - ${priceList[c]}**`, descList[c], false)
               };
             };
           };
