@@ -28,68 +28,69 @@ client.on("message", (message) => {
       if (theBank === null) theBank = 0;
     };
   let maMember = message.guild.members.get(message.author.id);
-  let caembed;
-  const items = JSON.parse(fs.readFileSync('items.json', 'utf8'));
-  
+  let caembed;  
   // Shop
   
-  let items = {
-  "Yellow": {
-    "name":"Yellow Color Role",
-    "type":"Color",
-    "price":50,
-		"rid":"518805180381396992",
-    "desc":"Gives you the `Yellow` color role."
-  },
-  "Orange": {
-    "name":"Orange Color Role",
-    "type":"Color",
-    "price":50,
-		"rid":"518894036195606544",
-    "desc":"Gives you the `Orange` color role."
-  },
-  "Red": {
-    "name":"Red Color Role",
-    "type":"Color",
-    "price":50,
-		"rid":"518893989206949900",
-    "desc":"Gives you the `Red` color role."
-  },
-  "Green": {
-    "name":"Green Color Role",
-    "type":"Color",
-    "price":50,
-		"rid":"518805112928600076",
-    "desc":"Gives you the `Green` color role."
-  },
-  "Blue": {
-    "name":"Blue Color Role",
-    "type":"Color",
-    "price":50,
-		"rid":"518804981948612608",
-    "desc":"Gives you the `Blue` color role."
-  },
-  "Indigo": {
-    "name":"Indigo Color Role",
-    "type":"Color",
-    "price":50,
-		"rid":"518894095708585995",
-    "desc":"Gives you the `Indigo` color role."
-  },
-  "Violet": {
-    "name":"Violet Color Role",
-    "type":"Color",
-    "price":50,
-		"rid":"518894137538248705",
-    "desc":"Gives you the `Violet` color role."
-  },
-  "Student": {
-    "name":"Student Role",
-    "type":"Role",
-    "price":0,
-		"rid":"530232386009563146",
-    "desc":"Gives you the `Student` role for access to the Academy channels on the Discord server."
-  }
+  let itemList = {
+    "Yellow": {
+      "name":"Yellow Color Role",
+      "type":"Color",
+      "price":50,
+      "rid":"518805180381396992",
+      "desc":"Gives you the `Yellow` color role."
+    },
+    "Orange": {
+      "name":"Orange Color Role",
+      "type":"Color",
+      "price":50,
+      "rid":"518894036195606544",
+      "desc":"Gives you the `Orange` color role."
+    },
+    "Red": {
+      "name":"Red Color Role",
+      "type":"Color",
+      "price":50,
+      "rid":"518893989206949900",
+      "desc":"Gives you the `Red` color role."
+    },
+    "Green": {
+      "name":"Green Color Role",
+      "type":"Color",
+      "price":50,
+      "rid":"518805112928600076",
+      "desc":"Gives you the `Green` color role."
+    },
+    "Blue": {
+      "name":"Blue Color Role",
+      "type":"Color",
+      "price":50,
+      "rid":"518804981948612608",
+      "desc":"Gives you the `Blue` color role."
+    },
+    "Indigo": {
+      "name":"Indigo Color Role",
+      "type":"Color",
+      "price":50,
+      "rid":"518894095708585995",
+      "desc":"Gives you the `Indigo` color role."
+    },
+    "Violet": {
+      "name":"Violet Color Role",
+      "type":"Color",
+      "price":50,
+      "rid":"518894137538248705",
+      "desc":"Gives you the `Violet` color role."
+    },
+    "Student": {
+      "name":"Student Role",
+      "type":"Role",
+      "price":0,
+      "rid":"530232386009563146",
+      "desc":"Gives you the `Student` role for access to the Academy channels on the Discord server."
+    }
+  };
+  
+  let items = Object.entries(itemList);
   
   if (msg.startsWith(`${prefix}EVAL`) && message.author.id === "288853176210161666") {
     eval(args.join(' '));
@@ -107,8 +108,8 @@ client.on("message", (message) => {
       let catDescs = ["Spice up your name with a nifty color role!", "Get access to hidden sections of the Discord server  with special roles."];
 
       for (let i = 0; i < items.length; i++) {
-        if (!categories.includes(items[i].type)) {
-          categories.push(items[i].type);
+        if (!categories.includes(items[i][1])) {
+          categories.push(items[i][1]);
         };
 
       };
@@ -135,10 +136,10 @@ client.on("message", (message) => {
           let catstoUp = categories[i].toUpperCase();
           if (argsToUp === catstoUp) {
 
-            for (let c = 0; c < items.length; c++) {
-              let itemstoUp = items[c].type.toUpperCase();
+            for (let c = 0; c !== null; c++) {
+              let itemstoUp = items[c][1].toUpperCase();
               if (argsToUp === itemstoUp) {
-                shopEmbed.addField(`**${items[c].name} - ${items[c].type}**`, items[c].desc, false)
+                shopEmbed.addField(`**${items[c][0]} - ${items[c][1]}**`, items[c][4], false)
               };
             };
           };
