@@ -12,6 +12,8 @@ client.on("ready", () => {
 
 client.on("message", (message) => {
 
+  // Variables
+  
   let prefix = "/";
   let msg = message.content.toUpperCase();
   let cont = message.content.slice(prefix.length).split(" ");
@@ -28,6 +30,66 @@ client.on("message", (message) => {
   let maMember = message.guild.members.get(message.author.id);
   let caembed;
   const items = JSON.parse(fs.readFileSync('items.json', 'utf8'));
+  
+  // Shop
+  
+  let items = {
+  "Yellow": {
+    "name":"Yellow Color Role",
+    "type":"Color",
+    "price":50,
+		"rid":"518805180381396992",
+    "desc":"Gives you the `Yellow` color role."
+  },
+  "Orange": {
+    "name":"Orange Color Role",
+    "type":"Color",
+    "price":50,
+		"rid":"518894036195606544",
+    "desc":"Gives you the `Orange` color role."
+  },
+  "Red": {
+    "name":"Red Color Role",
+    "type":"Color",
+    "price":50,
+		"rid":"518893989206949900",
+    "desc":"Gives you the `Red` color role."
+  },
+  "Green": {
+    "name":"Green Color Role",
+    "type":"Color",
+    "price":50,
+		"rid":"518805112928600076",
+    "desc":"Gives you the `Green` color role."
+  },
+  "Blue": {
+    "name":"Blue Color Role",
+    "type":"Color",
+    "price":50,
+		"rid":"518804981948612608",
+    "desc":"Gives you the `Blue` color role."
+  },
+  "Indigo": {
+    "name":"Indigo Color Role",
+    "type":"Color",
+    "price":50,
+		"rid":"518894095708585995",
+    "desc":"Gives you the `Indigo` color role."
+  },
+  "Violet": {
+    "name":"Violet Color Role",
+    "type":"Color",
+    "price":50,
+		"rid":"518894137538248705",
+    "desc":"Gives you the `Violet` color role."
+  },
+  "Student": {
+    "name":"Student Role",
+    "type":"Role",
+    "price":0,
+		"rid":"530232386009563146",
+    "desc":"Gives you the `Student` role for access to the Academy channels on the Discord server."
+  }
   
   if (msg.startsWith(`${prefix}EVAL`) && message.author.id === "288853176210161666") {
     eval(args.join(' '));
