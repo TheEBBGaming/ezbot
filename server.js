@@ -164,8 +164,12 @@ client.on("message", (message) => {
       };
     });
   };
+  
+  if (msg.startsWith(`${prefix}AUTOROLE`)) {
+    if (message
+  };
 
-/*
+
   if (msg.startsWith(`${prefix}LINK`)) {
     if (message.member.roles.find(val => val.role === "Royal Servant") || message.member.roles.find(val => val.role === "Mod") || message.member.roles.find(val => val.role === "Admin") || message.member.roles.find(val => val.role === "Head Admin") || message.member.roles.find(val => val.role === "Viscount") || message.member.roles.find(val => val.role === "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
 
