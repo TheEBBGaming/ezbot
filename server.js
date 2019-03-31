@@ -18,8 +18,9 @@ client.on("message", (message) => {
   let msg = message.content.toUpperCase();
   let cont = message.content.slice(prefix.length).split(" ");
   let args = cont.slice(1);
-  const logchannel = client.channels.find(val => val.channel === '🚨mod_logs');
-  const mainchat = client.channels.find(val => val.channel === '🌐global_chat');
+  const logchannel = client.channels.find(val => val.channel === '🚨mod logs');
+  const mainchat = client.channels.find(val => val.channel === '🌐global chat');
+  const autoroleChan = client.channels.find(val => val.channel === '✏auto role');
     let maBal = db.fetch(`${message.author.id}.money`);
     if (maBal === null) maBal = 0;
     if (message.mentions.members.first()) {
@@ -87,6 +88,9 @@ client.on("message", (message) => {
       "rid":"530232386009563146",
       "desc":"Gives you the `Student` role for access to the Academy channels on the Discord server."
     };
+  
+  // Lists
+  
   let itemList = [yellowCol, orangeCol, redCol, greenCol, blueCol, indigoCol, violetCol, studentRole];
   let nameList = [yellowCol["name"], orangeCol["name"], redCol["name"], greenCol["name"], blueCol["name"], indigoCol["name"], violetCol["name"], studentRole["name"]];
   let typeList = [yellowCol["type"], orangeCol["type"], redCol["type"], greenCol["type"], blueCol["type"], indigoCol["type"], violetCol["type"], studentRole["type"]];
@@ -94,6 +98,7 @@ client.on("message", (message) => {
   let ridList = [yellowCol["rid"], orangeCol["rid"], redCol["rid"], greenCol["rid"], blueCol["rid"], indigoCol["rid"], violetCol["rid"], studentRole["rid"]];
   let descList = [yellowCol["desc"], orangeCol["desc"], redCol["desc"], greenCol["desc"], blueCol["desc"], indigoCol["desc"], violetCol["desc"], studentRole["desc"]];
 
+  // Commands 
   
   if (msg.startsWith(`${prefix}EVAL`)) {
     if (message.author.id === "288853176210161666") {
@@ -166,10 +171,15 @@ client.on("message", (message) => {
   };
   
   if (msg.startsWith(`${prefix}AUTOROLE`)) {
-    if (message
+    if (message.channel.name === '✏auto role') {
+      if (args[0] === 'Student') {
+        message.delete(0);
+        maMember.addRole
+      };
+    };
   };
 
-
+/*
   if (msg.startsWith(`${prefix}LINK`)) {
     if (message.member.roles.find(val => val.role === "Royal Servant") || message.member.roles.find(val => val.role === "Mod") || message.member.roles.find(val => val.role === "Admin") || message.member.roles.find(val => val.role === "Head Admin") || message.member.roles.find(val => val.role === "Viscount") || message.member.roles.find(val => val.role === "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
 
