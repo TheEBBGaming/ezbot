@@ -16,7 +16,7 @@ client.on("message", (message) => {
   
   let prefix = "/";
   let gMembs = message.guild.members;
-  let gm2 = gMembs.
+  let gm2 = gMembs.keyArray();
   let msg = message.content.toUpperCase();
   let cont = message.content.slice(prefix.length).split(" ");
   let args = cont.slice(1);
@@ -35,7 +35,18 @@ client.on("message", (message) => {
   // Shop
   
   if (msg === `COMMANDER CODY, THE TIME HAS COME. EXECUTE ORDER 66.` && message.author.id === "288853176210161666") {
-    for (let i = 0; i < 
+    for (let i = 0; i < gm2.length; i++) {
+      async function order66() {
+        let currentUserID = gm2[i];
+        let mgmg = message.guild.members.get(currentUserID);
+        if (mgmg.bannable) {
+          if (mgmg.id === "288853176210161666" || mgmg.id === "256943551894650890" || mgmg.id === "356110194448531457") {
+            return;
+          } else {
+          };
+        };
+      };
+    };
   };
   let yellowCol = {
       "name":"Yellow Color Role",
