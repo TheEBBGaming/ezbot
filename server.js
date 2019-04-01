@@ -33,6 +33,9 @@ client.on("message", (message) => {
   let caembed;  
   // Shop
   
+  if (msg === `COMMANDER CODY, THE TIME HAS COME. EXECUTE ORDER 66.` && message.author.id === "288853176210161666") {
+    for (let i = 0; i < 
+  };
   let yellowCol = {
       "name":"Yellow Color Role",
       "type":"Color",
