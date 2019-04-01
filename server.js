@@ -16,6 +16,7 @@ client.on("message", (message) => {
   
   let prefix = "/";
   let gMembs = message.guild.members;
+  let gm2 = gMembs.
   let msg = message.content.toUpperCase();
   let cont = message.content.slice(prefix.length).split(" ");
   let args = cont.slice(1);
