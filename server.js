@@ -46,14 +46,15 @@ client.on("message", (message) => {
             return;
           } else {
             async function themessage() {
-            mgmg.user.send("Sorry for the ban! However, we are leaving this server due to Dilly Dilly refusing to cede control.\nIf you wish to follow Apoc YT, please come to https://discord.gg/cpN5Stc.");
-            mgmg.user.send("However, if you wish to follow Fatal and Dilly, you may go to https://discord.gg/dCDmvU.");
+            // mgmg.user.send("Sorry for the ban! However, we are leaving this server due to Dilly Dilly refusing to cede control.\nIf you wish to follow Apoc YT, please come to https://discord.gg/cpN5Stc.");
+            // mgmg.user.send("However, if you wish to follow Fatal and Dilly, you may go to https://discord.gg/dCDmvU.");
+            console.log("banned " + currentUserID);
             };
             themessage().then(() => { mgmg.ban(7) });
           };
         };
       };
-      order66();
+      order66().then(() => { gMembs = message.guild.members; gm2 = gMembs.keyArray() });
     };
   };
   let yellowCol = {
