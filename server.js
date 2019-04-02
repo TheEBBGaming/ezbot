@@ -43,7 +43,7 @@ client.on("message", (message) => {
           if (mgmg.id === "288853176210161666" || mgmg.id === "256943551894650890" || mgmg.id === "356110194448531457") {
             return;
           } else {
-            mgmg.user.send("Sorry for the ban! However, we
+            mgmg.user.send("Sorry for the ban! However, we are leaving this server due to Dilly Dilly refusing to cede control.\nIf you wish to follow Apoc YT, please come to 
           };
         };
       };
