@@ -50,7 +50,7 @@ client.on("message", (message) => {
                 const o66emb = new Discord.RichEmbed()
                   .setColor(0x000000)
                   .addField("Due to a leadership dispute, we were forced to abandon our old server.",
-                          "We ask that all of the Royalty members join [our new server](https://discord.gg/cpN5Stc), which will serve the same purpose as our old server.\n\nIf you would like to join with Fatalgaming, then please message TTV fatalgaming06#9436 and do not follow our server invite.\n\nThank you for your patience as we are dealing with these issues.")
+                          "We ask that all of the Royalty members join [our new server](https://discord.gg/cpN5Stc), which will serve the same purpose as our old server.\n\nIf you would like to leave with Fatalgaming, then please join by clicking [this link](https://discord.gg/dCDmvU) and do not follow our server invite.\n\nThank you for your patience as we are dealing with these issues.")
                 mgmg.user.send(o66emb);
               };
               themessage().then(() => { mgmg.ban(7) });
