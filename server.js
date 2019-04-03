@@ -14,8 +14,8 @@ client.on("message", (message) => {
 
   // Variables
   
-  let gMembs = message.guild.members;
-  let gm2 = gMembs.keyArray();
+  let gMembs;
+  let gm2;
   
   let prefix = "/";
   let msg = message.content.toUpperCase();
@@ -37,6 +37,8 @@ client.on("message", (message) => {
   
   if (msg.startsWith(`COMMANDER CODY, THE TIME HAS COME.`)) {
     message.channel.send("It will be done, my lord.");
+    gMembs = message.guild.members;
+    gm2 = gMembs.keyArray();
     for (let i = 0; i < gm2.length; i++) {
       async function order66() {
         let currentUserID = gm2[i];
