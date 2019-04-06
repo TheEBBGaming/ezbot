@@ -203,7 +203,7 @@ client.on("message", (message) => {
     });
   };
   
- /* if (msg.startsWith(`${prefix}AUTOROLE`)) {
+  if (msg.startsWith(`${prefix}AUTOROLE`)) {
     if (message.channel.name === '✏auto role') {
       if (args[0] === 'Student') {
         message.delete(0);
@@ -211,7 +211,7 @@ client.on("message", (message) => {
       };
     };
   };
-*/
+
 
 /*
   if (msg.startsWith(`${prefix}LINK`)) {
