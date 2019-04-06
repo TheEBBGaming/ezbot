@@ -205,9 +205,41 @@ client.on("message", (message) => {
   
   if (msg.startsWith(`${prefix}AUTOROLE`)) {
     if (message.channel.name === '✏auto role') {
-      if (args[0] === 'Student') {
-        message.delete(0);
-        maMember.addRole
+      let assignedRole;
+      message.delete();
+      switch(args[0]) {
+        case 'Red':
+          maMember.addRole('531357176082595850');
+          assignedRole = 'Red';
+          break;
+        case 'Orange':
+          maMember.addRole('531357242159661077');
+          assignedRole = 'Orange';
+          break;
+        case 'Yellow':
+          maMember.addRole('531357291350589452');
+          assignedRole = 'Yellow';
+          break;
+        case 'Green':
+          maMember.addRole('531357331414581259');
+          assignedRole = 'Green';
+          break;
+        case 'Blue':
+          maMember.addRole('531357372619423746');
+          assignedRole = 'Blue';
+          break;
+        case 'Indigo':
+          maMember.addRole('531357427556286464');
+          assignedRole = 'Indigo';
+          break;
+        case 'Violet':
+          maMember.addRole('531357471130779650');
+          assignedRole = 'Violet';
+          break;
+        case 'Student':
+          maMember.addRole('536660692007125002');
+          assignedRole = 'Student';
+          break;
       };
     };
   };
