@@ -24,6 +24,7 @@ client.on("message", (message) => {
   const logchannel = client.channels.find(val => val.channel === '🚨mod logs');
   const mainchat = client.channels.find(val => val.channel === '🌐global chat');
   const autoroleChan = client.channels.find(val => val.channel === '✏auto role');
+  let warnings;
     let maBal = db.fetch(`${message.author.id}.money`);
     if (maBal === null) maBal = 0;
     let selfWarnings = db.fetch(`${message.author.id}.warns`);
@@ -258,7 +259,7 @@ client.on("message", (message) => {
         message.channel.send(warnEmbed);
     } else {
       if (!args[1]) {
-        warnings.push(
+        db.push(`${});
       };
     };
   };
