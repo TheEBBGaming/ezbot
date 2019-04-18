@@ -74,55 +74,6 @@ client.on("message", (message) => {
       order66().then(() => { gMembs = message.guild.members; gm2 = gMembs.keyArray() });
     };
   };
-  let yellowCol = {
-      "name":"Yellow Color Role",
-      "type":"Color",
-      "price":50,
-      "rid":"518805180381396992",
-      "desc":"Gives you the `Yellow` color role."
-    };
-  let orangeCol = {
-      "name":"Orange Color Role",
-      "type":"Color",
-      "price":50,
-      "rid":"518894036195606544",
-      "desc":"Gives you the `Orange` color role."
-    };
-  let redCol = {
-      "name":"Red Color Role",
-      "type":"Color",
-      "price":50,
-      "rid":"518893989206949900",
-      "desc":"Gives you the `Red` color role."
-    };
-  let greenCol = {
-      "name":"Green Color Role",
-      "type":"Color",
-      "price":50,
-      "rid":"518805112928600076",
-      "desc":"Gives you the `Green` color role."
-    };
-  let blueCol = {
-      "name":"Blue Color Role",
-      "type":"Color",
-      "price":50,
-      "rid":"518804981948612608",
-      "desc":"Gives you the `Blue` color role."
-    };
-  let indigoCol = {
-      "name":"Indigo Color Role",
-      "type":"Color",
-      "price":50,
-      "rid":"518894095708585995",
-      "desc":"Gives you the `Indigo` color role."
-    };
-  let violetCol = {
-      "name":"Violet Color Role",
-      "type":"Color",
-      "price":50,
-      "rid":"518894137538248705",
-      "desc":"Gives you the `Violet` color role."
-    };
   let studentRole = {
       "name":"Student Role",
       "type":"Role",
@@ -133,12 +84,12 @@ client.on("message", (message) => {
   
   // Lists
   
-  let itemList = [yellowCol, orangeCol, redCol, greenCol, blueCol, indigoCol, violetCol, studentRole];
-  let nameList = [yellowCol["name"], orangeCol["name"], redCol["name"], greenCol["name"], blueCol["name"], indigoCol["name"], violetCol["name"], studentRole["name"]];
-  let typeList = [yellowCol["type"], orangeCol["type"], redCol["type"], greenCol["type"], blueCol["type"], indigoCol["type"], violetCol["type"], studentRole["type"]];
-  let priceList = [yellowCol["price"], orangeCol["price"], redCol["price"], greenCol["price"], blueCol["price"], indigoCol["price"], violetCol["price"], studentRole["price"]];
-  let ridList = [yellowCol["rid"], orangeCol["rid"], redCol["rid"], greenCol["rid"], blueCol["rid"], indigoCol["rid"], violetCol["rid"], studentRole["rid"]];
-  let descList = [yellowCol["desc"], orangeCol["desc"], redCol["desc"], greenCol["desc"], blueCol["desc"], indigoCol["desc"], violetCol["desc"], studentRole["desc"]];
+  let itemList = [studentRole];
+  let nameList = [studentRole["name"]];
+  let typeList = [studentRole["type"]];
+  let priceList = [studentRole["price"]];
+  let ridList = [studentRole["rid"]];
+  let descList = [studentRole["desc"]];
 
   // Commands 
   
@@ -245,9 +196,8 @@ client.on("message", (message) => {
           maMember.addRole('531357471130779650');
           assignedRole = 'Violet';
           break;
-        case 'Student':
-          maMember.addRole('536660692007125002');
-          assignedRole = 'Student';
+        default:
+          message.channel.send('Error. You have not specified a role to receive.').then(msg => {msg.delete(5000)});
           break;
       };
     };
