@@ -16,7 +16,7 @@ client.on("message", (message) => {
   
   let gMembs;
   let gm2;
-  
+  let firstMentioned;
   let prefix = "/";
   let msg = message.content.toUpperCase();
   let cont = message.content.slice(prefix.length).split(" ");
@@ -25,6 +25,7 @@ client.on("message", (message) => {
   const mainchat = client.channels.find(val => val.channel === '🌐global chat');
   const autoroleChan = client.channels.find(val => val.channel === '✏auto role');
   let warnings;
+  let warncount;
   let dateobj = new Date();
   let date = dateobj.getUTCDate();
   let monthnum = dateobj.getUTCMonth();
@@ -41,8 +42,9 @@ client.on("message", (message) => {
     let firstMentioned = message.mentions.members.first();
     let theBank = db.fetch(`${firstMentioned.id}.money`);
     if (theBank === null) theBank = 0;
-    let warnings = db.fetch(`${firstMentioned.id}.warns`);
-    if (warnings.count === null) warnings.count = 0;
+    warnings = db.fetch(`${firstMentioned.id}.warns`);
+    warncount = db.fetch(`${firstMentioned.id}.warncount`);
+    if (warncount = null) warncount = 0;
   };
   
   let maMember = message.guild.members.get(message.author.id);
@@ -215,8 +217,11 @@ client.on("message", (message) => {
     } else {
       let userwarns = db.fetch(`${message.mentions.members.first().id}.warns`);
       if (!args[1]) {
-        db.push(`${message.mentions.members.first().id}.warns`, [`${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, reason: 'No reason specified' });
-        message.channel.send(`Warned ${message.mentions.members.first().displayName} on ${userwarns.timestamp} for:\n${userwarns.reason}`);
+        db.push(`${message.mentions.members.first().id}.warns`, [`${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, 'No reason specified']);
+        message.channel.send(`Warned ${message.mentions.members.first().displayName} on ${userwarns[Number(warncount)][0]} for:\n${userwarns[Number(warncount)][1]}`);
+        let nowCount = Number(warncount) + 1;
+        db.set(`${message.mentions.members.first().id}.warncount`, nowCount);
+        message.channel.send(`${message.mentions.members.first().displayName} now has ${nowCount} warnings.`);
       };
     };
   };
