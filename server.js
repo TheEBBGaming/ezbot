@@ -26,6 +26,12 @@ client.on("message", (message) => {
   const autoroleChan = client.channels.find(val => val.channel === '✏auto role');
   let warnings;
   let warnCount = 0;
+  let dateobj = new Date();
+  let date = dateobj.getUTCDate();
+  let monthnum = dateobj.getUTCMonth();
+  let year = dateobj.getUTCFullYear();
+  let hours = dateobj.getUTCHours
+  let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
     let maBal = db.fetch(`${message.author.id}.money`);
     if (maBal === null) maBal = 0;
     let selfWarnings = db.fetch(`${message.author.id}.warns`);
@@ -208,7 +214,7 @@ client.on("message", (message) => {
         message.channel.send(warnEmbed);
     } else {
       if (!args[1]) {
-        db.push(`${message.mentions.members.first().id}.warns`, { timestamp: );
+        db.push(`${message.mentions.members.first().id}.warns`, { timestamp: `${months[monthnum]} ${date}, ${year}`});
       };
     };
   };
