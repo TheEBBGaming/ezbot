@@ -25,6 +25,7 @@ client.on("message", (message) => {
   const mainchat = client.channels.find(val => val.channel === '🌐global chat');
   const autoroleChan = client.channels.find(val => val.channel === '✏auto role');
   let warnings;
+  let warnCount = 0;
     let maBal = db.fetch(`${message.author.id}.money`);
     if (maBal === null) maBal = 0;
     let selfWarnings = db.fetch(`${message.author.id}.warns`);
@@ -34,7 +35,8 @@ client.on("message", (message) => {
       let theBank = db.fetch(`${firstMentioned.id}.money`);
       if (theBank === null) theBank = 0;
       let warnings = db.fetch(`${firstMentioned.id}.warns`);
-      if (warnings === null) warnings = 0;
+      let warnCount = db.fetch(`${firstMentioned.id}.warnCount`);
+      if (warnCount === null) warnCount = 0;
     };
   
   let maMember = message.guild.members.get(message.author.id);
@@ -252,6 +254,7 @@ client.on("message", (message) => {
   };
 
   if (msg.startsWith(`${prefix}WARN`)) {
+    
     if (!args[0] || !message.mentions.members.first()) {
       let warnEmbed = new Discord.RichEmbed()
         .setTitle(`:warning: ERROR :warning:`)
@@ -259,7 +262,7 @@ client.on("message", (message) => {
         message.channel.send(warnEmbed);
     } else {
       if (!args[1]) {
-        db.push(`${});
+        db.push(`${message.mentions.members.first().id}.warns`, );
       };
     };
   };
