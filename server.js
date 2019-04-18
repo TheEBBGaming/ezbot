@@ -221,7 +221,7 @@ client.on("message", (message) => {
         message.channel.send(`Warned ${message.mentions.members.first().displayName} on ${userwarns[Number(warncount)][0]} for:\n${userwarns[Number(warncount)][1]}`);
         let nowCount = Number(warncount) + 1;
         db.set(`${message.mentions.members.first().id}.warncount`, nowCount);
-        message.channel.send(`${message.mentions.members.first().displayName} now has ${nowCount} warnings.`);
+        message.channel.send(`${message.mentions.members.first().displayName} now has ${warncount} warnings.`);
       };
     };
   };
