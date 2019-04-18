@@ -245,10 +245,21 @@ client.on("message", (message) => {
           assignedRole = 'Student';
           break;
       };
-      return messag
     };
   };
 
+  if (msg.startsWith(`${prefix}WARN`)) {
+    if (!args[0] || !message.mentions.members.first()) {
+      let warnEmbed = new Discord.RichEmbed()
+        .setTitle(`:warning: ERROR :warning:`)
+        .addField(`User not specfied`, "Please specify a Discord user to warn.\n**Command Format:** `/warn @user [reason]`\n**NOTE:** Command parameters in `[]` are optional.")
+        message.channel.send(warnEmbed);
+    } else {
+      if (!args[1]) {
+        
+      };
+    };
+  };
 
 /*
   if (msg.startsWith(`${prefix}LINK`)) {
