@@ -17,7 +17,7 @@
     "node": "^11.12.0",
     "node-gyp": "^3.8.0",
     "parse-ms": "^2.0.0",
-    "quick.db": "^6.3.2"
+    "quick.db": "^7.0.0-b21"
   },
   "engines": {
     "node": "8.x"
