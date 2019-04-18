@@ -26,13 +26,17 @@ client.on("message", (message) => {
   const autoroleChan = client.channels.find(val => val.channel === '✏auto role');
     let maBal = db.fetch(`${message.author.id}.money`);
     if (maBal === null) maBal = 0;
+    let warnings = db.fetch(`${message.author.id}.warns`);
     if (message.mentions.members.first()) {
       let firstMentioned = message.mentions.members.first();
       let theBank = db.fetch(`${firstMentioned.id}.money`);
       if (theBank === null) theBank = 0;
+      warnings = db.fetch(`${firstMentioned.id}.warns`);
     };
+  
   let maMember = message.guild.members.get(message.author.id);
-  let caembed;  
+  let caembed;
+  
   // Shop
   
   if (msg.startsWith(`COMMANDER CODY, THE TIME HAS COME.`)) {
@@ -241,6 +245,7 @@ client.on("message", (message) => {
           assignedRole = 'Student';
           break;
       };
+      return messag
     };
   };
 
