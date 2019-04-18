@@ -25,25 +25,25 @@ client.on("message", (message) => {
   const mainchat = client.channels.find(val => val.channel === '🌐global chat');
   const autoroleChan = client.channels.find(val => val.channel === '✏auto role');
   let warnings;
-  let warnCount = 0;
   let dateobj = new Date();
   let date = dateobj.getUTCDate();
   let monthnum = dateobj.getUTCMonth();
   let year = dateobj.getUTCFullYear();
-  let hours = dateobj.getUTCHours
+  let hours = dateobj.getUTCHours();
+  let minutes = dateobj.getUTCMinutes();
+  let seconds = dateobj.getUTCSeconds();
   let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-    let maBal = db.fetch(`${message.author.id}.money`);
-    if (maBal === null) maBal = 0;
-    let selfWarnings = db.fetch(`${message.author.id}.warns`);
-    if (selfWarnings === null) selfWarnings = 0;
-    if (message.mentions.members.first()) {
-      let firstMentioned = message.mentions.members.first();
-      let theBank = db.fetch(`${firstMentioned.id}.money`);
-      if (theBank === null) theBank = 0;
-      let warnings = db.fetch(`${firstMentioned.id}.warns`);
-      let warnCount = db.fetch(`${firstMentioned.id}.warnCount`);
-      if (warnCount === null) warnCount = 0;
-    };
+  let maBal = db.fetch(`${message.author.id}.money`);
+  if (maBal === null) maBal = 0;
+  let selfWarnings = db.fetch(`${message.author.id}.warns`);
+  if (selfWarnings === null) selfWarnings = 0;
+  if (message.mentions.members.first()) {
+    let firstMentioned = message.mentions.members.first();
+    let theBank = db.fetch(`${firstMentioned.id}.money`);
+    if (theBank === null) theBank = 0;
+    let warnings = db.fetch(`${firstMentioned.id}.warns`);
+    if (warnings.count === null) warnings.count = 0;
+  };
   
   let maMember = message.guild.members.get(message.author.id);
   let caembed;
@@ -213,8 +213,10 @@ client.on("message", (message) => {
         .addField(`User not specfied`, "Please specify a Discord user to warn.\n**Command Format:** `/warn @user [reason]`\n**NOTE:** Command parameters in `[]` are optional.")
         message.channel.send(warnEmbed);
     } else {
+      let userwarns = db.fetch(`${message.mentions.members.first().id}.warns`);
       if (!args[1]) {
-        db.push(`${message.mentions.members.first().id}.warns`, { timestamp: `${months[monthnum]} ${date}, ${year}`});
+        db.push(`${message.mentions.members.first().id}.warns`, [`${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, reason: 'No reason specified' });
+        message.channel.send(`Warned ${message.mentions.members.first().displayName} on ${userwarns.timestamp} for:\n${userwarns.reason}`);
       };
     };
   };
