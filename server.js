@@ -26,12 +26,14 @@ client.on("message", (message) => {
   const autoroleChan = client.channels.find(val => val.channel === '✏auto role');
     let maBal = db.fetch(`${message.author.id}.money`);
     if (maBal === null) maBal = 0;
-    let warnings = db.fetch(`${message.author.id}.warns`);
+    let selfWarnings = db.fetch(`${message.author.id}.warns`);
+    if (selfWarnings === null) selfWarnings = 0;
     if (message.mentions.members.first()) {
       let firstMentioned = message.mentions.members.first();
       let theBank = db.fetch(`${firstMentioned.id}.money`);
       if (theBank === null) theBank = 0;
-      warnings = db.fetch(`${firstMentioned.id}.warns`);
+      let warnings = db.fetch(`${firstMentioned.id}.warns`);
+      if (warnings === null) warnings = 0;
     };
   
   let maMember = message.guild.members.get(message.author.id);
@@ -256,7 +258,7 @@ client.on("message", (message) => {
         message.channel.send(warnEmbed);
     } else {
       if (!args[1]) {
-        
+        warnings.push(
       };
     };
   };
