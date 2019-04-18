@@ -91,16 +91,6 @@ client.on("message", (message) => {
   let ridList = [studentRole["rid"]];
   let descList = [studentRole["desc"]];
 
-  // Commands 
-  
-  if (msg.startsWith(`${prefix}EVAL`)) {
-    if (message.author.id === "288853176210161666") {
-    eval(args.join(' '));
-    } else {
-      return message.channel.send("hey, how do you even know this command.. <@288853176210161666>!");
-    }
-  };
-  
   if (msg.startsWith(`${prefix}SHOP`)) {
     async function getBal() {
       maBal = await db.fetch(`${message.author.id}.money`);
@@ -162,7 +152,13 @@ client.on("message", (message) => {
       };
     });
   };
-  
+  if (msg.startsWith(`${prefix}EVAL`)) {
+    if (message.author.id === "288853176210161666") {
+    eval(args.join(' '));
+    } else {
+      return message.channel.send("hey, how do you even know this command.. <@288853176210161666>!");
+    }
+  };
   if (msg.startsWith(`${prefix}AUTOROLE`)) {
     if (message.channel.name === '✏auto role') {
       let assignedRole;
@@ -212,7 +208,7 @@ client.on("message", (message) => {
         message.channel.send(warnEmbed);
     } else {
       if (!args[1]) {
-        db.push(`${message.mentions.members.first().id}.warns`, );
+        db.push(`${message.mentions.members.first().id}.warns`, { timestamp: );
       };
     };
   };
