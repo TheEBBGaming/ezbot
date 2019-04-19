@@ -224,27 +224,22 @@ client.on("message", (message) => {
       seconds = dateobj.getUTCSeconds();
       months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
       let userwarns = db.fetch(`${message.mentions.members.first().id}.warns`);
-      if (!args[1]) {
-        db.push(`${message.mentions.members.first().id}.warns`, [`${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, 'No reason specified']);
-        let warnedEmbed = new Discord.RichEmbed()
-          .setAuthor(message.mentions.members.first().user.avatarURL, `Warned ${message.mentions.members.first().displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`)
-          .setFooter(message.author.avatarURL, `Warned by ${message.guild.members.get(message.author.id).displayName}${authorTag}`)
-          .setTitle(`${message.mentions.members.first().displayName}${mmmfTag} has been warned.`)
-          .addField('Warned By', `${message.author.member.)
-        message.channel.send(`Warned ${message.mentions.members.first().displayName} on ${userwarns[Number(warncount)][0]} for:\n${userwarns[Number(warncount)][1]}`);
-        db.add(`${message.mentions.members.first().id}.warncount`, 1);
-        warncount = db.fetch(`${message.mentions.members.first().id}.warncount`);
-      };
+      let warnReason;
       if (args[1]) {
         let warnReasonArray = args.slice(1);
-        let warnReason = warnReasonArray.join(' ');
-        db.push(`${message.mentions.members.first().id}.warns`, [`${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, warnReason]);
-        db.add(`${message.mentions.members.first().id}.warncount`, 1);
-        let newWarncount = db.fetch(`${message.mentions.members.first().id}.warncount`);
-        let fmwarns = db.fetch(`${message.mentions.members.first().id}.warns`);
-        message.channel.send(`Warned ${message.mentions.members.first().displayName} on ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC for:\n${warnReason}`);
-        message.channel.send(`${message.mentions.members.first().displayName} now has ${newWarncount} warnings.`);
+        warnReason = warnReasonArray.join(' ');
+      } else {
+        warnReason = 'No reason specified';
       };
+      db.push(`${message.mentions.members.first().id}.warns`, [`${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, warnReason]);
+      db.add(`${message.mentions.members.first().id}.warncount`, 1);
+      let newWarncount = db.fetch(`${message.mentions.members.first().id}.warncount`);
+      let fmwarns = db.fetch(`${message.mentions.members.first().id}.warns`);
+      let warnedEmbed = new Discord.RichEmbed()
+        .setAuthor(message.mentions.members.first().user.avatarURL, `Warned ${message.mentions.members.first().displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`)
+        .setFooter(message.author.avatarURL, `Warned by ${message.guild.members.get(message.author.id).displayName}${authorTag}`)
+        .setTitle(`${message.mentions.members.first().displayName}${mmmfTag} has been warned.`)
+        .addField('Warned For:', warnReason)
     };
   };
 
