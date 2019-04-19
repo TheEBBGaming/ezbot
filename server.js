@@ -18,19 +18,19 @@ client.on("message", (message) => {
   let modRoles = ['Moderator', 'Admin', 'Head Admin', 'Board of Directors', 'Chairman'];
   let userModRole;
   if (message.member.roles.some(r=>modRoles.includes(r.name))) {
-    if (message.member.roles.find(modRoles[0])) {
+    if (message.member.roles.find('name', modRoles[0])) {
       userModRole = 'Moderator';
-    } else if (message.member.roles.find(modRoles[0])) {
+    } else if (message.member.roles.find('name', modRoles[0])) {
       userModRole = 'Admin';
-    } else if (message.member.roles.find(modRoles[1])) {
+    } else if (message.member.roles.find('name', modRoles[1])) {
       userModRole = 'Head Admin';
-    } else if (message.member.roles.find(modRoles[2])) {
-      userModRole = 'Moderator';
-    } else if (message.member.roles.find(modRoles[3])) {
-      userModRole = 'Moderator';
-    } else if (message.member.roles.find(modRoles[4])) {
-      userModRole = 'Moderator';
-    }
+    } else if (message.member.roles.find('name', modRoles[2])) {
+      userModRole = 'Board of Directors';
+    } else if (message.member.roles.find('name', modRoles[3])) {
+      userModRole = 'Chairman';
+    };
+  } else if (message.member.hasPermission("ADMINISTRATOR")) {
+    userModRole = 'Admin';
   };
   let gm2;
   let firstMentioned;
@@ -41,7 +41,7 @@ client.on("message", (message) => {
   const logchannel = client.channels.find(val => val.channel === '🚨mod logs');
   const mainchat = client.channels.find(val => val.channel === '🌐global chat');
   const autoroleChan = client.channels.find(val => val.channel === '✏auto role');
-  let authorTag = message.author.tag.slice(message.author.username.length);
+  let authorTag;
   let mmmfTag;
   let warnings;
   let warncount;
@@ -64,7 +64,6 @@ client.on("message", (message) => {
     warnings = db.fetch(`${firstMentioned.id}.warns`);
     warncount = db.fetch(`${firstMentioned.id}.warncount`);
     if (warncount = null) warncount = 0;
-    let mmmfTag = message.mentions.members.first().user.tag.slice(firstMentioned.user.username.length);
   };
   
   let maMember = message.guild.members.get(message.author.id);
@@ -232,6 +231,8 @@ client.on("message", (message) => {
         .addField(`User not specfied`, "Please specify a Discord user to warn.\n**Command Format:** `/warn @user [reason]`\n**NOTE:** Command parameters in `[]` are optional.")
         message.channel.send(warnEmbed);
     } else {
+      authorTag = message.author.tag.slice(message.author.username.length);
+      mmmfTag = message.mentions.members.first().user.tag.slice(message.mentions.members.first().user.username.length);
       dateobj = new Date();
       date = dateobj.getUTCDate();
       monthnum = dateobj.getUTCMonth();
@@ -253,10 +254,11 @@ client.on("message", (message) => {
       let newWarncount = db.fetch(`${message.mentions.members.first().id}.warncount`);
       let fmwarns = db.fetch(`${message.mentions.members.first().id}.warns`);
       let warnedEmbed = new Discord.RichEmbed()
-        .setAuthor(message.mentions.members.first().user.avatarURL, `Warned ${message.mentions.members.first().displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`)
-        .setFooter(message.author.avatarURL, `Warned by ${message.guild.members.get(message.author.id).displayName}${authorTag}`)
-        .setTitle(`${message.mentions.members.first().displayName}${mmmfTag} has been warned.`)
+        .setAuthor(`Warned ${message.mentions.members.first().displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, message.mentions.members.first().user.avatarURL)
         .addField('Warned For:', warnReason)
+        .addField('Warned By:', `${message.member.displayName}${authorTag} - ${userModRole}`)
+        .setColor(0xFF0000)
+      message.channel.send(warnedEmbed);
     };
   };
 
