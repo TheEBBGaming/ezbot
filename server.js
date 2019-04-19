@@ -3,6 +3,7 @@ const client = new Discord.Client();
 const db = require('quick.db');
 const BrawlStars = require('brawlstars');
 const fs = require('fs');
+const evalcmd = require('./eval');
 const bsClient = new BrawlStars.Client({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJpYXQiOjE1NTE0OTAzMTV9.ahSIX-b6ZjWPI2EdtyoGXAK-brDW9fx6vpociyCW8jw" });
 const http = require('http'); const express = require('express'); const app = express(); app.get("/", (request, response) => { response.sendStatus(200); }); app.listen(process.env.PORT); setInterval(() => { http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`); }, 280000)
 
@@ -82,24 +83,21 @@ client.on("message", (message) => {
       order66().then(() => { gMembs = message.guild.members; gm2 = gMembs.keyArray() });
     };
   };
-  let studentRole = {
+
+  if (msg.startsWith(`${prefix}SHOP`) || msg.startsWith(`${prefix}STORE`) || msg.startsWith(`${prefix}BUY`)) {
+    let studentRole = {
       "name":"Student Role",
       "type":"Role",
       "price":0,
       "rid":"530232386009563146",
       "desc":"Gives you the `Student` role for access to the Academy channels on the Discord server."
     };
-  
-  // Lists
-  
-  let itemList = [studentRole];
-  let nameList = [studentRole["name"]];
-  let typeList = [studentRole["type"]];
-  let priceList = [studentRole["price"]];
-  let ridList = [studentRole["rid"]];
-  let descList = [studentRole["desc"]];
-
-  if (msg.startsWith(`${prefix}SHOP`)) {
+    let itemList = [studentRole];
+    let nameList = [studentRole["name"]];
+    let typeList = [studentRole["type"]];
+    let priceList = [studentRole["price"]];
+    let ridList = [studentRole["rid"]];
+    let descList = [studentRole["desc"]];
     async function getBal() {
       maBal = await db.fetch(`${message.author.id}.money`);
       if (maBal === null) maBal = 0;
@@ -161,11 +159,7 @@ client.on("message", (message) => {
     });
   };
   if (msg.startsWith(`${prefix}EVAL`)) {
-    if (message.author.id === "288853176210161666") {
-    eval(args.join(' '));
-    } else {
-      return message.channel.send("hey, how do you even know this command.. <@288853176210161666>!");
-    }
+    evalcmd.eval();
   };
   if (msg.startsWith(`${prefix}AUTOROLE`)) {
     if (message.channel.name === '✏auto role') {
