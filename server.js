@@ -15,6 +15,23 @@ client.on("message", (message) => {
   // Variables
   
   let gMembs;
+  let modRoles = ['Moderator', 'Admin', 'Head Admin', 'Board of Directors', 'Chairman'];
+  let userModRole;
+  if (message.member.roles.some(r=>modRoles.includes(r.name))) {
+    if (message.member.roles.find(modRoles[0])) {
+      userModRole = 'Moderator';
+    } else if (message.member.roles.find(modRoles[0])) {
+      userModRole = 'Admin';
+    } else if (message.member.roles.find(modRoles[1])) {
+      userModRole = 'Head Admin';
+    } else if (message.member.roles.find(modRoles[2])) {
+      userModRole = 'Moderator';
+    } else if (message.member.roles.find(modRoles[3])) {
+      userModRole = 'Moderator';
+    } else if (message.member.roles.find(modRoles[4])) {
+      userModRole = 'Moderator';
+    }
+  };
   let gm2;
   let firstMentioned;
   let prefix = "/";
