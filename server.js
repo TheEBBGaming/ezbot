@@ -223,10 +223,11 @@ client.on("message", (message) => {
       let userwarns = db.fetch(`${message.mentions.members.first().id}.warns`);
       if (!args[1]) {
         db.push(`${message.mentions.members.first().id}.warns`, [`${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, 'No reason specified']);
+        let warnedEmbed = new Discord.RichEmbed()
+          .setAuthor(
         message.channel.send(`Warned ${message.mentions.members.first().displayName} on ${userwarns[Number(warncount)][0]} for:\n${userwarns[Number(warncount)][1]}`);
         db.add(`${message.mentions.members.first().id}.warncount`, 1);
         warncount = db.fetch(`${message.mentions.members.first().id}.warncount`);
-        message.channel.send(`${message.mentions.members.first().displayName} now has ${warncount} warnings.`);
       };
       if (args[1]) {
         let warnReasonArray = args.slice(1);
