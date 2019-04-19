@@ -238,7 +238,7 @@ client.on("message", (message) => {
         db.add(`${message.mentions.members.first().id}.warncount`, 1);
         let newWarncount = db.fetch(`${message.mentions.members.first().id}.warncount`);
         let fmwarns = db.fetch(`${message.mentions.members.first().id}.warns`);
-        message.channel.send(`Warned ${message.mentions.members.first().displayName} on ${fmwarns[Number(warncount)][0]} for:\n${fmwarns[Number(warncount)][1]}`);
+        message.channel.send(`Warned ${message.mentions.members.first().displayName} on ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC for:\n${warnReason}`);
         message.channel.send(`${message.mentions.members.first().displayName} now has ${newWarncount} warnings.`);
       };
     };
