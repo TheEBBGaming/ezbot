@@ -232,14 +232,15 @@ client.on("message", (message) => {
         message.channel.send(`${message.mentions.members.first().displayName} now has ${warncount} warnings.`);
       };
       if (args[1]) {
-        message.channel.send('psst yes it works here');
-       /* let warnReasonArray = args.slice(1);
+        let warnReasonArray = args.slice(1);
         let warnReason = warnReasonArray.join(' ');
+        message.channel.send(warnReason);
         db.push(`${message.mentions.members.first().id}.warns`, [`${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, warnReason]);
-        message.channel.send(`Warned ${message.mentions.members.first().displayName} on ${userwarns[Number(warncount)][0]} for:\n${userwarns[Number(warncount)][1]}`);
+        let fmwarns = db.fetch(`${message.mentions.members.first().id}.warns`);
+        message.channel.send(`Warned ${message.mentions.members.first().displayName} on ${fmwarns[Number(warncount)][0]} for:\n${fmwarns[Number(warncount)][1]}`);
         db.add(`${message.mentions.members.first().id}.warncount`, 1)
         let newWarncount = db.fetch(`${message.mentions.members.first().id}.warncount`);
-        message.channel.send(`${message.mentions.members.first().displayName} now has ${newWarncount} warnings.`);*/
+        message.channel.send(`${message.mentions.members.first().displayName} now has ${newWarncount} warnings.`);
       };
     };
   };
