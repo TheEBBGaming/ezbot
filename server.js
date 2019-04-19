@@ -215,6 +215,14 @@ client.on("message", (message) => {
         .addField(`User not specfied`, "Please specify a Discord user to warn.\n**Command Format:** `/warn @user [reason]`\n**NOTE:** Command parameters in `[]` are optional.")
         message.channel.send(warnEmbed);
     } else {
+      dateobj = new Date();
+      date = dateobj.getUTCDate();
+      monthnum = dateobj.getUTCMonth();
+      year = dateobj.getUTCFullYear();
+      hours = dateobj.getUTCHours();
+      minutes = dateobj.getUTCMinutes();
+      seconds = dateobj.getUTCSeconds();
+      months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
       let userwarns = db.fetch(`${message.mentions.members.first().id}.warns`);
       if (!args[1]) {
         db.push(`${message.mentions.members.first().id}.warns`, [`${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, 'No reason specified']);
@@ -227,9 +235,9 @@ client.on("message", (message) => {
         let warnReason = warnReasonArray.join(' ');
         db.push(`${message.mentions.members.first().id}.warns`, [`${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, warnReason]);
         message.channel.send(`Warned ${message.mentions.members.first().displayName} on ${userwarns[Number(warncount)][0]} for:\n${userwarns[Number(warncount)][1]}`);
-        db.add(`${message.mentions.members.first().id}.warncount`, 1);
-        warncount = db.fetch(`${message.mentions.members.first().id}.warncount`);
-        message.channel.send(`${message.mentions.members.first().displayName} now has ${warncount} warnings.`);
+        db.add(`${message.mentions.members.first().id}.warncount`, 1)
+        let newWarncount = db.fetch(`${message.mentions.members.first().id}.warncount`);
+        message.channel.send(`${message.mentions.members.first().displayName} now has ${newWarncount} warnings.`);
       };
     };
   };
