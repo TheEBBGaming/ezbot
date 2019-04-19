@@ -24,6 +24,8 @@ client.on("message", (message) => {
   const logchannel = client.channels.find(val => val.channel === '🚨mod logs');
   const mainchat = client.channels.find(val => val.channel === '🌐global chat');
   const autoroleChan = client.channels.find(val => val.channel === '✏auto role');
+  let authorTag = message.author.tag.slice(message.author.username.length);
+  let mmmfTag;
   let warnings;
   let warncount;
   let dateobj = new Date();
@@ -45,6 +47,7 @@ client.on("message", (message) => {
     warnings = db.fetch(`${firstMentioned.id}.warns`);
     warncount = db.fetch(`${firstMentioned.id}.warncount`);
     if (warncount = null) warncount = 0;
+    let mmmfTag = message.mentions.members.first().user.tag.slice(firstMentioned.user.username.length);
   };
   
   let maMember = message.guild.members.get(message.author.id);
@@ -224,7 +227,10 @@ client.on("message", (message) => {
       if (!args[1]) {
         db.push(`${message.mentions.members.first().id}.warns`, [`${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, 'No reason specified']);
         let warnedEmbed = new Discord.RichEmbed()
-          .setAuthor(
+          .setAuthor(message.mentions.members.first().user.avatarURL, `Warned ${message.mentions.members.first().displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`)
+          .setFooter(message.author.avatarURL, `Warned by ${message.guild.members.get(message.author.id).displayName}${authorTag}`)
+          .setTitle(`${message.mentions.members.first().displayName}${mmmfTag} has been warned.`)
+          .addField('Warned By', `${message.author.member.)
         message.channel.send(`Warned ${message.mentions.members.first().displayName} on ${userwarns[Number(warncount)][0]} for:\n${userwarns[Number(warncount)][1]}`);
         db.add(`${message.mentions.members.first().id}.warncount`, 1);
         warncount = db.fetch(`${message.mentions.members.first().id}.warncount`);
