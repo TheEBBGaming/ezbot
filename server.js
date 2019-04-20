@@ -30,7 +30,7 @@ client.on("message", (message) => {
       userModRole = 'Chairman';
     };
   } else if (message.member.hasPermission("ADMINISTRATOR")) {
-    userModRole = 'Admin';
+    userModRole = 'Administrator';
   };
   let gm2;
   let firstMentioned;
@@ -38,9 +38,9 @@ client.on("message", (message) => {
   let msg = message.content.toUpperCase();
   let cont = message.content.slice(prefix.length).split(" ");
   let args = cont.slice(1);
-  const logchannel = client.channels.find(val => val.channel === '🚨mod logs');
-  const mainchat = client.channels.find(val => val.channel === '🌐global chat');
-  const autoroleChan = client.channels.find(val => val.channel === '✏auto role');
+  const logchannel = client.channels.find(val => val.channel === 'mod logs');
+  const mainchat = client.channels.find(val => val.channel === 'global chat');
+  const autoroleChan = client.channels.find(val => val.channel === 'auto role');
   let authorTag;
   let mmmfTag;
   let warnings;
@@ -254,11 +254,17 @@ client.on("message", (message) => {
       let newWarncount = db.fetch(`${message.mentions.members.first().id}.warncount`);
       let fmwarns = db.fetch(`${message.mentions.members.first().id}.warns`);
       let warnedEmbed = new Discord.RichEmbed()
-        .setAuthor(`Warned ${message.mentions.members.first().displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, message.mentions.members.first().user.avatarURL)
+        .setTitle('Warned' + message.mentions.members.first().displayName)
         .addField('Warned For:', warnReason)
         .addField('Warned By:', `${message.member.displayName}${authorTag} - ${userModRole}`)
         .setColor(0xFF0000)
+      let warnedLogEmbed = new Discord.RichEmbed()
+        .setAuthor(`Warned ${message.mentions.members.first().displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, message.mentions.members.first().user.avatarURL)
+        .addField('Warned For:', warnReason)
+        .addField('Warned By:', `${message.member.displayName}${authorTag}`)
+        .setFooter(`User now has $
       message.channel.send(warnedEmbed);
+      logChannel.send(warnedLogEmbed);
     };
   };
 
