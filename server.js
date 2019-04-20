@@ -262,9 +262,10 @@ client.on("message", (message) => {
         .setAuthor(`Warned ${message.mentions.members.first().displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, message.mentions.members.first().user.avatarURL)
         .addField('Warned For:', warnReason)
         .addField('Warned By:', `${message.member.displayName}${authorTag}`)
-        .setFooter(`User now has $
+        .setFooter(`User now has ${newWarncount} warnings`, message.mentions.members.first().user.avatarURL)
+        .setColor(0xFF0000)
       message.channel.send(warnedEmbed);
-      logChannel.send(warnedLogEmbed);
+      logchannel.send(warnedLogEmbed);
     };
   };
 
