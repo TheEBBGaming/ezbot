@@ -36,8 +36,9 @@ client.on("message", (message) => {
   let firstMentioned;
   let prefix = "/";
   let msg = message.content.toUpperCase();
-  let cont = message.content.slice(prefix.length).split(" ");
+  let cont = message.content.slice(prefix.length).split(' ');
   let args = cont.slice(1);
+  let argsString = args.join(' ');
   const logchannel = client.channels.find(val => val.channel === 'mod logs');
   const mainchat = client.channels.find(val => val.channel === 'global chat');
   const autoroleChan = client.channels.find(val => val.channel === 'auto role');
@@ -187,35 +188,37 @@ client.on("message", (message) => {
     if (message.channel.name === '✏auto role') {
       let assignedRole;
       message.delete();
-      switch(args[0]) {
-        case 'Red':
+      switch(argsString.toUpperCase()) {
+        case 'RED':
           maMember.addRole('531357176082595850');
           assignedRole = 'Red';
           break;
-        case 'Orange':
+        case 'ORANGE':
           maMember.addRole('531357242159661077');
           assignedRole = 'Orange';
           break;
-        case 'Yellow':
+        case 'YELLOW':
           maMember.addRole('531357291350589452');
           assignedRole = 'Yellow';
           break;
-        case 'Green':
+        case 'GREEN':
           maMember.addRole('531357331414581259');
           assignedRole = 'Green';
           break;
-        case 'Blue':
+        case 'BLUE':
           maMember.addRole('531357372619423746');
           assignedRole = 'Blue';
           break;
-        case 'Indigo':
+        case 'INDIGO':
           maMember.addRole('531357427556286464');
           assignedRole = 'Indigo';
           break;
-        case 'Violet':
+        case 'VIOLET':
           maMember.addRole('531357471130779650');
           assignedRole = 'Violet';
           break;
+        case 'STUDENT':
+          
         default:
           message.channel.send('Error. You have not specified a role to receive.').then(msg => {msg.delete(5000)});
           break;
