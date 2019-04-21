@@ -18,15 +18,15 @@ client.on("message", (message) => {
   let modRoles = ['Moderator', 'Admin', 'Head Admin', 'Board of Directors', 'Chairman'];
   let userModRole;
   if (message.member.roles.some(r=>modRoles.includes(r.name))) {
-    if (message.member.roles.find('name', modRoles[0])) {
+    if (message.member.roles.find(val => val.name === modRoles[0])) {
       userModRole = 'Moderator';
-    } else if (message.member.roles.find('name', modRoles[0])) {
+    } else if (message.member.roles.find(val => val.name === modRoles[0])) {
       userModRole = 'Admin';
-    } else if (message.member.roles.find('name', modRoles[1])) {
+    } else if (message.member.roles.find(val => val.name === modRoles[1])) {
       userModRole = 'Head Admin';
-    } else if (message.member.roles.find('name', modRoles[2])) {
+    } else if (message.member.roles.find(val => val.name === modRoles[2])) {
       userModRole = 'Board of Directors';
-    } else if (message.member.roles.find('name', modRoles[3])) {
+    } else if (message.member.roles.find(val => val.name === modRoles[3])) {
       userModRole = 'Chairman';
     };
   } else if (message.member.hasPermission("ADMINISTRATOR")) {
@@ -72,7 +72,7 @@ client.on("message", (message) => {
   
   // Shop
   
-  if (msg.startsWith(`COMMANDER CODY, THE TIME HAS COME.`)) {
+ /* if (msg.startsWith(`COMMANDER CODY, THE TIME HAS COME.`)) {
     message.channel.send("It will be done, my lord.");
     gMembs = message.guild.members;
     gm2 = gMembs.keyArray();
@@ -102,8 +102,8 @@ client.on("message", (message) => {
       order66().then(() => { gMembs = message.guild.members; gm2 = gMembs.keyArray() });
     };
   };
-
-  if (msg.startsWith(`${prefix}SHOP`) || msg.startsWith(`${prefix}STORE`) || msg.startsWith(`${prefix}BUY`)) {
+*/
+  if (msg.startsWith(`${prefix}SHOP`) || msg.startsWith(`${prefix}STORE`) || (msg.startsWith(`${prefix}BUY`) && !args[0])) {
     let studentRole = {
       "name":"Student Role",
       "type":"Role",
@@ -177,6 +177,7 @@ client.on("message", (message) => {
       };
     });
   };
+  
   if (msg.startsWith(`${prefix}EVAL`)) {
     if (message.author.id === "288853176210161666") {
       eval(args.join(' '));
