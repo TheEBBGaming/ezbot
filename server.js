@@ -211,7 +211,24 @@ client.on("message", (message) => {
         .setColor(0xFF0000)
       message.channel.send(banEmbed);
       logchannel.send(banLogEmbed);
-    } else if (
+    } else if (isNaN(args[1])) {
+      message.mentions.members.first().ban();
+      let banReason = args.slice(1).join(' ');
+      let banEmbed = new Discord.RichEmbed()
+        .setAuthor('Banned ' + message.mentions.members.first().displayName + mmmfTag, message.mentions.members.first().user.avatarURL)
+        .addField('Banned For:', banReason)
+        .addField('Banned By:', `${message.member.displayName}${authorTag} - ${userModRole}`)
+        .setFooter(`ID: ${message.mentions.members.first().id} • No messages deleted`)
+        .setColor(0xFF0000)
+      let banLogEmbed = new Discord.RichEmbed()
+        .setAuthor(`Banned ${message.mentions.members.first().displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, message.mentions.members.first().user.avatarURL)
+        .addField('Banned For:', banReason)
+        .addField('Banned By:', `${message.member.displayName}${authorTag}`)
+        .setFooter(`ID: ${message.mentions.members.first().id} • No messages deleted`)
+        .setColor(0xFF0000)
+      message.channel.send(banEmbed);
+      logchannel.send(banLogEmbed);
+    } else if (!isNaN(args[1]) && args[2])
   };
   
   if (msg.startsWith(`${prefix}EVAL`)) {
