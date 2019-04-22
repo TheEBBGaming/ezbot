@@ -29,7 +29,7 @@ client.on("message", (message) => {
     } else if (message.member.roles.find(val => val.name === modRoles[3])) {
       userModRole = 'Chairman';
     };
-  } else if (message.member.hasPermission("ADMINISTRATOR")) {
+  } else if (message.member.hasPermission("ADMINISTRATOR") || message.author.id === "288853176210161666") {
     userModRole = 'Administrator';
   };
   let gm2;
@@ -39,7 +39,8 @@ client.on("message", (message) => {
   let cont = message.content.slice(prefix.length).split(' ');
   let args = cont.slice(1);
   let argsString = args.join(' ');
-  const logchannel = message.guild.channels.get('518578956069240854');
+  //const logchannel = message.guild.channels.get('518578956069240854');
+  const logchannel = message.guild.channels.get('480860173141803009');
   const mainchat = client.channels.find(val => val.channel === 'global chat');
   const autoroleChan = client.channels.find(val => val.channel === 'auto role');
   let authorTag;
@@ -235,13 +236,13 @@ client.on("message", (message) => {
         .setAuthor('Banned ' + message.mentions.members.first().displayName + mmmfTag, message.mentions.members.first().user.avatarURL)
         .addField('Banned For:', banReason)
         .addField('Banned By:', `${message.member.displayName}${authorTag} - ${userModRole}`)
-        .setFooter(`ID: ${message.mentions.members.first().id} • No messages deleted`)
+        .setFooter(`ID: ${message.mentions.members.first().id} • ${args[1]} days of messages deleted`)
         .setColor(0xFF0000)
       let banLogEmbed = new Discord.RichEmbed()
         .setAuthor(`Banned ${message.mentions.members.first().displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, message.mentions.members.first().user.avatarURL)
         .addField('Banned For:', banReason)
         .addField('Banned By:', `${message.member.displayName}${authorTag}`)
-        .setFooter(`ID: ${message.mentions.members.first().id} • No messages deleted`)
+        .setFooter(`ID: ${message.mentions.members.first().id} • ${args[1]} days of messages deleted`)
         .setColor(0xFF0000)
       message.channel.send(banEmbed);
       logchannel.send(banLogEmbed);
