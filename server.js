@@ -185,8 +185,9 @@ client.on("message", (message) => {
         .setTitle(`:warning: ERROR :warning:`)
         .addField(`User not specfied`, "Please specify a Discord user to ban.\n**Command Format:** `/ban @user [number of days of messages to delete] [reason]`\n**NOTE:** Command parameters in `[]` are optional.")
       message.channel.send(warnEmbed);
-    };
-    
+    } else if (!args[1]) {
+      message.mentions.members.first().ban();
+    }
   };
   
   if (msg.startsWith(`${prefix}EVAL`)) {
