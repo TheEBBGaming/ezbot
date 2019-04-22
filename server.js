@@ -181,6 +181,13 @@ client.on("message", (message) => {
   if (msg.startsWith(`${prefix}BAN`)) {
     authorTag = message.author.tag.slice(message.author.username.length);
     mmmfTag = message.mentions.members.first().user.tag.slice(message.mentions.members.first().user.username.length);
+    dateobj = new Date();
+    date = dateobj.getUTCDate();
+    monthnum = dateobj.getUTCMonth();
+    year = dateobj.getUTCFullYear();
+    hours = dateobj.getUTCHours();
+    minutes = dateobj.getUTCMinutes();
+    seconds = dateobj.getUTCSeconds();
     if (userModRole === null) return;
     if (!args[0] || !message.mentions.members.first()) {
       let warnEmbed = new Discord.RichEmbed()
@@ -190,9 +197,21 @@ client.on("message", (message) => {
       message.channel.send(warnEmbed);
     } else if (!args[1]) {
       message.mentions.members.first().ban();
-      let succEmbed = new Discord.RichEmbed()
-        .setTitle(`Banned ${message.mentions.members.first().displayName}#${mmmfTag}`)
-    }
+      let banEmbed = new Discord.RichEmbed()
+        .setAuthor('Banned ' + message.mentions.members.first().displayName + mmmfTag, message.mentions.members.first().user.avatarURL)
+        .addField('Banned For:', 'No reason specified')
+        .addField('Banned By:', `${message.member.displayName}${authorTag} - ${userModRole}`)
+        .setFooter(`ID: ${message.mentions.members.first().id} • No messages deleted`)
+        .setColor(0xFF0000)
+      let banLogEmbed = new Discord.RichEmbed()
+        .setAuthor(`Banned ${message.mentions.members.first().displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, message.mentions.members.first().user.avatarURL)
+        .addField('Banned For:', 'No reason specified')
+        .addField('Banned By:', `${message.member.displayName}${authorTag}`)
+        .setFooter(`ID: ${message.mentions.members.first().id} • No messages deleted`)
+        .setColor(0xFF0000)
+      message.channel.send(banEmbed);
+      logchannel.send(banLogEmbed);
+    } else if (
   };
   
   if (msg.startsWith(`${prefix}EVAL`)) {
