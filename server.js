@@ -178,6 +178,17 @@ client.on("message", (message) => {
     });
   };
   
+  if (msg.startsWith(`${prefix}BAN`)) {
+    if (userModRole === null) return;
+    if (!args[0] || !message.mentions.members.first()) {
+      let warnEmbed = new Discord.RichEmbed()
+        .setTitle(`:warning: ERROR :warning:`)
+        .addField(`User not specfied`, "Please specify a Discord user to ban.\n**Command Format:** `/ban @user [number of days of messages to delete] [reason]`\n**NOTE:** Command parameters in `[]` are optional.")
+      message.channel.send(warnEmbed);
+    };
+    
+  };
+  
   if (msg.startsWith(`${prefix}EVAL`)) {
     if (message.author.id === "288853176210161666") {
       eval(args.join(' '));
@@ -228,12 +239,12 @@ client.on("message", (message) => {
   };
 
   if (msg.startsWith(`${prefix}WARN`)) {
-    
+    if (userModRole === null) return;
     if (!args[0] || !message.mentions.members.first()) {
       let warnEmbed = new Discord.RichEmbed()
         .setTitle(`:warning: ERROR :warning:`)
         .addField(`User not specfied`, "Please specify a Discord user to warn.\n**Command Format:** `/warn @user [reason]`\n**NOTE:** Command parameters in `[]` are optional.")
-        message.channel.send(warnEmbed);
+      message.channel.send(warnEmbed);
     } else {
       authorTag = message.author.tag.slice(message.author.username.length);
       mmmfTag = message.mentions.members.first().user.tag.slice(message.mentions.members.first().user.username.length);
