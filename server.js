@@ -179,14 +179,19 @@ client.on("message", (message) => {
   };
   
   if (msg.startsWith(`${prefix}BAN`)) {
+    authorTag = message.author.tag.slice(message.author.username.length);
+    mmmfTag = message.mentions.members.first().user.tag.slice(message.mentions.members.first().user.username.length);
     if (userModRole === null) return;
     if (!args[0] || !message.mentions.members.first()) {
       let warnEmbed = new Discord.RichEmbed()
         .setTitle(`:warning: ERROR :warning:`)
         .addField(`User not specfied`, "Please specify a Discord user to ban.\n**Command Format:** `/ban @user [number of days of messages to delete] [reason]`\n**NOTE:** Command parameters in `[]` are optional.")
+        .setColor(0xFF0000)
       message.channel.send(warnEmbed);
     } else if (!args[1]) {
       message.mentions.members.first().ban();
+      let succEmbed = new Discord.RichEmbed()
+        .setTitle(`Banned ${message.mentions.members.first().displayName}#${mmmfTag}`)
     }
   };
   
