@@ -39,8 +39,8 @@ client.on("message", (message) => {
   let cont = message.content.slice(prefix.length).split(' ');
   let args = cont.slice(1);
   let argsString = args.join(' ');
-  //const logchannel = message.guild.channels.get('518578956069240854');
-  const logchannel = message.guild.channels.get('480860173141803009');
+  const logchannel = message.guild.channels.get('518578956069240854');
+  // Private server: const logchannel = message.guild.channels.get('480860173141803009');
   const mainchat = client.channels.find(val => val.channel === 'global chat');
   const autoroleChan = client.channels.find(val => val.channel === 'auto role');
   let authorTag;
@@ -270,6 +270,7 @@ client.on("message", (message) => {
       return message.channel.send("error\n\nif you're seeing this, congratulations; you've managed to find a set of circumstances that shouldn't physically be possible. please dm Futuristick#7633 immediately")
     };
   };
+  
   if (msg.startsWith(`${prefix}KICK`)) {
     authorTag = message.author.tag.slice(message.author.username.length);
     dateobj = new Date();
@@ -307,16 +308,16 @@ client.on("message", (message) => {
       let kickReason = kickReasonSliced.join(' ');
       message.mentions.members.first().kick(kickReason);
       let banEmbed = new Discord.RichEmbed()
-        .setAuthor('Banned ' + message.mentions.members.first().displayName + mmmfTag, message.mentions.members.first().user.avatarURL)
-        .addField('Banned For:', kickReason)
-        .addField('Banned By:', `${message.member.displayName}${authorTag} - ${userModRole}`)
-        .setFooter(`ID: ${message.mentions.members.first().id} • No messages deleted`)
+        .setAuthor('Kicked ' + message.mentions.members.first().displayName + mmmfTag, message.mentions.members.first().user.avatarURL)
+        .addField('Kicked For:', kickReason)
+        .addField('Kicked By:', `${message.member.displayName}${authorTag} - ${userModRole}`)
+        .setFooter(`ID: ${message.mentions.members.first().id}`)
         .setColor(0xFF0000)
       let banLogEmbed = new Discord.RichEmbed()
-        .setAuthor(`Banned ${message.mentions.members.first().displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, message.mentions.members.first().user.avatarURL)
-        .addField('Banned For:', kickReason)
-        .addField('Banned By:', `${message.member.displayName}${authorTag}`)
-        .setFooter(`ID: ${message.mentions.members.first().id} • No messages deleted`)
+        .setAuthor(`Kicked ${message.mentions.members.first().displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, message.mentions.members.first().user.avatarURL)
+        .addField('Kicked For:', kickReason)
+        .addField('Kicked By:', `${message.member.displayName}${authorTag}`)
+        .setFooter(`ID: ${message.mentions.members.first().id}`)
         .setColor(0xFF0000)
       message.channel.send(banEmbed);
       logchannel.send(banLogEmbed);
@@ -324,6 +325,7 @@ client.on("message", (message) => {
       return message.channel.send("error\n\nif you're seeing this, congratulations; you've managed to find a set of circumstances that shouldn't physically be possible. please dm Futuristick#7633 immediately")
     };
   };
+  
   if (msg.startsWith(`${prefix}EVAL`)) {
     if (message.author.id === "288853176210161666") {
       eval(args.join(' '));
@@ -331,6 +333,7 @@ client.on("message", (message) => {
       return message.channel.send("hey, how do you even know this command.. <@288853176210161666>!");
     };
   };
+  
   if (msg.startsWith(`${prefix}AUTOROLE`)) {
     if (message.channel.name === '✏auto role') {
       let assignedRole;
@@ -399,7 +402,7 @@ client.on("message", (message) => {
       } else {
         warnReason = 'No reason specified';
       };
-      db.push(`${message.mentions.members.first().id}.warns`, [`${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, warnReason]);
+      db.push(`${message.mentions.members.first().id}.warns`, [`${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, warnReason, `${message.member.displayName}${authorTag} - ${userModRole}`]);
       db.add(`${message.mentions.members.first().id}.warncount`, 1);
       let newWarncount = db.fetch(`${message.mentions.members.first().id}.warncount`);
       let fmwarns = db.fetch(`${message.mentions.members.first().id}.warns`);
@@ -419,7 +422,20 @@ client.on("message", (message) => {
       logchannel.send(warnedLogEmbed);
     };
   };
-
+  
+  if (msg.startsWith(`${prefix}WARNINGS`)) {
+    if (userModRole = null) return;
+    if (!args[0] || !message.mentions.members.first()) {
+      let warnEmbed = new Discord.RichEmbed()
+        .setTitle(`:warning: ERROR :warning:`)
+        .addField(`User not specfied`, "Please specify a valid Discord member to check warnings for.\n**Command Format:** `/warnings @member`")
+        .setColor(0xFF0000)
+      message.channel.send(warnEmbed);
+    } else {
+      let warningsEmbed = new Discord.RichEmbed()
+      for (let i = 0; i < 2; i++) {}
+    };
+  };
 /*
   if (msg.startsWith(`${prefix}LINK`)) {
     if (message.member.roles.find(val => val.role === "Royal Servant") || message.member.roles.find(val => val.role === "Mod") || message.member.roles.find(val => val.role === "Admin") || message.member.roles.find(val => val.role === "Head Admin") || message.member.roles.find(val => val.role === "Viscount") || message.member.roles.find(val => val.role === "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
