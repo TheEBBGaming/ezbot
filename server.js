@@ -378,7 +378,7 @@ client.on("message", (message) => {
     };
   };
 
-  if (msg.startsWith(`${prefix}WARN`)) {
+  if (msg.startsWith(`${prefix}WARN`) && !msg.startsWith(`${prefix}WARNINGS`)) {
     if (userModRole === null) return;
     if (!args[0] || !message.mentions.members.first()) {
       let warnEmbed = new Discord.RichEmbed()
@@ -427,6 +427,7 @@ client.on("message", (message) => {
   
   if (msg.startsWith(`${prefix}WARNINGS`)) {
     if (userModRole === null) return;
+    authorTag = message.author.tag.slice(message.author.username.length);
     if (!args[0] || !message.mentions.members.first()) {
       let warnEmbed = new Discord.RichEmbed()
         .setTitle(`:warning: ERROR :warning:`)
@@ -437,17 +438,63 @@ client.on("message", (message) => {
       let warningsEmbed = new Discord.RichEmbed()
       .setColor(0xFFFF00)
       .setAuthor(`Warnings for ${message.mentions.members.first().displayName}${mmmfTag}`, message.mentions.members.first().user.avatarURL)
-      .setFooter(`Requested by ${message.member.displayName}${authorTag}`, message.author.avatarURL)
       for (let i = 0; i < warnings.length; i++) {
         if (i === 24) {
           message.channel.send(warningsEmbed);
           warningsEmbed = new Discord.RichEmbed()
+          .setColor(0xFFFF00)
         };
-        warningsEmbed.addField(`${warnings[i][0]} - by ${warnings[i][2]}`, `**Reason:** ${warnings[i][1]}`)
+        warningsEmbed.addField(`${warnings[i][0]} - by ${warnings[i][2]}`, `**Reason:** ${warnings[i][1]}`, true)
       };
+      warningsEmbed.setFooter(`Requested by ${message.member.displayName}${authorTag}`, message.author.avatarURL)
       message.channel.send(warningsEmbed);
     };
   };
+  
+  if (msg.startsWith(`${prefix}CLEARWARN`)) {
+    
+  };
+  
+  if (msg.startsWith(`${prefix}MUTE`)) {
+		if (!userModRole === null) {
+			if (!args[0]) {
+				let errEmbed = new Discord.RichEmbed()
+					.setTitle(":warning: ERROR :warning:")
+					.addField("Member not specified", "You must specify a member to mute. \n**Command Format:** `/mute @user [# of mins]`")
+					.setColor([255, 0, 0])
+				return message.channel.send(errEmbed);
+			} else if (!message.mentions.members.first()) {
+				let errEmbed = new Discord.RichEmbed()
+					.setTitle(":warning: ERROR :warning:")
+					.addField("Member not specified", "You must specify a member to mute. \n**Command Format:** `/mute @user [# of mins]`")
+					.setColor([255, 0, 0])
+				return message.channel.send(errEmbed);
+			} else if (!args[1]) {
+				let errEmbed = new Discord.RichEmbed()
+					.setTitle(":warning: ERROR :warning:")
+					.addField("Time limit not specified", "You must specify a length of time to mute the member for. \n**Command Format:** `/mute @user [# of mins]`")
+					.setColor([255, 0, 0])
+				return message.channel.send(errEmbed);
+			} else {
+
+				firstMentioned.addRole("518892881382080512");
+				if (!isNaN(args[1])) {
+					setTimeout(() => {firstMentioned.removeRole("518892881382080512");}, args[1] * 60000);
+					let succEmbed = new Discord.RichEmbed()
+						.setTitle("Success!")
+						.addField("Member muted", `The member has been muted for ` + args[1] + ` minute(s).`)
+						.setColor([0, 255, 0])
+					return message.channel.send(succEmbed);
+				} else {
+					let errEmbed = new Discord.RichEmbed()
+						.setTitle(":warning: ERROR :warning:")
+						.addField("Time limit not specified", "You must specify a length of time to mute the member for. \n**Command Format:** `/mute @user [# of mins]`")
+						.setColor([255, 0, 0])
+					return message.channel.send(errEmbed);
+				};
+			};
+		};
+	};
 /*
   if (msg.startsWith(`${prefix}LINK`)) {
     if (message.member.roles.find(val => val.role === "Royal Servant") || message.member.roles.find(val => val.role === "Mod") || message.member.roles.find(val => val.role === "Admin") || message.member.roles.find(val => val.role === "Head Admin") || message.member.roles.find(val => val.role === "Viscount") || message.member.roles.find(val => val.role === "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
@@ -875,53 +922,6 @@ client.on("message", (message) => {
 						.setFooter("This help message is brought to you by the Royalty family", "https://i.imgur.com/7Ut6i8F.jpg")
 					return message.channel.send(purgeEmbed);
 			};
-	};
-
-	if (msg.startsWith(`${prefix}MUTE`)) {
-		if (message.member.roles.find(val => val.role === "Mod") || message.member.roles.find(val => val.role === "Viscount") || message.member.roles.find(val => val.role === "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
-			if (!args[0]) {
-				let errEmbed = new Discord.RichEmbed()
-					.setTitle(":warning: ERROR :warning:")
-					.addField("Member not specified", "You must specify a member to mute. \n**Command Format:** `/mute @user [# of mins]`\n**Example:** `/mute @DiscordUser 30`")
-					.setColor([255, 0, 0])
-				return message.channel.send(errEmbed);
-			} else if (!message.mentions.members.first()) {
-				let errEmbed = new Discord.RichEmbed()
-					.setTitle(":warning: ERROR :warning:")
-					.addField("Member not specified", "You must specify a member to mute. \n**Command Format:** `/mute @user [# of mins]`\n**Example:** `/mute @DiscordUser 30`")
-					.setColor([255, 0, 0])
-				return message.channel.send(errEmbed);
-			} else if (!args[1]) {
-				let errEmbed = new Discord.RichEmbed()
-					.setTitle(":warning: ERROR :warning:")
-					.addField("Time limit not specified", "You must specify a length of time to mute the member for. \n**Command Format:** `/mute @user [# of mins]`\n**Example:** `/mute @DiscordUser 30`")
-					.setColor([255, 0, 0])
-				return message.channel.send(errEmbed);
-			} else {
-
-				firstMentioned.addRole("518892881382080512");
-				if (!isNaN(args[1])) {
-					setTimeout(() => {firstMentioned.removeRole("518892881382080512");}, args[1] * 60000);
-					let succEmbed = new Discord.RichEmbed()
-						.setTitle("Success!")
-						.addField("Member muted", `The member has been muted for ` + args[1] + ` minute(s).`)
-						.setColor([0, 255, 0])
-					return message.channel.send(succEmbed);
-				} else {
-					let errEmbed = new Discord.RichEmbed()
-						.setTitle(":warning: ERROR :warning:")
-						.addField("Time limit not specified", "You must specify a length of time to mute the member for. \n**Command Format:** `/mute @user [# of mins]`\n**Example:** `/mute @DiscordUser 30`")
-						.setColor([255, 0, 0])
-					return message.channel.send(errEmbed);
-				};
-			};
-		} else {
-			let errEmbed = new Discord.RichEmbed()
-				.setTitle(":warning: ERROR :warning:")
-				.addField("Invalid permissions", "You do not have the permissions to use this command.")
-				.setColor([255, 0, 0])
-			return message.channel.send(errEmbed);
-		};
 	};
   */
 });
