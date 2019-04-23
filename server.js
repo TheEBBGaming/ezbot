@@ -270,7 +270,60 @@ client.on("message", (message) => {
       return message.channel.send("error\n\nif you're seeing this, congratulations; you've managed to find a set of circumstances that shouldn't physically be possible. please dm Futuristick#7633 immediately")
     };
   };
-  
+  if (msg.startsWith(`${prefix}KICK`)) {
+    authorTag = message.author.tag.slice(message.author.username.length);
+    dateobj = new Date();
+    date = dateobj.getUTCDate();
+    monthnum = dateobj.getUTCMonth();
+    year = dateobj.getUTCFullYear();
+    hours = dateobj.getUTCHours();
+    minutes = dateobj.getUTCMinutes();
+    seconds = dateobj.getUTCSeconds();
+    if (userModRole === null) return;
+    if (!args[0] || !message.mentions.members.first() || !message.mentions.members.first().kickable) {
+      let warnEmbed = new Discord.RichEmbed()
+        .setTitle(`:warning: ERROR :warning:`)
+        .addField(`User not specfied`, "Please specify a valid Discord member to kick.\n**Command Format:** `/kick @member [reason]`\n**NOTE:** Command parameters in `[]` are optional.")
+        .setColor(0xFF0000)
+      message.channel.send(warnEmbed);
+    } else if (!args[1]) {
+      message.mentions.members.first().kick();
+      let banEmbed = new Discord.RichEmbed()
+        .setAuthor('Kicked ' + message.mentions.members.first().displayName + mmmfTag, message.mentions.members.first().user.avatarURL)
+        .addField('Kicked For:', 'No reason specified')
+        .addField('Banned By:', `${message.member.displayName}${authorTag} - ${userModRole}`)
+        .setFooter(`ID: ${message.mentions.members.first().id} • No messages deleted`)
+        .setColor(0xFF0000)
+      let banLogEmbed = new Discord.RichEmbed()
+        .setAuthor(`Banned ${message.mentions.members.first().displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, message.mentions.members.first().user.avatarURL)
+        .addField('Banned For:', 'No reason specified')
+        .addField('Banned By:', `${message.member.displayName}${authorTag}`)
+        .setFooter(`ID: ${message.mentions.members.first().id} • No messages deleted`)
+        .setColor(0xFF0000)
+      message.channel.send(banEmbed);
+      logchannel.send(banLogEmbed);
+    } else if (args[1]) {
+      let kickReasonSliced = args.slice(1);
+      let kickReason = kickReasonSliced.join(' ');
+      message.mentions.members.first().kick(kickReason);
+      let banEmbed = new Discord.RichEmbed()
+        .setAuthor('Banned ' + message.mentions.members.first().displayName + mmmfTag, message.mentions.members.first().user.avatarURL)
+        .addField('Banned For:', kickReason)
+        .addField('Banned By:', `${message.member.displayName}${authorTag} - ${userModRole}`)
+        .setFooter(`ID: ${message.mentions.members.first().id} • No messages deleted`)
+        .setColor(0xFF0000)
+      let banLogEmbed = new Discord.RichEmbed()
+        .setAuthor(`Banned ${message.mentions.members.first().displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, message.mentions.members.first().user.avatarURL)
+        .addField('Banned For:', kickReason)
+        .addField('Banned By:', `${message.member.displayName}${authorTag}`)
+        .setFooter(`ID: ${message.mentions.members.first().id} • No messages deleted`)
+        .setColor(0xFF0000)
+      message.channel.send(banEmbed);
+      logchannel.send(banLogEmbed);
+    } else {
+      return message.channel.send("error\n\nif you're seeing this, congratulations; you've managed to find a set of circumstances that shouldn't physically be possible. please dm Futuristick#7633 immediately")
+    };
+  };
   if (msg.startsWith(`${prefix}EVAL`)) {
     if (message.author.id === "288853176210161666") {
       eval(args.join(' '));
