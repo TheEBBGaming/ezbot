@@ -66,6 +66,7 @@ client.on("message", (message) => {
     warnings = db.fetch(`${firstMentioned.id}.warns`);
     warncount = db.fetch(`${firstMentioned.id}.warncount`);
     if (warncount = null) warncount = 0;
+    mmmfTag = message.mentions.members.first().user.tag.slice(message.mentions.members.first().user.username.length);
   };
   
   let maMember = message.guild.members.get(message.author.id);
@@ -181,7 +182,6 @@ client.on("message", (message) => {
   
   if (msg.startsWith(`${prefix}BAN`)) {
     authorTag = message.author.tag.slice(message.author.username.length);
-    mmmfTag = message.mentions.members.first().user.tag.slice(message.mentions.members.first().user.username.length);
     dateobj = new Date();
     date = dateobj.getUTCDate();
     monthnum = dateobj.getUTCMonth();
@@ -190,10 +190,10 @@ client.on("message", (message) => {
     minutes = dateobj.getUTCMinutes();
     seconds = dateobj.getUTCSeconds();
     if (userModRole === null) return;
-    if (!args[0] || !message.mentions.members.first()) {
+    if (!args[0] || !message.mentions.members.first() || !message.mentions.members.first().bannable) {
       let warnEmbed = new Discord.RichEmbed()
         .setTitle(`:warning: ERROR :warning:`)
-        .addField(`User not specfied`, "Please specify a Discord user to ban.\n**Command Format:** `/ban @user [number of days of messages to delete] [reason]`\n**NOTE:** Command parameters in `[]` are optional.")
+        .addField(`User not specfied`, "Please specify a valid Discord member to ban.\n**Command Format:** `/ban @member [number of days of messages to delete] [reason]`\n**NOTE:** Command parameters in `[]` are optional.")
         .setColor(0xFF0000)
       message.channel.send(warnEmbed);
     } else if (!args[1]) {
@@ -213,9 +213,9 @@ client.on("message", (message) => {
       message.channel.send(banEmbed);
       logchannel.send(banLogEmbed);
     } else if (isNaN(args[1])) {
-      message.mentions.members.first().ban(banReason);
       let banReasonSliced = args.slice(1);
       let banReason = banReasonSliced.join(' ');
+      message.mentions.members.first().ban(banReason);
       let banEmbed = new Discord.RichEmbed()
         .setAuthor('Banned ' + message.mentions.members.first().displayName + mmmfTag, message.mentions.members.first().user.avatarURL)
         .addField('Banned For:', banReason)
@@ -231,7 +231,7 @@ client.on("message", (message) => {
       message.channel.send(banEmbed);
       logchannel.send(banLogEmbed);
     } else if (!isNaN(args[1]) && args[2]) {
-      let banReasonSliced = args.slice(1);
+      let banReasonSliced = args.slice(2);
       let banReason = banReasonSliced.join(' ');
       message.mentions.members.first().ban({ days: Number(args[1]), reason: banReason });
       let banEmbed = new Discord.RichEmbed()
@@ -249,7 +249,7 @@ client.on("message", (message) => {
       message.channel.send(banEmbed);
       logchannel.send(banLogEmbed);
     } else if (!isNaN(args[1]) && !args[2]) {
-      let banReasonSliced = args.slice(1);
+      let banReasonSliced = args.slice(2);
       let banReason = banReasonSliced.join(' ');
       message.mentions.members.first().ban(Number(args[1]));
       let banEmbed = new Discord.RichEmbed()
