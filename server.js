@@ -214,7 +214,8 @@ client.on("message", (message) => {
       logchannel.send(banLogEmbed);
     } else if (isNaN(args[1])) {
       message.mentions.members.first().ban(banReason);
-      let banReason = args.slice(1).join(' ');
+      let banReasonSliced = args.slice(1);
+      let banReason = banReasonSliced.join(' ');
       let banEmbed = new Discord.RichEmbed()
         .setAuthor('Banned ' + message.mentions.members.first().displayName + mmmfTag, message.mentions.members.first().user.avatarURL)
         .addField('Banned For:', banReason)
@@ -230,8 +231,9 @@ client.on("message", (message) => {
       message.channel.send(banEmbed);
       logchannel.send(banLogEmbed);
     } else if (!isNaN(args[1]) && args[2]) {
-      let banReason = args.slice(1).join(' ');
-      message.mentions.members.first().ban({ days: args[1], reason: banReason });
+      let banReasonSliced = args.slice(1);
+      let banReason = banReasonSliced.join(' ');
+      message.mentions.members.first().ban({ days: Number(args[1]), reason: banReason });
       let banEmbed = new Discord.RichEmbed()
         .setAuthor('Banned ' + message.mentions.members.first().displayName + mmmfTag, message.mentions.members.first().user.avatarURL)
         .addField('Banned For:', banReason)
@@ -246,6 +248,26 @@ client.on("message", (message) => {
         .setColor(0xFF0000)
       message.channel.send(banEmbed);
       logchannel.send(banLogEmbed);
+    } else if (!isNaN(args[1]) && !args[2]) {
+      let banReasonSliced = args.slice(1);
+      let banReason = banReasonSliced.join(' ');
+      message.mentions.members.first().ban(Number(args[1]));
+      let banEmbed = new Discord.RichEmbed()
+        .setAuthor('Banned ' + message.mentions.members.first().displayName + mmmfTag, message.mentions.members.first().user.avatarURL)
+        .addField('Banned For:', 'No reason specified')
+        .addField('Banned By:', `${message.member.displayName}${authorTag} - ${userModRole}`)
+        .setFooter(`ID: ${message.mentions.members.first().id} • ${args[1]} days of messages deleted`)
+        .setColor(0xFF0000)
+      let banLogEmbed = new Discord.RichEmbed()
+        .setAuthor(`Banned ${message.mentions.members.first().displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, message.mentions.members.first().user.avatarURL)
+        .addField('Banned For:', 'No reason specified')
+        .addField('Banned By:', `${message.member.displayName}${authorTag}`)
+        .setFooter(`ID: ${message.mentions.members.first().id} • ${args[1]} days of messages deleted`)
+        .setColor(0xFF0000)
+      message.channel.send(banEmbed);
+      logchannel.send(banLogEmbed);
+    } else {
+      return message.channel.send("error\n\nif you're seeing this, congratulations; you've managed to find a set of circumstances that shouldn't physically be possible. please dm Futuristick#7633 immediately")
     };
   };
   
