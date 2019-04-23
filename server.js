@@ -20,13 +20,13 @@ client.on("message", (message) => {
   if (message.member.roles.some(r=>modRoles.includes(r.name))) {
     if (message.member.roles.find(val => val.name === modRoles[0])) {
       userModRole = 'Moderator';
-    } else if (message.member.roles.find(val => val.name === modRoles[0])) {
-      userModRole = 'Admin';
     } else if (message.member.roles.find(val => val.name === modRoles[1])) {
-      userModRole = 'Head Admin';
+      userModRole = 'Admin';
     } else if (message.member.roles.find(val => val.name === modRoles[2])) {
-      userModRole = 'Board of Directors';
+      userModRole = 'Head Admin';
     } else if (message.member.roles.find(val => val.name === modRoles[3])) {
+      userModRole = 'Board of Directors';
+    } else if (message.member.roles.find(val => val.name === modRoles[4])) {
       userModRole = 'Chairman';
     };
   } else if (message.member.hasPermission("ADMINISTRATOR") || message.author.id === "288853176210161666") {
@@ -59,6 +59,8 @@ client.on("message", (message) => {
   if (maBal === null) maBal = 0;
   let selfWarnings = db.fetch(`${message.author.id}.warns`);
   if (selfWarnings === null) selfWarnings = 0;
+  let selfWarncount = db.fetch(`${message.author.id}.warncount`);
+  if (selfWarncount === null) selfWarncount = 0;
   if (message.mentions.members.first()) {
     let firstMentioned = message.mentions.members.first();
     let theBank = db.fetch(`${firstMentioned.id}.money`);
@@ -404,8 +406,8 @@ client.on("message", (message) => {
       };
       db.push(`${message.mentions.members.first().id}.warns`, [`${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, warnReason, `${message.member.displayName}${authorTag} - ${userModRole}`]);
       db.add(`${message.mentions.members.first().id}.warncount`, 1);
-      let newWarncount = db.fetch(`${message.mentions.members.first().id}.warncount`);
       let fmwarns = db.fetch(`${message.mentions.members.first().id}.warns`);
+      let newWarncount = fmwarns.length;
       let warnedEmbed = new Discord.RichEmbed()
         .setAuthor('Warned ' + message.mentions.members.first().displayName + mmmfTag, message.mentions.members.first().user.avatarURL)
         .addField('Warned For:', warnReason)
@@ -433,7 +435,10 @@ client.on("message", (message) => {
       message.channel.send(warnEmbed);
     } else {
       let warningsEmbed = new Discord.RichEmbed()
-      for (let i = 0; i < 2; i++) {}
+      .setColor(0x
+      for (let i = 0; i < warnings.length; i++) {
+        warningsEmbed.addField(
+      }
     };
   };
 /*
