@@ -439,8 +439,13 @@ client.on("message", (message) => {
       .setAuthor(`Warnings for ${message.mentions.members.first().displayName}${mmmfTag}`, message.mentions.members.first().user.avatarURL)
       .setFooter(`Requested by ${message.member.displayName}${authorTag}`, message.author.avatarURL)
       for (let i = 0; i < warnings.length; i++) {
+        if (i === 24) {
+          message.channel.send(warningsEmbed);
+          warningsEmbed = new Discord.RichEmbed()
+        };
         warningsEmbed.addField(`${warnings[i][0]} - by ${warnings[i][2]}`, `**Reason:** ${warnings[i][1]}`)
       };
+      message.channel.send(warningsEmbed);
     };
   };
 /*
@@ -824,40 +829,6 @@ client.on("message", (message) => {
 			return message.channel.send(errEmbed);
 		};
 	};
-
-  if (msg.startsWith(`${prefix}PURGE`)) {
-    message.delete();
-    async function purge() {
-
-      if (!message.member.roles.find(val => val.role === "Mod")) {
-        message.channel.send('Must be mod, nab');
-        return;
-      };
-      if (isNaN(args[0])) {
-        let errEmbed = new Discord.RichEmbed()
-          .setTitle(":warning: ERROR :warning:")
-          .addField("Number of messages not specified", "Please specify a number of messages to delete\n**Command Format:** `/purge [# of messages]`")
-          .setColor([255, 0, 0])
-        return message.channel.send(errEmbed);
-      };
-      let theLimit = Number(args[0]) + 1;
-      const fetched = await message.channel.fetchMessages({limit: theLimit});
-      console.log(fetched.size + ' messages found, deleting...');
-
-      message.channel.bulkDelete(fetched)
-      let succEmbed = new Discord.RichEmbed()
-        .setTitle("Success!")
-        .addField("Purge successful", `I have deleted ${Number(fetched.size) - 1} messages.`)
-        .setColor([0, 255, 0])
-      return message.channel.send(succEmbed)
-        .then(msg => {
-        msg.delete(5000)
-        })
-      .catch(error => message.channel.send(`Error: ${error}`));
-
-    };
-    purge();
-  };
 
 	if (msg.startsWith(`${prefix}HELP`)) {
 		if(!args[0]) {
