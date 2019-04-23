@@ -426,7 +426,7 @@ client.on("message", (message) => {
   };
   
   if (msg.startsWith(`${prefix}WARNINGS`)) {
-    if (userModRole = null) return;
+    if (userModRole === null) return;
     if (!args[0] || !message.mentions.members.first()) {
       let warnEmbed = new Discord.RichEmbed()
         .setTitle(`:warning: ERROR :warning:`)
@@ -435,10 +435,12 @@ client.on("message", (message) => {
       message.channel.send(warnEmbed);
     } else {
       let warningsEmbed = new Discord.RichEmbed()
-      .setColor(0x
+      .setColor(0xFFFF00)
+      .setAuthor(`Warnings for ${message.mentions.members.first().displayName}${mmmfTag}`, message.mentions.members.first().user.avatarURL)
+      .setFooter(`Requested by ${message.member.displayName}${authorTag}`, message.author.avatarURL)
       for (let i = 0; i < warnings.length; i++) {
-        warningsEmbed.addField(
-      }
+        warningsEmbed.addField(`${warnings[i][0]} - by ${warnings[i][2]}`, `**Reason:** ${warnings[i][1]}`)
+      };
     };
   };
 /*
