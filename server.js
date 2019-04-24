@@ -436,8 +436,8 @@ client.on("message", (message) => {
       message.channel.send(warnEmbed);
     } else {
       let warningsEmbed = new Discord.RichEmbed()
-      .setColor(0xFFFF00)
-      .setAuthor(`Warnings for ${message.mentions.members.first().displayName}${mmmfTag}`, message.mentions.members.first().user.avatarURL)
+        .setColor(0xFFFF00)
+        .setAuthor(`Warnings for ${message.mentions.members.first().displayName}${mmmfTag}`, message.mentions.members.first().user.avatarURL)
       for (let i = 0; i < warnings.length; i++) {
         if (i === 24) {
           message.channel.send(warningsEmbed);
@@ -452,7 +452,20 @@ client.on("message", (message) => {
   };
   
   if (msg.startsWith(`${prefix}CLEARWARN`)) {
-    
+    if (userModRole === null) return;
+    if (!args[0] || !message.mentions.members.first()) {
+      let warnEmbed = new Discord.RichEmbed()
+        .setTitle(`:warning: ERROR :warning:`)
+        .addField(`User not specfied`, "Please specify a valid Discord member to check warnings for.\n**Command Format:** `/warnings @member`")
+        .setColor(0xFF0000)
+      message.channel.send(warnEmbed);
+      returnl
+    };
+    authorTag = message.author.tag.slice(message.author.username.length);
+    let commColEmb = new Discord.RichEmbed()
+      .setColor(0xFFFF00)
+      .setAuthor(`This command has been initiated by ${message.member.displayName}${authorTag}`, message.author.avatarURL)
+      .setTitle(
   };
   
   if (msg.startsWith(`${prefix}MUTE`)) {
