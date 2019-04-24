@@ -73,6 +73,7 @@ client.on("message", (message) => {
   
   let maMember = message.guild.members.get(message.author.id);
   let caembed;
+  let sentMessageID;
   
   // Shop
   
@@ -459,13 +460,24 @@ client.on("message", (message) => {
         .addField(`User not specfied`, "Please specify a valid Discord member to check warnings for.\n**Command Format:** `/warnings @member`")
         .setColor(0xFF0000)
       message.channel.send(warnEmbed);
-      returnl
+      return;
+    } else {
+      authorTag = message.author.tag.slice(message.author.username.length);
+      let commColEmb = new Discord.RichEmbed()
+        .setColor(0xFFFF00)
+        .setAuthor(`Clearing warning(s) for ${message.mentions.members.first().displayName}${mmmfTag}`, message.mentions.members.first().user.avatarURL)
+        .setFooter(`This command has been initiated by ${message.member.displayName}${authorTag}`, message.author.avatarURL)
+        .setTitle(`Please enter the number beside the warning you would like to remove.\nIf you would like to clear all warnings for the mentioned user, please enter "all".\nYou have 30 seconds until this command ends.`)
+      async function getcommColID() {
+        let sentMessage = await message.channel.send(commColEmb);
+        sentMessageID = sentMessage.id;
+      };
+      getcommColID();
+      let stringToSend = "```";
+      for (let i = 0; i < warnings.length; i++) {
+        if (stringToSend.length 
+      };
     };
-    authorTag = message.author.tag.slice(message.author.username.length);
-    let commColEmb = new Discord.RichEmbed()
-      .setColor(0xFFFF00)
-      .setAuthor(`This command has been initiated by ${message.member.displayName}${authorTag}`, message.author.avatarURL)
-      .setTitle(
   };
   
   if (msg.startsWith(`${prefix}MUTE`)) {
