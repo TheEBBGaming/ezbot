@@ -475,7 +475,16 @@ client.on("message", (message) => {
       getcommColID();
       let stringToSend = "```";
       for (let i = 0; i < warnings.length; i++) {
-        if (stringToSend.length 
+        if (stringToSend.length >= 1900) {
+          async function sendString() {
+            stringToSend = stringToSend + "\n```";
+            await message.channel.send(stringToSend);
+            stringToSend = "```";
+          };
+          sendString();
+          return;
+        };
+        stringToSend = stringToSend + `\nWarned on ${warnings[i][0]} - by ${warnings[i][2]}\nReason: ${warnings[i][1]}`
       };
     };
   };
