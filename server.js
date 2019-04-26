@@ -486,7 +486,8 @@ client.on("message", (message) => {
         };
         stringToSend = stringToSend + `\n[${i}] Warned on ${warnings[i][0]} - by ${warnings[i][2]}\nReason: ${warnings[i][1]}`;
       };
-      
+      let commandAuthor = message.author;
+      const collector = new Discord.MessageCollector(message.channel, m => commandAuthor.id == message.author.id, {  time: 30000, max: 30, maxMatches: 30 });
     };
   };
   
