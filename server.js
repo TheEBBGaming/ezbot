@@ -486,6 +486,7 @@ client.on("message", (message) => {
         };
         stringToSend = stringToSend + `\n[${i}] Warned on ${warnings[i][0]} - by ${warnings[i][2]}\nReason: ${warnings[i][1]}`;
       };
+      
     };
   };
   
