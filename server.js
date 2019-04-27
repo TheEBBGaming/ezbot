@@ -490,8 +490,9 @@ client.on("message", (message) => {
       const collector = new Discord.MessageCollector(m => commandAuthor.id == message.author.id, {  time: 30000, max: 30, maxMatches: 30 });
       collector.on('collect', message => {
         if (message.content.toUpperCase() === 'all') {
-          if (userModRole === 'Moderator') return message.channel.send('Insufficient Permissions.');
-          for (let i = 0; i < warnings.length; i++) {
+          if (userModRole === 'Moderator') {
+            return message.channel.send('Insufficient Permissions.');
+          } else {
             
           };
         };
