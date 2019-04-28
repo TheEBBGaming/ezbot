@@ -487,8 +487,7 @@ client.on("message", (message) => {
         stringToSend = stringToSend + `\n[${i}] Warned on ${warnings[i][0]} - by ${warnings[i][2]}\nReason: ${warnings[i][1]}`;
       };
       let commandAuthor = message.author;
-      const collector = new Discord.MessageCollector(m => commandAuthor.id == message.author.id, {  time: 30000, max: 30, maxMatches: 30 });
-      collector.on('collect', message => {
+      message.channel.awaitMessages(m => commandAuthor.id == message.author.id, {  time: 30000, max: 30, errors: ['time'] });
         if (message.content.toUpperCase() === 'all') {
           if (userModRole === 'Moderator') {
             return message.channel.send('Insufficient Permissions.');
@@ -496,7 +495,6 @@ client.on("message", (message) => {
             
           };
         };
-      });
     };
   };
   
