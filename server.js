@@ -498,6 +498,7 @@ client.on("message", (message) => {
       months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
       let commandAuthor = message.author;
       let toClear = message.mentions.members.first();
+      let warnDB = db.fetch(`${toClear.id}.warns`);
       const collector = new Discord.MessageCollector(m => commandAuthor.id == message.author.id, {  time: 30000, max: 30, maxMatches: 30 });
       collector.on('collect', message => {
         if (message.content.toUpperCase() === 'all') {
@@ -512,7 +513,10 @@ client.on("message", (message) => {
             message.channel.send(clearedEmbed);
           };
         } else if (!isNaN(message.content)) {
-          
+          if (!warnDB[Number(message.content)] === undefined) {
+            warnDB.splice(Number(message.content), 1);
+            db.set(`${toClear.id}.warns`, warnDB);
+          };
         };
       });
     };
