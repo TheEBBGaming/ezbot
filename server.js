@@ -467,12 +467,8 @@ client.on("message", (message) => {
         .setColor(0xFFFF00)
         .setAuthor(`Clearing warning(s) for ${message.mentions.members.first().displayName}${mmmfTag}`, message.mentions.members.first().user.avatarURL)
         .setFooter(`This command has been initiated by ${message.member.displayName}${authorTag}`, message.author.avatarURL)
-        .setTitle(`Please enter the number beside the warning you would like to remove.\nIf you would like to clear all warnings for the mentioned user, please enter "all".\nEnter "cancel" to cancel the command. The command will end either after 20 seconds or if you enter an incorrect value.`)
-      async function getcommColID() {
-        let sentMessage = await message.channel.send(commColEmb);
-        sentMessageID = sentMessage.id;
-      };
-      getcommColID();
+        .addField(`Please enter the number beside the warning you would like to remove.`, `If you would like to clear all warnings for the mentioned user, please enter "all".\nEnter "cancel" to cancel the command. \nThe command will end either after 20 seconds or if you enter an incorrect value.`)
+      message.channel.send(commColEmb);
       let stringToSend = "```";
       for (let i = 0; i < warnings.length; i++) {
         if (stringToSend.length >= 1900) {
@@ -502,15 +498,15 @@ client.on("message", (message) => {
       message.channel.awaitMessages(filter, { max: 1, time: 20000 })
       .then((collected) => { 
         if (collected.first().content.toUpperCase() === "cancel") {
-          return message.channel.send("Cancelled the command!"); 
+          return collected.first().channel.send("Cancelled the command!"); 
         };
         if (collected.first().content.toUpperCase() === "all" ) {
           db.delete(`${toClear.id}.warns`);
           let clearedEmbed = new Discord.RichEmbed()
             .setAuthor(`Cleared all warnings for ${toClear.displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, toClear.user.avatarURL)
-            .addField(`Cleared By:`, `${message.guild.members.get(collected.first().author.id).displayName}${authorTag}`)
+            .addField(`Cleared By:`, `${collected.first().guild.members.get(collected.first().author.id).displayName}${authorTag}`)
           logchannel.send(clearedEmbed);
-          message.channel.send(clearedEmbed);
+          collected.first().channel.send(clearedEmbed);
           return;
         } else if (!isNaN(collected.first().content.toUpperCase)) {
           if (warnDB[Number(collected.first().content)] === undefined) return;
@@ -520,19 +516,16 @@ client.on("message", (message) => {
           let clearedEmbed = new Discord.RichEmbed()
             .setAuthor(`Cleared warning number ${collected.first().content} for ${toClear.displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, toClear.user.avatarURL)
             .addField("Warning Info:", `Warned at ${warnDB[Number(collected.first().content)][0]} by ${warnDB[Number(collected.first().content)][2]}\n\n**Reason**: ${warnDB[Number(collected.first().content)][1]}`)
-            .addField("Cleared By:", `${message.guild.members.get(collected.first().author.id).displayName}${authorTag}`)
+            .addField("Cleared By:", `${collected.first().guild.members.get(collected.first().author.id).displayName}${authorTag}`)
           logchannel.send(clearedEmbed);
-          message.channel.send(clearedEmbed);
+          collected.first().channel.send(clearedEmbed);
           return;
         } else {
-          return message.channel.send('Error. Invalid input. Please run the command again.');
+          return collected.first().channel.send('Error. Invalid input. Please run the command again.');
         };
       })
-      .catch(e => {
-        console.log(e);
-        message.channel.send(
-      })
-      const collector = new Discord.MessageCollector(m => commandAuthor.id === m.author.id, {  time: 30000, max: 30 });
+      .catch(e => console.log(e));
+      /* const collector = new Discord.MessageCollector(m => commandAuthor.id === m.author.id, {  time: 30000, max: 30 });
       collector.on('collect', message => {
         if (message.content.toUpperCase() === 'ALL') {
           if (userModRole === 'Moderator') {
@@ -566,6 +559,7 @@ client.on("message", (message) => {
           message.channel.send('Error. Invalid input. Please enter the number beside a warning to remove it.\nEnter "all" to clear all warnings. Enter "cancel" to cancel the command.');
         };
       });
+      */
     };
   };
   
