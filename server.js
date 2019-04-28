@@ -470,16 +470,19 @@ client.on("message", (message) => {
         .addField(`Please enter the number beside the warning you would like to remove.`, `If you would like to clear all warnings for the mentioned user, please enter "all".\nEnter "cancel" to cancel the command. \nThe command will end either after 20 seconds or if you enter an incorrect value.`)
       let warnsEmbed = new Discord.RichEmbed()
       .setColor(0x0000FF)
-      for (let i = 0; i < warnings.length; i++) {
-        if (i === 24 || 48) {
-            message.channel.send(warnsEmbed);
-            warnsEmbed = new Discord.RichEmbed()
-              .setColor(0x0000FF)
+      async function sendEmbeds() {
+        for (let i = 0; i < warnings.length; i++) {
+          if (i === 24) {
+              message.channel.send(warnsEmbed);
+              warnsEmbed = new Discord.RichEmbed()
+                .setColor(0x0000FF)
+          };
+          warnsEmbed.addField(`[${i}] ${warnings[i][0]} - by ${warnings[i][2]}`, `**Reason:** ${warnings[i][1]}`, true)
         };
-        warnsEmbed.addField(`[${i}] ${warnings[i][0]} - by ${warnings[i][2]}`, `**Reason:** ${warnings[i][1]}`, true)
+          await message.channel.send(warnsEmbed);
+          await message.channel.send(commColEmb);
       };
-      message.channel.send(warnsEmbed);
-      message.channel.send(commColEmb);
+      sendEmbeds();
       authorTag = message.author.tag.slice(message.author.username.length);
       mmmfTag = message.mentions.members.first().user.tag.slice(message.mentions.members.first().user.username.length);
       dateobj = new Date();
