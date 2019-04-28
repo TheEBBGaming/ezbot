@@ -495,10 +495,10 @@ client.on("message", (message) => {
       let filter = response => response.author.id === message.author.id;
       message.channel.awaitMessages(filter, { max: 1, time: 20000 })
       .then((collected) => { 
-        if (collected.first().content.toUpperCase() === "cancel") {
+        if (collected.first().content.toUpperCase() === "CANCEL") {
           return collected.first().channel.send("Cancelled the command!"); 
         };
-        if (collected.first().content.toUpperCase() === "all" ) {
+        if (collected.first().content.toUpperCase() === "ALL" ) {
           db.delete(`${toClear.id}.warns`);
           let clearedEmbed = new Discord.RichEmbed()
             .setAuthor(`Cleared all warnings for ${toClear.displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, toClear.user.avatarURL)
