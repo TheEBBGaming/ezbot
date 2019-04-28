@@ -467,7 +467,7 @@ client.on("message", (message) => {
         .setColor(0xFFFF00)
         .setAuthor(`Clearing warning(s) for ${message.mentions.members.first().displayName}${mmmfTag}`, message.mentions.members.first().user.avatarURL)
         .setFooter(`This command has been initiated by ${message.member.displayName}${authorTag}`, message.author.avatarURL)
-        .setTitle(`Please enter the number beside the warning you would like to remove.\nIf you would like to clear all warnings for the mentioned user, please enter "all".\nYou have 30 seconds until this command ends.`)
+        .setTitle(`Please enter the number beside the warning you would like to remove.\nIf you would like to clear all warnings for the mentioned user, please enter "all".\nEnter "cancel" to cancel the command. You have 30 seconds until this command ends.`)
       async function getcommColID() {
         let sentMessage = await message.channel.send(commColEmb);
         sentMessageID = sentMessage.id;
@@ -501,7 +501,7 @@ client.on("message", (message) => {
       let warnDB = db.fetch(`${toClear.id}.warns`);
       const collector = new Discord.MessageCollector(m => commandAuthor.id == message.author.id, {  time: 30000, max: 30, maxMatches: 30 });
       collector.on('collect', message => {
-        if (message.content.toUpperCase() === 'all') {
+        if (message.content.toUpperCase() === 'ALL') {
           if (userModRole === 'Moderator') {
             return message.channel.send('Insufficient Permissions.');
           } else {
@@ -511,12 +511,26 @@ client.on("message", (message) => {
               .addField(`Cleared By:`, `${message.guild.members.get(commandAuthor.id).displayName}${authorTag}`)
             logchannel.send(clearedEmbed);
             message.channel.send(clearedEmbed);
+            collector.stop();
           };
         } else if (!isNaN(message.content)) {
           if (!warnDB[Number(message.content)] === undefined) {
             warnDB.splice(Number(message.content), 1);
             db.set(`${toClear.id}.warns`, warnDB);
+            warnDB = db.fetch(`${toClear.id}.warns`);
+            let clearedEmbed = new Discord.RichEmbed()
+              .setAuthor(`Cleared warning number ${message.content} for ${toClear.displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, toClear.user.avatarURL)
+              .addField("Warning Info:", `Warned at ${warnDB[Number(message.content)][0]} by ${warnDB[Number(message.content)][2]}\n\n**Reason**: ${warnDB[Number(message.content)][1]}`)
+              .addField("Cleared By:", `${message.guild.members.get(commandAuthor.id).displayName}${authorTag}`)
+            logchannel.send(clearedEmbed);
+            message.channel.send(clearedEmbed);
+            collector.stop();
           };
+        } else if (message.content.toUpperCase() === 'CANCEL') {
+          message.channel.send("Cancelled command.");
+          collector.stop();
+        } else {
+          message.channel.send('Error. Invalid input. Please enter the number beside a warning to remove it.\nEnter "all" to clear all warnings. Enter "cancel" to cancel the command.');
         };
       });
     };
