@@ -457,7 +457,7 @@ client.on("message", (message) => {
     if (!args[0] || !message.mentions.members.first()) {
       let warnEmbed = new Discord.RichEmbed()
         .setTitle(`:warning: ERROR :warning:`)
-        .addField(`User not specfied`, "Please specify a valid Discord member to check warnings for.\n**Command Format:** `/warnings @member`")
+        .addField(`User not specfied`, "Please specify a valid Discord member to clear warnings for.\n**Command Format:** `/clearwarn @member`")
         .setColor(0xFF0000)
       message.channel.send(warnEmbed);
       return;
@@ -482,7 +482,6 @@ client.on("message", (message) => {
             stringToSend = "```";
           };
           sendString();
-          return;
         };
         stringToSend = stringToSend + `\n[${i}] Warned on ${warnings[i][0]} - by ${warnings[i][2]}\nReason: ${warnings[i][1]}`;
       };
@@ -499,7 +498,7 @@ client.on("message", (message) => {
       let commandAuthor = message.author;
       let toClear = message.mentions.members.first();
       let warnDB = db.fetch(`${toClear.id}.warns`);
-      const collector = new Discord.MessageCollector(m => commandAuthor.id == message.author.id, {  time: 30000, max: 30, maxMatches: 30 });
+      const collector = new Discord.MessageCollector(m => commandAuthor.id === message.author.id, {  time: 30000, max: 30, maxMatches: 30 });
       collector.on('collect', message => {
         if (message.content.toUpperCase() === 'ALL') {
           if (userModRole === 'Moderator') {
