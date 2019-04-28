@@ -468,17 +468,18 @@ client.on("message", (message) => {
         .setAuthor(`Clearing warning(s) for ${message.mentions.members.first().displayName}${mmmfTag}`, message.mentions.members.first().user.avatarURL)
         .setFooter(`This command has been initiated by ${message.member.displayName}${authorTag}`, message.author.avatarURL)
         .addField(`Please enter the number beside the warning you would like to remove.`, `If you would like to clear all warnings for the mentioned user, please enter "all".\nEnter "cancel" to cancel the command. \nThe command will end either after 20 seconds or if you enter an incorrect value.`)
-      message.channel.send(commColEmb);
       let warnsEmbed = new Discord.RichEmbed()
       .setColor(0x0000FF)
       for (let i = 0; i < warnings.length; i++) {
-        if (i === 24) {
+        if (i === 24 || 48) {
             message.channel.send(warnsEmbed);
             warnsEmbed = new Discord.RichEmbed()
               .setColor(0x0000FF)
         };
         warnsEmbed.addField(`[${i}] ${warnings[i][0]} - by ${warnings[i][2]}`, `**Reason:** ${warnings[i][1]}`, true)
       };
+      message.channel.send(warnsEmbed);
+      message.channel.send(commColEmb);
       authorTag = message.author.tag.slice(message.author.username.length);
       mmmfTag = message.mentions.members.first().user.tag.slice(message.mentions.members.first().user.username.length);
       dateobj = new Date();
