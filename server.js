@@ -486,15 +486,30 @@ client.on("message", (message) => {
         };
         stringToSend = stringToSend + `\n[${i}] Warned on ${warnings[i][0]} - by ${warnings[i][2]}\nReason: ${warnings[i][1]}`;
       };
+      authorTag = message.author.tag.slice(message.author.username.length);
+      mmmfTag = message.mentions.members.first().user.tag.slice(message.mentions.members.first().user.username.length);
+      dateobj = new Date();
+      date = dateobj.getUTCDate();
+      monthnum = dateobj.getUTCMonth();
+      year = dateobj.getUTCFullYear();
+      hours = dateobj.getUTCHours();
+      minutes = dateobj.getUTCMinutes();
+      seconds = dateobj.getUTCSeconds();
+      months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
       let commandAuthor = message.author;
-      message.channel.awaitMessages(m => commandAuthor.id == message.author.id, {  time: 30000, max: 30, errors: ['time'] });
+      let toClear = message.mentions.members.first();
+      const collector = new Discord.MessageCollector(m => commandAuthor.id == message.author.id, {  time: 30000, max: 30, maxMatches: 30 });
+      collector.on('collect', message => {
         if (message.content.toUpperCase() === 'all') {
           if (userModRole === 'Moderator') {
             return message.channel.send('Insufficient Permissions.');
           } else {
-            
+            db.delete(`${toClear.id}.warns`);
+            let clearedEmbed = new Discord.RichEmbed()
+              .setAuthor(`Cleared all warnings for 
           };
         };
+      });
     };
   };
   
