@@ -467,7 +467,7 @@ client.on("message", (message) => {
         .setColor(0xFFFF00)
         .setAuthor(`Clearing warning(s) for ${message.mentions.members.first().displayName}${mmmfTag}`, message.mentions.members.first().user.avatarURL)
         .setFooter(`This command has been initiated by ${message.member.displayName}${authorTag}`, message.author.avatarURL)
-        .setTitle(`Please enter the number beside the warning you would like to remove.\nIf you would like to clear all warnings for the mentioned user, please enter "all".\nEnter "cancel" to cancel the command. The command will end either after 30 seconds or if you enter an incorrect`)
+        .setTitle(`Please enter the number beside the warning you would like to remove.\nIf you would like to clear all warnings for the mentioned user, please enter "all".\nEnter "cancel" to cancel the command. The command will end either after 20 seconds or if you enter an incorrect value.`)
       async function getcommColID() {
         let sentMessage = await message.channel.send(commColEmb);
         sentMessageID = sentMessage.id;
@@ -498,8 +498,9 @@ client.on("message", (message) => {
       let commandAuthor = message.author;
       let toClear = message.mentions.members.first();
       let warnDB = db.fetch(`${toClear.id}.warns`);
-      let filter = response => response.author.id === message.author.id && (response.content.toUpperCase() === "ALL" || response.content.toUpperCase() === "CANCEL"
-      message.channel.awaitMessages(response => response.author.idresponse.content.toUpperCase()
+      let filter = response => response.author.id === message.author.id && (response.content.toUpperCase() === "ALL" || response.content.toUpperCase() === "CANCEL" || !isNaN(response.content));
+      message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] })
+      .then((collected) =>
       const collector = new Discord.MessageCollector(m => commandAuthor.id === m.author.id, {  time: 30000, max: 30 });
       collector.on('collect', message => {
         if (message.content.toUpperCase() === 'ALL') {
