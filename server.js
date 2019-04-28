@@ -511,6 +511,8 @@ client.on("message", (message) => {
             logchannel.send(clearedEmbed);
             message.channel.send(clearedEmbed);
           };
+        } else if (!isNaN(message.content)) {
+          
         };
       });
     };
