@@ -506,7 +506,10 @@ client.on("message", (message) => {
           } else {
             db.delete(`${toClear.id}.warns`);
             let clearedEmbed = new Discord.RichEmbed()
-              .setAuthor(`Cleared all warnings for 
+              .setAuthor(`Cleared all warnings for ${toClear.displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, toClear.user.avatarURL)
+              .addField(`Cleared By:`, `${message.guild.members.get(commandAuthor.id).displayName}${authorTag}`)
+            logchannel.send(clearedEmbed);
+            message.channel.send(clearedEmbed);
           };
         };
       });
