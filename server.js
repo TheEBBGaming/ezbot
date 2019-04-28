@@ -498,9 +498,12 @@ client.on("message", (message) => {
       let commandAuthor = message.author;
       let toClear = message.mentions.members.first();
       let warnDB = db.fetch(`${toClear.id}.warns`);
-      let filter = response => response.author.id === message.author.id && (response.content.toUpperCase() === "ALL" || response.content.toUpperCase() === "CANCEL" || !isNaN(response.content));
-      message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] })
+      let filter = response => response.author.id === message.author.id;
+      message.channel.awaitMessages(filter, { max: 1, time: 20000 })
       .then((collected) => { 
+        if (collected.first().content.toUpperCase() === "cancel") {
+          return message.channel.send("Cancelled the command!"); 
+        };
         if (collected.content.toUpperCase() === "all" ) {
           db.delete(`${toClear.id}.warns`);
           let clearedEmbed = new Discord.RichEmbed()
