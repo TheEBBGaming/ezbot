@@ -39,7 +39,7 @@ client.on("message", (message) => {
   let cont = message.content.slice(prefix.length).split(' ');
   let args = cont.slice(1);
   let argsString = args.join(' ');
-  const logchannel = message.guild.channels.get('518578956069240854');
+  const logchannel = client.channels.find(val => val.channel === 'mod logs');
   // Private server: const logchannel = message.guild.channels.get('480860173141803009');
   const mainchat = client.channels.find(val => val.channel === 'global chat');
   const autoroleChan = client.channels.find(val => val.channel === 'auto role');
