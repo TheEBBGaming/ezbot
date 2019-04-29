@@ -520,7 +520,7 @@ client.on("message", (message) => {
             .setAuthor(`Cleared warning number ${collected.first().content} for ${toClear.displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, toClear.user.avatarURL)
             .addField("Warning Info:", `Warned at ${warnDB[Number(collected.first().content)][0]} by ${warnDB[Number(collected.first().content)][2]}\n\n**Reason**: ${warnDB[Number(collected.first().content)][1]}`)
             .addField("Cleared By:", `${collected.first().guild.members.get(collected.first().author.id).displayName}${authorTag}`)
-          logchannel.send(clearedEmbed);
+          // logchannel.send(clearedEmbed);
           return collected.first().channel.send(clearedEmbed);
         } else if (!collected.first().content.toUpperCase() === "ALL" && !collected.first().content.toUpperCase() === "CANCEL") {
           return collected.first().channel.send('Error. Invalid input. Please run the command again.');
