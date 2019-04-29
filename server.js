@@ -502,7 +502,7 @@ client.on("message", (message) => {
         if (collected.first().content.toUpperCase() === "CANCEL") {
           return collected.first().channel.send("Cancelled the command!"); 
         };
-        if (collected.first().content.toUpperCase() === "ALL" ) {
+        if (collected.first().content.toUpperCase() === "ALL") {
           db.delete(`${toClear.id}.warns`);
           let clearedEmbed = new Discord.RichEmbed()
             .setAuthor(`Cleared all warnings for ${toClear.displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, toClear.user.avatarURL)
@@ -510,7 +510,8 @@ client.on("message", (message) => {
           logchannel.send(clearedEmbed);
           collected.first().channel.send(clearedEmbed);
           return;
-        } else if (!isNaN(collected.first().content.toUpperCase)) {
+        };
+        if (!isNaN(collected.first().content)) {
           if (warnDB[Number(collected.first().content)] === undefined) return;
           warnDB.splice(Number(collected.first().content), 1);
           db.set(`${toClear.warns}`, warnDB);
@@ -520,9 +521,8 @@ client.on("message", (message) => {
             .addField("Warning Info:", `Warned at ${warnDB[Number(collected.first().content)][0]} by ${warnDB[Number(collected.first().content)][2]}\n\n**Reason**: ${warnDB[Number(collected.first().content)][1]}`)
             .addField("Cleared By:", `${collected.first().guild.members.get(collected.first().author.id).displayName}${authorTag}`)
           logchannel.send(clearedEmbed);
-          collected.first().channel.send(clearedEmbed);
-          return;
-        } else {
+          return collected.first().channel.send(clearedEmbed);
+        } else if (!collected.first().content.toUpperCase() === "ALL" && !collected.first().content.toUpperCase() === "CANCEL") {
           return collected.first().channel.send('Error. Invalid input. Please run the command again.');
         };
       })
