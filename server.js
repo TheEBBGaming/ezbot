@@ -510,13 +510,15 @@ client.on("message", (message) => {
           return collected.first().channel.send("Cancelled the command!"); 
         };
         if (collected.first().content.toUpperCase() === "ALL") {
-          db.delete(`${toClear.id}.warns`);
+          warnDB.splice(0, warnDB.length);
+          db.set(`{toClear.id}.warns`, warnDB);
+          warnDB = db.fetch(`${toClear.id}.warns`);
           let clearedEmbed = new Discord.RichEmbed()
             .setAuthor(`Cleared all warnings for ${toClear.displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, toClear.user.avatarURL)
             .addField(`Cleared By:`, `${collected.first().guild.members.get(collected.first().author.id).displayName}${authorTag}`)
           // logchannel.send(clearedEmbed);
           collected.first().channel.send(clearedEmbed);
-          warnings = new db.table(`${toClear.id}.warns`);
+          warnings = warnDB;
           return;
         };
         if (!isNaN(collected.first().content)) {
