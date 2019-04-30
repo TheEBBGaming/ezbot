@@ -422,12 +422,19 @@ client.on("message", (message) => {
         .setFooter(`ID: ${message.mentions.members.first().id} • User now has ${newWarncount} warnings`)
         .setColor(0xFF0000)
       message.channel.send(warnedEmbed);
-      logchannel.send(warnedLogEmbed);
+      // logchannel.send(warnedLogEmbed);
     };
   };
   
   if (msg.startsWith(`${prefix}WARNINGS`)) {
     if (userModRole === null) return;
+    if (warnings.length === 0) {
+      let warningsEmbed = new Discord.RichEmbed()
+        .setColor(0xFFFF00)
+        .setAuthor(`${message.mentions.members.first().displayName}${mmmfTag} has no current warnings.`, message.mentions.members.first().user.avatarURL)
+        .setFooter(`Requested by ${message.member.displayName}${authorTag}`, message.author.avatarURL)
+      return message.channel.send(warningsEmbed);
+    };
     authorTag = message.author.tag.slice(message.author.username.length);
     if (!args[0] || !message.mentions.members.first()) {
       let warnEmbed = new Discord.RichEmbed()
@@ -507,8 +514,9 @@ client.on("message", (message) => {
           let clearedEmbed = new Discord.RichEmbed()
             .setAuthor(`Cleared all warnings for ${toClear.displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, toClear.user.avatarURL)
             .addField(`Cleared By:`, `${collected.first().guild.members.get(collected.first().author.id).displayName}${authorTag}`)
-          logchannel.send(clearedEmbed);
+          // logchannel.send(clearedEmbed);
           collected.first().channel.send(clearedEmbed);
+          warnings = new db.table(`${toClear.id}.warns`);
           return;
         };
         if (!isNaN(collected.first().content)) {
