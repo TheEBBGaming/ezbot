@@ -443,6 +443,7 @@ client.on("message", (message) => {
         .setColor(0xFF0000)
       message.channel.send(warnEmbed);
     } else {
+      warnings = db.fetch(`${message.mentions.members.first().id}.warns`);
       let warningsEmbed = new Discord.RichEmbed()
         .setColor(0xFFFF00)
         .setAuthor(`Warnings for ${message.mentions.members.first().displayName}${mmmfTag}`, message.mentions.members.first().user.avatarURL)
@@ -471,7 +472,7 @@ client.on("message", (message) => {
     } else {
       authorTag = message.author.tag.slice(message.author.username.length);
       let commColEmb = new Discord.RichEmbed()
-        .setColor(0xFFFF00)
+        .setColor(0x0000FF)
         .setAuthor(`Clearing warning(s) for ${message.mentions.members.first().displayName}${mmmfTag}`, message.mentions.members.first().user.avatarURL)
         .setFooter(`This command has been initiated by ${message.member.displayName}${authorTag}`, message.author.avatarURL)
         .addField(`Please enter the number beside the warning you would like to remove.`, `If you would like to clear all warnings for the mentioned user, please enter "all".\nEnter "cancel" to cancel the command. \nThe command will end either after 20 seconds or if you enter an incorrect value.`)
@@ -512,12 +513,15 @@ client.on("message", (message) => {
         if (collected.first().content.toUpperCase() === "ALL") {
           let warnlength = warnings.length;
           warnDB = db.fetch(`${toClear.id}.warns`);
-          for (let i = warnlength; i <= 0; i--) {
+          for (let i = warnlength; i >= 0; i--) {
             warnDB.splice(i, 1);
+            db.set(`${toClear.id}.warns`, warnDB);
+            warnDB = db.fetch(`${toClear.id}.warns`);
           };
           let clearedEmbed = new Discord.RichEmbed()
             .setAuthor(`Cleared all warnings for ${toClear.displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, toClear.user.avatarURL)
             .addField(`Cleared By:`, `${collected.first().guild.members.get(collected.first().author.id).displayName}${authorTag}`)
+            .setColor(0x0000FF)
           // logchannel.send(clearedEmbed);
           collected.first().channel.send(clearedEmbed);
           return;
