@@ -128,34 +128,39 @@ client.on("message", (message) => {
       let removedRoles = "";
       let addedRoles = "";
       for (let i = 0; i <= arrayRL; i++) {
-        if (!message.guild.roles.find(val => val.name === roles[i].slice(1))) return message.channel.send(`Error. Couldn't find role named ${roles[i].slice(1)}`);
+        if (!message.guild.roles.find(val => val.name.toUpperCase() === roles[i].toUpperCase().slice(1))) return message.channel.send(`Error. Couldn't find role named ${roles[i].slice(1)}`);
         if (roles[i].startsWith("-")) {
-          roleToEdit = message.guild.roles.find(val => val.name === roles[i].slice(1));
+          roleToEdit = message.guild.roles.find(val => val.name === roles[i].toUpperCase().slice(1));
           roleID = roleToEdit.id;
           firstMentioned.removeRole(roleID)
           .then(removedRoles += `${roleToEdit.name} `)
           .catch(e => console.log(e));
         } else if (roles[i].startsWith("+")) {
-          roleToEdit = message.guild.roles.find(val => val.name === roles[i].slice(1));
+          roleToEdit = message.guild.roles.find(val => val.name === roles[i].toUpperCase().slice(1));
           roleID = roleToEdit.id;
           firstMentioned.addRole(roleID)
           .then(addedRoles += `${roleToEdit.name} `)
           .catch(e => console.log(e));
         } else {
-          roleToEdit = message.guild.roles.find(val => val.name === roles[i].slice(1));
+          roleToEdit = message.guild.roles.find(val => val.name === roles[i].toUpperCase().slice(1));
           roleID = roleToEdit.id;
-          if (firstMentioned.roles.find(val => val.name === roles[i])) {
+          if (firstMentioned.roles.find(val => val.name === roles[i].toUpperCase())) {
             firstMentioned.removeRole(roleID)
             .then(removedRoles += `${roleToEdit.name} `)
             .catch(e => console.log(e));
-          } else if (!firstMentioned.roles.find(val => val.name === roles[i])) {
+          } else if (!firstMentioned.roles.find(val => val.name === roles[i].toUpperCase())) {
             firstMentioned.addRole(roleID)
+            .then(addedRoles += `${roleToEdit.name} `)
             .catch(e => console.log(e));
           } else {
             message.channel.send("okay, this error should never even occur, but because it did, dm futuristick/mooose immediately, please");
           };;
         };
       };
+      let rolesEmbed = new Discord.RichEmbed()
+      .setColor(0x00FF00)
+      .setAuthor(`Edited roles for ${firstMentioned.displayName}`, firstMentioned.user.avatarURL)
+      .addField("Added Roles:", addedRoles
     };
   };
   if (msg.startsWith(`${prefix}SHOP`) || msg.startsWith(`${prefix}STORE`) || (msg.startsWith(`${prefix}BUY`) && !args[0])) {
