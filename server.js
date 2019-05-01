@@ -512,7 +512,7 @@ client.on("message", (message) => {
         if (collected.first().content.toUpperCase() === "ALL") {
           let warnlength = warnings.length;
           warnDB = db.fetch(`${toClear.id}.warns`);
-          for (let i = 0; i < warnlength; i++) {
+          for (let i = warnlength; i <= 0; i--) {
             warnDB.splice(i, 1);
           };
           let clearedEmbed = new Discord.RichEmbed()
