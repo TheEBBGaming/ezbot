@@ -111,7 +111,17 @@ client.on("message", (message) => {
   
   if (msg.startsWith(`${prefix}ROLE`)) {
     if (userModRole === null) return;
-    if (!args[0])
+    if (!args[0]) {
+      let warnEmbed = new Discord.RichEmbed()
+        .setTitle(`:warning: ERROR :warning:`)
+        .addField(`User not specfied`, "Please specify a valid Discord member to edit roles.\n**Command Format:** `/role @member [roles]`\n**RUN `/help role` FOR MORE INFORMATION**")
+        .setColor(0xFF0000)
+      message.channel.send(warnEmbed);
+    } else {
+      let roles = args.slice(1);
+      let arrayRL = Number(roles.length) - 1;
+      for (let i = 0; i <= roles.length; i++
+    };
   };
   if (msg.startsWith(`${prefix}SHOP`) || msg.startsWith(`${prefix}STORE`) || (msg.startsWith(`${prefix}BUY`) && !args[0])) {
     let studentRole = {
