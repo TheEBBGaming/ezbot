@@ -133,34 +133,39 @@ client.on("message", (message) => {
           roleToEdit = message.guild.roles.find(val => val.name === roles[i].toUpperCase().slice(1));
           roleID = roleToEdit.id;
           firstMentioned.removeRole(roleID)
-          .then(removedRoles += `${roleToEdit.name} `)
+          .then(removedRoles += `${roleToEdit.name}, `)
           .catch(e => console.log(e));
         } else if (roles[i].startsWith("+")) {
           roleToEdit = message.guild.roles.find(val => val.name === roles[i].toUpperCase().slice(1));
           roleID = roleToEdit.id;
           firstMentioned.addRole(roleID)
-          .then(addedRoles += `${roleToEdit.name} `)
+          .then(addedRoles += `${roleToEdit.name}, `)
           .catch(e => console.log(e));
         } else {
           roleToEdit = message.guild.roles.find(val => val.name === roles[i].toUpperCase().slice(1));
           roleID = roleToEdit.id;
           if (firstMentioned.roles.find(val => val.name === roles[i].toUpperCase())) {
             firstMentioned.removeRole(roleID)
-            .then(removedRoles += `${roleToEdit.name} `)
+            .then(removedRoles += `${roleToEdit.name}, `)
             .catch(e => console.log(e));
           } else if (!firstMentioned.roles.find(val => val.name === roles[i].toUpperCase())) {
             firstMentioned.addRole(roleID)
-            .then(addedRoles += `${roleToEdit.name} `)
+            .then(addedRoles += `${roleToEdit.name}, `)
             .catch(e => console.log(e));
           } else {
             message.channel.send("okay, this error should never even occur, but because it did, dm futuristick/mooose immediately, please");
           };;
         };
       };
+      authorTag = message.author.tag.slice(message.author.username.length);
       let rolesEmbed = new Discord.RichEmbed()
-      .setColor(0x00FF00)
-      .setAuthor(`Edited roles for ${firstMentioned.displayName}`, firstMentioned.user.avatarURL)
-      .addField("Added Roles:", addedRoles
+        .setColor(0x00FF00)
+        .setAuthor(`Edited roles for ${firstMentioned.displayName}${mmmfTag}`, firstMentioned.user.avatarURL)
+        .addField("Added Roles:", addedRoles)
+        .addField("Removed Roles:", removedRoles)
+        .setFooter(`Edited by ${maMember.displayName}${authorTag}`, message.author.avatarURL)
+      logchannel.send(rolesEmbed);
+      message.channel.send(rolesEmbed);
     };
   };
   if (msg.startsWith(`${prefix}SHOP`) || msg.startsWith(`${prefix}STORE`) || (msg.startsWith(`${prefix}BUY`) && !args[0])) {
@@ -477,7 +482,7 @@ client.on("message", (message) => {
         .setFooter(`ID: ${message.mentions.members.first().id} • User now has ${newWarncount} warnings`)
         .setColor(0xFF0000)
       message.channel.send(warnedEmbed);
-      // logchannel.send(warnedLogEmbed);
+      logchannel.send(warnedLogEmbed);
     };
   };
   
@@ -512,7 +517,7 @@ client.on("message", (message) => {
         warningsEmbed.addField(`${warnings[i][0]} - by ${warnings[i][2]}`, `**Reason:** ${warnings[i][1]}`, true)
       };
       authorTag = message.author.tag.slice(message.author.username.length);
-      warningsEmbed.setFooter(`Requested by ${message.member.displayName}$authorTag}`, message.author.avatarURL)
+      warningsEmbed.setFooter(`Requested by ${message.member.displayName}${authorTag}`, message.author.avatarURL)
       message.channel.send(warningsEmbed);
     };
   };
