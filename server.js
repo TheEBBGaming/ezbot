@@ -429,6 +429,7 @@ client.on("message", (message) => {
   if (msg.startsWith(`${prefix}WARNINGS`)) {
     if (userModRole === null) return;
     if (warnings.length === 0) {
+      authorTag = message.author.tag.slice(message.author.username.length);
       let warningsEmbed = new Discord.RichEmbed()
         .setColor(0xFFFF00)
         .setAuthor(`${message.mentions.members.first().displayName}${mmmfTag} has no current warnings.`, message.mentions.members.first().user.avatarURL)
@@ -456,7 +457,7 @@ client.on("message", (message) => {
         warningsEmbed.addField(`${warnings[i][0]} - by ${warnings[i][2]}`, `**Reason:** ${warnings[i][1]}`, true)
       };
       authorTag = message.author.tag.slice(message.author.username.length);
-      warningsEmbed.setFooter(`Requested by ${message.member.displayName}${authorTag}`, message.author.avatarURL)
+      warningsEmbed.setFooter(`Requested by ${message.member.displayName}$authorTag}`, message.author.avatarURL)
       message.channel.send(warningsEmbed);
     };
   };
