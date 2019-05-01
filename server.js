@@ -123,12 +123,15 @@ client.on("message", (message) => {
       let arrayRL = Number(roles.length) - 1;
       let roleToEdit;
       let roleID;
+      let removedRoles = "";
+      let addedRoles = "";
       for (let i = 0; i <= arrayRL; i++) {
         if (!message.guild.roles.find(val => val.name === roles[i].slice(1))) return message.channel.send(`Error. Couldn't find role named ${roles[i].slice(1)}`);
         if (roles[i].startsWith("-")) {
           roleToEdit = message.guild.roles.find(val => val.name === roles[i].slice(1));
           roleID = roleToEdit.id;
           firstMentioned.removeRole(roleID)
+          .then(removedRoles += `${roleToEdit.name} `
           .catch(e => console.log(e));
         } else if (roles[i].startsWith("+")) {
           roleToEdit = message.guild.roles.find(val => val.name === roles[i].slice(1));
@@ -143,8 +146,10 @@ client.on("message", (message) => {
             .catch(e => console.log(e));
           } else if (!firstMentioned.roles.find(val => val.name === roles[i])) {
             firstMentioned.addRole(roleID)
-            .catch(e => console.lo
-          };
+            .catch(e => console.log(e));
+          } else {
+            message.channel.send("okay, this error should never even occur, but because it did, dm futuristick/mooose immediately, please");
+          };;
         };
       };
     };
