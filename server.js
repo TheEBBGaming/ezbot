@@ -455,6 +455,7 @@ client.on("message", (message) => {
         };
         warningsEmbed.addField(`${warnings[i][0]} - by ${warnings[i][2]}`, `**Reason:** ${warnings[i][1]}`, true)
       };
+      authorTag = message.author.tag.slice(message.author.username.length);
       warningsEmbed.setFooter(`Requested by ${message.member.displayName}${authorTag}`, message.author.avatarURL)
       message.channel.send(warningsEmbed);
     };
