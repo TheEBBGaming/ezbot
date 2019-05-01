@@ -119,7 +119,9 @@ client.on("message", (message) => {
       message.channel.send(warnEmbed);
     } else {
       firstMentioned = message.mentions.members.first();
-      let roles = args.slice(1);
+      let rolecont = message.content.slice(prefix.length).split(', ');
+      let newargs = rolecont.slice(1);
+      let roles = newargs.slice(1);
       let arrayRL = Number(roles.length) - 1;
       let roleToEdit;
       let roleID;
@@ -131,18 +133,20 @@ client.on("message", (message) => {
           roleToEdit = message.guild.roles.find(val => val.name === roles[i].slice(1));
           roleID = roleToEdit.id;
           firstMentioned.removeRole(roleID)
-          .then(removedRoles += `${roleToEdit.name} `
+          .then(removedRoles += `${roleToEdit.name} `)
           .catch(e => console.log(e));
         } else if (roles[i].startsWith("+")) {
           roleToEdit = message.guild.roles.find(val => val.name === roles[i].slice(1));
           roleID = roleToEdit.id;
           firstMentioned.addRole(roleID)
+          .then(addedRoles += `${roleToEdit.name} `)
           .catch(e => console.log(e));
         } else {
           roleToEdit = message.guild.roles.find(val => val.name === roles[i].slice(1));
           roleID = roleToEdit.id;
           if (firstMentioned.roles.find(val => val.name === roles[i])) {
             firstMentioned.removeRole(roleID)
+            .then(removedRoles += `${roleToEdit.name} `)
             .catch(e => console.log(e));
           } else if (!firstMentioned.roles.find(val => val.name === roles[i])) {
             firstMentioned.addRole(roleID)
