@@ -108,7 +108,7 @@ client.on("message", (message) => {
     };
   };
 */
-  if (msg.startsWith(`${prefix}SHOP`) || msg.startsWith(`${prefix}STORE`) || (msg.startsWith(`${prefix}BUY`) && !args[0])) {
+/*  if (msg.startsWith(`${prefix}SHOP`) || msg.startsWith(`${prefix}STORE`) || (msg.startsWith(`${prefix}BUY`) && !args[0])) {
     let studentRole = {
       "name":"Student Role",
       "type":"Role",
@@ -546,6 +546,7 @@ client.on("message", (message) => {
         };
       })
       .catch(e => console.log(e));
+      */
       /* const collector = new Discord.MessageCollector(m => commandAuthor.id === m.author.id, {  time: 30000, max: 30 });
       collector.on('collect', message => {
         if (message.content.toUpperCase() === 'ALL') {
@@ -581,6 +582,7 @@ client.on("message", (message) => {
         };
       });
       */
+  /*
     };
   };
   
@@ -624,6 +626,7 @@ client.on("message", (message) => {
 			};
 		};
 	};
+  */
 /*
   if (msg.startsWith(`${prefix}LINK`)) {
     if (message.member.roles.find(val => val.role === "Royal Servant") || message.member.roles.find(val => val.role === "Mod") || message.member.roles.find(val => val.role === "Admin") || message.member.roles.find(val => val.role === "Head Admin") || message.member.roles.find(val => val.role === "Viscount") || message.member.roles.find(val => val.role === "Viscountess") || maMember.hasPermission("ADMINISTRATOR")) {
