@@ -111,16 +111,26 @@ client.on("message", (message) => {
   
   if (msg.startsWith(`${prefix}ROLE`)) {
     if (userModRole === null) return;
-    if (!args[0]) {
+    if (!args[0] || !message.mentions.members.first()) {
       let warnEmbed = new Discord.RichEmbed()
         .setTitle(`:warning: ERROR :warning:`)
         .addField(`User not specfied`, "Please specify a valid Discord member to edit roles.\n**Command Format:** `/role @member [roles]`\n**RUN `/help role` FOR MORE INFORMATION**")
         .setColor(0xFF0000)
       message.channel.send(warnEmbed);
     } else {
+      firstMentioned = message.mentions.members.first();
       let roles = args.slice(1);
       let arrayRL = Number(roles.length) - 1;
-      for (let i = 0; i <= roles.length; i++
+      let roleToAdd;
+      for (let i = 0; i <= arrayRL; i++) {
+        if (!message.guild.roles.find(val => val.name === roles[i].slice(1))) return message.channel.send(`Error. Couldn't find role named ${roles[i].slice(1)}`);
+        if (roles[i].startsWith("-")) {
+          roleToAdd = message.guild.roles.find(val => val.name === roles[i].slice(1));
+          let roleID = roleToAdd.id;
+          firstMentioned.addRole(roleID)
+          .catch(e => console.log(e));
+        }
+      };
     };
   };
   if (msg.startsWith(`${prefix}SHOP`) || msg.startsWith(`${prefix}STORE`) || (msg.startsWith(`${prefix}BUY`) && !args[0])) {
