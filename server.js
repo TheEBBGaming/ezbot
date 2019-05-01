@@ -161,10 +161,18 @@ client.on("message", (message) => {
       let rolesEmbed = new Discord.RichEmbed()
         .setColor(0x00FF00)
         .setAuthor(`Edited roles for ${firstMentioned.displayName}${mmmfTag}`, firstMentioned.user.avatarURL)
-        .addField("Added Roles:", addedRoles)
-        .addField("Removed Roles:", removedRoles)
-        .setFooter(`Edited by ${maMember.displayName}${authorTag}`, message.author.avatarURL)
-      logchannel.send(rolesEmbed);
+      if (addedRoles === "") {
+        rolesEmbed.addField("Added Roles:", "None");
+      } else {
+        rolesEmbed.addField("Added Roles:", addedRoles);
+      };
+      if (removedRoles === "") {
+        rolesEmbed.addField("Removed Roles:", "None");
+      } else {
+        rolesEmbed.addField("Removed Roles:", removedRoles);
+      };
+        rolesEmbed.setFooter(`Edited by ${maMember.displayName}${authorTag}`, message.author.avatarURL)
+      // logchannel.send(rolesEmbed);
       message.channel.send(rolesEmbed);
     };
   };
