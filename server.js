@@ -121,15 +121,31 @@ client.on("message", (message) => {
       firstMentioned = message.mentions.members.first();
       let roles = args.slice(1);
       let arrayRL = Number(roles.length) - 1;
-      let roleToAdd;
+      let roleToEdit;
+      let roleID;
       for (let i = 0; i <= arrayRL; i++) {
         if (!message.guild.roles.find(val => val.name === roles[i].slice(1))) return message.channel.send(`Error. Couldn't find role named ${roles[i].slice(1)}`);
         if (roles[i].startsWith("-")) {
-          roleToAdd = message.guild.roles.find(val => val.name === roles[i].slice(1));
-          let roleID = roleToAdd.id;
+          roleToEdit = message.guild.roles.find(val => val.name === roles[i].slice(1));
+          roleID = roleToEdit.id;
+          firstMentioned.removeRole(roleID)
+          .catch(e => console.log(e));
+        } else if (roles[i].startsWith("+")) {
+          roleToEdit = message.guild.roles.find(val => val.name === roles[i].slice(1));
+          roleID = roleToEdit.id;
           firstMentioned.addRole(roleID)
           .catch(e => console.log(e));
-        }
+        } else {
+          roleToEdit = message.guild.roles.find(val => val.name === roles[i].slice(1));
+          roleID = roleToEdit.id;
+          if (firstMentioned.roles.find(val => val.name === roles[i])) {
+            firstMentioned.removeRole(roleID)
+            .catch(e => console.log(e));
+          } else if (!firstMentioned.roles.find(val => val.name === roles[i])) {
+            firstMentioned.addRole(roleID)
+            .catch(e => console.lo
+          };
+        };
       };
     };
   };
