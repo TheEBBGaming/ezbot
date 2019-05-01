@@ -128,7 +128,7 @@ client.on("message", (message) => {
       let removedRoles = "";
       let addedRoles = "";
       for (let i = 0; i <= arrayRL; i++) {
-        if (!message.guild.roles.find(val => val.name.toUpperCase() === roles[i].toUpperCase().slice(1))) return message.channel.send(`Error. Couldn't find role named ${roles[i].slice(1)}`);
+        /* if (!message.guild.roles.find(val => val.name.toUpperCase() === roles[i].toUpperCase().slice(1))) return message.channel.send(`Error. Couldn't find role named ${roles[i].slice(1)}`);
         if (roles[i].startsWith("-")) {
           roleToEdit = message.guild.roles.find(val => val.name === roles[i].toUpperCase().slice(1));
           roleID = roleToEdit.id;
@@ -154,8 +154,9 @@ client.on("message", (message) => {
             .catch(e => console.log(e));
           } else {
             message.channel.send("okay, this error should never even occur, but because it did, dm futuristick/mooose immediately, please");
-          };;
-        };
+          };
+        };*/
+        message.channel.send("Heard" + roles[i]);
       };
       authorTag = message.author.tag.slice(message.author.username.length);
       let rolesEmbed = new Discord.RichEmbed()
