@@ -1084,12 +1084,14 @@ client.on("message", (message) => {
 			const helpEmbed = new Discord.RichEmbed()
 				.setTitle("Command List")
 				.setAuthor(`Requested by ${message.author.username}`, message.author.avatarURL)
-				.setDescription("Type `/help [command]` for more information on the command. (i.e. `/help link`)")
-				.addField("/link", "Links a Discord user to their Brawl Stars tag, assigning any roles needed.")
-        .addField("/mute", "Mutes the mentioned user for a specified amount of time.")
-        .addField("/purge", "Purges the specified number of messages from the chat.")
-				.addField("/help", "Do you really need to ask?")
-				.setFooter("This help message is brought to you by the Royalty family", "https://i.imgur.com/7Ut6i8F.jpg")
+      for (let key in commands) {
+          if (!commands.hasOwnProperty(key)) continue;
+          var obj = commands[key];
+          for (let prop in obj) {
+              if(!obj.hasOwnProperty(prop)) continue;
+              alert(prop + " = " + obj[prop]);
+          }
+      }
 			return message.channel.send(helpEmbed);
 		} else if (args[0] === "link") {
 			const viceEmbed = new Discord.RichEmbed()
