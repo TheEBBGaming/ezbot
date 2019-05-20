@@ -74,6 +74,7 @@ client.on("message", (message) => {
   let maMember = message.guild.members.get(message.author.id);
   let caembed;
   let sentMessageID;
+  let tdl = [];
   
   const commands = {
     shop: {
@@ -114,7 +115,23 @@ client.on("message", (message) => {
   };
   let cmdArray = [commands.shop, commands.ban, commands.kick, commands.warn, commands.warnings, commands.clearwarn, commands.mute];
   
-  // Shop
+  if (msg.startsWith(`${prefix}TDL`) && message.author.id === "288853176210161666") {
+    if (args[0]) {
+      let tdlemb = new Discord.RichEmbed()
+      .addField("Added to to-do list", `Added \`${args.join(" ")}\` to your to-do list!`)
+      .setColor(0x00FF00)
+      tdl.push(args.join(" "));
+      message.channel.send(tdlemb);
+    } else {
+      let tdlemb = new Discord.RichEmbed();
+      for (let i = 0; i < tdl.length; i++) {
+        tdlemb.addField(tdl[i], "/u200b");
+      };
+      tdlemb.setColor(0x00FF00);
+      message.channel.send(tdlemb);
+    };
+  };
+  
   
  /* if (msg.startsWith(`COMMANDER CODY, THE TIME HAS COME.`)) {
     message.channel.send("It will be done, my lord.");
