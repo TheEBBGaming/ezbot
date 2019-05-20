@@ -1083,9 +1083,9 @@ client.on("message", (message) => {
     let cmdusage;
 		if(!args[0]) {
 			const helpEmbed = new Discord.RichEmbed()
-				.setTitle("Command List")
 				.setFooter(`Requested by ${message.author.username}`, message.author.avatarURL)
-        .setColor(
+        .setColor(0x00FFFF)
+        .addField("Command List", "Enter `/help [command]` for more info on a command.")
       for (let key in commands) {
         if (!commands.hasOwnProperty(key)) continue;
         let obj = commands[key];
