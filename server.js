@@ -1080,18 +1080,23 @@ client.on("message", (message) => {
 	};
 */
 	if (msg.startsWith(`${prefix}HELP`)) {
+    let cmdusage;
 		if(!args[0]) {
 			const helpEmbed = new Discord.RichEmbed()
 				.setTitle("Command List")
-				.setAuthor(`Requested by ${message.author.username}`, message.author.avatarURL)
+				.setFooter(`Requested by ${message.author.username}`, message.author.avatarURL)
+        .setColor(
       for (let key in commands) {
-          if (!commands.hasOwnProperty(key)) continue;
-          var obj = commands[key];
-          for (let prop in obj) {
-              if(!obj.hasOwnProperty(prop)) continue;
-              alert(prop + " = " + obj[prop]);
-          }
-      }
+        if (!commands.hasOwnProperty(key)) continue;
+        let obj = commands[key];
+        for (let prop in obj) {
+          if(!obj.hasOwnProperty(prop)) continue;
+          if (prop === "usage") {
+            cmdusage = obj[prop];
+            helpEmbed.addField("/" + key, cmdusage);
+          };
+        };
+      };
 			return message.channel.send(helpEmbed);
 		} else if (args[0] === "link") {
 			const viceEmbed = new Discord.RichEmbed()
