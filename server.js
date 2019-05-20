@@ -75,6 +75,45 @@ client.on("message", (message) => {
   let caembed;
   let sentMessageID;
   
+  const commands = {
+    shop: {
+      usage: "/shop or /store",
+      info: "Shows a list of items available in the store, as well as the user's current balance.",
+      rolereqs: "None"
+    },
+    shop: {
+      usage: "/shop or /store",
+      info: "Shows a list of items available in the store, as well as the user's current balance.",
+      rolereqs: "None"
+    },
+    shop: {
+      usage: "/shop or /store",
+      info: "Shows a list of items available in the store, as well as the user's current balance.",
+      rolereqs: "None"
+    },
+    shop: {
+      usage: "/shop or /store",
+      info: "Shows a list of items available in the store, as well as the user's current balance.",
+      rolereqs: "None"
+    },
+    shop: {
+      usage: "/shop or /store",
+      info: "Shows a list of items available in the store, as well as the user's current balance.",
+      rolereqs: "None"
+    },
+    shop: {
+      usage: "/shop or /store",
+      info: "Shows a list of items available in the store, as well as the user's current balance.",
+      rolereqs: "None"
+    },
+    
+    shop: {
+      usage: "/shop or /store",
+      info: "Shows a list of items available in the store, as well as the user's current balance.",
+      rolereqs: "None"
+    }
+  };
+  
   // Shop
   
  /* if (msg.startsWith(`COMMANDER CODY, THE TIME HAS COME.`)) {
@@ -108,7 +147,7 @@ client.on("message", (message) => {
     };
   };
 */
-  
+  /*
   if (msg.startsWith(`${prefix}ROLE`)) {
     if (userModRole === null) return;
     if (!args[0] || !message.mentions.members.first()) {
@@ -128,7 +167,7 @@ client.on("message", (message) => {
       let removedRoles = "";
       let addedRoles = "";
       for (let i = 0; i <= arrayRL; i++) {
-        /* if (!message.guild.roles.find(val => val.name.toUpperCase() === roles[i].toUpperCase().slice(1))) return message.channel.send(`Error. Couldn't find role named ${roles[i].slice(1)}`);
+        if (!message.guild.roles.find(val => val.name.toUpperCase() === roles[i].toUpperCase().slice(1))) return message.channel.send(`Error. Couldn't find role named ${roles[i].slice(1)}`);
         if (roles[i].startsWith("-")) {
           roleToEdit = message.guild.roles.find(val => val.name === roles[i].toUpperCase().slice(1));
           roleID = roleToEdit.id;
@@ -155,8 +194,7 @@ client.on("message", (message) => {
           } else {
             message.channel.send("okay, this error should never even occur, but because it did, dm futuristick/mooose immediately, please");
           };
-        };*/
-        message.channel.send("Heard" + roles[i]);
+        };
       };
       authorTag = message.author.tag.slice(message.author.username.length);
       let rolesEmbed = new Discord.RichEmbed()
@@ -173,10 +211,11 @@ client.on("message", (message) => {
         rolesEmbed.addField("Removed Roles:", removedRoles);
       };
         rolesEmbed.setFooter(`Edited by ${maMember.displayName}${authorTag}`, message.author.avatarURL)
-      // logchannel.send(rolesEmbed);
+      logchannel.send(rolesEmbed);
       message.channel.send(rolesEmbed);
     };
   };
+  */
   if (msg.startsWith(`${prefix}SHOP`) || msg.startsWith(`${prefix}STORE`) || (msg.startsWith(`${prefix}BUY`) && !args[0])) {
     let studentRole = {
       "name":"Student Role",
