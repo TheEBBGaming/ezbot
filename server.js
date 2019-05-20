@@ -77,42 +77,42 @@ client.on("message", (message) => {
   
   const commands = {
     shop: {
-      usage: "/shop or /store",
+      usage: "`/shop` or `/store`",
       info: "Shows a list of items available in the store, as well as the user's current balance.",
       rolereqs: "None"
     },
-    shop: {
-      usage: "/shop or /store",
-      info: "Shows a list of items available in the store, as well as the user's current balance.",
-      rolereqs: "None"
+    ban: {
+      usage: "`/ban @member [number of days of messages to delete] [reason]`\n**NOTE:** Command parameters in `[]` are optional.",
+      info: "Bans the mentioned member",
+      rolereqs: "Must be Moderator or above"
     },
-    shop: {
-      usage: "/shop or /store",
-      info: "Shows a list of items available in the store, as well as the user's current balance.",
-      rolereqs: "None"
+    kick: {
+      usage: "`/kick @member [reason]`\n**NOTE:** Command parameters in `[]` are optional.",
+      info: "Kicks the mentioned member",
+      rolereqs: "Must be Moderator or above"
     },
-    shop: {
-      usage: "/shop or /store",
-      info: "Shows a list of items available in the store, as well as the user's current balance.",
-      rolereqs: "None"
+    warn: {
+      usage: "`/warn @member [reason]`\n**NOTE:** Command parameters in `[]` are optional.",
+      info: "Warns the mentioned member",
+      rolereqs: "Must be Moderator or above"
     },
-    shop: {
-      usage: "/shop or /store",
-      info: "Shows a list of items available in the store, as well as the user's current balance.",
-      rolereqs: "None"
+    warnings: {
+      usage: "`/warnings @member`",
+      info: "Shows a list of warnings for the mentioned member.",
+      rolereqs: "Must be Moderator or above"
     },
-    shop: {
-      usage: "/shop or /store",
-      info: "Shows a list of items available in the store, as well as the user's current balance.",
-      rolereqs: "None"
+    clearwarn: {
+      usage: "`/clearwarn @member`",
+      info: "Clears either a specified warning or all warnings for the mentioned member.",
+      rolereqs: "Must be Moderator or above"
     },
-    
-    shop: {
-      usage: "/shop or /store",
-      info: "Shows a list of items available in the store, as well as the user's current balance.",
-      rolereqs: "None"
+    mute: {
+      usage: "`/mute @member (# of mins)`",
+      info: "Mutes the mentioned member for the specified amount of minutes.",
+      rolereqs: "Must be Moderator or above"
     }
   };
+  let cmdArray = [commands.shop, commands.ban, commands.kick, commands.warn, commands.warnings, commands.clearwarn, commands.mute];
   
   // Shop
   
@@ -632,7 +632,7 @@ client.on("message", (message) => {
             .setAuthor(`Cleared all warnings for ${toClear.displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, toClear.user.avatarURL)
             .addField(`Cleared By:`, `${collected.first().guild.members.get(collected.first().author.id).displayName}${authorTag}`)
             .setColor(0x0000FF)
-          // logchannel.send(clearedEmbed);
+          logchannel.send(clearedEmbed);
           collected.first().channel.send(clearedEmbed);
           return;
         };
@@ -647,48 +647,13 @@ client.on("message", (message) => {
           warnDB.splice(Number(collected.first().content), 1);
           db.set(`${toClear.id}.warns`, warnDB);
           warnDB = db.fetch(`${toClear.id}.warns`);
-          // logchannel.send(clearedEmbed);
+          logchannel.send(clearedEmbed);
           return collected.first().channel.send(clearedEmbed);
         } else if (!collected.first().content.toUpperCase() === "ALL" && !collected.first().content.toUpperCase() === "CANCEL") {
           return collected.first().channel.send('Error. Invalid input. Please run the command again.');
         };
       })
       .catch(e => console.log(e));
-      /* const collector = new Discord.MessageCollector(m => commandAuthor.id === m.author.id, {  time: 30000, max: 30 });
-      collector.on('collect', message => {
-        if (message.content.toUpperCase() === 'ALL') {
-          if (userModRole === 'Moderator') {
-            return message.channel.send('Insufficient Permissions.');
-          } else {
-            db.delete(`${toClear.id}.warns`);
-            let clearedEmbed = new Discord.RichEmbed()
-              .setAuthor(`Cleared all warnings for ${toClear.displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, toClear.user.avatarURL)
-              .addField(`Cleared By:`, `${message.guild.members.get(commandAuthor.id).displayName}${authorTag}`)
-            logchannel.send(clearedEmbed);
-            message.channel.send(clearedEmbed);
-            collector.stop();
-          };
-        } else if (!isNaN(message.content)) {
-          if (!warnDB[Number(message.content)] === undefined) {
-            warnDB.splice(Number(message.content), 1);
-            db.set(`${toClear.id}.warns`, warnDB);
-            warnDB = db.fetch(`${toClear.id}.warns`);
-            let clearedEmbed = new Discord.RichEmbed()
-              .setAuthor(`Cleared warning number ${message.content} for ${toClear.displayName}${mmmfTag} at ${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`, toClear.user.avatarURL)
-              .addField("Warning Info:", `Warned at ${warnDB[Number(message.content)][0]} by ${warnDB[Number(message.content)][2]}\n\n**Reason**: ${warnDB[Number(message.content)][1]}`)
-              .addField("Cleared By:", `${message.guild.members.get(commandAuthor.id).displayName}${authorTag}`)
-            logchannel.send(clearedEmbed);
-            message.channel.send(clearedEmbed);
-            collector.stop();
-          };
-        } else if (message.content.toUpperCase() === 'CANCEL') {
-          message.channel.send("Cancelled command.");
-          collector.stop();
-        } else {
-          message.channel.send('Error. Invalid input. Please enter the number beside a warning to remove it.\nEnter "all" to clear all warnings. Enter "cancel" to cancel the command.');
-        };
-      });
-      */
     };
   };
   
@@ -1113,7 +1078,7 @@ client.on("message", (message) => {
 			return message.channel.send(errEmbed);
 		};
 	};
-
+*/
 	if (msg.startsWith(`${prefix}HELP`)) {
 		if(!args[0]) {
 			const helpEmbed = new Discord.RichEmbed()
@@ -1160,7 +1125,6 @@ client.on("message", (message) => {
 					return message.channel.send(purgeEmbed);
 			};
 	};
-  */
 });
 
 client.login(process.env.TOKEN);
