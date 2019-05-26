@@ -76,6 +76,10 @@ client.on("message", (message) => {
   let sentMessageID;
   let tdl = [];
   
+  if (!msg.indexOf("SPANISH") === -1) {
+    let newmsg = msg.replace(/spanish/gi, "Oxar");
+    message.channel.send("I think you mean:\n\n" + newmsg);
+  };
   const commands = {
     shop: {
       usage: "`/shop` or `/store`",
