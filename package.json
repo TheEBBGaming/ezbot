@@ -14,7 +14,6 @@
     "brawlstars": "^1.2.3",
     "discord.js": "^11.5.1",
     "express": "^4.16.4",
-    "node": "^12.3.1",
     "node-gyp": "^4.0.0",
     "parse-ms": "^2.0.0",
     "quick.db": "^7.0.0-b22"
