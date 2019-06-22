@@ -76,11 +76,16 @@ client.on("message", (message) => {
   let sentMessageID;
   let tdl = [];
   
-   calcChem = (redc, greenc, bluec, yellowc, pinkc) => {
-
+   if (msg.startsWith(`${prefix}CHEMCALC`)) {
+    let redc = args[0];
+    let greenc = args[1];
+    let bluec = args[2];
+    let yellowc = args[3];
+    let pinkc = args[4];
 
     let yFuel = Math.floor(Number(yellowc) / 20);
-    let bFuel = Math.floor(Number(bluec)  = Math.floor(Number(greenc) / 10);
+    let bFuel = Math.floor(Number(bluec) / 12);
+    let gFuel = Math.floor(Number(greenc) / 10);
     let pFuel = Math.floor(Number(pinkc) / 5);
 
     let fuelCombs = [yFuel, bFuel, gFuel, pFuel]
@@ -101,9 +106,8 @@ client.on("message", (message) => {
     let pinkResult = Math.floor((pRem / 200) * 100) / 100;
     let totalProfit = packResult + redResult + greenResult + blueResult + yellowResult + pinkResult;
 
-    console.log(`**__RESULTS__**\n\n**Input**\nRed: ${redc}\nGreen: ${greenc}\nBlue: ${bluec}\nYellow: ${yellowc}\nPink: ${pinkc}\n\n**Profit**\n\n**Fuel Packs** - ${madePacks} packs - ${packResult} WLs\nRed: ${redResult}\nGreen: ${greenResult}\nBlue: ${blueResult}\nYellow: ${yellowResult}\nPink: ${pinkResult}\n\n**TOTAL EARNINGS: ${totalProfit} WLs**`);
-};
-  (9353, 7467, 1985, 6281, 3582);
+    message.channel.send(`**__RESULTS__**\n\n**Input**\nRed: ${redc}\nGreen: ${greenc}\nBlue: ${bluec}\nYellow: ${yellowc}\nPink: ${pinkc}\n\n**Profit**\n\n**Fuel Packs** - ${madePacks} packs - ${packResult} WLs\nRed: ${redResult}\nGreen: ${greenResult}\nBlue: ${blueResult}\nYellow: ${yellowResult}\nPink: ${pinkResult}\n\n**TOTAL EARNINGS: ${totalProfit} WLs**`);
+  };
   const commands = {
     shop: {
       usage: "`/shop` or `/store`",
