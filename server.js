@@ -101,7 +101,7 @@ client.on("message", (message) => {
     let pinkResult = Math.floor((pRem / 200) * 100) / 100;
     let totalProfit = packResult + redResult + greenResult + blueResult + yellowResult + pinkResult;
 
-    console.log(`**__RESULTS__**\n\n**Input**\nRed: ${redc}\nGreen: ${greenc}\nBlue: ${bluec}\nYellow: ${yellowc}\nPink: ${pinkc}\n\n**Profit**\n\n**Fuel Packs** - ${madePacks} packs - ${packResult} WLs\nRed: ${redResult}\nGreen: ${greenResult}\nBlue: ${blueResult}\nYellow: ${yellowResult}\nPink: ${pinkResult}\n\n**TOTAL EARNINGS: ${totalProfit}**`);
+    console.log(`**__RESULTS__**\n\n**Input**\nRed: ${redc}\nGreen: ${greenc}\nBlue: ${bluec}\nYellow: ${yellowc}\nPink: ${pinkc}\n\n**Profit**\n\n**Fuel Packs** - ${madePacks} packs - ${packResult} WLs\nRed: ${redResult}\nGreen: ${greenResult}\nBlue: ${blueResult}\nYellow: ${yellowResult}\nPink: ${pinkResult}\n\n**TOTAL EARNINGS: ${totalProfit} WLs**`);
 };
   (9353, 7467, 1985, 6281, 3582);
   const commands = {
