@@ -76,10 +76,34 @@ client.on("message", (message) => {
   let sentMessageID;
   let tdl = [];
   
-  if (!msg.indexOf("SPANISH") === -1) {
-    let newmsg = msg.replace(/spanish/gi, "Oxar");
-    message.channel.send("I think you mean:\n\n" + newmsg);
-  };
+   calcChem = (redc, greenc, bluec, yellowc, pinkc) => {
+
+
+    let yFuel = Math.floor(Number(yellowc) / 20);
+    let bFuel = Math.floor(Number(bluec)  = Math.floor(Number(greenc) / 10);
+    let pFuel = Math.floor(Number(pinkc) / 5);
+
+    let fuelCombs = [yFuel, bFuel, gFuel, pFuel]
+    let numCombs = Math.min.apply(null, fuelCombs);
+
+    let madePacks = numCombs * 5;
+
+    let yRem = Number(yellowc) - (numCombs * 20);
+    let bRem = Number(bluec) - (numCombs * 12);
+    let gRem = Number(greenc) - (numCombs * 10);
+    let pRem = Number(pinkc) - (numCombs * 5);
+
+    let packResult = madePacks / 20;
+    let redResult = Math.floor((redc / 1500) * 100) / 100;
+    let greenResult = Math.floor((gRem / 1500) * 100) / 100;
+    let blueResult = Math.floor((bRem / 225) * 100) / 100;
+    let yellowResult = Math.floor((yRem / 100) * 100) / 100;
+    let pinkResult = Math.floor((pRem / 200) * 100) / 100;
+    let totalProfit = packResult + redResult + greenResult + blueResult + yellowResult + pinkResult;
+
+    console.log(`**__RESULTS__**\n\n**Input**\nRed: ${redc}\nGreen: ${greenc}\nBlue: ${bluec}\nYellow: ${yellowc}\nPink: ${pinkc}\n\n**Profit**\n\n**Fuel Packs** - ${madePacks} packs - ${packResult} WLs\nRed: ${redResult}\nGreen: ${greenResult}\nBlue: ${blueResult}\nYellow: ${yellowResult}\nPink: ${pinkResult}\n\n**TOTAL EARNINGS: ${totalProfit}**`);
+};
+  (9353, 7467, 1985, 6281, 3582);
   const commands = {
     shop: {
       usage: "`/shop` or `/store`",
@@ -87,7 +111,7 @@ client.on("message", (message) => {
       rolereqs: "None"
     },
     ban: {
-      usage: "`/ban @member [number of days of messages to delete] [reason]`\n**NOTE:** Command parameters in `[]` are optional.",
+      usage: "`/ba @member [number of days of messages to delete] [reason]`\n**NOTE:** Command parameters in `[]` are optional.",
       info: "Bans the mentioned member",
       rolereqs: "Must be Moderator or above"
     },
