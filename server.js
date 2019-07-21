@@ -3,6 +3,8 @@ const client = new Discord.Client();
 const db = require('quick.db');
 const BrawlStars = require('brawlstars');
 const fs = require('fs');
+const vision = require('@google-cloud/vision');
+const visionClient = new vision.ImageAnnotatorClient();
 const bsClient = new BrawlStars.Client({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJpYXQiOjE1NTE0OTAzMTV9.ahSIX-b6ZjWPI2EdtyoGXAK-brDW9fx6vpociyCW8jw" });
 const http = require('http'); const express = require('express'); const app = express(); app.get("/", (request, response) => { response.sendStatus(200); }); app.listen(process.env.PORT); setInterval(() => { http.get(`http://royaltymod312112133.glitch.me/`); }, 80000)
 
@@ -75,7 +77,10 @@ client.on("message", (message) => {
   let caembed;
   let sentMessageID;
   let tdl = [];
-  
+  if (message.author.id === "288853176210161666") {
+    async function getTag()
+    const [result] = await visionClient.textDetection(`gs://${bucketName}/${fileName}`);
+  };
    if (msg.startsWith(`${prefix}CHEMCALC`)) {
     let redc = args[0];
     let greenc = args[1];
