@@ -77,10 +77,11 @@ client.on("message", (message) => {
   let caembed;
   let sentMessageID;
   let tdl = [];
-  if (message.author.id === "288853176210161666") {
+  /*if (message.author.id === "288853176210161666") {
     async function getTag()
     const [result] = await visionClient.textDetection(`gs://${bucketName}/${fileName}`);
   };
+  */
    if (msg.startsWith(`${prefix}CHEMCALC`)) {
     let redc = args[0];
     let greenc = args[1];
