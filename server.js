@@ -84,7 +84,7 @@ client.on("message", (message) => {
   */
   
    if (message.channel.type === "dm") {
-     if (message)
+     if (message.attachments.size <= 0) {}
    };   if (msg.startsWith(`${prefix}CHEMCALC`)) {
     let redc = args[0];
     let greenc = args[1];
