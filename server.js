@@ -82,7 +82,8 @@ client.on("message", (message) => {
     const [result] = await visionClient.textDetection(`gs://${bucketName}/${fileName}`);
   };
   */
-   if (msg.startsWith(`${prefix}CHEMCALC`)) {
+  
+   if (message.channel.type === DMchannel) {}   if (msg.startsWith(`${prefix}CHEMCALC`)) {
     let redc = args[0];
     let greenc = args[1];
     let bluec = args[2];
@@ -1190,3 +1191,4 @@ client.on("message", (message) => {
 });
 
 client.login(process.env.TOKEN);
+
