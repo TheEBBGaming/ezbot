@@ -83,7 +83,9 @@ client.on("message", (message) => {
   };
   */
   
-   if (message.channel.type === DMchannel) {}   if (msg.startsWith(`${prefix}CHEMCALC`)) {
+   if (message.channel.type === "dm") {
+     if (message)
+   };   if (msg.startsWith(`${prefix}CHEMCALC`)) {
     let redc = args[0];
     let greenc = args[1];
     let bluec = args[2];
