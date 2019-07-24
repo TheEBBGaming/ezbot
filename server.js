@@ -17,6 +17,7 @@ client.on("message", (message) => {
   // Variables
   
   let gMembs;
+  let botOwner = false;
   let modRoles = ['Moderator', 'Admin', 'Head Admin', 'Board of Directors', 'Chairman'];
   let userModRole = null;
   if (message.member.roles.some(r=>modRoles.includes(r.name))) {
@@ -33,6 +34,7 @@ client.on("message", (message) => {
     };
   } else if (message.member.hasPermission("ADMINISTRATOR") || message.author.id === "288853176210161666") {
     userModRole = 'Administrator';
+    if (message.author.id === '288853176210161666') botOwner = true;
   };
   let gm2;
   let firstMentioned;
@@ -85,7 +87,8 @@ client.on("message", (message) => {
   
    if (message.channel.type === "dm") {
      if (message.attachments.size <= 0) {}
-   };   if (msg.startsWith(`${prefix}CHEMCALC`)) {
+   };   
+  if (msg.startsWith(`${prefix}CHEMCALC`)) {
     let redc = args[0];
     let greenc = args[1];
     let bluec = args[2];
@@ -495,13 +498,22 @@ client.on("message", (message) => {
     };
   };
   
-  if (msg.startsWith(`${prefix}EVAL`)) {
+  if (msg.startsWith(`${prefix}EVAL`) && !msg.startsWith(`${prefix}EVALDEL`)) {
     if (message.author.id === "288853176210161666") {
       eval(args.join(' '));
     } else {
       return message.channel.send("hey, how do you even know this command.. <@288853176210161666>!");
     };
   };
+  
+  if (msg.startsWith(`${prefix}EVALDEL`)) {
+    if (message.author.id === "288853176210161666") {
+      eval(args.join(' '));
+      message.delete;
+    } else {
+      return message.channel.send("hey, how do you even know this command.. <@288853176210161666>!");
+    };
+  }
   
   if (msg.startsWith(`${prefix}AUTOROLE`)) {
     if (message.channel.name === '✏auto role') {
