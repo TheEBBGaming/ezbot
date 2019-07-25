@@ -14,8 +14,19 @@ client.on("ready", () => {
 
 client.on("message", (message) => {
 
-  // Variables
+  if (message.channel.type === "dm") {
+     if (message.attachments.size <= 0) {
+       return;
+     } else {
+       for (let value of message.attachments.values()) {
+         message.channel.send(value.url);
+         return;
+       };
+     };
+  };
   
+  
+  // Variables
   let gMembs;
   let botOwner = false;
   let modRoles = ['Moderator', 'Admin', 'Head Admin', 'Board of Directors', 'Chairman'];
@@ -85,13 +96,7 @@ client.on("message", (message) => {
   };
   */
   
-   if (message.channel.type === "dm") {
-     if (message.attachments.size <= 0) {
-       return;
-     } else {
-       
-     }
-   };   
+      
   if (msg.startsWith(`${prefix}CHEMCALC`)) {
     let redc = args[0];
     let greenc = args[1];
