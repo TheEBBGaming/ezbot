@@ -29,6 +29,7 @@ client.on("message", (message) => {
           let formData = new FormData();
           formData.append("image", value.url);
           let request = http.get({
+            port: 8000,
             url: "https://api.imgur.com/3/image",
             type: "POST",
             datatype: "json",
@@ -49,7 +50,6 @@ client.on("message", (message) => {
             contentType: false,
             processData: false
           });
-          request.end();
         }
          postToImgur();
          message.channel.send(value.url);
