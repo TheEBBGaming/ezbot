@@ -31,7 +31,7 @@ client.on("message", (message) => {
           fdata.append("image", thevalue.url)
           try {
             let myreq = http.get({
-              host: "api.imgur.com",
+              host: "https://api.imgur.com",
               path: "/3/image",
               type: "POST",
               datatype: "json",
