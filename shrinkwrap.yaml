@@ -11,6 +11,7 @@ dependencies:
   node-gyp: 5.0.3
   parse-ms: 2.1.0
   quick.db: 7.0.0-b22
+  request: 2.88.0
   xhr2: 0.2.0
 packages:
   /@google-cloud/promisify/1.0.2:
@@ -1911,4 +1912,5 @@ specifiers:
   node-gyp: ^5.0.3
   parse-ms: ^2.0.0
   quick.db: ^7.0.0-b22
+  request: ^2.88.0
   xhr2: ^0.2.0

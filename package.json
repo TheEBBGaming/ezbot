@@ -22,7 +22,8 @@
     "parse-ms": "^2.0.0",
     "quick.db": "^7.0.0-b22",
     "xhr2": "^0.2.0",
-    "ajax-request": "^1.2.3"
+    "ajax-request": "^1.2.3",
+    "request": "^2.88.0"
   },
   "engines": {
     "node": "8.x"
