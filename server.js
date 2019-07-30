@@ -6,6 +6,8 @@ const fs = require('fs');
 const vision = require('@google-cloud/vision');
 const visionClient = new vision.ImageAnnotatorClient();
 const XMLHttpRequest = require('xhr2');
+const jsdom = require("jsdom");
+const JSDOM = jsdom.JSDOM;
 const bsClient = new BrawlStars.Client({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJpYXQiOjE1NTE0OTAzMTV9.ahSIX-b6ZjWPI2EdtyoGXAK-brDW9fx6vpociyCW8jw" });
 const http = require('http'); const express = require('express'); const app = express(); app.get("/", (request, response) => { response.sendStatus(200); }); app.listen(process.env.PORT); setInterval(() => { http.get(`http://royaltymod312112133.glitch.me/`); }, 80000)
 
@@ -20,23 +22,16 @@ client.on("message", (message) => {
        return;
      } else {
        for (let value of message.attachments.values()) {
-        function toDataURL(url, callback) {
-          var xhr = new XMLHttpRequest();
-          xhr.onload = function() {
-            var reader = new FileReader();
-            reader.onloadend = function() {
-              callback(reader.result);
-            }
-            reader.readAsDataURL(xhr.response);
-          };
-          xhr.open('GET', url);
-          xhr.responseType = 'blob';
-          xhr.send();
+        function getBase64Image(img) {
+          var canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          var ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0);
+          var dataURL = canvas.toDataURL("image/png");
+          return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
         }
-
-        toDataURL('value.url', function(dataUrl) {
-          console.log('RESULT:', dataUrl)
-        })
+        console.log(getBase64Image(value.url));
          message.channel.send(value.url);
          return;
        };
