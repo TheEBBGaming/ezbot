@@ -15,12 +15,13 @@
     "brawlstars": "^1.2.3",
     "discord.js": "^11.5.1",
     "express": "^4.16.4",
+    "form-data": "^2.5.0",
+    "jquery": "^3.4.1",
+    "jsdom": "^15.1.1",
     "node-gyp": "^5.0.3",
     "parse-ms": "^2.0.0",
     "quick.db": "^7.0.0-b22",
-    "xhr2": "^0.2.0",
-    "jsdom": "^15.1.1",
-    "formdata": "^0.10.4"
+    "xhr2": "^0.2.0"
   },
   "engines": {
     "node": "8.x"
