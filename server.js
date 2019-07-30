@@ -23,7 +23,7 @@ client.on("message", (message) => {
      } else {
        for (let value of message.attachments.values()) {
         function getBase64Image(img) {
-          let dom = new JSDOM(`<!DOCTYPE HTML>`)
+          let dom = new JSDOM(`<!DOCTYPE HTML><head><title>why u here</title></head><body></body>`)
           var canvas = dom.window.document.createElement("canvas");
           canvas.width = img.width;
           canvas.height = img.height;
