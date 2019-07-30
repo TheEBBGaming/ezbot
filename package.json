@@ -10,6 +10,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@google-cloud/vision": "^1.1.3",
     "better-sqlite3": "^5.4.1",
     "brawlstars": "^1.2.3",
     "discord.js": "^11.5.1",
@@ -17,7 +18,7 @@
     "node-gyp": "^5.0.3",
     "parse-ms": "^2.0.0",
     "quick.db": "^7.0.0-b22",
-    "@google-cloud/vision": "^1.1.3"
+    "xhr2": "^0.2.0"
   },
   "engines": {
     "node": "8.x"

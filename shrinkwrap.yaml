@@ -7,6 +7,7 @@ dependencies:
   node-gyp: 5.0.3
   parse-ms: 2.1.0
   quick.db: 7.0.0-b22
+  xhr2: 0.2.0
 packages:
   /@google-cloud/promisify/1.0.2:
     dev: false
@@ -1514,6 +1515,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-GIyAXC2cB7LjvpgMt9EKS2ldqr0MTrORaleiOno6TweZ6r3TKtoFQWay/2PceJ3RuBasOHzXNn5Lrw1X0bEjqA==
+  /xhr2/0.2.0:
+    dev: false
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-BDtiD0i2iKPK/S8OAZfpk6tyzEDnKKSjxWHcMBVmh+LuqJ8A32qXTyOx+TVOg2dKvq6zGBq2sgKPkEeRs1qTRA==
   /yallist/3.0.3:
     dev: false
     resolution:
@@ -1530,3 +1537,4 @@ specifiers:
   node-gyp: ^5.0.3
   parse-ms: ^2.0.0
   quick.db: ^7.0.0-b22
+  xhr2: ^0.2.0
