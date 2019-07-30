@@ -19,13 +19,30 @@ client.on("message", (message) => {
        return;
      } else {
        for (let value of message.attachments.values()) {
+        function toDataURL(url, callback) {
+          var xhr = new XMLHttpRequest();
+          xhr.onload = function() {
+            var reader = new FileReader();
+            reader.onloadend = function() {
+              callback(reader.result);
+            }
+            reader.readAsDataURL(xhr.response);
+          };
+          xhr.open('GET', url);
+          xhr.responseType = 'blob';
+          xhr.send();
+        }
+
+        toDataURL('value.url', function(dataUrl) {
+          console.log('RESULT:', dataUrl)
+        })
          message.channel.send(value.url);
          return;
        };
      };
   };
   
-  
+  if (message.channel.type === 'dm') return;
   // Variables
   let gMembs;
   let botOwner = false;
