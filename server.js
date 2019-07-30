@@ -8,7 +8,6 @@ const visionClient = new vision.ImageAnnotatorClient();
 const XMLHttpRequest = require('xhr2');
 const jsdom = require("jsdom");
 const JSDOM = jsdom.JSDOM;
-global.document = new JSDOM(html).window.document;
 const bsClient = new BrawlStars.Client({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJpYXQiOjE1NTE0OTAzMTV9.ahSIX-b6ZjWPI2EdtyoGXAK-brDW9fx6vpociyCW8jw" });
 const http = require('http'); const express = require('express'); const app = express(); app.get("/", (request, response) => { response.sendStatus(200); }); app.listen(process.env.PORT); setInterval(() => { http.get(`http://royaltymod312112133.glitch.me/`); }, 80000)
 
@@ -24,7 +23,8 @@ client.on("message", (message) => {
      } else {
        for (let value of message.attachments.values()) {
         function getBase64Image(img) {
-          var canvas = document.createElement("canvas");
+          let dom = new JSDOM(`<!DOCTYPE HTML>`)
+          var canvas = dom.window.document.createElement("canvas");
           canvas.width = img.width;
           canvas.height = img.height;
           var ctx = canvas.getContext("2d");
