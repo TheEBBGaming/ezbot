@@ -25,20 +25,24 @@ client.on("message", (message) => {
      if (message.attachments.size <= 0) {
        return;
      } else {
-       for (let thevalue of message.attachments.values()) {
+       for (let value of message.attachments.values()) {
         function postToImgur() {
+          let mydata = {
+            image: value.url
+          };
           let fdata = new FormData();
-          fdata.append("image", thevalue.url)
+          fdata.append("image", value.url)
           try {
             request.get({
               host: "https://api.imgur.com",
+              uri: "https://api.imgur.com/3/image",
               path: "/3/image",
               type: "POST",
               datatype: "json",
               headers: {
                 "Authorization": "Client-ID e95f39640c4a8a7"
               },
-              formData: fdata,
+              formData: mydata,
               success: function(response) {
                 console.log(response);
                 message.channel.send(response);
@@ -58,7 +62,7 @@ client.on("message", (message) => {
           };
         }
          postToImgur();
-         message.channel.send(thevalue.url);
+         message.channel.send(value.url);
          return;
        };
      };
