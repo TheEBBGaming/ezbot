@@ -27,21 +27,18 @@ client.on("message", (message) => {
      } else {
        for (let thevalue of message.attachments.values()) {
         function postToImgur() {
-          const data = {
-            image: thevalue.url
-          };
+          let fdata = new FormData();
+          fdata.append("image", thevalue.url)
           try {
             let myreq = http.get({
-              port: 8000,
-              host: "https://api.imgur.com",
-              path: "/json",
-              url: "https://api.imgur.com/3/image",
+              host: "api.imgur.com",
+              path: "/3/image",
               type: "POST",
               datatype: "json",
               headers: {
                 "Authorization": "Client-ID e95f39640c4a8a7"
               },
-              formData: data,
+              formData: fdata,
               success: function(response) {
                 console.log(response);
                 message.channel.send(response);
