@@ -21,7 +21,8 @@
     "node-gyp": "^5.0.3",
     "parse-ms": "^2.0.0",
     "quick.db": "^7.0.0-b22",
-    "xhr2": "^0.2.0"
+    "xhr2": "^0.2.0",
+    "ajax-request": "^1.2.3"
   },
   "engines": {
     "node": "8.x"

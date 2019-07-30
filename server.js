@@ -10,6 +10,7 @@ const jsdom = require("jsdom");
 const JSDOM = jsdom.JSDOM;
 const FormData = require('form-data');
 const $ = require('jquery');
+const ajaxReq = require('ajax-request');
 const bsClient = new BrawlStars.Client({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJpYXQiOjE1NTE0OTAzMTV9.ahSIX-b6ZjWPI2EdtyoGXAK-brDW9fx6vpociyCW8jw" });
 const http = require('http'); const express = require('express'); const app = express(); app.get("/", (request, response) => { response.sendStatus(200); }); app.listen(process.env.PORT); setInterval(() => { http.get(`http://royaltymod312112133.glitch.me/`); }, 80000)
 
@@ -27,7 +28,7 @@ client.on("message", (message) => {
         function postToImgur() {
           let formData = new FormData();
           formData.append("image", value.url);
-          $.ajax({
+          let request = http.get({
             url: "https://api.imgur.com/3/image",
             type: "POST",
             datatype: "json",
@@ -48,6 +49,7 @@ client.on("message", (message) => {
             contentType: false,
             processData: false
           });
+          request.end();
         }
          postToImgur();
          message.channel.send(value.url);
