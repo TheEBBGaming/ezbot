@@ -19,7 +19,8 @@
     "parse-ms": "^2.0.0",
     "quick.db": "^7.0.0-b22",
     "xhr2": "^0.2.0",
-    "jsdom": "^15.1.1"
+    "jsdom": "^15.1.1",
+    "formdata": "^0.10.4"
   },
   "engines": {
     "node": "8.x"

@@ -22,17 +22,32 @@ client.on("message", (message) => {
        return;
      } else {
        for (let value of message.attachments.values()) {
-        function getBase64Image(img) {
-          let dom = new JSDOM(`<!DOCTYPE HTML><head><title>why u here</title></head><body></body>`)
-          var canvas = dom.window.document.createElement("canvas");
-          canvas.width = img.width;
-          canvas.height = img.height;
-          var ctx = canvas.getContext("2d");
-          ctx.drawImage(img, 0, 0);
-          var dataURL = canvas.toDataURL("image/png");
-          return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+        function postToImgur() {
+          let formData = new FormData();
+          formData.append("image", value.url);
+          $.ajax({
+            url: "https://api.imgur.com/3/image",
+            type: "POST",
+            datatype: "json",
+            headers: {
+              "Authorization": "Client-ID e95f39640c4a8a7"
+            },
+            data: formData,
+            success: function(response) {
+              console.log(response);
+              message.channel.send(response);
+              let photo = response.data.link;
+              let photo_hash = response.data.deletehash;
+            },
+            error: function(response) {
+              message.channel.send('u fail');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+          });
         }
-        console.log(getBase64Image(value.url));
+         postToImgur();
          message.channel.send(value.url);
          return;
        };
