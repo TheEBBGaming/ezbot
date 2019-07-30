@@ -8,7 +8,6 @@ const visionClient = new vision.ImageAnnotatorClient();
 const XMLHttpRequest = require('xhr2');
 const jsdom = require("jsdom");
 const JSDOM = jsdom.JSDOM;
-const FormData = require('form-data');
 const $ = require('jquery');
 const ajaxReq = require('ajax-request');
 const request = require('request');
@@ -25,13 +24,16 @@ client.on("message", (message) => {
      if (message.attachments.size <= 0) {
        return;
      } else {
-       for (let value of message.attachments.values()) {
+       for (let tvalue of message.attachments.values()) {
         function postToImgur() {
           let mydata = {
-            image: value.url
+            image: tvalue.url
           };
-          let fdata = new FormData();
-          fdata.append("image", value.url)
+          let fdata = {
+            image: {
+              value: tvalue.url
+            }
+          }
           try {
             request.get({
               host: "https://api.imgur.com",
@@ -62,7 +64,7 @@ client.on("message", (message) => {
           };
         }
          postToImgur();
-         message.channel.send(value.url);
+         message.channel.send(tvalue.url);
          return;
        };
      };
