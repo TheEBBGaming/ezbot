@@ -30,9 +30,9 @@ client.on("message", (message) => {
           let fdata = new FormData();
           fdata.append("image", thevalue.url)
           try {
-            let myreq = http.get({
-              host: "https://api.imgur.com/3/image",
-              port: 8000,
+            request.get({
+              host: "https://api.imgur.com",
+              path: "/3/image",
               type: "POST",
               datatype: "json",
               headers: {
@@ -52,7 +52,6 @@ client.on("message", (message) => {
               contentType: false,
               processData: false
             })
-          myreq.end();
           }
           catch(e) { 
             console.log(e);
