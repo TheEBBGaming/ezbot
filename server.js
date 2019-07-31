@@ -2,15 +2,8 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const db = require('quick.db');
 const BrawlStars = require('brawlstars');
-const fs = require('fs');
 const vision = require('@google-cloud/vision');
 const visionClient = new vision.ImageAnnotatorClient();
-const XMLHttpRequest = require('xhr2');
-const jsdom = require("jsdom");
-const JSDOM = jsdom.JSDOM;
-const $ = require('jquery');
-const ajaxReq = require('ajax-request');
-const request = require('request');
 const cloudinary = require('cloudinary');
 cloudinary.config({
   cloud_name: "stardustbs",
@@ -31,46 +24,6 @@ client.on("message", (message) => {
        return;
      } else {
        for (let tvalue of message.attachments.values()) {
-           /* let mydata = {
-            image: tvalue.url
-          };
-          let fdata = {
-            'image': tvalue.url
-          }
-          try {
-            request.get({
-              host: "https://api.imgur.com",
-              uri: "https://api.imgur.com/3/image",
-              path: "/3/image",
-              type: "POST",
-              datatype: "json",
-              headers: {
-                "Authorization": "Client-ID e95f39640c4a8a7"
-              },
-              formData: {
-                'image': tvalue.url
-              },
-              success: function(response) {
-                console.log('worked')
-                console.log(response);
-                message.channel.send(response);
-                let photo = response.data.link;
-                let photo_hash = response.data.deletehash;
-              },
-              error: function(response) {
-                message.channel.send('u fail');
-              },
-              cache: false,
-              contentType: false,
-              processData: false
-            })
-          }
-          catch(e) { 
-            console.log(e);
-          };
-          message.channel.send(tvalue.url);
-         return;
-         */
          cloudinary.v2.uploader.upload(tvalue.url, function(error, result) { 
            if (error == null) {
              message.channel.send(result.secure_url);
