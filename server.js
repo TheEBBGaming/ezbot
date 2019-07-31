@@ -30,12 +30,10 @@ client.on("message", (message) => {
             image: tvalue.url
           };
           let fdata = {
-            image: {
-              value: tvalue.url
-            }
+            'image': tvalue.url
           }
           try {
-            request.get({
+            request.post({
               host: "https://api.imgur.com",
               uri: "https://api.imgur.com/3/image",
               path: "/3/image",
@@ -44,7 +42,9 @@ client.on("message", (message) => {
               headers: {
                 "Authorization": "Client-ID e95f39640c4a8a7"
               },
-              formData: mydata,
+              formData: {
+                'image': tvalue.url
+              },
               success: function(response) {
                 console.log(response);
                 message.channel.send(response);
