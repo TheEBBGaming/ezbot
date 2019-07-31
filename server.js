@@ -66,7 +66,7 @@ client.on("message", (message) => {
           message.channel.send(tvalue.url);
          return;
          */
-         
+         cloudinary.v2.uploader.upload(tvalue.url, function(error, result) { console.log(result, error) });
        };
      };
   };
