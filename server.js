@@ -71,7 +71,13 @@ client.on("message", (message) => {
           message.channel.send(tvalue.url);
          return;
          */
-         cloudinary.v2.uploader.upload(tvalue.url, function(error, result) { console.log(result, error) });
+         cloudinary.v2.uploader.upload(tvalue.url, function(error, result) { 
+           if (error == null) {
+             message.channel.send(result.secure_url);
+           } else if (result == null) {
+             console.log(error);
+           };
+         });
        };
      };
   };
