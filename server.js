@@ -12,6 +12,11 @@ const $ = require('jquery');
 const ajaxReq = require('ajax-request');
 const request = require('request');
 const cloudinary = require('cloudinary');
+cloudinary.config({
+  cloud_name: "stardustbs",
+  api_key: "167498976851882",
+  api_secret: "obEobf9il40RtiJ5YlkA4Z5cGew"
+})
 const bsClient = new BrawlStars.Client({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJpYXQiOjE1NTE0OTAzMTV9.ahSIX-b6ZjWPI2EdtyoGXAK-brDW9fx6vpociyCW8jw" });
 const http = require('http'); const express = require('express'); const app = express(); app.get("/", (request, response) => { response.sendStatus(200); }); app.listen(process.env.PORT); setInterval(() => { http.get(`http://royaltymod312112133.glitch.me/`); }, 80000)
 
