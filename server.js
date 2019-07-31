@@ -26,7 +26,7 @@ client.on("message", (message) => {
        return;
      } else {
        for (let tvalue of message.attachments.values()) {
-          let mydata = {
+           /* let mydata = {
             image: tvalue.url
           };
           let fdata = {
@@ -65,6 +65,8 @@ client.on("message", (message) => {
           };
           message.channel.send(tvalue.url);
          return;
+         */
+         
        };
      };
   };
