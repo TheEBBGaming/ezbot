@@ -25,7 +25,6 @@ client.on("message", (message) => {
        return;
      } else {
        for (let tvalue of message.attachments.values()) {
-        function postToImgur() {
           let mydata = {
             image: tvalue.url
           };
@@ -33,7 +32,7 @@ client.on("message", (message) => {
             'image': tvalue.url
           }
           try {
-            request.post({
+            request.get({
               host: "https://api.imgur.com",
               uri: "https://api.imgur.com/3/image",
               path: "/3/image",
@@ -46,6 +45,7 @@ client.on("message", (message) => {
                 'image': tvalue.url
               },
               success: function(response) {
+                console.log('worked')
                 console.log(response);
                 message.channel.send(response);
                 let photo = response.data.link;
@@ -62,9 +62,7 @@ client.on("message", (message) => {
           catch(e) { 
             console.log(e);
           };
-        }
-         postToImgur();
-         message.channel.send(tvalue.url);
+          message.channel.send(tvalue.url);
          return;
        };
      };
