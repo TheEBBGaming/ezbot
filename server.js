@@ -28,6 +28,7 @@ client.on("message", (message) => {
            if (error == null) {
              message.channel.send(cresult.secure_url);
              async function cloudOCR() {
+               console.log(cresult);
                const [result] = await visionClient.textDetection(cresult.secure_url);
                const detections = result.textAnnotations;
                message.channel.send('Text:');
