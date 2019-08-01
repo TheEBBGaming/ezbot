@@ -27,6 +27,11 @@ client.on("message", (message) => {
          cloudinary.v2.uploader.upload(tvalue.url, function(error, result) { 
            if (error == null) {
              message.channel.send(result.secure_url);
+             async function
+             const [result] = await client.textDetection(`gs://${bucketName}/${fileName}`);
+             const detections = result.textAnnotations;
+             console.log('Text:');
+             detections.forEach(text => console.log(text));
            } else if (result == null) {
              console.log(error);
            };
