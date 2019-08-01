@@ -24,15 +24,17 @@ client.on("message", (message) => {
        return;
      } else {
        for (let tvalue of message.attachments.values()) {
-         cloudinary.v2.uploader.upload(tvalue.url, function(error, result) { 
+         cloudinary.v2.uploader.upload(tvalue.url, function(error, cresult) { 
            if (error == null) {
-             message.channel.send(result.secure_url);
-             async function
-             const [result] = await client.textDetection(`gs://${bucketName}/${fileName}`);
-             const detections = result.textAnnotations;
-             console.log('Text:');
-             detections.forEach(text => console.log(text));
-           } else if (result == null) {
+             message.channel.send(cresult.secure_url);
+             async function cloudOCR() {
+               const [result] = await visionClient.textDetection(cresult.secure_url);
+               const detections = result.textAnnotations;
+               message.channel.send('Text:');
+               detections.forEach(text => message.channel.send(text));
+             };
+             cloudOCR();
+           } else if (cresult == null) {
              console.log(error);
            };
          });
