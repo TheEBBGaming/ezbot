@@ -123,7 +123,7 @@ client.on("message", (message) => {
   if (msg.startsWith(`${prefix}PROTEAM`) || msg.startsWith(`${prefix}PT`)) {
     let ptemb = new Discord.RichEmbed()
     .setColor(0x00FFFF)
-    .addField('**Pro Team**', 'We are just like everyone else and have our own Pro Team. Our team competes in many tournaments outside our family alongside other organizations. If you are already familiar with the game, the Pro Team is the next big step. If you would like to sign up for the Stardust Pro Team, the link is listed below.\n\nFor any questions please contact <@251061721488293890>.\n\n\n[**Sign up today!**](https://forms.gle/2ZL3s1JbZdb53vxW6)');
+    .addField('**Pro Team**', 'We, like other families, have our own Pro Team. Our team competes outside our family alongside other organizations. If you are already familiar with the game, the Pro Team is the next big step. If you would like to sign up for the Stardust Pro Team, the link is listed below.\n\nFor any questions please contact <@251061721488293890>.\n\n\n[**Sign up today!**](https://forms.gle/2ZL3s1JbZdb53vxW6)');
     message.channel.send(ptemb);
   }
   
