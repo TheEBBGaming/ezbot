@@ -32,7 +32,7 @@ client.on("message", (message) => {
                const [result] = await visionClient.textDetection(cresult.secure_url);
                const detections = result.textAnnotations;
                message.channel.send('Text:');
-               detections.forEach(text => message.channel.send(text));
+               detections.forEach(text => console.log(text));
              };
              cloudOCR();
            } else if (cresult == null) {
