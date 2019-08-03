@@ -114,6 +114,11 @@ client.on("message", (message) => {
   };
   */
   
+  if (msg.startsWith(`${prefix}WHITELIST`)) {
+    let wlemb = new Discord.RichEmbed()
+    .setColor(0x000000)
+    .addField('**Whitelist**', 'The whitelist is a group of Stardust members who help stabilize Clubs that are running low on members. This is one of the few ways to engage with Stardust Leadership, and help the family out. If you would like to sign up for the whitelist, the link is listed below.\nFor any questions, please contact <@421819915742347276>. https://forms.gle/wo3pRzeko8vgMtad8 }')
+  }
       
   if (msg.startsWith(`${prefix}CHEMCALC`)) {
     let redc = args[0];
