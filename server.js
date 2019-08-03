@@ -114,10 +114,24 @@ client.on("message", (message) => {
   };
   */
   
-  if (msg.startsWith(`${prefix}WHITELIST`)) {
+  if (msg.startsWith(`${prefix}WHITELIST`) || msg.startsWith(`${prefix}WL`)) {
     let wlemb = new Discord.RichEmbed()
-    .setColor(0x000000)
-    .addField('**Whitelist**', 'The whitelist is a group of Stardust members who help stabilize Clubs that are running low on members. This is one of the few ways to engage with Stardust Leadership, and help the family out. If you would like to sign up for the whitelist, the link is listed below.\nFor any questions, please contact <@421819915742347276>. https://forms.gle/wo3pRzeko8vgMtad8 }')
+    .setColor(0xFFFFFF)
+    .addField('**Whitelist**', 'The whitelist is a group of Stardust members who help stabilize Clubs that are running low on members. This is one of the few ways to engage with Stardust Leadership, and help the family out. If you would like to sign up for the whitelist, the link is listed below.\n\nFor any questions, please contact <@421819915742347276>.\n\n\n[**Sign up today!**](https://forms.gle/wo3pRzeko8vgMtad8)');
+    message.channel.send(wlemb);
+  }
+  if (msg.startsWith(`${prefix}PROTEAM`) || msg.startsWith(`${prefix}PT`)) {
+    let ptemb = new Discord.RichEmbed()
+    .setColor(0x00FFFF)
+    .addField('**Pro Team**', 'We are just like everyone else and have our own Pro Team. Our team competes in many tournaments outside our family alongside other organizations. If you are already familiar with the game, the Pro Team is the next big step. If you would like to sign up for the Stardust Pro Team, the link is listed below.\n\nFor any questions please contact <@251061721488293890>.\n\n\n[**Sign up today!**](https://forms.gle/2ZL3s1JbZdb53vxW6)');
+    message.channel.send(ptemb);
+  }
+  
+  if (msg.startsWith(`${prefix}CLUBS`) || msg.startsWith(`${prefix}CLUBLIST`) || msg.startsWith(`${prefix}FAMILYCLUBS`) || msg.startsWith(`${prefix}FAMILY`) || msg.startsWith(`${prefix}CL`) || msg.startsWith(`${prefix}FC`)) {
+    let fcemb = new Discord.RichEmbed()
+    .setColor(0x00FFFF)
+    .addField('**Club List**', 'You may be wondering where to find a list of our official Stardust Family clubs. We have partnered up with Brawland to broadcast our family clubs with real time statistics on their amazing website. Below is a link to our section to find all of our club information.\n\n\n[**Club List**](https://brawland.com/p/stardust)');
+    message.channel.send(fcemb);
   }
       
   if (msg.startsWith(`${prefix}CHEMCALC`)) {
