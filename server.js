@@ -127,7 +127,7 @@ client.on("message", (message) => {
     message.channel.send(ptemb);
   }
   
-  if (msg.startsWith(`${prefix}CLUBS`) || msg.startsWith(`${prefix}CLUBLIST`) || msg.startsWith(`${prefix}FAMILYCLUBS`) || msg.startsWith(`${prefix}FAMILY`) || msg.startsWith(`${prefix}CL`) || msg.startsWith(`${prefix}FC`)) {
+  if (msg.startsWith(`${prefix}CLUBS`) || msg.startsWith(`${prefix}CLUBLIST`) || msg.startsWith(`${prefix}FAMILYCLUBS`) || msg.startsWith(`${prefix}FAMILY`) || (msg.startsWith(`${prefix}CL`) && !msg.startsWith(`${prefix}CLE`)) || msg.startsWith(`${prefix}FC`)) {
     let fcemb = new Discord.RichEmbed()
     .setColor(0x00FFFF)
     .addField('**Club List**', 'You may be wondering where to find a list of our official Stardust Family clubs. We have partnered up with Brawland to broadcast our family clubs with real time statistics on their amazing website. Below is a link to our section to find all of our club information.\n\n\n[**Club List**](https://brawland.com/p/stardust)');
@@ -603,7 +603,7 @@ client.on("message", (message) => {
     };
   };
 
-  if (msg.startsWith(`${prefix}WARN`) && !msg.startsWith(`${prefix}WARNINGS`)) {
+  if (msg.startsWith(`${prefix}WARN`) && !msg.startsWith(`${prefix}WARNI`)) {
     if (userModRole === null) return;
     if (!args[0] || !message.mentions.members.first()) {
       let warnEmbed = new Discord.RichEmbed()
