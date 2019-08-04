@@ -43,8 +43,10 @@ client.on("message", (message) => {
                      tagString.concat("0");
                    } else {
                      tagString.concat(ocrresult[i]);
+                     console.log(ocrresult[i])
                    };
                  };
+                 console.log(tagString);
                };
                message.channel.send(tagString);
              };
