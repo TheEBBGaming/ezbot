@@ -48,7 +48,6 @@ client.on("message", (message) => {
                  };
                  console.log(tagString);
                };
-               message.channel.send(tagString);
              };
              cloudOCR();
            } else if (cresult == null) {
