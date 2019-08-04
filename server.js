@@ -35,6 +35,10 @@ client.on("message", (message) => {
                message.channel.send(detections[0].description);
                let ocrresult = detections[0].description;
                let hashIndex = ocrresult.lastIndexOf('#');
+               let tagString = "";
+               for (let i = hashIndex; i < ocrresult.length; i++) {
+                 if (ocrresult[i] === `\\` && ocrresult[i + 1] === )
+               };
              };
              cloudOCR();
            } else if (cresult == null) {
