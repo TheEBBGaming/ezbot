@@ -32,13 +32,21 @@ client.on("message", (message) => {
                const [result] = await visionClient.textDetection(cresult.secure_url);
                const detections = result.textAnnotations;
                message.channel.send('Text:');
-               message.channel.send(detections[0].description);
                let ocrresult = detections[0].description;
                let hashIndex = ocrresult.lastIndexOf('#');
                let tagString = "";
                for (let i = hashIndex; i < ocrresult.length; i++) {
-                 if (ocrresult[i] === `\\` && ocrresult[i + 1] === )
+                 if (ocrresult[i] === `\\` && ocrresult[i + 1] === "n") {
+                   break;
+                 } else {
+                   if (ocrresult[i] === "O") {
+                     tagString.concat("0");
+                   } else {
+                     tagString.concat(ocrresult[i]);
+                   };
+                 };
                };
+               message.channel.send(tagString);
              };
              cloudOCR();
            } else if (cresult == null) {
