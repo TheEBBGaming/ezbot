@@ -31,7 +31,6 @@ client.on("message", (message) => {
                console.log(cresult);
                const [result] = await visionClient.textDetection(cresult.secure_url);
                const detections = result.textAnnotations;
-               message.channel.send('Text:');
                let ocrresult = detections[0].description;
                let hashIndex = ocrresult.lastIndexOf('#');
                let tagString = [];
@@ -43,14 +42,15 @@ client.on("message", (message) => {
                  } else {
                    if (ocrresult[i] === "O") {
                      tagString.push("0");
+                     console.log(`I pushed 0!`);
                    } else {
-                     
-                     console.log(ocrresult[i])
+                     tagString.push(ocrresult[i]);
+                     console.log(`I pushed ${ocrresult[i]}!`);
                    };
-                   console.log("I pushed " + ocrresult[i] + "!")
+                   console.log("I pushed " + ocrresult[i] + "!");
                  };
-                 console.log(tagString);
                };
+               console.log(`It is now ${tagString}.`);
              };
              cloudOCR();
            } else if (cresult == null) {
