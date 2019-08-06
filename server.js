@@ -34,15 +34,16 @@ client.on("message", (message) => {
                message.channel.send('Text:');
                let ocrresult = detections[0].description;
                let hashIndex = ocrresult.lastIndexOf('#');
-               let tagString = "";
+               let tagString = [];
+               console.log(`HashIndex is ${hashIndex}!`);
                for (let i = hashIndex; i < ocrresult.length; i++) {
+                 console.log("You are currently at" + i)
                  if (ocrresult[i] === `\\` && ocrresult[i + 1] === "n") {
                    break;
                  } else {
                    if (ocrresult[i] === "O") {
-                     tagString.concat("0");
+                     tagString.push("0");
                    } else {
-                     tagString.concat(ocrresult[i]);
                      console.log(ocrresult[i])
                    };
                  };
