@@ -34,23 +34,23 @@ client.on("message", (message) => {
                let ocrresult = detections[0].description;
                let hashIndex = ocrresult.lastIndexOf('#');
                let tagString = [];
-               console.log(`HashIndex is ${hashIndex}!`);
                for (let i = hashIndex; i < ocrresult.length; i++) {
-                 console.log("You are currently at " + i + ".");
                  if (ocrresult[i] === "S" && ocrresult[i + 1] === "T") {
                    break;
                  } else {
                    if (ocrresult[i] === "O") {
                      tagString.push("0");
-                     console.log(`I pushed 0!`);
                    } else {
                      tagString.push(ocrresult[i]);
-                     console.log(`I pushed ${ocrresult[i]}!`);
                    };
-                   console.log("I pushed " + ocrresult[i] + "!");
                  };
                };
                message.channel.send(`The tag is ${tagString.join("")}.`);
+               async function getBrawlProfile() {
+                 let userProfile = await bsClient.getPlayer(tagString.join(""));
+                 console.log(userProfile);
+               }
+               getBrawlProfile();
              };
              cloudOCR();
            } else if (cresult == null) {
