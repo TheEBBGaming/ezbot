@@ -48,7 +48,9 @@ client.on("message", (message) => {
                message.channel.send(`The tag is ${tagString.join("")}.`);
                async function getBrawlProfile() {
                  let sentTag = tagString.join("");
-                 let userProfile = await bsClient.getPlayer(sentTag.slice(1));
+                 console.log(sentTag);
+                 console.log(sentTag.slice(1));
+                 let userProfile = await bsClient.getPlayer("Q0RLL8G0");
                  console.log(userProfile);
                }
                getBrawlProfile();
