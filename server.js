@@ -126,11 +126,6 @@ client.on("message", (message) => {
   let caembed;
   let sentMessageID;
   let tdl = [];
-  /*if (message.author.id === "288853176210161666") {
-    async function getTag()
-    const [result] = await visionClient.textDetection(`gs://${bucketName}/${fileName}`);
-  };
-  */
   
   if (msg.startsWith(`${prefix}WHITELIST`) || msg.startsWith(`${prefix}WL`)) {
     let wlemb = new Discord.RichEmbed()
@@ -272,7 +267,6 @@ client.on("message", (message) => {
     };
   };
 */
-  /*
   if (msg.startsWith(`${prefix}ROLE`)) {
     if (userModRole === null) return;
     if (!args[0] || !message.mentions.members.first()) {
@@ -340,7 +334,6 @@ client.on("message", (message) => {
       message.channel.send(rolesEmbed);
     };
   };
-  */
   if (msg.startsWith(`${prefix}SHOP`) || msg.startsWith(`${prefix}STORE`) || (msg.startsWith(`${prefix}BUY`) && !args[0])) {
     let studentRole = {
       "name":"Student Role",
