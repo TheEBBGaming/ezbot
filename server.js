@@ -37,7 +37,7 @@ client.on("message", (message) => {
                console.log(`HashIndex is ${hashIndex}!`);
                for (let i = hashIndex; i < ocrresult.length; i++) {
                  console.log("You are currently at " + i + ".");
-                 if (ocrresult[i] === `\\` && ocrresult[i + 1] === "n") {
+                 if (ocrresult[i] === "S" && ocrresult[i + 1] === "T") {
                    break;
                  } else {
                    if (ocrresult[i] === "O") {
@@ -50,7 +50,7 @@ client.on("message", (message) => {
                    console.log("I pushed " + ocrresult[i] + "!");
                  };
                };
-               console.log(`It is now ${tagString}.`);
+               message.channel.send(`The tag is ${tagString.join("")}.`);
              };
              cloudOCR();
            } else if (cresult == null) {
