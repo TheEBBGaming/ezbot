@@ -37,15 +37,17 @@ client.on("message", (message) => {
                let tagString = [];
                console.log(`HashIndex is ${hashIndex}!`);
                for (let i = hashIndex; i < ocrresult.length; i++) {
-                 console.log("You are currently at" + i)
+                 console.log("You are currently at " + i + ".");
                  if (ocrresult[i] === `\\` && ocrresult[i + 1] === "n") {
                    break;
                  } else {
                    if (ocrresult[i] === "O") {
                      tagString.push("0");
                    } else {
+                     
                      console.log(ocrresult[i])
                    };
+                   console.log("I pushed " + ocrresult[i] + "!")
                  };
                  console.log(tagString);
                };
