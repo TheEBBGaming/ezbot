@@ -28,7 +28,6 @@ client.on("message", (message) => {
            if (error == null) {
              message.channel.send(cresult.secure_url);
              async function cloudOCR() {
-               console.log(cresult);
                const [result] = await visionClient.textDetection(cresult.secure_url);
                const detections = result.textAnnotations;
                let ocrresult = detections[0].description;
@@ -48,8 +47,7 @@ client.on("message", (message) => {
                message.channel.send(`The tag is ${tagString.join("")}.`);
                async function getBrawlProfile() {
                  let sentTag = tagString.join("");
-                 console.log(sentTag);
-                 console.log(sentTag.slice(1));
+
                  let userProfile = await bsClient.getPlayer("Q0RLL8G0");
                  console.log(userProfile);
                }
