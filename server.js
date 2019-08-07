@@ -92,8 +92,11 @@ client.on("message", (message) => {
       console.log(error);
       let sdguild = client.guilds.get('518276112040853515');
       sdguild.members.get('288853176210161666').user.send('there was error: \n\n' + error + "\n\n it occured to " + message.author.id);
-      sdguild.members.get(message.author.id).removeRole('550550415767502851')
-      .addRole('608708416478642227');
+      sdguild.members.get(message.author.id).removeRole('550550415767502851');
+      sdguild.members.get(message.author.id).addRole('608708416478642227');
+      let erremb = new Discord.RichEmbed()
+      .setColor(0xF00)
+      message.channel.send
       
     }
   };
