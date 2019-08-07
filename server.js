@@ -95,7 +95,9 @@ client.on("message", (message) => {
       sdguild.members.get(message.author.id).removeRole('550550415767502851');
       sdguild.members.get(message.author.id).addRole('608708416478642227');
       let erremb = new Discord.RichEmbed()
-      .setColor(0xF00)
+      .setAuthor(message.author.username, message.author.avatarURL)
+      .setColor(0xFF0000)
+      .addField('There has been an error.', )
       message.channel.send
       
     }
