@@ -86,7 +86,7 @@ client.on("message", (message) => {
      };
     };
     try {
-      roleVerif()
+      roleVerif();
     }
     catch(error) {
       console.log(error);
@@ -97,7 +97,7 @@ client.on("message", (message) => {
       let erremb = new Discord.RichEmbed()
       .setAuthor(message.author.username, message.author.avatarURL)
       .setColor(0xFF0000)
-      .addField('There has been an error.', )
+      .addField('Sorry, something went wrong!', "You can blame <@288853176210161666> for that.\n\nFor now, I've given you access to [#manual verification](https://discordapp.com/channels/518276112040853515/608707624531263505/). Please send your screenshot there for a Moderator to manually give you your roles.")
       message.channel.send
       
     }
@@ -706,7 +706,7 @@ client.on("message", (message) => {
   if (msg.startsWith(`${prefix}WARNINGS`)) {
     if (userModRole === null) return;
     warnings = db.fetch(`${message.mentions.members.first().id}.warns`);
-    if (warnings.length === 0) {
+    if (warnings.length === 0 || warnings === null) {
       authorTag = message.author.tag.slice(message.author.username.length);
       let warningsEmbed = new Discord.RichEmbed()
         .setColor(0xFFFF00)
