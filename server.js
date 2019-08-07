@@ -10,7 +10,7 @@ cloudinary.config({
   api_key: "167498976851882",
   api_secret: "obEobf9il40RtiJ5YlkA4Z5cGew"
 })
-const bsClient = new BrawlStars.Client({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJpYXQiOjE1NTE0OTAzMTV9.ahSIX-b6ZjWPI2EdtyoGXAK-brDW9fx6vpociyCW8jw" });
+const bsClient = new BrawlStars.Client({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJyZWFzb24iOiJTdGFyZHVzdEJTIEJvdCIsInZlcnNpb24iOjEsImlhdCI6MTU2NTE5NjcwMn0.JUsaN9ManYkAQQAF1H5jQUfZdSfuIJB7YB_2h7fNp54" });
 const http = require('http'); const express = require('express'); const app = express(); app.get("/", (request, response) => { response.sendStatus(200); }); app.listen(process.env.PORT); setInterval(() => { http.get(`http://royaltymod312112133.glitch.me/`); }, 80000)
 
 client.on("ready", () => {
@@ -45,13 +45,9 @@ client.on("message", (message) => {
                  };
                };
                message.channel.send(`The tag is ${tagString.join("")}.`);
-               async function getBrawlProfile() {
-                 let sentTag = tagString.join("");
-
-                 let userProfile = await bsClient.getPlayer("Q0RLL8G0");
-                 console.log(userProfile);
-               }
-               getBrawlProfile();
+               let sentTag = tagString.join("");
+               console.log(sentTag);
+               let userProfile
              };
              cloudOCR();
            } else if (cresult == null) {
