@@ -103,7 +103,6 @@ client.on("message", (message) => {
     }
   };
   
-  if (message.channel.type === 'dm') return;
   // Variables
   let gMembs;
   let botOwner = false;
@@ -171,10 +170,11 @@ client.on("message", (message) => {
   let tdl = [];
   
   if (msg.startsWith(`${prefix}ADDCLUB`)) {
-    if (!args[2] || args[1].startsWith('#') || !isNaN(args[3] || )) return message.channel.send('You need 3 arguments: club, club tag, & role ID. e.g. `/addclub Gaming PGPV2R2Q 567658582078914571`');
+    if (!userModRole === "Administrator" && !userModRole === "Chairman" && !botOwner) return;
+    if (!args[2] || args[1].startsWith('#')) return message.channel.send('You need 3 arguments: club, club tag, & role ID. e.g. `/addclub Gaming PGPV2R2Q 567658582078914571`');
     db.push('clubList', [args[0], args[1], args[2]]);
-    return message.channel.send("Success! Added Club " + args[0])
-  }
+    return message.channel.send("Success! Added Club " + args[0] + " to the role with ID " + args[2]);
+  };
   
   if (msg.startsWith(`${prefix}WHITELIST`) || msg.startsWith(`${prefix}WL`)) {
     let wlemb = new Discord.RichEmbed()
