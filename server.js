@@ -188,7 +188,10 @@ client.on("message", (message) => {
     .addField('**Club List**', 'You may be wondering where to find a list of our official Stardust Family clubs. We have partnered up with Brawland to broadcast our family clubs with real time statistics on their amazing website. Below is a link to our section to find all of our club information.\n\n\n[**Club List**](https://brawland.com/p/stardust)');
     message.channel.send(fcemb);
   }
-      
+  if (msg.startsWith(`${prefix}DEMOTE`)) {
+    if (!message.mentions.members.first) return;
+    message.channel.send('Demoted <@' + message.mentions.members.first().id + '>. Now what?');
+  }    
   if (msg.startsWith(`${prefix}CHEMCALC`)) {
     let redc = args[0];
     let greenc = args[1];
