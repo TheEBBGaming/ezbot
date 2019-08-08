@@ -126,6 +126,7 @@ client.on("message", (message) => {
     if (message.author.id === '288853176210161666') botOwner = true;
   };
   let gm2;
+  let clubList = db.fetch(`clubList`);
   let firstMentioned;
   let prefix = "/";
   let msg = message.content.toUpperCase();
@@ -168,6 +169,12 @@ client.on("message", (message) => {
   let caembed;
   let sentMessageID;
   let tdl = [];
+  
+  if (msg.startsWith(`${prefix}ADDCLUB`)) {
+    if (!args[2] || args[1].startsWith('#') || !isNaN(args[3] || )) return message.channel.send('You need 3 arguments: club, club tag, & role ID. e.g. `/addclub Gaming PGPV2R2Q 567658582078914571`');
+    db.push('clubList', [args[0], args[1], args[2]]);
+    return message.channel.send("Success! Added Club " + args[0])
+  }
   
   if (msg.startsWith(`${prefix}WHITELIST`) || msg.startsWith(`${prefix}WL`)) {
     let wlemb = new Discord.RichEmbed()
