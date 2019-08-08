@@ -98,7 +98,7 @@ client.on("message", (message) => {
       .setAuthor(message.author.username, message.author.avatarURL)
       .setColor(0xFF0000)
       .addField('Sorry, something went wrong!', "You can blame <@288853176210161666> for that.\n\nFor now, I've given you access to [#manual verification](https://discordapp.com/channels/518276112040853515/608707624531263505/). Please send your screenshot there for a Moderator to manually give you your roles.")
-      message.channel.send
+      message.channel.send(erremb);
       
     }
   };
