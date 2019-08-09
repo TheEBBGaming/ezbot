@@ -27,15 +27,12 @@ client.on("message", (message) => {
        for (let tvalue of message.attachments.values()) {
          cloudinary.v2.uploader.upload(tvalue.url, function(error, cresult) { 
            if (error == null) {
-             message.channel.send(cresult.secure_url);
              async function cloudOCR() {
                const [result] = await visionClient.textDetection(cresult.secure_url);
                const detections = result.textAnnotations;
                let ocrresult = detections[0].description;
                let hashIndex = ocrresult.lastIndexOf('#');
                let tagString = [];
-               message.channel.send(ocrresult);
-               console.log(ocrresult);
                for (let i = hashIndex; i < ocrresult.length; i++) {
                  if (ocrresult[i].match(/\n/gm)) {
                    break;
@@ -47,20 +44,23 @@ client.on("message", (message) => {
                    };
                  };
                };
-               message.channel.send(`The tag is ${tagString.join("")}.`);
                let sentTag = tagString.join("");
                let userTag = sentTag.slice(1);
-               console.log(sentTag);
-               let rolesToGive = "I would give you the roles:\n\n";
                let userProfile = await bsClient.getPlayer(userTag);
+               let stardust = client.guilds.get("518276112040853515");
+               let authorMember = stardust.members.get(message.author.id);
                if (userProfile.club.name.startsWith("Stardust")) {
                  let userClub = userProfile.club.name.slice(9);
-                 message.channel.send(userClub);
+                 let clubList = db.fetch("clubList");
+                 let clArray = clubList.all();
+                 for (let i = 0; i < clArray.length; i++) {
+                   if (clArray[i][0] === userClub && userProfile.club.tag === clArray[i][1]) {
+                     authorMember.removeRole('550550415767502851');
+                     authorMember.addRole(clArray[i][2]);
+                   };
+                 };
                } else {
-                 rolesToGive = rolesToGive + "Guest";
-                 message.channel.send(rolesToGive);
                }
-               console.log(userProfile);
              };
              cloudOCR();
            } else if (cresult == null) {
