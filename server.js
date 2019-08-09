@@ -21,9 +21,9 @@ client.on('guildMemberAdd', member => {
     if (!member.id === "404794370139750401") return;
     let welcEmb = new Discord.RichEmbed()
     .setColor(0xEBA911)
-    .addField("Welcome to Stardust, " + member.tag + "!", "Before we let you in, we'll just need some verification so we know who you are.\n\nJust send me a picture of your Trophy Road profile as shown in the video below. If you have any questions or concerns, please Direct Message <@532261291600117780>. Thank you for your cooperation.")
-    .setImage("https://imgur.com/DlgH9sy")
+    .addField("Welcome to Stardust, " + member.user.tag + "!", "Before we let you in, we'll just need some verification so we know who you are.\n\nJust send me a picture of your Trophy Road profile as shown in the video below. If you have any questions or concerns, please Direct Message <@532261291600117780>. Thank you for your cooperation.")
     member.send(welcEmb);
+    member.send("https://imgur.com/DlgH9sy");
 });
 
 client.on("message", (message) => {
