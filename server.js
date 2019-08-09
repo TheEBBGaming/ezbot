@@ -20,7 +20,8 @@ client.on("ready", () => {
 client.on('guildMemberAdd', member => {
     if (!member.id === "404794370139750401") return;
     let welcEmb = new Discord.RichEmbed()
-    .addField("Welcome to Stardust, " + member.tag + "!", "Before we let you in, we'll just need some verification so we know who you are.")
+    .addField("Welcome to Stardust, " + member.tag + "!", "Before we let you in, we'll just need some verification so we know who you are.\n\nJust send me a picture of your Trophy Road profile as shown in the video below. If you have any questions or concerns, please Direct Message <@532261291600117780>. Thank you for your cooperation.")
+    
 });
 
 client.on("message", (message) => {
@@ -133,7 +134,7 @@ client.on("message", (message) => {
   };
   let gm2;
   let clubList = db.fetch(`clubList`);
-  let userInfo = db.fetch()
+  let userInfo = db.fetch(`${message.author.id}.info`);
   let firstMentioned;
   let prefix = "/";
   let msg = message.content.toUpperCase();
