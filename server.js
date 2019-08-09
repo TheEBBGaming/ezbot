@@ -20,6 +20,7 @@ client.on("ready", () => {
 client.on('guildMemberAdd', member => {
     if (!member.id === "404794370139750401") return;
     let welcEmb = new Discord.RichEmbed()
+    .addField("Welcome to Stardust, " + member.tag + "!", "Before we let you in, we'll just need some verification so we know who you are.")
 });
 
 client.on("message", (message) => {
@@ -132,6 +133,7 @@ client.on("message", (message) => {
   };
   let gm2;
   let clubList = db.fetch(`clubList`);
+  let userInfo = db.fetch()
   let firstMentioned;
   let prefix = "/";
   let msg = message.content.toUpperCase();
