@@ -21,9 +21,9 @@ client.on('guildMemberAdd', member => {
     if (!member.id === "404794370139750401") return;
     let welcEmb = new Discord.RichEmbed()
     .setColor(0xEBA911)
+    .setImage("https://media.giphy.com/media/cKsc4H4bg1msdgkBuE/giphy.gif")
     .addField("Welcome to Stardust, " + member.user.tag + "!", "Before we let you in, we'll just need some verification so we know who you are.\n\nJust send me a picture of your Trophy Road profile as shown in the video below. If you have any questions or concerns, please Direct Message <@532261291600117780>. Thank you for your cooperation.")
     member.send(welcEmb);
-    member.send("https://imgur.com/DlgH9sy");
 });
 
 client.on("message", (message) => {
@@ -42,7 +42,9 @@ client.on("message", (message) => {
                let ocrresult = detections[0].description;
                let hashIndex = ocrresult.lastIndexOf('#');
                let tagString = [];
+               console.log(ocrresult);
                for (let i = hashIndex; i < ocrresult.length; i++) {
+                 console.log(ocrresult[i]);
                  if (ocrresult[i].match(/\n/gm)) {
                    break;
                  } else {
