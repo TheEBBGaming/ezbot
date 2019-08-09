@@ -49,6 +49,12 @@ client.on("message", (message) => {
                let userProfile = await bsClient.getPlayer(userTag);
                let stardust = client.guilds.get("518276112040853515");
                let authorMember = stardust.members.get(message.author.id);
+               let succEmb = new Discord.RichEmbed()
+               .setColor(0x00FF00)
+               .addField('Found you!', `You're ${userProfile.name} with the tag ${userProfile.tag}, right? I've given you your roles on the [server](https://discordapp.com/channels/518276112040853515/).`)
+               .setThumbnail(userProfile.avatarUrl)
+               .setAuthor(message.author.username, message.author.avatarURL)
+               .setFooter("If I messed anything up, please let a Moderator know immediately!", "https://images-ext-2.discordapp.net/external/Cs_NAISor0PFLsU9v_TrKkBklarqRBGT576KZIgpCSw/%3Fsize%3D128/https/cdn.discordapp.com/icons/518276112040853515/34a790f3593d4ce624c2f75370d99223.png")
                if (userProfile.club.name.startsWith("Stardust")) {
                  let userClub = userProfile.club.name.slice(9);
                  let clubList = db.fetch("clubList");
@@ -57,7 +63,13 @@ client.on("message", (message) => {
                    if (clArray[i][0] === userClub && userProfile.club.tag === clArray[i][1]) {
                      authorMember.removeRole('550550415767502851');
                      authorMember.addRole(clArray[i][2]);
-                   };
+                     let guildRole = stardust.roles.find(role => role === userProfile.club.role);
+                     authorMember.addRole(guildRole);
+                     message.channel.send(succEmb);
+                   } else {
+                     authorMember.removeRole('550550415767502851');
+                     authorMember.addRole()
+                   }
                  };
                } else {
                }
