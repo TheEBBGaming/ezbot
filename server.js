@@ -37,7 +37,7 @@ client.on("message", (message) => {
                message.channel.send(ocrresult);
                console.log(ocrresult);
                for (let i = hashIndex; i < ocrresult.length; i++) {
-                 if (ocrresult.indexOf(/) === ocrresult[i]) {
+                 if (ocrresult.match() === ocrresult[i]) {
                    break;
                  } else {
                    if (ocrresult[i] === "O") {
