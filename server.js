@@ -48,29 +48,13 @@ client.on("message", (message) => {
                message.channel.send(`The tag is ${tagString.join("")}.`);
                let sentTag = tagString.join("");
                let userTag = sentTag.slice(1);
-               let tagToSend = userTag.replace( /[\r\n]+/gm, "" );
+               let tagToSend = userTag.replace(/[\r\n]+/gm, "");
                console.log(sentTag);
                let rolesToGive = "I would give you the roles:\n\n";
                let userProfile = await bsClient.getPlayer(tagToSend);
                if (userProfile.club.name.startsWith("Stardust")) {
-                 rolesToGive = rolesToGive + "Stardust Gaming\n\n";
-                 switch(userProfile.club.role) {
-                   case 'Member':
-                     rolesToGive = rolesToGive + "Member";
-                     break;
-                   case 'Senior':
-                     rolesToGive = rolesToGive + "Senior";
-                     break;
-                   case 'Vice President':
-                     rolesToGive = rolesToGive + "Vice President";
-                     break;
-                   case 'President':
-                     rolesToGive = rolesToGive + "President";
-                     break;
-                   default:
-                     message.channel.send("there's been an error. don't ask me what.");
-                 };
-                 message.channel.send(rolesToGive);
+                 let userClub = userProfile.club.name.slice(9);
+                 message.channel.send(userClub);
                } else {
                  rolesToGive = rolesToGive + "Guest";
                  message.channel.send(rolesToGive);
@@ -102,7 +86,7 @@ client.on("message", (message) => {
       
     }
   };
-  
+  if (message.channel.type === "dm") return;
   // Variables
   let gMembs;
   let botOwner = false;
