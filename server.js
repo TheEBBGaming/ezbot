@@ -34,8 +34,10 @@ client.on("message", (message) => {
                let ocrresult = detections[0].description;
                let hashIndex = ocrresult.lastIndexOf('#');
                let tagString = [];
+               message.channel.send(ocrresult);
+               console.log(ocrresult);
                for (let i = hashIndex; i < ocrresult.length; i++) {
-                 if (ocrresult[i] === "S" && ocrresult[i + 1] === "T") {
+                 if (ocrresult.indexOf(/) === ocrresult[i]) {
                    break;
                  } else {
                    if (ocrresult[i] === "O") {
@@ -48,10 +50,9 @@ client.on("message", (message) => {
                message.channel.send(`The tag is ${tagString.join("")}.`);
                let sentTag = tagString.join("");
                let userTag = sentTag.slice(1);
-               let tagToSend = userTag.replace(/[\r\n]+/gm, "");
                console.log(sentTag);
                let rolesToGive = "I would give you the roles:\n\n";
-               let userProfile = await bsClient.getPlayer(tagToSend);
+               let userProfile = await bsClient.getPlayer(userTag);
                if (userProfile.club.name.startsWith("Stardust")) {
                  let userClub = userProfile.club.name.slice(9);
                  message.channel.send(userClub);
