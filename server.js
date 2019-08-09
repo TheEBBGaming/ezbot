@@ -17,6 +17,11 @@ client.on("ready", () => {
   console.log("DARUK'S PROTECTION IS READY TO ROLL");
 });
 
+client.on('guildMemberAdd', member => {
+    if (!member.id === "404794370139750401") return;
+    let welcEmb = new Discord.RichEmbed()
+});
+
 client.on("message", (message) => {
 
   if (message.channel.type === "dm") {
@@ -68,11 +73,15 @@ client.on("message", (message) => {
                      message.channel.send(succEmb);
                    } else {
                      authorMember.removeRole('550550415767502851');
-                     authorMember.addRole()
+                     authorMember.addRole("550521408799768587");
+                     message.channel.send(succEmb);
                    }
                  };
                } else {
-               }
+                  authorMember.removeRole('550550415767502851');
+                  authorMember.addRole("550521408799768587");
+                  message.channel.send(succEmb);
+               };
              };
              cloudOCR();
            } else if (cresult == null) {
