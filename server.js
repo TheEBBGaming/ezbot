@@ -50,7 +50,6 @@ client.on("message", (message) => {
                    console.log(regresult);
                    let [match1, match2, match3, match4, match5, match6, match7] = regresult;
                    for (let j = match6.index + 1; j < match7.index; j++) {
-                     tagString.push(ocrresult[j]);
                      if (ocrresult[j] === "O") {
                        tagString.push("0");
                      } else if (ocrresult[j] === "Z") {
