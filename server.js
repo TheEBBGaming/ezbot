@@ -46,7 +46,8 @@ client.on("message", (message) => {
                console.log(ocrresult);
                for (let i = hashIndex; i < ocrresult.length; i++) {
                  if (!ocrresult[i]) {
-                   let regresult = matchAll(ocrresult, /\n/g).toArray();
+                   let regresult = ocrresult.matchAll(/\n/g)
+                   console.log(regresult);
                    let [match1, match2, match3, match4, match5, match6, match7] = regresult;
                    for (let j = match6.index + 1; j < match7.index; j++) {
                      tagString.push(ocrresult[j]);
