@@ -9,6 +9,7 @@ dependencies:
   form-data: 2.5.0
   jquery: 3.4.1
   jsdom: 15.1.1
+  match-all: 1.2.5
   node-gyp: 5.0.3
   parse-ms: 2.1.0
   quick.db: 7.0.0-b22
@@ -1100,6 +1101,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==
+  /match-all/1.2.5:
+    dev: false
+    resolution:
+      integrity: sha512-KW4trRDMYbVkAKZ1J655vh0931mk3XM1lIJ480TXUL3KBrOsZ6WpryYJELonvtXC1O4erLYB069uHidLkswbjQ==
   /media-typer/0.3.0:
     dev: false
     engines:
@@ -1927,6 +1932,7 @@ specifiers:
   form-data: ^2.5.0
   jquery: ^3.4.1
   jsdom: ^15.1.1
+  match-all: ^1.2.5
   node-gyp: ^5.0.3
   parse-ms: ^2.0.0
   quick.db: ^7.0.0-b22

@@ -24,7 +24,8 @@
     "xhr2": "^0.2.0",
     "ajax-request": "^1.2.3",
     "request": "^2.88.0",
-    "cloudinary": "^1.14.0"
+    "cloudinary": "^1.14.0",
+    "match-all": "^1.2.5"
   },
   "engines": {
     "node": "8.x"

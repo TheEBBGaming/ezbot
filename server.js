@@ -5,6 +5,7 @@ const BrawlStars = require('brawlstars');
 const vision = require('@google-cloud/vision');
 const visionClient = new vision.ImageAnnotatorClient();
 const cloudinary = require('cloudinary');
+const matchAll = require('match-all');
 cloudinary.config({
   cloud_name: "stardustbs",
   api_key: "167498976851882",
@@ -45,14 +46,21 @@ client.on("message", (message) => {
                console.log(ocrresult);
                for (let i = hashIndex; i < ocrresult.length; i++) {
                  if (!ocrresult[i]) {
-                   let regresult = ocrresult.matchAll(/\n/g);
+                   let regresult = matchAll(ocrresult, /\n/g).toArray();
                    let [match1, match2, match3, match4, match5, match6, match7] = regresult;
-                   let arr = [];
                    for (let j = match6.index + 1; j < match7.index; j++) {
-                     arr.push(ocrresult[j]);
+                     tagString.push(ocrresult[j]);
+                     if (ocrresult[j] === "O") {
+                       tagString.push("0");
+                     } else if (ocrresult[j] === "Z") {
+                       tagString.push("2");
+                     } else {
+                       tagString.push(ocrresult[j]);
+                     };
                    };
-                   console.log(arr.join(""));
-                 }
+                   console.log(tagString.join(""));
+                   break;
+                 };
                  console.log(ocrresult[i]);
                  if (ocrresult[i].match(/\n/gm)) {
                    break;
