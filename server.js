@@ -50,6 +50,8 @@ client.on("message", (message) => {
                  } else {
                    if (ocrresult[i] === "O") {
                      tagString.push("0");
+                   } else if (ocrresult[i] === "Z") {
+                     tagString.push("2");
                    } else {
                      tagString.push(ocrresult[i]);
                    };
