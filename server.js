@@ -230,7 +230,10 @@ client.on("message", (message) => {
   };
   
   if (msg.startsWith(`${prefix}REFRESH`)) {
-    
+    let posRoles = [['Member', '550518379149131776'], ['Senior', '550518022939344896'], ['Vice President', '550517562623000589'], ['President', '550516837234901039']];
+    if (message.author.roles.find(val => val.name === userInfo[0][1].club.role)) {
+      continue;
+    }
   }
   
   if (msg.startsWith(`${prefix}WHITELIST`) || msg.startsWith(`${prefix}WL`)) {
@@ -252,10 +255,7 @@ client.on("message", (message) => {
     .addField('**Club List**', 'You may be wondering where to find a list of our official Stardust Family clubs. We have partnered up with Brawland to broadcast our family clubs with real time statistics on their amazing website. Below is a link to our section to find all of our club information.\n\n\n[**Club List**](https://brawland.com/p/stardust)');
     message.channel.send(fcemb);
   }
-  if (msg.startsWith(`${prefix}DEMOTE`)) {
-    if (!message.mentions.members.first) return;
-    message.channel.send('Demoted <@' + message.mentions.members.first().id + '>. Now what?');
-  }    
+
   if (msg.startsWith(`${prefix}CHEMCALC`)) {
     let redc = args[0];
     let greenc = args[1];
