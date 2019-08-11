@@ -234,9 +234,9 @@ client.on("message", (message) => {
     async function guestRefreshRoles(posRoles) {
       for (let j = 0; j < posRoles.length; j++) {
         if (userInfo[0][1].club.role === posRoles[j][0]) {
-              console.log(`new posrole is ${posRoles[j][1]}`);
-              maMember.addRole(posRoles[j][1]);
-              modified = true;
+          console.log(`new posrole is ${posRoles[j][1]}`);
+          maMember.addRole(posRoles[j][1]);
+          modified = true;
         };
       };
     };
@@ -259,8 +259,18 @@ client.on("message", (message) => {
           refreshRoles(posRoles);
         };
         if (!maMember.roles.find(vall => vall.name === userInfo[0][1].club.name)) {
-          
-        }
+          for (let j = 0; j < clubList.length; j++) {
+            if (maMember.roles.find(valll => valll.name === clubList[j][0])) {
+              maMember.removeRole(clubList[j][2]);
+              for (let k = 0; k < clubList.length; k++) {
+                if (userClub === clubList[k][0]) {
+                  maMember.addRole(clubList[k][2]);
+                  modified = true;
+                };
+              };
+            };
+          };
+        };
       };
     };
     if (!modified) {
