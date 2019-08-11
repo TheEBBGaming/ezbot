@@ -126,6 +126,7 @@ client.on("message", (message) => {
     };
     try {
       roleVerif();
+      if (client.guilds.get(""))
     }
     catch(error) {
       console.log(error);
