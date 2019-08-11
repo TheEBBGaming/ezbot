@@ -96,15 +96,11 @@ client.on("message", (message) => {
                    if (clArray[i][0] === userClub && userProfile.club.tag === clArray[i][1]) {
                      authorMember.removeRole('550550415767502851');
                      authorMember.addRole(clArray[i][2]);
-                     let guildRole = stardust.roles.find(role => role === userProfile.club.role);
+                     let guildRole = stardust.roles.find(therole => therole.name === userProfile.club.role);
                      authorMember.addRole(guildRole);
                      message.channel.send(succEmb);
                      break;
-                   } else {
-                     authorMember.removeRole('550550415767502851');
-                     authorMember.addRole("550521408799768587");
-                     message.channel.send(succEmb);
-                   }
+                   };
                  };
                } else {
                   authorMember.removeRole('550550415767502851');
