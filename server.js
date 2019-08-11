@@ -247,7 +247,7 @@ client.on("message", (message) => {
     if (userInfo[0][1].club.name.length > 9) userClub = userInfo[0][1].club.name.slice(9);
     console.log("userclub is " + userClub);
     for (let i = 0; i < clubList.length; i++) {
-      console.log(`current tag is ${userInfo[0`[1].club.tag} matching ${clubList[i][0]}`);
+      console.log(`current tag is ${userInfo[0][1].club.tag} === ${clubList[i][1]} matching ${clubList[i][0]} === ${userClub}`);
       if (clubList[i][0] === userClub && userInfo[0][1].club.tag === clubList[i][1]) {
         console.log(`${clubList[i][0]} matches ${userClub}`);
         maMember.addRole(clubList[i][2]);
