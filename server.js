@@ -216,6 +216,7 @@ client.on("message", (message) => {
   };
   
   if (msg.startsWith(`${prefix}REFRESH`)) {
+    if (!message.author.id === "404794370139750401") return;
     async function refreshRoles(posRoles) {
       for (let j = 0; j < posRoles.length; j++) {
         if (userInfo[0][1].club.role === posRoles[j][0]) {
