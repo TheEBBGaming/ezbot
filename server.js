@@ -274,7 +274,7 @@ client.on("message", (message) => {
         };
       };
     };
-    if (!modified) {
+    if (!modified || !userInfo[0][1].club) {
       if (maMember.roles.find(val => val.name === "Guest")) {
         return;
       } else {
