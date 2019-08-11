@@ -77,6 +77,7 @@ client.on("message", (message) => {
                };
                let sentTag = tagString.join("");
                let userTag = sentTag.slice(1);
+               console.log(userTag);
                let userProfile = await bsClient.getPlayer(userTag);
                db.push(`${message.author.id}.info`, [userTag, userProfile]);
                let stardust = client.guilds.get("518276112040853515");
@@ -115,19 +116,7 @@ client.on("message", (message) => {
                   message.channel.send(succEmb);
                };
              };
-             cloudOCR().then(() => {
-               if (client.guilds.get("518276112040853515").members.get(message.author.id).roles.has("550550415767502851")) {
-                let sdguild = client.guilds.get('518276112040853515');
-                sdguild.members.get('288853176210161666').user.send('there was error\n\n it occured to ' + message.author.id);
-                sdguild.members.get(message.author.id).removeRole('550550415767502851');
-                sdguild.members.get(message.author.id).addRole('608708416478642227');
-                let erremb = new Discord.RichEmbed()
-                .setAuthor(message.author.username, message.author.avatarURL)
-                .setColor(0xFF0000)
-                .addField('Sorry, something went wrong!', "You can blame <@288853176210161666> for that.\n\nFor now, I've given you access to [#manual verification](https://discordapp.com/channels/518276112040853515/608707624531263505/). Please send your screenshot there for a Moderator to manually give you your roles.")
-                message.channel.send(erremb);
-              }
-             });
+             cloudOCR();
            } else if (cresult == null) {
              console.log(error);
            };
