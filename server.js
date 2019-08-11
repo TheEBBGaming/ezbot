@@ -231,18 +231,12 @@ client.on("message", (message) => {
         };
       };
     };
-    async function refreshRoles(posRoles) {
+    async function guestRefreshRoles(posRoles) {
       for (let j = 0; j < posRoles.length; j++) {
         if (userInfo[0][1].club.role === posRoles[j][0]) {
-          for (let k = 0; k < posRoles.length; k++) {
-            if (maMember.roles.find(val2 => val2.name === posRoles[k][0])) {
-              console.log(`current posrole is ${posRoles[k][1]}`);
               console.log(`new posrole is ${posRoles[j][1]}`);
-              maMember.removeRole(posRoles[k][1]);
               maMember.addRole(posRoles[j][1]);
               modified = true;
-            };
-          };
         };
       };
     };
@@ -253,9 +247,14 @@ client.on("message", (message) => {
     if (userInfo[0][1].club.name.length > 9) userClub = userInfo[0][1].club.name.slice(9);
     console.log("userclub is " + userClub);
     for (let i = 0; i < clubList.length; i++) {
+      console.log(`current tag is ${userInfo[0`[1].club.tag} matching ${clubList[i][0]}`);
       if (clubList[i][0] === userClub && userInfo[0][1].club.tag === clubList[i][1]) {
         console.log(`${clubList[i][0]} matches ${userClub}`);
-        if (maMember.roles.find(val1 => val1.name === "Guest")) maMember.removeRole("550521408799768587"); 
+        maMember.addRole(clubList[i][2]);
+        if (maMember.roles.find(val1 => val1.name === "Guest")) {
+          maMember.removeRole("550521408799768587"); 
+          guestRefreshRoles(posRoles);
+        };
         if (!maMember.roles.find(val => val.name === userInfo[0][1].club.role)) {
           refreshRoles(posRoles);
         };
