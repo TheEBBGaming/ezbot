@@ -29,12 +29,19 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on("message", (message) => {
-
+  
+  let userInfo = db.fetch(`${message.author.id}.info`);
+  
   if (message.channel.type === "dm") {
     async function roleVerif() {
      if (message.attachments.size <= 0) {
-       return;
+       if (userInfo) {
+         return message.channel.send("Sorry, I can't help you with that. Please try messaging <@532261291600117780> for any inquiries.");
+       } else {
+         return message.channel.send("Sorry, that isn't an image! I'll need you to send an image of your Trophy Road profile in order to receive your roles.\n\nIf you have any questions, please message <@532261291600117780>");
+       }
      } else {
+       if (userInfo) return;
        for (let tvalue of message.attachments.values()) {
          cloudinary.v2.uploader.upload(tvalue.url, function(error, cresult) { 
            if (error == null) {
@@ -126,7 +133,17 @@ client.on("message", (message) => {
     };
     try {
       roleVerif();
-      if (client.guilds.get(""))
+      if (client.guilds.get("518276112040853515").members.get(message.author.id).roles.has("550550415767502851")) {
+        let sdguild = client.guilds.get('518276112040853515');
+        sdguild.members.get('288853176210161666').user.send('there was error\n\n it occured to ' + message.author.id);
+        sdguild.members.get(message.author.id).removeRole('550550415767502851');
+        sdguild.members.get(message.author.id).addRole('608708416478642227');
+        let erremb = new Discord.RichEmbed()
+        .setAuthor(message.author.username, message.author.avatarURL)
+        .setColor(0xFF0000)
+        .addField('Sorry, something went wrong!', "You can blame <@288853176210161666> for that.\n\nFor now, I've given you access to [#manual verification](https://discordapp.com/channels/518276112040853515/608707624531263505/). Please send your screenshot there for a Moderator to manually give you your roles.")
+        message.channel.send(erremb);
+      }
     }
     catch(error) {
       console.log(error);
@@ -166,7 +183,6 @@ client.on("message", (message) => {
   };
   let gm2;
   let clubList = db.fetch(`clubList`);
-  let userInfo = db.fetch(`${message.author.id}.info`);
   let firstMentioned;
   let prefix = "/";
   let msg = message.content.toUpperCase();
