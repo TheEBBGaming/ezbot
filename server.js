@@ -6,6 +6,7 @@ const vision = require('@google-cloud/vision');
 const visionClient = new vision.ImageAnnotatorClient();
 const cloudinary = require('cloudinary');
 const matchAll = require('match-all');
+require('events').EventEmitter.defaultMaxListeners = 25;
 cloudinary.config({
   cloud_name: "stardustbs",
   api_key: "167498976851882",
@@ -90,7 +91,7 @@ client.on("message", (message) => {
                if (userProfile.club.name.startsWith("Stardust")) {
                  let userClub = userProfile.club.name.slice(9);
                  let clubList = db.fetch("clubList");
-                 let clArray = clubList.all();
+                 let clArray = clubList;
                  for (let i = 0; i < clArray.length; i++) {
                    if (clArray[i][0] === userClub && userProfile.club.tag === clArray[i][1]) {
                      authorMember.removeRole('550550415767502851');
@@ -98,6 +99,7 @@ client.on("message", (message) => {
                      let guildRole = stardust.roles.find(role => role === userProfile.club.role);
                      authorMember.addRole(guildRole);
                      message.channel.send(succEmb);
+                     break;
                    } else {
                      authorMember.removeRole('550550415767502851');
                      authorMember.addRole("550521408799768587");
