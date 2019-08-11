@@ -230,9 +230,22 @@ client.on("message", (message) => {
   };
   
   if (msg.startsWith(`${prefix}REFRESH`)) {
-    let posRoles = [['Member', '550518379149131776'], ['Senior', '550518022939344896'], ['Vice President', '550517562623000589'], ['President', '550516837234901039']];
-    if (message.author.roles.find(val => val.name === userInfo[0][1].club.role)) {
-      continue;
+    let clubList = db.fetch("clubList");
+    for (let i = 0; i < clubList.length; i++) {
+    if (clubList[i][0] === userClub && userProfile.club.tag === clubList[i][1]) {
+      if (maMember.roles.find(val1 => val1.name === "Guest")) maMember.removeRole("550521408799768587");
+      let posRoles = [['Member', '550518379149131776'], ['Senior', '550518022939344896'], ['Vice President', '550517562623000589'], ['President', '550516837234901039']];
+      if (!maMember.roles.find(val => val.name === userInfo[0][1].club.role)) {
+        for (let j = 0; j < posRoles.length; j++) {
+          if (userInfo[0][1].club.role === posRoles[j][0]) {
+            for (let k = 0; k < posRoles.length; k++) {
+              if (maMember.roles.find(val2 => val2.name === posRoles[k][0])) {
+                maMember.removeRole(posroles[k])
+              }
+            }
+          }
+        }
+      }
     }
   }
   
