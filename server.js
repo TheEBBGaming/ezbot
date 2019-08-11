@@ -217,6 +217,23 @@ client.on("message", (message) => {
   
   if (msg.startsWith(`${prefix}REFRESH`)) {
     if (!message.author.id === "404794370139750401") return;
+    async function giveGuest(posRoles, clubList) {
+      if (maMember.roles.find(val => val.name === "Guest")) {
+        return;
+      } else {
+        for (let i = 0; i < posRoles.length; i++) {
+          if (maMember.roles.find(val1 => val1.name === posRoles[i][0])) {
+            maMember.removeRole(posRoles[i][1]);
+          };
+        };
+        for (let i = 0; i < clubList.length; i++) {
+          if (maMember.roles.find(val1 => val1.name === clubList[i][0])) {
+            maMember.removeRole(clubList[i][2]);
+          };
+        };
+        maMember.addRole("550521408799768587");
+      };
+    }
     async function refreshRoles(posRoles) {
       for (let j = 0; j < posRoles.length; j++) {
         if (userInfo[0][1].club.role === posRoles[j][0]) {
@@ -242,9 +259,13 @@ client.on("message", (message) => {
       };
     };
     let modified = false;
+
     let clubList = db.fetch("clubList");
     let posRoles = [['Member', '550518379149131776'], ['Senior', '550518022939344896'], ['Vice President', '550517562623000589'], ['President', '550516837234901039']];
     let userClub = "gguild";
+    if (!userInfo[0][1].club) {
+      return giveGuest(posRoles, clubList);
+    }
     if (userInfo[0][1].club.name.length > 9) userClub = userInfo[0][1].club.name.slice(9);
     console.log("userclub is " + userClub);
     for (let i = 0; i < clubList.length; i++) {
@@ -274,25 +295,13 @@ client.on("message", (message) => {
         };
       };
     };
-    if (!modified || !userInfo[0][1].club) {
-      if (maMember.roles.find(val => val.name === "Guest")) {
-        return;
-      } else {
-        for (let i = 0; i < posRoles.length; i++) {
-          if (maMember.roles.find(val1 => val1.name === posRoles[i][0])) {
-            maMember.removeRole(posRoles[i][1]);
-          };
-        };
-        for (let i = 0; i < clubList.length; i++) {
-          if (maMember.roles.find(val1 => val1.name === clubList[i][0])) {
-            maMember.removeRole(clubList[i][2]);
-          };
-        };
-        maMember.addRole("550521408799768587");
-      };
+    if (!modified) {
+      giveGuest(posRoles, clubList);
     };
     console.log(modified);
   };
+  
+  
   
   if (msg.startsWith(`${prefix}WHITELIST`) || msg.startsWith(`${prefix}WL`)) {
     let wlemb = new Discord.RichEmbed()
