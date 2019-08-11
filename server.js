@@ -35,11 +35,7 @@ client.on("message", (message) => {
   if (message.channel.type === "dm") {
     async function roleVerif() {
      if (message.attachments.size <= 0) {
-       if (userInfo) {
-         return message.channel.send("Sorry, I can't help you with that. Please try messaging <@532261291600117780> for any inquiries.");
-       } else {
-         return message.channel.send("Sorry, that isn't an image! I'll need you to send an image of your Trophy Road profile in order to receive your roles.\n\nIf you have any questions, please message <@532261291600117780>");
-       }
+       return;
      } else {
        if (userInfo) return;
        for (let tvalue of message.attachments.values()) {
