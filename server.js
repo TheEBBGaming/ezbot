@@ -49,6 +49,7 @@ client.on("message", (message) => {
                    let regresult = ocrresult.matchAll(/\n/g)
                    console.log(regresult);
                    let [match1, match2, match3, match4, match5, match6, match7] = regresult;
+                   tagString.push("#");
                    for (let j = match6.index + 1; j < match7.index; j++) {
                      if (ocrresult[j] === "O") {
                        tagString.push("0");
@@ -76,6 +77,7 @@ client.on("message", (message) => {
                };
                let sentTag = tagString.join("");
                let userTag = sentTag.slice(1);
+               console.log(userTag);
                let userProfile = await bsClient.getPlayer(userTag);
                let stardust = client.guilds.get("518276112040853515");
                let authorMember = stardust.members.get(message.author.id);
