@@ -51,11 +51,9 @@ client.on("message", (message) => {
                let ocrresult = detections[0].description;
                let hashIndex = ocrresult.lastIndexOf('#');
                let tagString = [];
-               console.log(ocrresult);
                for (let i = hashIndex; i < ocrresult.length; i++) {
                  if (!ocrresult[i]) {
                    let regresult = ocrresult.matchAll(/\n/g)
-                   console.log(regresult);
                    let [match1, match2, match3, match4, match5, match6, match7] = regresult;
                    tagString.push("#");
                    for (let j = match6.index + 1; j < match7.index; j++) {
@@ -67,10 +65,8 @@ client.on("message", (message) => {
                        tagString.push(ocrresult[j]);
                      };
                    };
-                   console.log(tagString.join(""));
                    break;
                  };
-                 console.log(ocrresult[i]);
                  if (ocrresult[i].match(/\n/gm)) {
                    break;
                  } else {
@@ -85,8 +81,8 @@ client.on("message", (message) => {
                };
                let sentTag = tagString.join("");
                let userTag = sentTag.slice(1);
-               console.log(userTag);
                let userProfile = await bsClient.getPlayer(userTag);
+               db.push(`${message.author.id}.info`, [userTag, userProfile]);
                let stardust = client.guilds.get("518276112040853515");
                let authorMember = stardust.members.get(message.author.id);
                let succEmb = new Discord.RichEmbed()
@@ -232,6 +228,10 @@ client.on("message", (message) => {
     db.push('clubList', [args[0], args[1], args[2]]);
     return message.channel.send("Success! Added Club " + args[0] + " to the role with ID " + args[2]);
   };
+  
+  if (msg.startsWith(`${prefix}REFRESH`)) {
+    
+  }
   
   if (msg.startsWith(`${prefix}WHITELIST`) || msg.startsWith(`${prefix}WL`)) {
     let wlemb = new Discord.RichEmbed()
