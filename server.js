@@ -258,6 +258,9 @@ client.on("message", (message) => {
         if (!maMember.roles.find(val => val.name === userInfo[0][1].club.role)) {
           refreshRoles(posRoles);
         };
+        if (!maMember.roles.find(vall => vall.name === userInfo[0][1].club.name)) {
+          
+        }
       };
     };
     if (!modified) {
