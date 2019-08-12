@@ -317,6 +317,7 @@ client.on("message", (message) => {
   }
   
 if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
+  if (!userModRole === "Board of Directors" && !userModRole === "Chairman") return;
   async function manualvf() {
   if (!args[1] || !message.mentions.members.first()) {
     return message.channel.send("Syntax Error. Correct syntax: `/mv @user [tag]`");
