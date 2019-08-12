@@ -316,6 +316,7 @@ client.on("message", (message) => {
     message.channel.send(ptemb);
   }
   
+  
   if (msg.startsWith(`${prefix}CLUBS`) || msg.startsWith(`${prefix}CLUBLIST`) || msg.startsWith(`${prefix}FAMILYCLUBS`) || msg.startsWith(`${prefix}FAMILY`) || (msg.startsWith(`${prefix}CL`) && !msg.startsWith(`${prefix}CLE`)) || msg.startsWith(`${prefix}FC`)) {
     let fcemb = new Discord.RichEmbed()
     .setColor(0x00FFFF)
