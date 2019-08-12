@@ -316,6 +316,19 @@ client.on("message", (message) => {
     message.channel.send(ptemb);
   }
   
+if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
+  async function manualvf() {
+  if (!args[1] || !message.mentions.members.first()) {
+    return message.channel.send("Syntax Error. Correct syntax: `/mv @user [tag]`");
+  };
+  let tagarg = args[1];
+  if (args[1].startsWith("#")) tagarg = args[1].slice(1);
+  let userProf = await bsClient.getPlayer(tagarg.toUpperCase());
+  db.push(`${message.mentions.members.first().id}.info`, [tagarg, userProf]);
+  message.channel.send(`Done! Assigned user <@${message.mentions.members.first().id}> the tag ${tagarg.toUpperCase()}`);
+  };
+  manualvf();
+}
   
   if (msg.startsWith(`${prefix}CLUBS`) || msg.startsWith(`${prefix}CLUBLIST`) || msg.startsWith(`${prefix}FAMILYCLUBS`) || msg.startsWith(`${prefix}FAMILY`) || (msg.startsWith(`${prefix}CL`) && !msg.startsWith(`${prefix}CLE`)) || msg.startsWith(`${prefix}FC`)) {
     let fcemb = new Discord.RichEmbed()
