@@ -317,7 +317,7 @@ client.on("message", (message) => {
   }
   
 if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
-  if (!userModRole === "Board of Directors" && !userModRole === "Chairman") return;
+  if (userModRole === "Board of Directors" || userModRole === "Chairman") {
   async function manualvf() {
   if (!args[1] || !message.mentions.members.first()) {
     return message.channel.send("Syntax Error. Correct syntax: `/mv @user [tag]`");
@@ -329,6 +329,7 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
   message.channel.send(`Done! Assigned user <@${message.mentions.members.first().id}> the tag ${tagarg.toUpperCase()}`);
   };
   manualvf();
+  };
 }
   
   if (msg.startsWith(`${prefix}CLUBS`) || msg.startsWith(`${prefix}CLUBLIST`) || msg.startsWith(`${prefix}FAMILYCLUBS`) || msg.startsWith(`${prefix}FAMILY`) || (msg.startsWith(`${prefix}CL`) && !msg.startsWith(`${prefix}CLE`)) || msg.startsWith(`${prefix}FC`)) {
