@@ -234,7 +234,9 @@ continue;
     let newlist = [];
     let foundclub = false;
     for (let i = 0; i < clubList.length; i++) {
-      if (clubList[i][0].toUpperCase === args[0].toUpperCase) {
+      console.log(clubList[i][0]);
+      console.log(args[0].toUpperCase());
+      if (clubList[i][0].toUpperCase() === args[0].toUpperCase()) {
         foundclub = true;
         for (let j = 0; j < clubList.length; j++) {
           if (j === i) {
@@ -243,6 +245,7 @@ continue;
             newlist.push(clubList[j]);
           };
         };
+        break;
       } else {
         continue;
       };
@@ -251,7 +254,7 @@ continue;
       return message.channel.send(`Error. Couldn't find Club with name \`${args[0]}\`.`);
     } else {
       console.log(newlist);
-      db.set()
+      db.set(`clubList`, newlist);
     };
   };
   
