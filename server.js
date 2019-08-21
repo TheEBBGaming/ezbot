@@ -216,33 +216,42 @@ client.on("message", (message) => {
   };
   
   if (msg.startsWith(`${prefix}REMOVECLUB`) || msg.startsWith(`${prefix}RC`)) {
+    /*
+    for (let i = 0; i < mydb.length; i++) {
+if (mydb[i][1] === 'x2') {
+for (let j = 0; j < mydb.length; j++) {
+if (j === i) {
+continue;
+} else {
+newarray.push(mydb[j]);
+};
+};
+} else {
+continue;
+};
+};
+*/
     let newlist = [];
     let foundclub = false;
     for (let i = 0; i < clubList.length; i++) {
       if (clubList[i][0].toUpperCase === args[0].toUpperCase) {
         foundclub = true;
-        message.channel.send('Found ' + clubList[i][0]);
-        continue;
+        for (let j = 0; j < clubList.length; j++) {
+          if (j === i) {
+            continue;
+          } else {
+            newlist.push(clubList[j]);
+          };
+        };
       } else {
-        newlist.push(clubList[i]);
-        message.channel.send('Pushed ' + clubList[i] + ' to new list!');
+        continue;
       };
     };
     if (!foundclub) {
       return message.channel.send(`Error. Couldn't find Club with name \`${args[0]}\`.`);
     } else {
       console.log(newlist);
-      async function makeNewList() {
-        await db.delete('clubList');
-        let newclist = db.fetch(`clubList`);
-        for (let newclubs = 0; newclubs < newlist.length; newclubs++) {
-          db.push('clubList', newlist[newclubs]);
-          message.channel.send('Added ' + newlist[newclubs] + 'back to the list!');
-        };
-        message.channel.send('Done! Removed ' + args[0] + ' from the Club List!');
-      };
-      makeNewList();
-      clubList = db.fetch('clubList');
+      db.set()
     };
   };
   
