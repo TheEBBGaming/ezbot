@@ -215,6 +215,33 @@ client.on("message", (message) => {
     return message.channel.send("Success! Added Club " + args[0] + " to the role with ID " + args[2]);
   };
   
+  if (msg.startsWith(`${prefix}REMOVECLUB`) || msg.startsWith(`${prefix}RC`)) {
+    let newlist = [];
+    let foundclub = false;
+    for (let i = 0; i < clubList.length; i++) {
+      if (clubList[i][0].toUpperCase === args[0].toUpperCase) {
+        foundclub = true;
+        continue;
+      } else {
+        newlist.push(clubList[i]);
+      };
+    };
+    if (!foundclub) {
+      return message.channel.send(`Error. Couldn't find Club with name \`${args[0]}\`.`);
+    } else {
+      async function makeNewList() {
+        await db.delete('clubList');
+        let newclist = db.fetch(`clubList`);
+        for (let newclubs = 0; newclubs < newlist.length; newclubs++) {
+          newclist.push(newlist[newclubs]);
+        };
+        message.channel.send('Done! Removed ' + args[0] + ' from the Club List!');
+      };
+      makeNewList();
+      clubList = db.fetch('clubList');
+    };
+  };
+  
   if (msg.startsWith(`${prefix}REFRESH`)) {
     if (!message.author.id === "404794370139750401") return;
     async function giveGuest(posRoles, clubList) {
