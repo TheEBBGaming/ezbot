@@ -317,14 +317,16 @@ client.on("message", (message) => {
   }
   
 if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
-  if (userModRole === "Board of Directors" || userModRole === "Chairman") {
+  if (userModRole === "Board of Directors" || userModRole === "Chairman" || userModRole === "Administrator") {
   async function manualvf() {
   if (!args[1] || !message.mentions.members.first()) {
     return message.channel.send("Syntax Error. Correct syntax: `/mv @user [tag]`");
   };
   let tagarg = args[1];
   if (args[1].startsWith("#")) tagarg = args[1].slice(1);
+  if (db.fetch(`${message.mentions.members.first().id}.info`)) return message.channel.send("Error. User already verified.");
   let userProf = await bsClient.getPlayer(tagarg.toUpperCase());
+  if (!userProf) return message.channel.send("Error. Invalid tag.");
   db.push(`${message.mentions.members.first().id}.info`, [tagarg, userProf]);
   message.channel.send(`Done! Assigned user <@${message.mentions.members.first().id}> the tag ${tagarg.toUpperCase()}`);
   };
