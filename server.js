@@ -221,19 +221,23 @@ client.on("message", (message) => {
     for (let i = 0; i < clubList.length; i++) {
       if (clubList[i][0].toUpperCase === args[0].toUpperCase) {
         foundclub = true;
+        message.channel.send('Found ' + clubList[i][0]);
         continue;
       } else {
         newlist.push(clubList[i]);
+        message.channel.send('Pushed ' + clubList[i] + ' to new list!');
       };
     };
     if (!foundclub) {
       return message.channel.send(`Error. Couldn't find Club with name \`${args[0]}\`.`);
     } else {
+      console.log(newlist);
       async function makeNewList() {
         await db.delete('clubList');
         let newclist = db.fetch(`clubList`);
         for (let newclubs = 0; newclubs < newlist.length; newclubs++) {
-          newclist.push(newlist[newclubs]);
+          db.push('clubList', newlist[newclubs]);
+          message.channel.send('Added ' + newlist[newclubs] + 'back to the list!');
         };
         message.channel.send('Done! Removed ' + args[0] + ' from the Club List!');
       };
