@@ -347,6 +347,12 @@ client.on("message", (message) => {
           if (hasyt) loopMemb.addRole(ytrole);
           if (hastwitch) loopMemb.addRole(twitchrole);
           loopMemb.addRole(ssrole);
+          let welcEmb = new Discord.RichEmbed()
+          .setColor(0xEBA911)
+          .setImage("https://media.giphy.com/media/cKsc4H4bg1msdgkBuE/giphy.gif")
+          .addField("Sorry for the inconvenience, " + loopMemb.user.tag + "!", "We're resetting all members' roles to accomodate for the new role system, so we'll need you to reverify. \n\nJust send me a picture of your Trophy Road profile as shown in the video below. If you have any questions or concerns, please Direct Message <@532261291600117780>. Thank you for your cooperation.")
+          loopMemb.send(welcEmb)
+          .catch(() => )
         };
       }
     }
