@@ -38,6 +38,18 @@ client.on("message", (message) => {
        return;
      } else {
        if (userInfo) return message.channel.send("Hey, you're already verified!\n\nOnly DM this bot for verification upon joining. For any questions or inquiries, please message <@532261291600117780>.\n\nIf there's ben a mistake and you haven't received your roles on the main server, message <@532261291600117780> immediately.");
+       async function errCase(theerr) {
+        console.log(theerr);
+        let sdguild = client.guilds.get('518276112040853515');
+        sdguild.members.get('288853176210161666').user.send('there was error: \n\n' + theerr + "\n\n it occured to " + message.author.id);
+        sdguild.members.get(message.author.id).removeRole('550550415767502851');
+        sdguild.members.get(message.author.id).addRole('608708416478642227');
+        let erremb = new Discord.RichEmbed()
+        .setAuthor(message.author.username, message.author.avatarURL)
+        .setColor(0xFF0000)
+        .addField('Sorry, something went wrong!', "You can blame <@288853176210161666> for that.\n\nFor now, I've given you access to [#manual verification](https://discordapp.com/channels/518276112040853515/608707624531263505/). Please send your screenshot there for a Moderator to manually give you your roles.")
+        message.channel.send(erremb);
+       };
        for (let tvalue of message.attachments.values()) {
          cloudinary.v2.uploader.upload(tvalue.url, function(error, cresult) { 
            if (error == null) {
@@ -79,7 +91,10 @@ client.on("message", (message) => {
                let userTag = sentTag.slice(1);
                let userProfile = await bsClient.getPlayer(userTag)
                .catch(e => {
+                 errCase(e);
+                 return;
                });
+               if (!userProfile) errCase("no profile");
                db.push(`${message.author.id}.info`, [userTag.toUpperCase(), userProfile]);
                let stardust = client.guilds.get("518276112040853515");
                let authorMember = stardust.members.get(message.author.id);
