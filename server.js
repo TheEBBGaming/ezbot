@@ -333,9 +333,22 @@ client.on("message", (message) => {
     let ssrole = '550550415767502851';
     let twitchrole = '560576306996051969';
     let ytrole = '560576366232469514';
+    let hastwitch = false;
+    let hasyt = false;
     for (let i = 0; i < membArr.length; i++) {
       let loopMemb = message.guild.members.get(membArr[i]);
-      if (loopMemb.manageable)
+      if (!loopMemb.manageable || db.fetch(`${membArr[i]}.info`)) {
+        console.log("couldn't edit " + loopMemb.displayName);
+      } else {
+        if (loopMemb.roles.find(twitchrole)) hastwitch = true;
+        if (loopMemb.roles.find(ytrole)) hasyt = true;
+        async function resetRoles() {
+          await loopMemb.removeRoles(loopMemb.roles);
+          if (hasyt) loopMemb.addRole(ytrole);
+          if (hastwitch) loopMemb.addRole(twitchrole);
+          loopMemb.addRole(ssrole);
+        };
+      }
     }
   }
   
