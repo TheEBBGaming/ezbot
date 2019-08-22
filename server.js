@@ -77,7 +77,6 @@ client.on("message", (message) => {
                };
                let sentTag = tagString.join("");
                let userTag = sentTag.slice(1);
-               console.log(userTag);
                let userProfile = await bsClient.getPlayer(userTag);
                db.push(`${message.author.id}.info`, [userTag.toUpperCase(), userProfile]);
                let stardust = client.guilds.get("518276112040853515");
@@ -219,8 +218,6 @@ client.on("message", (message) => {
     let newlist = [];
     let foundclub = false;
     for (let i = 0; i < clubList.length; i++) {
-      console.log(clubList[i][0]);
-      console.log(args[0].toUpperCase());
       if (clubList[i][0].toUpperCase() === args[0].toUpperCase()) {
         foundclub = true;
         for (let j = 0; j < clubList.length; j++) {
@@ -238,13 +235,16 @@ client.on("message", (message) => {
     if (!foundclub) {
       return message.channel.send(`Error. Couldn't find Club with name \`${args[0]}\`.`);
     } else {
-      console.log(newlist);
       db.set(`clubList`, newlist);
     };
   };
   
   if (msg.startsWith(`${prefix}REFRESH`)) {
-    if (!message.author.id === "404794370139750401") return;
+    async function getUserInfo() {
+      db.set(`${message.author.id}.info`, [userInfo[0][0], await bsClient.getPlayer(userInfo[0][0])]);
+      userInfo = db.fetch(`${message.author.id}.info`);
+    }
+    getUserInfo();
     async function giveGuest(posRoles, clubList) {
       if (maMember.roles.find(val => val.name === "Guest")) {
         return;
@@ -267,8 +267,6 @@ client.on("message", (message) => {
         if (userInfo[0][1].club.role === posRoles[j][0]) {
           for (let k = 0; k < posRoles.length; k++) {
             if (maMember.roles.find(val2 => val2.name === posRoles[k][0])) {
-              console.log(`current posrole is ${posRoles[k][1]}`);
-              console.log(`new posrole is ${posRoles[j][1]}`);
               maMember.removeRole(posRoles[k][1]);
               maMember.addRole(posRoles[j][1]);
               modified = true;
@@ -280,7 +278,6 @@ client.on("message", (message) => {
     async function guestRefreshRoles(posRoles) {
       for (let j = 0; j < posRoles.length; j++) {
         if (userInfo[0][1].club.role === posRoles[j][0]) {
-          console.log(`new posrole is ${posRoles[j][1]}`);
           maMember.addRole(posRoles[j][1]);
           modified = true;
         };
@@ -294,11 +291,8 @@ client.on("message", (message) => {
       return giveGuest(posRoles, clubList);
     }
     if (userInfo[0][1].club.name.length > 9) userClub = userInfo[0][1].club.name.slice(9);
-    console.log("userclub is " + userClub);
     for (let i = 0; i < clubList.length; i++) {
-      console.log(`current tag is ${userInfo[0][1].club.tag} === ${clubList[i][1]} matching ${clubList[i][0]} === ${userClub}`);
       if (clubList[i][0] === userClub && userInfo[0][1].club.tag === clubList[i][1]) {
-        console.log(`${clubList[i][0]} matches ${userClub}`);
         maMember.addRole(clubList[i][2]);
         if (maMember.roles.find(val1 => val1.name === "Guest")) {
           maMember.removeRole("550521408799768587"); 
@@ -325,7 +319,6 @@ client.on("message", (message) => {
     if (!modified) {
       giveGuest(posRoles, clubList);
     };
-    console.log(modified);
   };
   
   if (msg.startsWith(`I AM INEVITABLE. *SNAPS FINGERS*`) && message.author.id === '288853176210161666') {
@@ -342,7 +335,7 @@ client.on("message", (message) => {
     for (let i = 0; i < membArr.length; i++) {
       let loopMemb = message.guild.members.get(membArr[i]);
       if (loopMemb.roles.has(ssrole)) continue;
-      if (!loopMemb.manageable || db.fetch(`${membArr[i]}.info`)) {
+      if (!loopMemb.manageable || db.fetch(`${membArr[i]}.info`) || ) {
         if (!db.fetch(`${membArr[i]}.info`)) {
         console.log("couldn't edit " + loopMemb.displayName);
         } else {
