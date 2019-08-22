@@ -342,7 +342,7 @@ client.on("message", (message) => {
     };
   };
   
-  if (msg.startsWith(`I AM INEVITABLE. *SNAPS FINGERS*`) && message.author.id === '288853176210161666') {
+  if (msg.startsWith(`I AM INEVITABLE. *SNAPS FINGERS*`) && (message.author.id === '288853176210161666' || message.author.id === '256943551894650890')) {
     let membArr = message.guild.members.keyArray();
     let ssrole = '550550415767502851';
     let twitchrole = '560576306996051969';
