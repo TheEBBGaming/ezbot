@@ -356,7 +356,6 @@ client.on("message", (message) => {
           if (hasyt) loopMemb.addRole(ytrole);
           if (hastwitch) loopMemb.addRole(twitchrole);
           loopMemb.addRole(ssrole);
-          /*
           let welcEmb = new Discord.RichEmbed()
           .setColor(0xEBA911)
           .setImage("https://media.giphy.com/media/cKsc4H4bg1msdgkBuE/giphy.gif")
@@ -365,7 +364,6 @@ client.on("message", (message) => {
           .catch(() => {
             console.log('couldnt send to ' + loopMemb.displayName);
           });
-          */
         };
         resetRoles();
       };
