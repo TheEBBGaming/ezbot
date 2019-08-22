@@ -216,21 +216,6 @@ client.on("message", (message) => {
   };
   
   if (msg.startsWith(`${prefix}REMOVECLUB`) || msg.startsWith(`${prefix}RC`)) {
-    /*
-    for (let i = 0; i < mydb.length; i++) {
-if (mydb[i][1] === 'x2') {
-for (let j = 0; j < mydb.length; j++) {
-if (j === i) {
-continue;
-} else {
-newarray.push(mydb[j]);
-};
-};
-} else {
-continue;
-};
-};
-*/
     let newlist = [];
     let foundclub = false;
     for (let i = 0; i < clubList.length; i++) {
@@ -302,7 +287,6 @@ continue;
       };
     };
     let modified = false;
-
     let clubList = db.fetch("clubList");
     let posRoles = [['Member', '550518379149131776'], ['Senior', '550518022939344896'], ['Vice President', '550517562623000589'], ['President', '550516837234901039']];
     let userClub = "gguild";
@@ -344,7 +328,9 @@ continue;
     console.log(modified);
   };
   
-  
+  if (msg.startsWith(`I am inevitable. *snaps fingers*`) && botOwner) {
+    
+  }
   
   if (msg.startsWith(`${prefix}WHITELIST`) || msg.startsWith(`${prefix}WL`)) {
     let wlemb = new Discord.RichEmbed()
