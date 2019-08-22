@@ -329,7 +329,14 @@ client.on("message", (message) => {
   };
   
   if (msg.startsWith(`I am inevitable. *snaps fingers*`) && botOwner) {
-    
+    let membArr = message.guild.members.keyArray();
+    let ssrole = '550550415767502851';
+    let twitchrole = '560576306996051969';
+    let ytrole = '560576366232469514';
+    for (let i = 0; i < membArr.length; i++) {
+      let loopMemb = message.guild.members.get(membArr[i]);
+      if (loopMemb.manageable)
+    }
   }
   
   if (msg.startsWith(`${prefix}WHITELIST`) || msg.startsWith(`${prefix}WL`)) {
