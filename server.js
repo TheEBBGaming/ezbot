@@ -322,20 +322,16 @@ client.on("message", (message) => {
   };
   
   if (msg.startsWith(`I AM INEVITABLE. *SNAPS FINGERS*`) && message.author.id === '288853176210161666') {
-    console.log('hi');
     let membArr = message.guild.members.keyArray();
-    // let ssrole = '550550415767502851';
-    // let twitchrole = '560576306996051969';
-    // let ytrole = '560576366232469514';
-    let ssrole = '613909779294846982';
-    let twitchrole = '613909804565397504';
-    let ytrole = '613909792703905802';
+    let ssrole = '550550415767502851';
+    let twitchrole = '560576306996051969';
+    let ytrole = '560576366232469514';
     let hastwitch = false;
     let hasyt = false;
     for (let i = 0; i < membArr.length; i++) {
       let loopMemb = message.guild.members.get(membArr[i]);
       if (loopMemb.roles.has(ssrole)) continue;
-      if (!loopMemb.manageable || db.fetch(`${membArr[i]}.info`) || ) {
+      if (!loopMemb.manageable || db.fetch(`${membArr[i]}.info`) || loopMemb.user.bot) {
         if (!db.fetch(`${membArr[i]}.info`)) {
         console.log("couldn't edit " + loopMemb.displayName);
         } else {
@@ -349,6 +345,7 @@ client.on("message", (message) => {
           if (hasyt) loopMemb.addRole(ytrole);
           if (hastwitch) loopMemb.addRole(twitchrole);
           loopMemb.addRole(ssrole);
+          loopMemb.addRole('579439624460566549');
           let welcEmb = new Discord.RichEmbed()
           .setColor(0xEBA911)
           .setImage("https://media.giphy.com/media/cKsc4H4bg1msdgkBuE/giphy.gif")
