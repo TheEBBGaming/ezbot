@@ -37,7 +37,7 @@ client.on("message", (message) => {
      if (message.attachments.size <= 0) {
        return;
      } else {
-       if (userInfo) return;
+       if (userInfo) return message.channel.send("Hey, you're already verified!\n\nOnly DM this bot for verification upon joining. For any questions or inquiries, please message <@532261291600117780>.\n\nIf there's ben a mistake and you haven't received your roles on the main server, message <@532261291600117780> immediately.");
        for (let tvalue of message.attachments.values()) {
          cloudinary.v2.uploader.upload(tvalue.url, function(error, cresult) { 
            if (error == null) {
@@ -77,7 +77,9 @@ client.on("message", (message) => {
                };
                let sentTag = tagString.join("");
                let userTag = sentTag.slice(1);
-               let userProfile = await bsClient.getPlayer(userTag);
+               let userProfile = await bsClient.getPlayer(userTag)
+               .catch(e => {
+               });
                db.push(`${message.author.id}.info`, [userTag.toUpperCase(), userProfile]);
                let stardust = client.guilds.get("518276112040853515");
                let authorMember = stardust.members.get(message.author.id);
@@ -342,9 +344,18 @@ client.on("message", (message) => {
         if (loopMemb.roles.has(ytrole)) hasyt = true;
         async function resetRoles() {
           await loopMemb.removeRoles(loopMemb.roles);
+          await loopMemb.addRole(ssrole)
+          .catch(e => {
+            console.log('error: ' + e);
+            loopMemb = null;
+            hasyt = null;
+            hastwitch = null;
+            ssrole = null;
+            twitchrole = null;
+            ytrole = null;
+          });
           if (hasyt) loopMemb.addRole(ytrole);
           if (hastwitch) loopMemb.addRole(twitchrole);
-          loopMemb.addRole(ssrole);
           loopMemb.addRole('579439624460566549');
           let welcEmb = new Discord.RichEmbed()
           .setColor(0xEBA911)
