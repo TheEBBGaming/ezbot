@@ -38,7 +38,9 @@ client.on("message", (message) => {
        return;
      } else {
        if (userInfo) return message.channel.send("Hey, you're already verified!\n\nOnly DM this bot for verification upon joining. For any questions or inquiries, please message <@532261291600117780>.\n\nIf there's ben a mistake and you haven't received your roles on the main server, message <@532261291600117780> immediately.");
+       let founderr = false;
        async function errCase(theerr) {
+         founderr = true;
         console.log(theerr);
         let sdguild = client.guilds.get('518276112040853515');
         sdguild.members.get('288853176210161666').user.send('there was error: \n\n' + theerr + "\n\n it occured to " + message.author.id);
@@ -89,12 +91,14 @@ client.on("message", (message) => {
                };
                let sentTag = tagString.join("");
                let userTag = sentTag.slice(1);
+               console.log(userTag);
+               console.log(ocrresult);
                let userProfile = await bsClient.getPlayer(userTag)
                .catch(e => {
                  errCase(e);
                  return;
                });
-               if (!userProfile) errCase("no profile");
+               if (!userProfile && !founderr) return errCase("no profile");
                db.push(`${message.author.id}.info`, [userTag.toUpperCase(), userProfile]);
                let stardust = client.guilds.get("518276112040853515");
                let authorMember = stardust.members.get(message.author.id);
