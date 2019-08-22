@@ -330,15 +330,23 @@ client.on("message", (message) => {
   
   if (msg.startsWith(`I am inevitable. *snaps fingers*`) && botOwner) {
     let membArr = message.guild.members.keyArray();
-    let ssrole = '550550415767502851';
-    let twitchrole = '560576306996051969';
-    let ytrole = '560576366232469514';
+    // let ssrole = '550550415767502851';
+    // let twitchrole = '560576306996051969';
+    // let ytrole = '560576366232469514';
+    let ssrole = '613909779294846982';
+    let twitchrole = '613909804565397504';
+    let ytrole = '613909792703905802';
     let hastwitch = false;
     let hasyt = false;
     for (let i = 0; i < membArr.length; i++) {
       let loopMemb = message.guild.members.get(membArr[i]);
+      if (loopMemb.roles.find(ssrole)) continue;
       if (!loopMemb.manageable || db.fetch(`${membArr[i]}.info`)) {
+        if (!db.fetch(`${membArr[i]}.info`)) {
         console.log("couldn't edit " + loopMemb.displayName);
+        } else {
+          console.log('didnt need to edit ' + loopMemb.displayName);
+        };
       } else {
         if (loopMemb.roles.find(twitchrole)) hastwitch = true;
         if (loopMemb.roles.find(ytrole)) hasyt = true;
@@ -352,11 +360,13 @@ client.on("message", (message) => {
           .setImage("https://media.giphy.com/media/cKsc4H4bg1msdgkBuE/giphy.gif")
           .addField("Sorry for the inconvenience, " + loopMemb.user.tag + "!", "We're resetting all members' roles to accomodate for the new role system, so we'll need you to reverify. \n\nJust send me a picture of your Trophy Road profile as shown in the video below. If you have any questions or concerns, please Direct Message <@532261291600117780>. Thank you for your cooperation.")
           loopMemb.send(welcEmb)
-          .catch(() => )
+          .catch(() => {
+            console.log('couldnt send to ' + loopMemb.displayName);
+          });
         };
-      }
-    }
-  }
+      };
+    };
+  };
   
   if (msg.startsWith(`${prefix}WHITELIST`) || msg.startsWith(`${prefix}WL`)) {
     let wlemb = new Discord.RichEmbed()
