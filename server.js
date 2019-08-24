@@ -91,8 +91,6 @@ client.on("message", (message) => {
                };
                let sentTag = tagString.join("");
                let userTag = sentTag.slice(1);
-               console.log(userTag);
-               console.log(ocrresult);
                let userProfile = await bsClient.getPlayer(userTag)
                .catch(e => {
                  errCase(e);
@@ -372,6 +370,7 @@ client.on("message", (message) => {
             ssrole = null;
             twitchrole = null;
             ytrole = null;
+            return;
           });
           if (hasyt) loopMemb.addRole(ytrole);
           if (hastwitch) loopMemb.addRole(twitchrole);
