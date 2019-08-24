@@ -21,7 +21,6 @@ client.on("ready", () => {
 });
 
 client.on('guildMemberAdd', member => {
-    if (!member.id === "404794370139750401") return;
     let welcEmb = new Discord.RichEmbed()
     .setColor(0xEBA911)
     .setImage("https://media.giphy.com/media/cKsc4H4bg1msdgkBuE/giphy.gif")
@@ -260,6 +259,7 @@ client.on("message", (message) => {
   };
   
   if (msg.startsWith(`${prefix}REFRESH`)) {
+    if (message.author.id === "288853176210161666" && args[0]) maMember = message.mentions.members.first();
     async function getUserInfo() {
       db.set(`${message.author.id}.info`, [userInfo[0][0], await bsClient.getPlayer(userInfo[0][0])]);
       userInfo = db.fetch(`${message.author.id}.info`);
@@ -341,7 +341,7 @@ client.on("message", (message) => {
     };
   };
   
-  if (msg.startsWith(`I AM INEVITABLE. *SNAPS FINGERS*`) && (message.author.id === '288853176210161666' || message.author.id === '256943551894650890')) {
+/*  if (msg.startsWith(`I AM INEVITABLE. *SNAPS FINGERS*`) && (message.author.id === '288853176210161666' || message.author.id === '256943551894650890')) {
     let membArr = message.guild.members.keyArray();
     let ssrole = '550550415767502851';
     let ctr = 0;
@@ -394,7 +394,7 @@ console.log('didnt need to edit ' + loopMemb.displayName);
       };
     };
   };
-  
+  */
   if (msg.startsWith(`${prefix}WHITELIST`) || msg.startsWith(`${prefix}WL`)) {
     let wlemb = new Discord.RichEmbed()
     .setColor(0xFFFFFF)
