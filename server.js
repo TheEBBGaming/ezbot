@@ -6,7 +6,6 @@ const vision = require('@google-cloud/vision');
 const visionClient = new vision.ImageAnnotatorClient();
 const cloudinary = require('cloudinary');
 const matchAll = require('match-all');
-client.setMaxListeners(100)
 require('events').EventEmitter.prototype._MaxListeners = 105;
 cloudinary.config({
   cloud_name: "stardustbs",
