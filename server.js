@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+rereconst Discord = require("discord.js");
 const client = new Discord.Client();
 const db = require('quick.db');
 const BrawlStars = require('brawlstars');
@@ -367,6 +367,7 @@ console.log('didnt need to edit ' + loopMemb.displayName);
           await loopMemb.removeRoles(loopMemb.roles);
           await loopMemb.addRole(ssrole)
           .catch(e => {
+            if (e.includes("Missing Permissions")) return;
             message.channel.send(loopMemb.displayName)
             console.log('error: ' + e);
             loopMemb = null;
