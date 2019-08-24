@@ -364,6 +364,7 @@ client.on("message", (message) => {
           await loopMemb.removeRoles(loopMemb.roles);
           await loopMemb.addRole(ssrole)
           .catch(e => {
+            message.channel.send(loopMemb.displayName)
             console.log('error: ' + e);
             loopMemb = null;
             hasyt = null;
