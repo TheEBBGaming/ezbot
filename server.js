@@ -422,6 +422,9 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
   let authorMember = maMember;
   let clubList = db.fetch("clubList");
   let clArray = clubList;
+  let guildRole;
+  let isGuest = false;
+  let usersclub;
   if (!userProfile) return message.channel.send("Error. Invalid tag.");
   await db.push(`${message.mentions.members.first().id}.info`, [tagarg, userProfile]);
   if (userProfile.club.name.startsWith("Stardust")) {
@@ -431,8 +434,8 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
                      if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
                      if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
                      authorMember.addRole(clArray[i][2]);
+                     usersclub = clArray[i][2];
                      let posRoles = [['Member', '550518379149131776'], ['Senior', '550518022939344896'], ['Vice President', '550517562623000589'], ['President', '550516837234901039']];
-                     let guildRole;
                      for (let j = 0; i=j < posRoles.length; j++) {
                        if (userProfile.club.role === posRoles[j][0]) {
                          guildRole = posRoles[j][1];
@@ -448,8 +451,16 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
                   if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
                   if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
                   authorMember.addRole("550521408799768587");
+                  isGuest = true;
                };
-  message.channel.send(`Done! Assigned user <@${message.mentions.members.first().id}> the tag ${tagarg.toUpperCase()}`);
+  let rolestr = "and the following role(s):\n\n";
+  if (isGuest) {
+    rolestr = rolestr + "Guest";
+  } else {
+    let twostr = usersclub + "\n" + guildRole;
+    rolestr = rolestr + twostr;
+  } 
+  message.channel.send(`Done! Assigned user <@${message.mentions.members.first().id}> the tag ${tagarg.toUpperCase()} ${rolestr}`);
   };
   manualvf();
   };
