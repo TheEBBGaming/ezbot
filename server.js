@@ -128,7 +128,7 @@ client.on("message", (message) => {
                    };
                  };
                } else {
-                  authorMember.removeRole('550550415767502851');
+                  if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
                   authorMember.addRole("550521408799768587");
                   message.channel.send(succEmb);
                };
