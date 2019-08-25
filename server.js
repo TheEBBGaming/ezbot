@@ -419,13 +419,13 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
   if (args[1].startsWith("#")) tagarg = args[1].slice(1);
   if (db.fetch(`${message.mentions.members.first().id}.info`)) return message.channel.send("Error. User already verified.");
   let userProfile = await bsClient.getPlayer(tagarg.toUpperCase());
+  let authorMember = maMember;
+  let clubList = db.fetch("clubList");
+  let clArray = clubList;
   if (!userProfile) return message.channel.send("Error. Invalid tag.");
   await db.push(`${message.mentions.members.first().id}.info`, [tagarg, userProfile]);
-    /*
   if (userProfile.club.name.startsWith("Stardust")) {
                  let userClub = userProfile.club.name.slice(9);
-                 let clubList = db.fetch("clubList");
-                 let clArray = clubList;
                  for (let i = 0; i < clArray.length; i++) {
                    if (clArray[i][0] === userClub && userProfile.club.tag === clArray[i][1]) {
                      if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
@@ -441,7 +441,6 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
                        };
                      };
                      authorMember.addRole(guildRole);
-                     message.channel.send(succEmb);
                      break;
                    };
                  };
@@ -449,9 +448,7 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
                   if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
                   if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
                   authorMember.addRole("550521408799768587");
-                  message.channel.send(succEmb);
                };
-               */
   message.channel.send(`Done! Assigned user <@${message.mentions.members.first().id}> the tag ${tagarg.toUpperCase()}`);
   };
   manualvf();
