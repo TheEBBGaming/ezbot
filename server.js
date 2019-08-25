@@ -419,7 +419,7 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
   if (args[1].startsWith("#")) tagarg = args[1].slice(1);
   if (db.fetch(`${message.mentions.members.first().id}.info`)) return message.channel.send("Error. User already verified.");
   let userProfile = await bsClient.getPlayer(tagarg.toUpperCase());
-  let authorMember = maMember;
+  let authorMember = message.mentions.members.first();
   let clubList = db.fetch("clubList");
   let clArray = clubList;
   let guildRole;
@@ -457,7 +457,7 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
   if (isGuest) {
     rolestr = rolestr + "Guest";
   } else {
-    let twostr = usersclub + "\n" + guildRole;
+    let twostr = message.guild.roles.get(usersclub).name + "\n" + message.guild.roles.get(guildRole).displayName;
     rolestr = rolestr + twostr;
   } 
   message.channel.send(`Done! Assigned user <@${message.mentions.members.first().id}> the tag ${tagarg.toUpperCase()} ${rolestr}`);
