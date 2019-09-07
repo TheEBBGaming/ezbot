@@ -436,7 +436,7 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
                      authorMember.addRole(clArray[i][2]);
                      usersclub = clArray[i][2];
                      let posRoles = [['Member', '550518379149131776'], ['Senior', '550518022939344896'], ['Vice President', '550517562623000589'], ['President', '550516837234901039']];
-                     for (let j = 0; i=j < posRoles.length; j++) {
+                     for (let j = 0; j < posRoles.length; j++) {
                        if (userProfile.club.role === posRoles[j][0]) {
                          guildRole = posRoles[j][1];
                        } else {
