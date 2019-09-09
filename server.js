@@ -166,19 +166,20 @@ client.on("message", (message) => {
   let botOwner = false;
   let modRoles = ['Moderator', 'Admin', 'Head Admin', 'Board of Directors', 'Chairman'];
   let userModRole = null;
-  if (message.member.roles.some(r=>modRoles.includes(r.name))) {
-    if (message.member.roles.find(val => val.name === modRoles[0])) {
+  let mesMemb = client.guilds.get('518276112040853515').members.get(message.author.id);
+  if (mesMemb.roles.some(r=>modRoles.includes(r.name))) {
+    if (mesMemb.roles.find(val => val.name === modRoles[0])) {
       userModRole = 'Moderator';
-    } else if (message.member.roles.find(val => val.name === modRoles[1])) {
+    } else if (mesMemb.roles.find(val => val.name === modRoles[1])) {
       userModRole = 'Admin';
-    } else if (message.member.roles.find(val => val.name === modRoles[2])) {
+    } else if (mesMemb.roles.find(val => val.name === modRoles[2])) {
       userModRole = 'Head Admin';
-    } else if (message.member.roles.find(val => val.name === modRoles[3])) {
+    } else if (mesMemb.roles.find(val => val.name === modRoles[3])) {
       userModRole = 'Board of Directors';
-    } else if (message.member.roles.find(val => val.name === modRoles[4])) {
+    } else if (mesMemb.roles.find(val => val.name === modRoles[4])) {
       userModRole = 'Chairman';
     };
-  } else if (message.member.hasPermission("ADMINISTRATOR") || message.author.id === "288853176210161666") {
+  } else if (mesMemb.hasPermission("ADMINISTRATOR") || message.author.id === "288853176210161666") {
     userModRole = 'Administrator';
     if (message.author.id === '288853176210161666') botOwner = true;
   };
