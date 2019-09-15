@@ -160,7 +160,7 @@ client.on("message", (message) => {
       
     }
   };
-  if (message.channel.type === "dm") return;
+  if (!message.channel.type === "text") return;
   // Variables
   let gMembs;
   let botOwner = false;
