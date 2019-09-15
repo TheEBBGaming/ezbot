@@ -418,7 +418,7 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
   };
   let tagarg = args[1];
   if (args[1].startsWith("#")) tagarg = args[1].slice(1);
-  if (db.fetch(`${message.mentions.members.first().id}.info`)) return message.channel.send("Error. User already verified.");
+  if (!db.fetch(`${message.mentions.members.first().id}.info`)) await db.push(`${message.mentions.members.first().id}.info`, [tagarg, userProfile]);
   let userProfile = await bsClient.getPlayer(tagarg.toUpperCase());
   let authorMember = message.mentions.members.first();
   let clubList = db.fetch("clubList");
@@ -427,7 +427,6 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
   let isGuest = false;
   let usersclub;
   if (!userProfile) return message.channel.send("Error. Invalid tag.");
-  await db.push(`${message.mentions.members.first().id}.info`, [tagarg, userProfile]);
   if (userProfile.club.name.startsWith("Stardust")) {
                  let userClub = userProfile.club.name.slice(9);
                  for (let i = 0; i < clArray.length; i++) {
