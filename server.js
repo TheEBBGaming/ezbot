@@ -168,6 +168,7 @@ client.on("message", (message) => {
   let modRoles = ['Moderator', 'Admin', 'Head Admin', 'Board of Directors', 'Chairman'];
   let userModRole = null;
   let mesMemb = message.member;
+  if (!mesMemb.roles) console.log(message.author.id);
   if (mesMemb.roles.some(r=>modRoles.includes(r.name))) {
     if (mesMemb.roles.find(val => val.name === modRoles[0])) {
       userModRole = 'Moderator';
