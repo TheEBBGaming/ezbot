@@ -166,7 +166,7 @@ client.on("message", (message) => {
   let botOwner = false;
   let modRoles = ['Moderator', 'Admin', 'Head Admin', 'Board of Directors', 'Chairman'];
   let userModRole = null;
-  let mesMemb = client.guilds.get('518276112040853515').members.get(message.author.id);
+  let mesMemb = message.member;
   if (mesMemb.roles.some(r=>modRoles.includes(r.name))) {
     if (mesMemb.roles.find(val => val.name === modRoles[0])) {
       userModRole = 'Moderator';
@@ -181,8 +181,8 @@ client.on("message", (message) => {
     };
   } else if (mesMemb.hasPermission("ADMINISTRATOR") || message.author.id === "288853176210161666") {
     userModRole = 'Administrator';
-    if (message.author.id === '288853176210161666') botOwner = true;
   };
+  if (message.author.id === '288853176210161666') botOwner = true;
   let gm2;
   let clubList = db.fetch(`clubList`);
   let firstMentioned;
