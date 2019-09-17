@@ -270,44 +270,65 @@ client.on("message", (message) => {
     }
     getUserInfo();
     async function giveRoles() {
-      let tagarg = db.fetch(`${message.author.id}.info`)[0]
+      let tagarg = db.fetch(`${message.author.id}.info`)[0];
       let userProfile = await bsClient.getPlayer(tagarg.toUpperCase());
-  if (!db.fetch(`${message.mentions.members.first().id}.info`)) await db.push(`${message.mentions.members.first().id}.info`, [tagarg, userProfile]);
-  let authorMember = message.mentions.members.first();
-  let clubList = db.fetch("clubList");
-  let clArray = clubList;
-  let guildRole;
-  let grName;
-  let isGuest = false;
-  let usersclub;
-  if (!userProfile) return message.channel.send("Error. Invalid tag.");
-  if (userProfile.club.name.startsWith("Stardust")) {
-   let userClub = userProfile.club.name.slice(9);
-   for (let i = 0; i < clArray.length; i++) {
-     if (clArray[i][0] === userClub && userProfile.club.tag === clArray[i][1]) {
-       if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
-       if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
-       authorMember.addRole(clArray[i][2]);
-       usersclub = clArray[i][2];
-       let posRoles = [['Member', '550518379149131776'], ['Senior', '550518022939344896'], ['Vice President', '550517562623000589'], ['President', '550516837234901039']];
-       for (let j = 0; j < posRoles.length; j++) {
-         if (userProfile.club.role === posRoles[j][0]) {
-           guildRole = posRoles[j][1];
-           grName = posRoles[j][0];
-         } else {
-           continue;
+      if (!db.fetch(`${message.mentions.members.first().id}.info`)) await db.push(`${message.mentions.members.first().id}.info`, [tagarg, userProfile]);
+      let authorMember = message.mentions.members.first();
+      let clubList = db.fetch("clubList");
+      let clArray = clubList;
+      let guildRole;
+      let posRoles = [['Member', '550518379149131776'], ['Senior', '550518022939344896'], ['Vice President', '550517562623000589'], ['President', '550516837234901039']];
+      let grName;
+      let isGuest = false;
+      let usersclub;
+      if (!userProfile) return message.channel.send("Error. Couldn't get tag.");
+      if (userProfile.club.name.startsWith("Stardust")) {
+       let userClub = userProfile.club.name.slice(9);
+       for (let k = 0; k < clArray.length; k++) {
+         for (let j = 0; j < posRoles.length; j++) {
+             if (userProfile.club.role === posRoles[j][0]) {
+               guildRole = posRoles[j][1];
+               grName = posRoles[j][0];
+             } else {
+               continue;
+             };
+           };
+         if (maMember.roles.find(val => val.name === clArray[k][0])) {
+           let removeGR = message.guild.roles.find(val => val.name === clArray[k][0]);
+           let removeGPos = message.guild.roles.find(val => val.name === grName);
+           if (!removeGR || !removeGPos) { 
+             message.channel.send("Sorry, there's been an error! Please contact a Moderator to have your roles corrected.");
+             return;
+           } else {
+             maMember.removeRole(removeGR);
+             maMember.removeRole(removeGPos);
+           }
          };
        };
-       authorMember.addRole(guildRole);
-       break;
-     };
-   };
-  } else {
-    if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
-    if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
-    authorMember.addRole("550521408799768587");
-    isGuest = true;
-  };
+       for (let i = 0; i < clArray.length; i++) {
+         if (clArray[i][0] === userClub && userProfile.club.tag === clArray[i][1]) {
+           if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
+           if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
+           authorMember.addRole(clArray[i][2]);
+           usersclub = clArray[i][2];
+           for (let j = 0; j < posRoles.length; j++) {
+             if (userProfile.club.role === posRoles[j][0]) {
+               guildRole = posRoles[j][1];
+               grName = posRoles[j][0];
+             } else {
+               continue;
+             };
+           };
+           authorMember.addRole(guildRole);
+           break;
+         };
+       };
+      } else {
+        if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
+        if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
+        authorMember.addRole("550521408799768587");
+        isGuest = true;
+      };
     };
   };
   
