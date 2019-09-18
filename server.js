@@ -371,6 +371,7 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
        if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
        authorMember.addRole(clArray[i][2]);
        usersclub = clArray[i][2];
+       console.log(clArray[i][2]);
        let posRoles = [['Member', '550518379149131776'], ['Senior', '550518022939344896'], ['Vice President', '550517562623000589'], ['President', '550516837234901039']];
        for (let j = 0; j < posRoles.length; j++) {
          if (userProfile.club.role === posRoles[j][0]) {
@@ -394,6 +395,8 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
   if (isGuest) {
     rolestr = rolestr + "Guest";
   } else {
+    console.log(usersclub);
+    console.log(message.guild.roles.get(usersclub));
     let twostr = message.guild.roles.get(usersclub).name + "\n" + grName;
     rolestr = rolestr + twostr;
   } 
