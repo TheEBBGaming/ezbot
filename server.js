@@ -265,15 +265,15 @@ client.on("message", (message) => {
   if (msg.startsWith(`${prefix}REFRESH`)) {
     if (message.author.id === "288853176210161666" && args[0]) maMember = message.mentions.members.first();
     async function getUserInfo() {
-      db.set(`${message.author.id}.info`, [userInfo[0][0], await bsClient.getPlayer(userInfo[0][0])]);
+      db.set(`${message.author.id}.info`, [userInfo[0], await bsClient.getPlayer(userInfo[0])]);
       userInfo = db.fetch(`${message.author.id}.info`);
     }
     getUserInfo();
     async function giveRoles() {
       let tagarg = db.fetch(`${message.author.id}.info`)[0];
       let userProfile = await bsClient.getPlayer(tagarg.toUpperCase());
-      if (!db.fetch(`${message.mentions.members.first().id}.info`)) await db.push(`${message.mentions.members.first().id}.info`, [tagarg, userProfile]);
-      let authorMember = message.mentions.members.first();
+      if (!db.fetch(`${maMember}.info`)) await db.push(`${maMember.id}.info`, [tagarg, userProfile]);
+      let authorMember = maMember;
       let clubList = db.fetch("clubList");
       let clArray = clubList;
       let guildRole;
@@ -330,6 +330,7 @@ client.on("message", (message) => {
         isGuest = true;
       };
     };
+    giveRoles();
   };
   
   if (msg.startsWith(`${prefix}WHITELIST`) || msg.startsWith(`${prefix}WL`)) {
