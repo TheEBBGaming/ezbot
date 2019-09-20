@@ -284,28 +284,31 @@ client.on("message", (message) => {
       if (!userProfile) return message.channel.send("Error. Couldn't get tag.");
       if (userProfile.club.name.startsWith("Stardust")) {
        let userClub = userProfile.club.name.slice(9);
-       for (let k = 0; k < clArray.length; k++) {
-         for (let j = 0; j < posRoles.length; j++) {
-             if (message.guild.roles.find(val => val.name === posRoles[j][0])) {
-               guildRole = posRoles[j][1];
-               grName = posRoles[j][0];
-               console.log(grName);
-             } else {
-               continue;
+       async function removeRoles() {
+         for (let k = 0; k < clArray.length; k++) {
+           for (let j = 0; j < posRoles.length; j++) {
+               if (maMember.roles.find(posRoles[j][1])) {
+                 guildRole = posRoles[j][1];
+                 grName = posRoles[j][0];
+                 console.log(grName);
+               } else {
+                 continue;
+               };
              };
+           if (maMember.roles.find(val => val.name === clArray[k][0])) {
+             let removeGR = clArray[k][2];
+             let removeGPos = message.guild.roles.find(val => val.name === grName);
+             console.log(removeGPos.name);
+             if (!removeGR || !removeGPos) { 
+               message.channel.send("Sorry, there's been an error! Please contact a Moderator to have your roles corrected.");
+               return;
+             } else {
+               maMember.removeRoles([removeGR, removeGPos]);
+             }
            };
-         if (maMember.roles.find(val => val.name === clArray[k][0])) {
-           let removeGR = clArray[k][2];
-           let removeGPos = message.guild.roles.find(val => val.name === grName);
-           console.log(removeGPos.name);
-           if (!removeGR || !removeGPos) { 
-             message.channel.send("Sorry, there's been an error! Please contact a Moderator to have your roles corrected.");
-             return;
-           } else {
-             maMember.removeRoles([removeGR, removeGPos]);
-           }
          };
        };
+       async function addRoles() {
        for (let i = 0; i < clArray.length; i++) {
          if (clArray[i][0] === userClub && userProfile.club.tag === clArray[i][1]) {
            if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
@@ -324,6 +327,9 @@ client.on("message", (message) => {
            break;
          };
        };
+      };
+        await removeRoles();
+        await addRoles();
       } else {
         if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
         if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
