@@ -287,23 +287,22 @@ client.on("message", (message) => {
        async function removeRoles() {
          for (let k = 0; k < clArray.length; k++) {
            for (let j = 0; j < posRoles.length; j++) {
-               if (maMember.roles.find(posRoles[j][1])) {
+               if (maMember.roles.has(posRoles[j][1])) {
                  guildRole = posRoles[j][1];
                  grName = posRoles[j][0];
-                 console.log(grName);
                } else {
                  continue;
                };
              };
-           if (maMember.roles.find(val => val.name === clArray[k][0])) {
+           if (maMember.roles.has(clArray[k][2])) {
              let removeGR = clArray[k][2];
              let removeGPos = message.guild.roles.find(val => val.name === grName);
-             console.log(removeGPos.name);
+             console.log("It's " + removeGPos.name);
              if (!removeGR || !removeGPos) { 
                message.channel.send("Sorry, there's been an error! Please contact a Moderator to have your roles corrected.");
                return;
              } else {
-               maMember.removeRoles([removeGR, removeGPos]);
+               await maMember.removeRoles([removeGR, removeGPos]);
              }
            };
          };
@@ -313,7 +312,7 @@ client.on("message", (message) => {
          if (clArray[i][0] === userClub && userProfile.club.tag === clArray[i][1]) {
            if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
            if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
-           authorMember.addRole(clArray[i][2]);
+           await authorMember.addRole(clArray[i][2]);
            usersclub = clArray[i][2];
            for (let j = 0; j < posRoles.length; j++) {
              if (userProfile.club.role === posRoles[j][0]) {
@@ -323,13 +322,14 @@ client.on("message", (message) => {
                continue;
              };
            };
-           authorMember.addRole(guildRole);
+           await authorMember.addRole(guildRole);
            break;
          };
        };
       };
-        await removeRoles();
-        await addRoles();
+        await removeRoles().then(() => {
+          addRoles();  
+        })
       } else {
         if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
         if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
