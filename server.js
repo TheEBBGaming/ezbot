@@ -286,7 +286,7 @@ client.on("message", (message) => {
        let userClub = userProfile.club.name.slice(9);
        for (let k = 0; k < clArray.length; k++) {
          for (let j = 0; j < posRoles.length; j++) {
-             if (userProfile.club.role === posRoles[j][0]) {
+             if (message.guild.roles.find(val => val.name === posRoles[j][0])) {
                guildRole = posRoles[j][1];
                grName = posRoles[j][0];
                console.log(grName);
