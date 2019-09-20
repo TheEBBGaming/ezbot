@@ -289,19 +289,20 @@ client.on("message", (message) => {
              if (userProfile.club.role === posRoles[j][0]) {
                guildRole = posRoles[j][1];
                grName = posRoles[j][0];
+               console.log(grName);
              } else {
                continue;
              };
            };
          if (maMember.roles.find(val => val.name === clArray[k][0])) {
-           let removeGR = message.guild.roles.find(val => val.name === clArray[k][0]);
+           let removeGR = clArray[k][2];
            let removeGPos = message.guild.roles.find(val => val.name === grName);
+           console.log(removeGPos.name);
            if (!removeGR || !removeGPos) { 
              message.channel.send("Sorry, there's been an error! Please contact a Moderator to have your roles corrected.");
              return;
            } else {
-             maMember.removeRole(removeGR);
-             maMember.removeRole(removeGPos);
+             maMember.removeRoles([removeGR, removeGPos]);
            }
          };
        };
