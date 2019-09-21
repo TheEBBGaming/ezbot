@@ -265,7 +265,7 @@ client.on("message", (message) => {
   if (msg.startsWith(`${prefix}REFRESH`)) {
     if (message.author.id === "288853176210161666" && args[0]) maMember = message.mentions.members.first();
     async function getUserInfo() {
-      db.set(`${message.author.id}.info`, [userInfo[0], await bsClient.getPlayer(userInfo[0])]);
+      db.set(`${maMember.id}.info`, [userInfo[0], await bsClient.getPlayer(userInfo[0])]);
       userInfo = db.fetch(`${message.author.id}.info`);
     }
     getUserInfo();
@@ -385,7 +385,7 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
   let tagarg = args[1];
   if (args[1].startsWith("#")) tagarg = args[1].slice(1);
   let userProfile = await bsClient.getPlayer(tagarg.toUpperCase());
-  if (!db.fetch(`${message.mentions.members.first().id}.info`)) await db.push(`${message.mentions.members.first().id}.info`, [tagarg, userProfile]);
+  if (!db.fetch(`${message.mentions.members.first().id}.info`)) await db.set(`${message.mentions.members.first().id}.info`, [tagarg, userProfile]);
   let authorMember = message.mentions.members.first();
   let clubList = db.fetch("clubList");
   let clArray = clubList;
