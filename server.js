@@ -28,7 +28,6 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on("message", (message) => {
-  
   let userInfo = db.fetch(`${message.author.id}.info`);
   
   if (message.channel.type === "dm") {
@@ -264,13 +263,13 @@ client.on("message", (message) => {
   
   if (msg.startsWith(`${prefix}REFRESH`)) {
     if (message.author.id === "288853176210161666" && args[0]) maMember = message.mentions.members.first();
+    userInfo = db.fetch(`${maMember.id}.info`);
     async function getUserInfo() {
       db.set(`${maMember.id}.info`, [userInfo[0], await bsClient.getPlayer(userInfo[0])]);
-      userInfo = db.fetch(`${message.author.id}.info`);
     }
     getUserInfo();
     async function giveRoles() {
-      let tagarg = db.fetch(`${message.author.id}.info`)[0];
+      let tagarg = db.fetch(`${maMember.id}.info`)[0];
       let userProfile = await bsClient.getPlayer(tagarg.toUpperCase());
       if (!db.fetch(`${maMember}.info`)) await db.push(`${maMember.id}.info`, [tagarg, userProfile]);
       let authorMember = maMember;
