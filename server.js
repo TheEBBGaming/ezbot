@@ -333,6 +333,7 @@ client.on("message", (message) => {
           addRoles();  
         })
       } else {
+        console.log('isguest');
         if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
         if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
         async function removeRoles() {
@@ -358,7 +359,9 @@ client.on("message", (message) => {
             };
           };
           await authorMember.addRole("550521408799768587");
+          console.log(message.guild.roles.get('550521408799768587').name);
         };
+        removeRoles();
         isGuest = true;
       };
     };
