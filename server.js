@@ -162,6 +162,7 @@ client.on("message", (message) => {
   console.log(message.channel.type);
   if (!message.guild) return;
   if (message.guild.id !== "518276112040853515" && message.guild.id !== "532272611330228234") return;
+  if (message.channel.type === "dm") return;
   if (!message.channel.type === "text") return;
   if (message.author.bot) return;
   // Variables
