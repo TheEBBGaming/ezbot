@@ -283,6 +283,7 @@ client.on("message", (message) => {
       let usersclub;
       if (!userProfile) return message.channel.send("Error. Couldn't get tag.");
       if (userProfile.club.name.startsWith("Stardust")) {
+       if (maMember.roles.has('550521408799768587')) await maMember.removeRole('550521408799768587');
        let userClub = userProfile.club.name.slice(9);
        async function removeRoles() {
          for (let k = 0; k < clArray.length; k++) {
