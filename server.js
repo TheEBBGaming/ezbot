@@ -267,7 +267,6 @@ client.on("message", (message) => {
     async function getUserInfo() {
       db.set(`${maMember.id}.info`, [userInfo[0], await bsClient.getPlayer(userInfo[0])]);
       userInfo = db.fetch(`${maMember.id}.info`);
-      console.log(userInfo[0]);
     }
     getUserInfo();
     async function giveRoles() {
@@ -299,7 +298,6 @@ client.on("message", (message) => {
            if (maMember.roles.has(clArray[k][2])) {
              let removeGR = clArray[k][2];
              let removeGPos = message.guild.roles.find(val => val.name === grName);
-             console.log("It's " + removeGPos.name);
              if (!removeGR || !removeGPos) { 
                message.channel.send("Sorry, there's been an error! Please contact a Moderator to have your roles corrected.");
                return;
@@ -333,7 +331,6 @@ client.on("message", (message) => {
           addRoles();  
         })
       } else {
-        console.log('isguest');
         if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
         if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
         async function removeRoles() {
@@ -342,7 +339,6 @@ client.on("message", (message) => {
                 if (maMember.roles.has(posRoles[j][1])) {
                    guildRole = posRoles[j][1];
                    grName = posRoles[j][0];
-                  console.log(grName);
                 } else {
                    continue;
                 };
@@ -350,7 +346,6 @@ client.on("message", (message) => {
             if (maMember.roles.has(clArray[k][2])) {
                let removeGR = clArray[k][2];
                let removeGPos = message.guild.roles.find(val => val.name === grName);
-               console.log("It's " + removeGPos.name);
               if (!removeGR || !removeGPos) {
                  return;
               } else {
@@ -359,7 +354,6 @@ client.on("message", (message) => {
             };
           };
           await authorMember.addRole("550521408799768587");
-          console.log(message.guild.roles.get('550521408799768587').name);
         };
         removeRoles();
         isGuest = true;
