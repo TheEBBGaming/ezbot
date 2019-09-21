@@ -266,6 +266,8 @@ client.on("message", (message) => {
     userInfo = db.fetch(`${maMember.id}.info`);
     async function getUserInfo() {
       db.set(`${maMember.id}.info`, [userInfo[0], await bsClient.getPlayer(userInfo[0])]);
+      userInfo = db.fetch(`${maMember.id}.info`);
+      console.log(userInfo[0]);
     }
     getUserInfo();
     async function giveRoles() {
@@ -339,6 +341,7 @@ client.on("message", (message) => {
                 if (maMember.roles.has(posRoles[j][1])) {
                    guildRole = posRoles[j][1];
                    grName = posRoles[j][0];
+                  console.log(grName);
                 } else {
                    continue;
                 };
