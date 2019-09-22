@@ -395,7 +395,13 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
   let isGuest = false;
   let usersclub;
   if (!userProfile) return message.channel.send("Error. Invalid tag.");
-  if (userProfile.club.name.startsWith("Stardust")) {
+  if (!userProfile.club) {
+    if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
+    if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
+    authorMember.addRole("550521408799768587");
+    isGuest = true;
+  }
+  if (userProfile.club && userProfile.club.name.startsWith("Stardust")) {
    let userClub = userProfile.club.name.slice(9);
    for (let i = 0; i < clArray.length; i++) {
      if (clArray[i][0] === userClub && userProfile.club.tag === clArray[i][1]) {
