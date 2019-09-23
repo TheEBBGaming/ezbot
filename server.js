@@ -122,7 +122,11 @@ client.on('guildMemberAdd', member => {
           isGuest = true;
         };
       };
-      giveRoles();
+      giveRoles().then(() => {
+        setTimeout(function() {
+          maMember.removeRole("550550415767502851");
+        }, 5000)
+      })  
       member.send("Welcome back to the server! I've given you your roles back, but I might've made a mistake. If so, please let a Moderator know!");
     };
 });
