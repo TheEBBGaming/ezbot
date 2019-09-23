@@ -20,11 +20,111 @@ client.on("ready", () => {
 });
 
 client.on('guildMemberAdd', member => {
-    let welcEmb = new Discord.RichEmbed()
-    .setColor(0xEBA911)
-    .setImage("https://media.giphy.com/media/cKsc4H4bg1msdgkBuE/giphy.gif")
-    .addField("Welcome to Stardust, " + member.user.tag + "!", "Before we let you in, we'll just need some verification so we know who you are.\n\nJust send me a picture of your Trophy Road profile as shown in the video below. If you have any questions or concerns, please Direct Message <@532261291600117780>. Thank you for your cooperation.")
-    member.send(welcEmb);
+    let maMember = client.guilds.get("518276112040853515").members.get(member.id);
+    let userInfo = db.fetch(`${maMember.id}.info`);
+    if (!userInfo) {
+      let welcEmb = new Discord.RichEmbed()
+      .setColor(0xEBA911)
+      .setImage("https://media.giphy.com/media/cKsc4H4bg1msdgkBuE/giphy.gif")
+      .addField("Welcome to Stardust, " + member.user.tag + "!", "Before we let you in, we'll just need some verification so we know who you are.\n\nJust send me a picture of your Trophy Road profile as shown in the video below. If you have any questions or concerns, please Direct Message <@532261291600117780>. Thank you for your cooperation.")
+      member.send(welcEmb);
+    } else {
+      async function getUserInfo() {
+        db.set(`${maMember.id}.info`, [userInfo[0], await bsClient.getPlayer(userInfo[0])]);
+        userInfo = db.fetch(`${maMember.id}.info`);
+      }
+      getUserInfo();
+      async function giveRoles() {
+        let tagarg = db.fetch(`${maMember.id}.info`)[0];
+        let userProfile = await bsClient.getPlayer(tagarg.toUpperCase());
+        if (!db.fetch(`${maMember}.info`)) await db.push(`${maMember.id}.info`, [tagarg, userProfile]);
+        let authorMember = maMember;
+        let clubList = db.fetch("clubList");
+        let clArray = clubList;
+        let guildRole;
+        let posRoles = [['Member', '550518379149131776'], ['Senior', '550518022939344896'], ['Vice President', '550517562623000589'], ['President', '550516837234901039']];
+        let grName;
+        let isGuest = false;
+        let usersclub;
+        if (userProfile.club.name.startsWith("Stardust")) {
+         if (maMember.roles.has('550521408799768587')) await maMember.removeRole('550521408799768587');
+         let userClub = userProfile.club.name.slice(9);
+         async function removeRoles() {
+           for (let k = 0; k < clArray.length; k++) {
+             for (let j = 0; j < posRoles.length; j++) {
+                 if (maMember.roles.has(posRoles[j][1])) {
+                   guildRole = posRoles[j][1];
+                   grName = posRoles[j][0];
+                 } else {
+                   continue;
+                 };
+               };
+             if (maMember.roles.has(clArray[k][2])) {
+               let removeGR = clArray[k][2];
+               let removeGPos = client.guilds.get("518276112040853515").roles.find(val => val.name === grName);
+               if (!removeGR || !removeGPos) { 
+                 return;
+               } else {
+                 await maMember.removeRoles([removeGR, removeGPos]);
+               }
+             };
+           };
+         };
+         async function addRoles() {
+         for (let i = 0; i < clArray.length; i++) {
+           if (clArray[i][0] === userClub && userProfile.club.tag === clArray[i][1]) {
+             if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
+             if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
+             await authorMember.addRole(clArray[i][2]);
+             usersclub = clArray[i][2];
+             for (let j = 0; j < posRoles.length; j++) {
+               if (userProfile.club.role === posRoles[j][0]) {
+                 guildRole = posRoles[j][1];
+                 grName = posRoles[j][0];
+               } else {
+                 continue;
+               };
+             };
+             await authorMember.addRole(guildRole);
+             break;
+           };
+         };
+        };
+          await removeRoles().then(() => {
+            addRoles();  
+          })
+        } else {
+          if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
+          if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
+          async function removeRoles() {
+            for (let k = 0; k < clArray.length; k++) {
+              for (let j = 0; j < posRoles.length; j++) {
+                  if (maMember.roles.has(posRoles[j][1])) {
+                     guildRole = posRoles[j][1];
+                     grName = posRoles[j][0];
+                  } else {
+                     continue;
+                  };
+                };
+              if (maMember.roles.has(clArray[k][2])) {
+                 let removeGR = clArray[k][2];
+                 let removeGPos = client.guilds.get("518276112040853515").roles.find(val => val.name === grName);
+                if (!removeGR || !removeGPos) {
+                   return;
+                } else {
+                   await maMember.removeRoles([removeGR, removeGPos]);
+                };
+              };
+            };
+            await authorMember.addRole("550521408799768587");
+          };
+          removeRoles();
+          isGuest = true;
+        };
+      };
+      giveRoles();
+      member.send("Welcome back to the server! I've given you your roles back, but I might've made a mistake. If so, please let a Moderator know!");
+    };
 });
 
 client.on("message", (message) => {
