@@ -370,9 +370,13 @@ client.on("message", (message) => {
   if (msg.startsWith(`${prefix}REFRESH`)) {
     if (message.author.id === "288853176210161666" && args[0]) maMember = message.mentions.members.first();
     userInfo = db.fetch(`${maMember.id}.info`);
+    let argtwo;
     async function getUserInfo() {
-      let argtwo = await bsClient.getPlayer(userInfo[0]);
-      if (!typeof(argtwo) === "string") argtwo = await bsClient.getPlayer(userInfo[0][0]);
+      if (typeof(userInfo[0]) !== "string") { 
+        argtwo = await bsClient.getPlayer(userInfo[0][0]);
+      } else {
+        argtwo = await bsClient.getPlayer(userInfo[0]);
+      }
       let argone = userInfo[0];
       if (!typeof(argone) === "string") argone = userInfo[0][0];
       db.set(`${maMember.id}.info`, [argone, argtwo]);
@@ -398,6 +402,7 @@ client.on("message", (message) => {
       let usersclub;
       if (!userProfile) return message.channel.send("Error. Couldn't get tag.");
       if (userProfile.club.name.startsWith("Stardust")) {
+        console.log("sws");
        if (maMember.roles.has('550521408799768587')) await maMember.removeRole('550521408799768587');
        let userClub = userProfile.club.name.slice(9);
        async function removeRoles() {
@@ -423,6 +428,7 @@ client.on("message", (message) => {
          };
        };
        async function addRoles() {
+        console.log("addingroles");
        for (let i = 0; i < clArray.length; i++) {
          if (clArray[i][0] === userClub && userProfile.club.tag === clArray[i][1]) {
            if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
@@ -446,6 +452,7 @@ client.on("message", (message) => {
           addRoles();  
         })
       } else {
+        console.log("notstar");
         if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
         if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
         async function removeRoles() {
