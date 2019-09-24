@@ -523,6 +523,7 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
     isGuest = true;
   }
   if (userProfile.club && userProfile.club.name.startsWith("Stardust")) {
+   console.log("sws");
    let userClub = userProfile.club.name.slice(9);
    for (let i = 0; i < clArray.length; i++) {
      if (clArray[i][0] === userClub && userProfile.club.tag === clArray[i][1]) {
@@ -553,6 +554,7 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
   let rolestr = "and the following role(s):\n\n";
   if (isGuest) {
     rolestr = rolestr + "Guest";
+    console.log("ig");
   } else {
     console.log(usersclub);
     console.log(message.guild.roles.get(usersclub));
