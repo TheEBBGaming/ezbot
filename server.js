@@ -377,6 +377,7 @@ client.on("message", (message) => {
     getUserInfo();
     async function giveRoles() {
       let tagarg = db.fetch(`${maMember.id}.info`)[0];
+      if (!typeof(tagarg) === "string") tagarg = 
       let userProfile = await bsClient.getPlayer(tagarg.toUpperCase());
       if (!db.fetch(`${maMember}.info`)) await db.push(`${maMember.id}.info`, [tagarg, userProfile]);
       let authorMember = maMember;
