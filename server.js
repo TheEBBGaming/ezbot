@@ -391,6 +391,7 @@ client.on("message", (message) => {
       };
       console.log(tagarg);
       let userProfile = await bsClient.getPlayer(tagarg.toUpperCase());
+      // bsClient.getPlayer(db.fetch(`${maMember.id}.info`)[0][0].toUpperCase()).club.name;
       if (!db.fetch(`${maMember}.info`)) await db.push(`${maMember.id}.info`, [tagarg, userProfile]);
       let authorMember = maMember;
       let clubList = db.fetch("clubList");
