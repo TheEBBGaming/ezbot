@@ -371,13 +371,17 @@ client.on("message", (message) => {
     if (message.author.id === "288853176210161666" && args[0]) maMember = message.mentions.members.first();
     userInfo = db.fetch(`${maMember.id}.info`);
     async function getUserInfo() {
-      db.set(`${maMember.id}.info`, [userInfo[0], await bsClient.getPlayer(userInfo[0])]);
+      let argtwo = await bsClient.getPlayer(userInfo[0]);
+      if (!typeof(argtwo) === "string") argtwo = await bsClient.getPlayer(userInfo[0][0]);
+      let argone = userInfo[0];
+      if (!typeof(argone) === "string") argone = userInfo[0][0];
+      db.set(`${maMember.id}.info`, [argone, argtwo]);
       userInfo = db.fetch(`${maMember.id}.info`);
     }
     getUserInfo();
     async function giveRoles() {
       let tagarg = db.fetch(`${maMember.id}.info`)[0];
-      if (!typeof(tagarg) === "string") tagarg = 
+      if (!typeof(tagarg) === "string") tagarg = db.fetch(`${maMember.id}.info`)[0][0];
       let userProfile = await bsClient.getPlayer(tagarg.toUpperCase());
       if (!db.fetch(`${maMember}.info`)) await db.push(`${maMember.id}.info`, [tagarg, userProfile]);
       let authorMember = maMember;
