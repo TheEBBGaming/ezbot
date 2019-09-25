@@ -484,3 +484,35 @@ console.log('didnt need to edit ' + loopMemb.displayName);
 		};
 	};
 */
+
+
+   let membArr = message.guild.members.keyArray();
+    let ssrole = '550550415767502851';
+    let ctr = 0;
+    for (let i = 0; i < membArr.length; i++) {
+      ctr += 1;
+      let loopMemb = message.guild.members.get(membArr[i]);
+      if (loopMemb.roles.has(ssrole) || !db.fetch(`${loopMemb.id}.info`)) continue;
+      let userInfo = db.fetch(`${loopMemb.id}.info`);
+        if (loopMemb.roles.has(twitchrole)) hastwitch = true;
+        if (loopMemb.roles.has(ytrole)) hasyt = true;
+        async function resetRoles() {
+          if (typeof(userInfo[0]) !== "string") { 
+        argtwo = await bsClient.getPlayer(userInfo[0][0]);
+      } else {
+        argtwo = await bsClient.getPlayer(userInfo[0]);
+      }
+          if (hasyt) await loopMemb.addRole(ytrole);
+          if (hastwitch) await loopMemb.addRole(twitchrole);
+          await loopMemb.addRole('579439624460566549');
+          let welcEmb = new Discord.RichEmbed()
+          .setColor(0xEBA911)
+          .setImage("https://media.giphy.com/media/cKsc4H4bg1msdgkBuE/giphy.gif")
+          .addField("Sorry for the inconvenience, " + loopMemb.user.tag + "!", "We're resetting all members' roles to accomodate for the new role system, so we'll need you to reverify. \n\nJust send me a picture of your Trophy Road profile as shown in the video below. If you have any questions or concerns, please Direct Message <@532261291600117780>. Thank you for your cooperation.")
+          loopMemb.send(welcEmb)
+          .catch(() => {
+            console.log('couldnt send to ' + loopMemb.displayName);
+          });
+        };
+        resetRoles();
+    };
