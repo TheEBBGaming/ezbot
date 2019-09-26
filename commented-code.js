@@ -489,18 +489,19 @@ console.log('didnt need to edit ' + loopMemb.displayName);
    let membArr = message.guild.members.keyArray();
     let ctr = 0;
     let ruif;
+    let argtwo;
     for (let i = 0; i < membArr.length; i++) {
       let loopMemb = message.guild.members.get(membArr[i]);
       if (!db.fetch(`${loopMemb.id}.info`)) continue;
       ctr += 1;
-      let userInfo = db.fetch(`${loopMemb.id}.info`);
+      let uif = db.fetch(`${loopMemb.id}.info`);
         async function resetInfo() {
-          if (typeof(userInfo[0]) !== "string") { 
-        argtwo = await bsClient.getPlayer(userInfo[0][0]);
-        ruif = userInfo[0][0];
+          if (typeof(uif[0]) !== "string") { 
+        argtwo = await bsClient.getPlayer(uif[0][0]);
+        ruif = uif[0][0];
       } else {
-        argtwo = await bsClient.getPlayer(userInfo[0]);
-        ruif = userInfo[0];
+        argtwo = await bsClient.getPlayer(uif[0]);
+        ruif = uif[0];
       }
           console.log(ctr);
           db.set(`${loopMemb.id}.info`, [ruif, argtwo]);
