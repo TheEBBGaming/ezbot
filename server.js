@@ -527,6 +527,7 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
    let userClub = userProfile.club.name.slice(9);
    for (let i = 0; i < clArray.length; i++) {
      if (clArray[i][0] === userClub && userProfile.club.tag === clArray[i][1]) {
+       console.log("found");
        if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
        if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
        authorMember.addRole(clArray[i][2]);
@@ -545,6 +546,12 @@ if (msg.startsWith(`${prefix}MANUALVERIFY`) || msg.startsWith(`${prefix}MV`)) {
        break;
      };
    };
+    if (!guildRole && !grName) {
+      if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
+      if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
+      authorMember.addRole("550521408799768587");
+      isGuest = true;
+    };
   } else {
     if (authorMember.roles.has("608708416478642227")) authorMember.removeRole('608708416478642227');
     if (authorMember.roles.has("550550415767502851")) authorMember.removeRole('550550415767502851');
