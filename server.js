@@ -362,10 +362,10 @@ client.on("message", message => {
   let gMembs;
   let botOwner = false;
   let modRoles = [
-    "Moderator",
+    "Club Health",
     "Admin",
     "Head Admin",
-    "Board of Directors",
+    "Department Head",
     "Chairman"
   ];
   let userModRole = null;
@@ -383,7 +383,7 @@ client.on("message", message => {
     } else if (mesMemb.roles.find(val => val.name === modRoles[2])) {
       userModRole = "Head Admin";
     } else if (mesMemb.roles.find(val => val.name === modRoles[3])) {
-      userModRole = "Board of Directors";
+      userModRole = "Department Head";
     } else if (mesMemb.roles.find(val => val.name === modRoles[4])) {
       userModRole = "Chairman";
     }
@@ -920,8 +920,7 @@ client.on("message", message => {
       let removedRoles = "";
       let addedRoles = "";
       for (let i = 0; i <= arrayRL; i++) {
-        if (
-          !message.guild.roles.find(
+        if (!message.guild.roles.find(
             val => val.name.toUpperCase() === roles[i].toUpperCase().slice(1)
           )
         )
