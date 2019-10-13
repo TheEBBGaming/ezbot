@@ -24,7 +24,7 @@ app.get("/", (request, response) => {
 });
 app.listen(process.env.PORT);
 setInterval(() => {
-  http.get(`http://royaltymod312112133.glitch.me/`);
+  http.get(`http://lmntz.glitch.me/`);
 }, 80000);
 
 client.on("ready", () => {
