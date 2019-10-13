@@ -20,7 +20,7 @@
     "jquery": "^3.4.1",
     "jsdom": "^15.1.1",
     "match-all": "^1.2.5",
-    "node-gyp": "^5.0.3",
+    "node-gyp": "^5.0.5",
     "parse-ms": "^2.0.0",
     "quick.db": "^7.0.0-b22",
     "request": "^2.88.0",
