@@ -179,7 +179,7 @@ client.on("message", message => {
       } else {
         if (userInfo)
           return message.channel.send(
-            "Hey, you're already verified!\n\nOnly DM this bot for verification upon joining. For any questions or inquiries, please message <@532261291600117780>.\n\nIf there's ben a mistake and you haven't received your roles on the main server, message <@532261291600117780> immediately."
+            "Hey, you're already verified!\n\nOnly DM this bot for verification upon joining. For any questions or inquiries, please message <@532261291600117780>.\n\nIf there's been a mistake and you haven't received your roles on the main server, message <@532261291600117780> immediately."
           );
         let founderr = false;
         async function errCase(theerr) {
