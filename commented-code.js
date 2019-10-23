@@ -488,6 +488,7 @@ let message;
 let db;
 let bsClient;
 let maMember;
+let userProfile;
 
    let membArr = message.guild.members.keyArray();
     let ctr = 0;
@@ -525,6 +526,7 @@ let maMember;
           let grName;
           let isGuest = false;
           let usersclub;
+          userProfile = uif;
           if (userProfile.club.name.startsWith("EZ")) {
             if (maMember.roles.has("550521408799768587")) await maMember.removeRole("550521408799768587");
             if (maMember.roles.has("582029503241388061")) await maMember.removeRole("582029503241388061");
@@ -583,7 +585,38 @@ let maMember;
             await removeRoles().then(() => {
               addRoles();
             });
-        };
+        } else {
+          if (authorMember.roles.has("608708416478642227"))
+            authorMember.removeRole("608708416478642227");
+          if (authorMember.roles.has("550550415767502851"))
+            authorMember.removeRole("550550415767502851");
+          async function removeRoles() {
+            for (let k = 0; k < clArray.length; k++) {
+              for (let j = 0; j < posRoles.length; j++) {
+                if (maMember.roles.has(posRoles[j][1])) {
+                  guildRole = posRoles[j][1];
+                  grName = posRoles[j][0];
+                } else {
+                  continue;
+                }
+              }
+              if (maMember.roles.has(clArray[k][2])) {
+                let removeGR = clArray[k][2];
+                let removeGPos = message.guild.roles.find(
+                  val => val.name === grName
+                );
+                if (!removeGR || !removeGPos) {
+                  return;
+                } else {
+                  await maMember.removeRoles([removeGR, removeGPos]);
+                }
+              }
+            }
+            await authorMember.addRole("550521408799768587");
+          }
+          removeRoles();
+          isGuest = true;
+      };
       };
     };
     refresh();
