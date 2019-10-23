@@ -487,27 +487,102 @@ console.log('didnt need to edit ' + loopMemb.displayName);
 let message;
 let db;
 let bsClient;
+let maMember;
 
    let membArr = message.guild.members.keyArray();
     let ctr = 0;
     let ruif;
     let argtwo;
+    async function refresh() {
     for (let i = 0; i < membArr.length; i++) {
-      let loopMemb = message.guild.members.get(membArr[i]);
-      if (!db.fetch(`${loopMemb.id}.info`)) continue;
-      ctr += 1;
-      let uif = db.fetch(`${loopMemb.id}.info`);
-        async function resetInfo() {
-          if (typeof(uif[0]) !== "string") { 
-          console.log("error with " + loopMemb);
-        argtwo = await bsClient.getPlayer(uif[0][0]);
-        ruif = uif[0][0];
-      } else {
-        argtwo = await bsClient.getPlayer(uif[0]);
-        ruif = uif[0];
-      }
-          console.log(ctr);
-          db.set(`${loopMemb.id}.info`, [ruif, argtwo]);
+        let loopMemb = message.guild.members.get(membArr[i]);
+        if (!db.fetch(`${loopMemb.id}.info`)) continue;
+        ctr += 1;
+        let uif = db.fetch(`${loopMemb.id}.info`);
+          async function resetInfo() {
+            if (typeof(uif[0]) !== "string") { 
+            console.log("error with " + loopMemb);
+          argtwo = await bsClient.getPlayer(uif[0][0]);
+          ruif = uif[0][0];
+        } else {
+          argtwo = await bsClient.getPlayer(uif[0]);
+          ruif = uif[0];
+        }
+            console.log(ctr);
+            db.set(`${loopMemb.id}.info`, [ruif, argtwo]);
+          };
+          resetInfo();
+          let authorMember = maMember;
+          let clubList = db.fetch("clubList");
+          let clArray = clubList;
+          let guildRole;
+          let posRoles = [
+            ["Member", "550518379149131776"],
+            ["Senior", "550518022939344896"],
+            ["Vice President", "550517562623000589"],
+            ["President", "550516837234901039"]
+          ];
+          let grName;
+          let isGuest = false;
+          let usersclub;
+          if (userProfile.club.name.startsWith("EZ")) {
+            if (maMember.roles.has("550521408799768587")) await maMember.removeRole("550521408799768587");
+            let userClub = userProfile.club.name.slice(9);
+            async function removeRoles() {
+              for (let k = 0; k < clArray.length; k++) {
+                for (let j = 0; j < posRoles.length; j++) {
+                  if (maMember.roles.has(posRoles[j][1])) {
+                    guildRole = posRoles[j][1];
+                    grName = posRoles[j][0];
+                  } else {
+                    continue;
+                  }
+                }
+                if (maMember.roles.has(clArray[k][2])) {
+                  let removeGR = clArray[k][2];
+                  let removeGPos = message.guild.roles.find(
+                    val => val.name === grName
+                  );
+                  if (!removeGR || !removeGPos) {
+                    message.channel.send(
+                      "Sorry, there's been an error! Please contact a Moderator to have your roles corrected."
+                    );
+                    return;
+                  } else {
+                    await maMember.removeRoles([removeGR, removeGPos]);
+                  }
+                }
+              }
+            }
+            async function addRoles() {
+              for (let i = 0; i < clArray.length; i++) {
+                if (
+                  clArray[i][0] === userClub &&
+                  userProfile.club.tag === clArray[i][1]
+                ) {
+                  if (authorMember.roles.has("608708416478642227"))
+                    authorMember.removeRole("608708416478642227");
+                  if (authorMember.roles.has("550550415767502851"))
+                    authorMember.removeRole("550550415767502851");
+                  await authorMember.addRole(clArray[i][2]);
+                  usersclub = clArray[i][2];
+                  for (let j = 0; j < posRoles.length; j++) {
+                    if (userProfile.club.role === posRoles[j][0]) {
+                      guildRole = posRoles[j][1];
+                      grName = posRoles[j][0];
+                    } else {
+                      continue;
+                    }
+                  }
+                  await authorMember.addRole(guildRole);
+                  break;
+                }
+              }
+            }
+            await removeRoles().then(() => {
+              addRoles();
+            });
         };
-        resetInfo();
+      };
     };
+    refresh();
