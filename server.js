@@ -538,7 +538,7 @@ client.on("message", message => {
       let isGuest = false;
       let usersclub;
       if (!userProfile) return message.channel.send("Error. Couldn't get tag.");
-      if (userProfile.club.name.startsWith("Stardust")) {
+      if (userProfile.club.name.startsWith("EZ")) {
         if (maMember.roles.has("550521408799768587"))
           await maMember.removeRole("550521408799768587");
         let userClub = userProfile.club.name.slice(9);
