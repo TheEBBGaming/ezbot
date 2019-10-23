@@ -527,6 +527,7 @@ let maMember;
           let usersclub;
           if (userProfile.club.name.startsWith("EZ")) {
             if (maMember.roles.has("550521408799768587")) await maMember.removeRole("550521408799768587");
+            if (maMember.roles.has("582029503241388061")) await maMember.removeRole("582029503241388061");
             let userClub = userProfile.club.name.slice(9);
             async function removeRoles() {
               for (let k = 0; k < clArray.length; k++) {
@@ -544,8 +545,8 @@ let maMember;
                     val => val.name === grName
                   );
                   if (!removeGR || !removeGPos) {
-                    message.channel.send(
-                      "Sorry, there's been an error! Please contact a Moderator to have your roles corrected."
+                    console.log(
+                      "error with" + loopMemb
                     );
                     return;
                   } else {
