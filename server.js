@@ -39,7 +39,7 @@ client.on("guildMemberAdd", member => {
       .setColor(0xeba911)
       .setImage("https://media.giphy.com/media/cKsc4H4bg1msdgkBuE/giphy.gif")
       .addField(
-        "Welcome to Stardust, " + member.user.tag + "!",
+        "Welcome to the Elementz family, " + member.user.tag + "!",
         "Before we let you in, we'll just need some verification so we know who you are.\n\nJust send me a picture of your Trophy Road profile as shown in the video below. If you have any questions or concerns, please Direct Message <@532261291600117780>. Thank you for your cooperation."
       );
     member.send(welcEmb);
@@ -70,7 +70,7 @@ client.on("guildMemberAdd", member => {
       let grName;
       let isGuest = false;
       let usersclub;
-      if (userProfile.club.name.startsWith("Stardust")) {
+      if (userProfile.club.name.startsWith("EZ")) {
         if (maMember.roles.has("550521408799768587"))
           await maMember.removeRole("550521408799768587");
         let userClub = userProfile.club.name.slice(9);
@@ -105,8 +105,6 @@ client.on("guildMemberAdd", member => {
             ) {
               if (authorMember.roles.has("608708416478642227"))
                 authorMember.removeRole("608708416478642227");
-              if (authorMember.roles.has("550550415767502851"))
-                authorMember.removeRole("550550415767502851");
               await authorMember.addRole(clArray[i][2]);
               usersclub = clArray[i][2];
               for (let j = 0; j < posRoles.length; j++) {

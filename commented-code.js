@@ -513,6 +513,7 @@ let userProfile;
             db.set(`${loopMemb.id}.info`, [ruif, argtwo]);
           };
           resetInfo();
+          maMember = loopMemb;
           let authorMember = maMember;
           let clubList = db.fetch("clubList");
           let clArray = clubList;
@@ -586,10 +587,10 @@ let userProfile;
               addRoles();
             });
         } else {
-          if (authorMember.roles.has("608708416478642227"))
-            authorMember.removeRole("608708416478642227");
-          if (authorMember.roles.has("550550415767502851"))
-            authorMember.removeRole("550550415767502851");
+          if (maMember.roles.has("550521408799768587")) await maMember.removeRole("550521408799768587");
+          if (maMember.roles.has("582029503241388061")) await maMember.removeRole("582029503241388061");
+          if (authorMember.roles.has("608708416478642227")) await authorMember.removeRole("608708416478642227");
+          if (authorMember.roles.has("550550415767502851")) await authorMember.removeRole("550550415767502851");
           async function removeRoles() {
             for (let k = 0; k < clArray.length; k++) {
               for (let j = 0; j < posRoles.length; j++) {
