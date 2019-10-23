@@ -126,8 +126,6 @@ client.on("guildMemberAdd", member => {
       } else {
         if (authorMember.roles.has("608708416478642227"))
           authorMember.removeRole("608708416478642227");
-        if (authorMember.roles.has("550550415767502851"))
-          authorMember.removeRole("550550415767502851");
         async function removeRoles() {
           for (let k = 0; k < clArray.length; k++) {
             for (let j = 0; j < posRoles.length; j++) {

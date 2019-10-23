@@ -499,6 +499,7 @@ let userProfile;
         let loopMemb = message.guild.members.get(membArr[i]);
         if (!db.fetch(`${loopMemb.id}.info`)) continue;
         ctr += 1;
+        async function doitall() {
         let uif = db.fetch(`${loopMemb.id}.info`);
           async function resetInfo() {
             if (typeof(uif[0]) !== "string") { 
@@ -617,6 +618,12 @@ let userProfile;
           }
           removeRoles();
           isGuest = true;
+      };
+    };
+      if (ctr > 9) {
+      setTimeout(doitall, 7500);
+      } else {
+        doitall();
       };
       };
     };
