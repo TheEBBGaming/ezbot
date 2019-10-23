@@ -519,9 +519,7 @@ client.on("message", message => {
       let tagarg = db.fetch(`${maMember.id}.info`)[0];
       if (typeof tagarg !== "string") {
         tagarg = db.fetch(`${maMember.id}.info`)[0][0];
-        console.log("done");
       }
-      console.log(tagarg);
       let userProfile = await bsClient.getPlayer(tagarg.toUpperCase());
       // bsClient.getPlayer(db.fetch(`${maMember.id}.info`)[0][0].toUpperCase()).club.name;
       if (!db.fetch(`${maMember}.info`))
@@ -541,7 +539,6 @@ client.on("message", message => {
       let usersclub;
       if (!userProfile) return message.channel.send("Error. Couldn't get tag.");
       if (userProfile.club.name.startsWith("Stardust")) {
-        console.log("sws");
         if (maMember.roles.has("550521408799768587"))
           await maMember.removeRole("550521408799768587");
         let userClub = userProfile.club.name.slice(9);
@@ -572,7 +569,6 @@ client.on("message", message => {
           }
         }
         async function addRoles() {
-          console.log("addingroles");
           for (let i = 0; i < clArray.length; i++) {
             if (
               clArray[i][0] === userClub &&
@@ -601,7 +597,6 @@ client.on("message", message => {
           addRoles();
         });
       } else {
-        console.log("notstar");
         if (authorMember.roles.has("608708416478642227"))
           authorMember.removeRole("608708416478642227");
         if (authorMember.roles.has("550550415767502851"))

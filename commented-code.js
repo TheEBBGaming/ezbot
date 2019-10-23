@@ -484,7 +484,9 @@ console.log('didnt need to edit ' + loopMemb.displayName);
 		};
 	};
 */
-
+let message;
+let db;
+let bsClient;
 
    let membArr = message.guild.members.keyArray();
     let ctr = 0;
@@ -497,6 +499,7 @@ console.log('didnt need to edit ' + loopMemb.displayName);
       let uif = db.fetch(`${loopMemb.id}.info`);
         async function resetInfo() {
           if (typeof(uif[0]) !== "string") { 
+          console.log("error with " + loopMemb);
         argtwo = await bsClient.getPlayer(uif[0][0]);
         ruif = uif[0][0];
       } else {
