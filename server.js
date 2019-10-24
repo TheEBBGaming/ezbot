@@ -52,6 +52,7 @@ client.on("guildMemberAdd", member => {
       userInfo = db.fetch(`${maMember.id}.info`);
     }
     getUserInfo();
+    console.log("fetched info");
     async function giveRoles() {
       let tagarg = db.fetch(`${maMember.id}.info`)[0];
       let userProfile = await bsClient.getPlayer(tagarg.toUpperCase());
@@ -70,6 +71,7 @@ client.on("guildMemberAdd", member => {
       let grName;
       let isGuest = false;
       let usersclub;
+      console.log("defined stuff");
       if (userProfile.club.name.startsWith("EZ")) {
         if (maMember.roles.has("550521408799768587"))
           await maMember.removeRole("550521408799768587");
@@ -127,6 +129,7 @@ client.on("guildMemberAdd", member => {
         if (authorMember.roles.has("608708416478642227"))
           authorMember.removeRole("608708416478642227");
         async function removeRoles() {
+          console.log("got to removing");
           for (let k = 0; k < clArray.length; k++) {
             for (let j = 0; j < posRoles.length; j++) {
               if (maMember.roles.has(posRoles[j][1])) {
@@ -152,11 +155,13 @@ client.on("guildMemberAdd", member => {
         }
         removeRoles();
         isGuest = true;
+        console.log("done removing");
       }
     }
     giveRoles().then(() => {
       setTimeout(function() {
         maMember.removeRole("550550415767502851");
+        console.log("removed role");
       }, 5000);
     });
     member.send(
