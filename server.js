@@ -45,9 +45,13 @@ client.on("guildMemberAdd", member => {
     member.send(welcEmb);
   } else {
     async function getUserInfo() {
+      console.log(userInfo[0]);
+      let infotag;
+      if (typeof userInfo[0] === "string") infotag = userInfo[0];
+      if (typeof userInfo[0] !== "string") infotag = userInfo[0][0];
       db.set(`${maMember.id}.info`, [
-        userInfo[0],
-        await bsClient.getPlayer(userInfo[0])
+        infotag,
+        await bsClient.getPlayer(infotag)
       ]);
       userInfo = db.fetch(`${maMember.id}.info`);
     }
@@ -542,7 +546,7 @@ client.on("message", message => {
       if (userProfile.club.name.startsWith("EZ")) {
         if (maMember.roles.has("550521408799768587"))
           await maMember.removeRole("550521408799768587");
-        let userClub = userProfile.club.name.slice(9);
+        let userClub = userProfile.club.name.slice(3);
         async function removeRoles() {
           for (let k = 0; k < clArray.length; k++) {
             for (let j = 0; j < posRoles.length; j++) {
