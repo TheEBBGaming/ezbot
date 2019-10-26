@@ -79,7 +79,7 @@ client.on("guildMemberAdd", member => {
       if (userProfile.club.name.startsWith("EZ")) {
         if (maMember.roles.has("550521408799768587"))
           await maMember.removeRole("550521408799768587");
-        let userClub = userProfile.club.name.slice(9);
+        let userClub = userProfile.club.name.slice(3);
         async function removeRoles() {
           for (let k = 0; k < clArray.length; k++) {
             for (let j = 0; j < posRoles.length; j++) {
@@ -284,8 +284,8 @@ client.on("message", message => {
                     "If I messed anything up, please let a Moderator know immediately!",
                     "https://images-ext-2.discordapp.net/external/Cs_NAISor0PFLsU9v_TrKkBklarqRBGT576KZIgpCSw/%3Fsize%3D128/https/cdn.discordapp.com/icons/518276112040853515/34a790f3593d4ce624c2f75370d99223.png"
                   );
-                if (userProfile.club.name.startsWith("Stardust")) {
-                  let userClub = userProfile.club.name.slice(9);
+                if (userProfile.club.name.startsWith("EZ")) {
+                  let userClub = userProfile.club.name.slice(3);
                   let clubList = db.fetch("clubList");
                   let clArray = clubList;
                   for (let i = 0; i < clArray.length; i++) {
@@ -696,9 +696,8 @@ client.on("message", message => {
           authorMember.addRole("550521408799768587");
           isGuest = true;
         }
-        if (userProfile.club && userProfile.club.name.startsWith("Stardust")) {
-          console.log("sws");
-          let userClub = userProfile.club.name.slice(9);
+        if (userProfile.club && userProfile.club.name.startsWith("EZ")) {
+          let userClub = userProfile.club.name.slice(3);
           for (let i = 0; i < clArray.length; i++) {
             if (
               clArray[i][0] === userClub &&
