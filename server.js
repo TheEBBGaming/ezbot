@@ -703,14 +703,12 @@ client.on("message", message => {
               clArray[i][0] === userClub &&
               userProfile.club.tag === clArray[i][1]
             ) {
-              console.log("found");
               if (authorMember.roles.has("608708416478642227"))
                 authorMember.removeRole("608708416478642227");
               if (authorMember.roles.has("550550415767502851"))
                 authorMember.removeRole("550550415767502851");
               authorMember.addRole(clArray[i][2]);
               usersclub = clArray[i][2];
-              console.log(clArray[i][2]);
               let posRoles = [
                 ["Member", "550518379149131776"],
                 ["Senior", "550518022939344896"],
@@ -748,10 +746,7 @@ client.on("message", message => {
         let rolestr = "and the following role(s):\n\n";
         if (isGuest) {
           rolestr = rolestr + "Guest";
-          console.log("ig");
         } else {
-          console.log(usersclub);
-          console.log(message.guild.roles.get(usersclub));
           let twostr = message.guild.roles.get(usersclub).name + "\n" + grName;
           rolestr = rolestr + twostr;
         }
