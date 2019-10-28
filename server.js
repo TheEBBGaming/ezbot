@@ -548,17 +548,17 @@ client.on("message", message => {
               }
             }
             async function addRoles() {
-              for (let i = 0; i < clArray.length; i++) {
+              for (let l = 0; l < clArray.length; l++) {
                 if (
-                  clArray[i][0] === userClub &&
-                  userProfile.club.tag === clArray[i][1]
+                  clArray[l][0] === userClub &&
+                  userProfile.club.tag === clArray[l][1]
                 ) {
                   if (authorMember.roles.has("608708416478642227"))
                     authorMember.removeRole("608708416478642227");
                   if (authorMember.roles.has("550550415767502851"))
                     authorMember.removeRole("550550415767502851");
-                  await authorMember.addRole(clArray[i][2]);
-                  usersclub = clArray[i][2];
+                  await authorMember.addRole(clArray[l][2]);
+                  usersclub = clArray[l][2];
                   for (let j = 0; j < posRoles.length; j++) {
                     if (userProfile.club.role === posRoles[j][0]) {
                       guildRole = posRoles[j][1];
