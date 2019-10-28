@@ -488,12 +488,12 @@ let message;
 let db;
 let bsClient;
 let maMember;
-let userProfile;
 
    let membArr = message.guild.members.keyArray();
     let ctr = 0;
     let ruif;
     let argtwo;
+    let userProfile = await bsClient.getPlayer(tagarg.toUpperCase());
     async function refresh() {
     for (let i = 0; i < membArr.length; i++) {
         let loopMemb = message.guild.members.get(membArr[i]);
@@ -510,7 +510,6 @@ let userProfile;
           argtwo = await bsClient.getPlayer(uif[0]);
           ruif = uif[0];
         }
-            console.log(ctr);
             db.set(`${loopMemb.id}.info`, [ruif, argtwo]);
           };
           resetInfo();
@@ -532,7 +531,7 @@ let userProfile;
           if (userProfile.club.name.startsWith("EZ")) {
             if (maMember.roles.has("550521408799768587")) await maMember.removeRole("550521408799768587");
             if (maMember.roles.has("582029503241388061")) await maMember.removeRole("582029503241388061");
-            let userClub = userProfile.club.name.slice(9);
+            let userClub = userProfile.club.name.slice(3);
             async function removeRoles() {
               for (let k = 0; k < clArray.length; k++) {
                 for (let j = 0; j < posRoles.length; j++) {
@@ -620,8 +619,9 @@ let userProfile;
           isGuest = true;
       };
     };
-      if (ctr > 9) {
-      setTimeout(doitall, 7500);
+      if (ctr > 7) {
+      console.log("waiting...");
+      setTimeout(doitall, 8000);
       } else {
         doitall();
       };

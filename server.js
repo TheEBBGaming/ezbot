@@ -509,14 +509,11 @@ client.on("message", message => {
     userInfo = db.fetch(`${maMember.id}.info`);
     let argtwo;
     async function getUserInfo() {
-      console.log(typeof userInfo[0]);
-      console.log()
+
       if (typeof userInfo[0] !== "string") {
         argtwo = await bsClient.getPlayer(userInfo[0][0]);
-        console.log("it's 00");
       } else {
         argtwo = await bsClient.getPlayer(userInfo[0]);
-        console.log("it's 0");
       }
       let argone = userInfo[0];
       if (!typeof argone === "string") argone = userInfo[0][0];
