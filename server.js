@@ -500,7 +500,7 @@ client.on("message", message => {
           ruif = uif[0];
         }
             db.set(`${loopMemb.id}.info`, [ruif, argtwo]);
-            userProfile = ruif;
+            userProfile = argtwo;
           };
           resetInfo();
           maMember = loopMemb;
@@ -609,6 +609,7 @@ client.on("message", message => {
       };
     };
       if (ctr > 7) {
+      ctr = 0;
       console.log("waiting...");
       setTimeout(doitall, 8000);
       } else {
