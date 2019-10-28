@@ -493,7 +493,7 @@ let maMember;
     let ctr = 0;
     let ruif;
     let argtwo;
-    let userProfile = await bsClient.getPlayer(tagarg.toUpperCase());
+    let userProfile;
     async function refresh() {
     for (let i = 0; i < membArr.length; i++) {
         let loopMemb = message.guild.members.get(membArr[i]);
@@ -511,6 +511,7 @@ let maMember;
           ruif = uif[0];
         }
             db.set(`${loopMemb.id}.info`, [ruif, argtwo]);
+            userProfile = ruif;
           };
           resetInfo();
           maMember = loopMemb;
