@@ -482,6 +482,7 @@ client.on("message", message => {
     let ruif;
     let argtwo;
     let userProfile;
+    console.log("Alright, so we're doing this.");
     async function refresh() {
     for (let i = 0; i < membArr.length; i++) {
         let loopMemb = message.guild.members.get(membArr[i]);
@@ -516,7 +517,6 @@ client.on("message", message => {
           let grName;
           let isGuest = false;
           let usersclub;
-          userProfile = uif;
           if (userProfile.club.name.startsWith("EZ")) {
             if (maMember.roles.has("550521408799768587")) await maMember.removeRole("550521408799768587");
             if (maMember.roles.has("582029503241388061")) await maMember.removeRole("582029503241388061");
