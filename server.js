@@ -367,7 +367,7 @@ client.on("message", message => {
   let gMembs;
   let botOwner = false;
   let modRoles = [
-    "Club Health",
+    "Moderator",
     "Admin",
     "Head Admin",
     "Department Head",
