@@ -18,6 +18,25 @@ const bsClient = new BrawlStars.Client({
 });
 const http = require("http");
 const rp = require("request-promise");
+const bsreqops = {
+  headers: {
+    'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJyZWFzb24iOiJTdGFyZHVzdEJTIEJvdCIsInZlcnNpb24iOjEsImlhdCI6MTU2NTE5NjcwMn0.JUsaN9ManYkAQQAF1H5jQUfZdSfuIJB7YB_2h7fNp54'
+  }
+};
+
+function callback(error, response, body) {
+  if (!error && response.statusCode == 200) {
+    const info = JSON.parse(body);
+    
+  }
+}
+
+const bsClient = {
+  getPlayer: function {
+  
+}
+}
+
 const express = require("express");
 const app = express();
 app.get("/", (request, response) => {
@@ -650,6 +669,7 @@ client.on("message", message => {
   }
 
   if (msg.startsWith(`${prefix}REFRESH`)) {
+    console.log("can compute");
     if (message.author.id === "288853176210161666" && args[0])
       maMember = message.mentions.members.first();
     userInfo = db.fetch(`${maMember.id}.info`);
