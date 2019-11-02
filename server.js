@@ -12,10 +12,11 @@ cloudinary.config({
   api_key: "167498976851882",
   api_secret: "obEobf9il40RtiJ5YlkA4Z5cGew"
 });
-const bsClient = new BrawlStars.Client({
+/* const bsClient = new BrawlStars.Client({
   token:
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJyZWFzb24iOiJTdGFyZHVzdEJTIEJvdCIsInZlcnNpb24iOjEsImlhdCI6MTU2NTE5NjcwMn0.JUsaN9ManYkAQQAF1H5jQUfZdSfuIJB7YB_2h7fNp54"
 });
+*/
 const http = require("http");
 const rp = require("request-promise");
 const bsreqops = {
@@ -25,20 +26,27 @@ const bsreqops = {
   json: true
 };
 
-function callback(error, response, body) {
-  if (!error && response.statusCode == 200) {
-    const info = JSON.parse(body);
-    
-  }
-}
-
 const bsClient = {
   getPlayer: function(tag) {
+    console.log("got this far");
     bsreqops.url = `https://api.starlist.pro/v1/player?tag=${tag}`;
     rp(bsreqops)
-    .then(() => {
-      
+    .then((body) => {
+      return body;
     })
+    .catch ((e) => {
+      throw new Error(e);
+    });
+  },
+  getClub: function(tag) {
+    bsreqops.url = `https://api.starlist.pro/v1/ckub?tag=${tag}`;
+    rp(bsreqops)
+    .then((body) => {
+      return body;
+    })
+    .catch ((e) => {
+      throw new Error(e);
+    });
   }
 }
 
