@@ -21,7 +21,8 @@ const rp = require("request-promise");
 const bsreqops = {
   headers: {
     'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJyZWFzb24iOiJTdGFyZHVzdEJTIEJvdCIsInZlcnNpb24iOjEsImlhdCI6MTU2NTE5NjcwMn0.JUsaN9ManYkAQQAF1H5jQUfZdSfuIJB7YB_2h7fNp54'
-  }
+  },
+  json: true
 };
 
 function callback(error, response, body) {
@@ -32,9 +33,9 @@ function callback(error, response, body) {
 }
 
 const bsClient = {
-  getPlayer: function {
-  
-}
+  getPlayer: function(tag) {
+    
+  }
 }
 
 const express = require("express");
