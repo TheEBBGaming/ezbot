@@ -12,13 +12,14 @@ cloudinary.config({
   api_key: "167498976851882",
   api_secret: "obEobf9il40RtiJ5YlkA4Z5cGew"
 });
-/* const bsClient = new BrawlStars.Client({
+const bsClient = new BrawlStars.Client({
   token:
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJyZWFzb24iOiJTdGFyZHVzdEJTIEJvdCIsInZlcnNpb24iOjEsImlhdCI6MTU2NTE5NjcwMn0.JUsaN9ManYkAQQAF1H5jQUfZdSfuIJB7YB_2h7fNp54"
 });
-*/
+
 const http = require("http");
 const rp = require("request-promise");
+/*
 const bsreqops = {
   headers: {
     Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJyZWFzb24iOiJTdGFyZHVzdEJTIEJvdCIsInZlcnNpb24iOjEsImlhdCI6MTU2NTE5NjcwMn0.JUsaN9ManYkAQQAF1H5jQUfZdSfuIJB7YB_2h7fNp54'
@@ -49,7 +50,7 @@ const bsClient = {
     });
   }
 }
-
+*/
 const express = require("express");
 const app = express();
 app.get("/", (request, response) => {
