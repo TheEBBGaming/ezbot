@@ -14,6 +14,7 @@ dependencies:
   parse-ms: 2.1.0
   quick.db: 7.0.0-b22
   request: 2.88.0
+  request-promise: 4.2.4
   xhr2: 0.2.0
 packages:
   /@google-cloud/promisify/1.0.2:
@@ -273,6 +274,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-S4XzBk5sMB+Rcb/LNcpzXr57VRTxgAvaAEDAl1AwRx27j00hT84O6OkteE7u8UB3NuaaygCRrEpqox4uDOrbdQ==
+  /bluebird/3.7.1:
+    dev: false
+    resolution:
+      integrity: sha512-DdmyoGCleJnkbp3nkbxTLJ18rjDsE4yCggEwKNXkeV123sPNfOCYeDoeuOY+F2FrSjO1YXcTU+dsy96KMy+gcg==
   /body-parser/1.19.0:
     dependencies:
       bytes: 3.1.0
@@ -1432,6 +1437,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-GEn74ZffufCmkDDLNcl3uuyF/aSD6exEyh1v/ZSdAomB82t6G9hzJVRx0jBmLDW+VfZqks3aScmMw9DszwUalA==
+  /psl/1.4.0:
+    dev: false
+    resolution:
+      integrity: sha512-HZzqCGPecFLyoRj5HLfuDSKYTJkAfB5thKBIkRHtGjWwY7p1dAyveIbXIq4tO0KYfDF2tHqPUgY9SDnGm00uFw==
   /punycode/1.4.1:
     dev: false
     resolution:
@@ -1509,6 +1518,16 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-jItXPLmrSR8jmTRmRWJXCnGJsfy85mB3Wd/uINMXA65yrnFo0cPClFIUWzo2najVNSl+mx7/4W8ttlLWJe99pQ==
+  /request-promise-core/1.1.2:
+    dependencies:
+      lodash: 4.17.15
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    peerDependencies:
+      request: ^2.34
+    resolution:
+      integrity: sha512-UHYyq1MO8GsefGEt7EprS8UrXsm1TxEvFUX1IMTuSLU2Rh7fTIdFtl8xD7JiEYiWU2dl+NYAjCTksTehQUxPag==
   /request-promise-core/1.1.2/request@2.88.0:
     dependencies:
       lodash: 4.17.15
@@ -1535,6 +1554,19 @@ packages:
       request: ^2.34
     resolution:
       integrity: sha512-rIMnbBdgNViL37nZ1b3L/VfPOpSi0TqVDQPAvO6U14lMzOLrt5nilxCQqtDKhZeDiW0/hkCXGoQjhgJd/tCh6w==
+  /request-promise/4.2.4:
+    dependencies:
+      bluebird: 3.7.1
+      request-promise-core: 1.1.2
+      stealthy-require: 1.1.1
+      tough-cookie: 2.5.0
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    peerDependencies:
+      request: ^2.34
+    resolution:
+      integrity: sha512-8wgMrvE546PzbR5WbYxUQogUnUDfM0S7QIFZMID+J73vdFARkFy+HElj4T+MWYhpXwlLp0EQ8Zoj8xUA0he4Vg==
   /request/2.88.0:
     dependencies:
       aws-sign2: 0.7.0
@@ -1812,7 +1844,7 @@ packages:
       integrity: sha512-Q5srk/4vDM54WJsJio3XNn6K2sCG+CQ8G5Wz6bZhRZoAe/+TxjWB/GlFAnYEbkYVlON9FMk/fE3h2RLpPXo4lQ==
   /tough-cookie/2.5.0:
     dependencies:
-      psl: 1.2.0
+      psl: 1.4.0
       punycode: 2.1.1
     dev: false
     engines:
@@ -2029,4 +2061,5 @@ specifiers:
   parse-ms: ^2.0.0
   quick.db: ^7.0.0-b22
   request: ^2.88.0
+  request-promise: ^4.2.4
   xhr2: ^0.2.0

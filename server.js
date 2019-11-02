@@ -17,6 +17,7 @@ const bsClient = new BrawlStars.Client({
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJyZWFzb24iOiJTdGFyZHVzdEJTIEJvdCIsInZlcnNpb24iOjEsImlhdCI6MTU2NTE5NjcwMn0.JUsaN9ManYkAQQAF1H5jQUfZdSfuIJB7YB_2h7fNp54"
 });
 const http = require("http");
+const rp = require("request-promise");
 const express = require("express");
 const app = express();
 app.get("/", (request, response) => {
