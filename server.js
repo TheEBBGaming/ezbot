@@ -34,17 +34,26 @@ client.on("ready", () => {
   let ezguild = client.guilds.get("518276112040853515");
   let ezrole = ezguild.roles.get("536995863050846238");
   let mmrole = ezguild.roles.get("532723522045345812");
+  let prevez = "red";
+  let prevmm = "blue";
   async function changeColors() {
-    if (ezrole.hexColor.toUpperCase() === "#E14B4B") {
+    if (prevez === "red") {
       ezrole.setColor("#2688D8");
-    } else if (ezrole.hexColor.toUpperCase() === "#2688D8") {
+      prevez = "blue";
+    } else {
       ezrole.setColor("#E14B4B");
+      prevez = "red";
     };
-    if (mmrole.hexColor.toUpperCase() === "#E14B4B") {
-      ezrole.setColor("#2688D8");
-    } else if (mmrole.hexColor.toUpperCase() === "#2688D8") ezrole.setColor("#E14B4B");
+    if (prevmm === "red") {
+      mmrole.setColor("#2688D8");
+      prevmm = "blue";
+    } else {
+      mmrole.setColor("#E14B4B");
+      prevmm = "red";
+    };
   };
   setInterval(changeColors, 5000);
+  
 });
 
 client.on("guildMemberAdd", member => {
