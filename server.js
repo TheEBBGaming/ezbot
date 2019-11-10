@@ -19,38 +19,6 @@ const bsClient = new BrawlStars.Client({
 
 const http = require("http");
 const rp = require("request-promise");
-/*
-const bsreqops = {
-  headers: {
-    Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJyZWFzb24iOiJTdGFyZHVzdEJTIEJvdCIsInZlcnNpb24iOjEsImlhdCI6MTU2NTE5NjcwMn0.JUsaN9ManYkAQQAF1H5jQUfZdSfuIJB7YB_2h7fNp54'
-  },
-  json: true
-};
-
-const bsClient = {
-  getPlayer: function(tag) {
-    console.log("got this far");
-    bsreqops.url = `https://api.starlist.pro/v1/player?tag=${tag}`;
-    rp(bsreqops)
-    .then((body) => {
-      return body;
-    })
-    .catch ((e) => {
-      throw new Error(e);
-    });
-  },
-  getClub: function(tag) {
-    bsreqops.url = `https://api.starlist.pro/v1/ckub?tag=${tag}`;
-    rp(bsreqops)
-    .then((body) => {
-      return body;
-    })
-    .catch ((e) => {
-      throw new Error(e);
-    });
-  }
-}
-*/
 const express = require("express");
 const app = express();
 app.get("/", (request, response) => {
@@ -63,6 +31,20 @@ setInterval(() => {
 
 client.on("ready", () => {
   console.log("DARUK'S PROTECTION IS READY TO ROLL");
+  let ezguild = client.guilds.get("518276112040853515");
+  let ezrole = ezguild.roles.get("536995863050846238");
+  let mmrole = ezguild.roles.get("532723522045345812");
+  async function changeColors() {
+    if (ezrole.hexColor.toUpperCase() === "#E14B4B") {
+      ezrole.setColor("#2688D8");
+    } else if (ezrole.hexColor.toUpperCase() === "#2688D8") {
+      ezrole.setColor("#E14B4B");
+    };
+    if (mmrole.hexColor.toUpperCase() === "#E14B4B") {
+      ezrole.setColor("#2688D8");
+    } else if (mmrole.hexColor.toUpperCase() === "#2688D8") ezrole.setColor("#E14B4B");
+  };
+  setInterval(changeColors, 5000);
 });
 
 client.on("guildMemberAdd", member => {
