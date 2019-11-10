@@ -524,7 +524,7 @@ client.on("message", message => {
           argtwo = await bsClient.getPlayer(uif[0]);
           ruif = uif[0];
         }
-            db.set(`${loopMemb.id}.info`, [ruif, argtwo]);
+            await db.set(`${loopMemb.id}.info`, [ruif, argtwo]);
             userProfile = argtwo;
           };
           resetInfo();
@@ -633,12 +633,20 @@ client.on("message", message => {
           isGuest = true;
       };
     };
-      if (ctr > 7) {
+      if (ctr > 5) {
       ctr = 0;
       console.log("waiting...");
-      setTimeout(doitall, 8000);
+      setTimeout(doitall, 5000)
+      .catch(e => {
+        console.log(e);
+        return;
+      });
       } else {
-        doitall();
+        doitall()
+        .catch(e => {
+          console.log(e);
+          return;
+        });
       };
       };
     };
