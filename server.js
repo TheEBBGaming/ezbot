@@ -34,8 +34,8 @@ client.on("ready", () => {
   let ezguild = client.guilds.get("518276112040853515");
   let ezrole = ezguild.roles.get("536995863050846238");
   let mmrole = ezguild.roles.get("532723522045345812");
-  let prevez = "red";
-  let prevmm = "blue";
+  let prevez = "blue";
+  let prevmm = "red";
   async function changeColors() {
     if (prevez === "red") {
       ezrole.setColor("#2688D8");
