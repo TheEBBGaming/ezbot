@@ -522,6 +522,7 @@ client.on("message", message => {
     for (let i = 0; i < membArr.length; i++) {
         let loopMemb = message.guild.members.get(membArr[i]);
         if (!db.fetch(`${loopMemb.id}.info`)) continue;
+        if (db.fetch(`${loopMemb.id}.hasrefreshed`)) continue;
         ctr += 1;
         async function doitall() {
         let uif = db.fetch(`${loopMemb.id}.info`);
@@ -642,17 +643,18 @@ client.on("message", message => {
           removeRoles();
           isGuest = true;
       };
+      await db.set(`${loopMemb.id}.hasrefreshed`, true);
     };
       if (ctr > 5) {
       ctr = 0;
       console.log("waiting...");
-      setTimeout(doitall, 5000)
+      await setTimeout(doitall, 5000)
       .catch(e => {
         console.log(e);
         return;
       });
       } else {
-        doitall()
+        await doitall()
         .catch(e => {
           console.log(e);
           return;
