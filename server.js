@@ -66,6 +66,7 @@ client.on("ready", () => {
 client.on("guildMemberAdd", member => {
   let maMember = client.guilds.get("518276112040853515").members.get(member.id);
   let userInfo = db.fetch(`${maMember.id}.info`);
+  async function fixRoles() {
   if (!userInfo) {
     let welcEmb = new Discord.RichEmbed()
       .setColor(0xeba911)
@@ -201,9 +202,11 @@ client.on("guildMemberAdd", member => {
       }, 5000);
     });
     member.send(
-      "Welcome back to the server! I've given you your roles back, but I might've made a mistake. If so, please let a Moderator know!"
+      "Welcome back to the server! I've given you your roles back, but it might take up to a minute. I might have made a mistake. If so, please let a Moderator know!"
     );
   }
+  };
+  setTimeout(fixRoles, 15000)
 });
 
 client.on("message", message => {
