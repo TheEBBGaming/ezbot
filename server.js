@@ -645,10 +645,9 @@ client.on("message", message => {
       };
       await db.set(`${loopMemb.id}.hasrefreshed`, true);
     };
-      if (ctr > 5) {
+      if (ctr > 1) {
       ctr = 0;
-      console.log("waiting...");
-      await setTimeout(doitall, 5000)
+      await setTimeout(doitall, 1200)
       .catch(e => {
         console.log(e);
         return;
