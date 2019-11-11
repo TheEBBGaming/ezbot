@@ -38,23 +38,23 @@ client.on("ready", () => {
   let prevmm = "red";
   async function changeColors() {
     if (prevez === "red") {
-      ezrole.setColor("#2688D8");
+      await ezrole.setColor("#2688D8");
       prevez = "blue";
       console.log("changed ez");
     } else {
-      ezrole.setColor("#E14B4B");
+      await ezrole.setColor("#E14B4B");
       prevez = "red";
       console.log("changed ez");
 
 
     };
     if (prevmm === "red") {
-      mmrole.setColor("#2688D8");
+      await mmrole.setColor("#2688D8");
       prevmm = "blue";
       console.log("changed mm");
 
     } else {
-      mmrole.setColor("#E14B4B");
+      await mmrole.setColor("#E14B4B");
       prevmm = "red";
       console.log("changed mm");
     };
