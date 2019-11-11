@@ -528,7 +528,6 @@ client.on("message", message => {
         let uif = db.fetch(`${loopMemb.id}.info`);
           async function resetInfo() {
             if (typeof(uif[0]) !== "string") { 
-            console.log("error with " + loopMemb);
           argtwo = await bsClient.getPlayer(uif[0][0]);
           ruif = uif[0][0];
         } else {
@@ -543,7 +542,7 @@ client.on("message", message => {
           let clubList = db.fetch("clubList");
           let clArray = clubList;
           let guildRole;
-          userProfile = db.fetch(`${membArr[i]}.info`[0])
+          userProfile = db.fetch(`${membArr[i]}.info`)[1]
           let posRoles = [
             ["Member", "550518379149131776"],
             ["Senior", "550518022939344896"],
@@ -648,10 +647,6 @@ client.on("message", message => {
       if (ctr > 1) {
       ctr = 0;
       await setTimeout(doitall, 1200)
-      .catch(e => {
-        console.log(e);
-        return;
-      });
       } else {
         await doitall()
         .catch(e => {
