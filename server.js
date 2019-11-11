@@ -536,7 +536,6 @@ client.on("message", message => {
           ruif = uif[0];
         }
             await db.set(`${loopMemb.id}.info`, [ruif, argtwo]);
-            userProfile = argtwo;
           };
           resetInfo();
           maMember = loopMemb;
@@ -544,6 +543,7 @@ client.on("message", message => {
           let clubList = db.fetch("clubList");
           let clArray = clubList;
           let guildRole;
+          userProfile = db.fetch(`${membArr[i]}.info`[0])
           let posRoles = [
             ["Member", "550518379149131776"],
             ["Senior", "550518022939344896"],
@@ -553,7 +553,7 @@ client.on("message", message => {
           let grName;
           let isGuest = false;
           let usersclub;
-          if (!userProfile.club || !userProfile.club.name.startsWith("EZ")) {
+          if (!userProfile || !userProfile.club || !userProfile.club.name.startsWith("EZ")) {
             if (maMember.roles.has("550521408799768587")) await maMember.removeRole("550521408799768587");
             if (maMember.roles.has("582029503241388061")) await maMember.removeRole("582029503241388061");
             if (authorMember.roles.has("608708416478642227")) await authorMember.removeRole("608708416478642227");
