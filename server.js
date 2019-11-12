@@ -689,7 +689,7 @@ client.on("message", message => {
 
   if (msg.startsWith(`${prefix}REFRESH`)) {
     console.log("can compute");
-    if (message.author.id === "288853176210161666" && args[0])
+    if (userModRole && args[0])
       maMember = message.mentions.members.first();
     userInfo = db.fetch(`${maMember.id}.info`);
     let argtwo;
