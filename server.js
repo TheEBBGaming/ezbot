@@ -729,7 +729,7 @@ client.on("message", message => {
       let isGuest = false;
       let usersclub;
       if (!userProfile) return message.channel.send("Error. Couldn't get tag.");
-      if (userProfile.club && userProfile.club.name.startsWith("EZ")) {
+      if (userProfile.club.name.startsWith("EZ")) {
         if (maMember.roles.has("550521408799768587"))
           await maMember.removeRole("550521408799768587");
         let userClub = userProfile.club.name.slice(3);
@@ -739,6 +739,7 @@ client.on("message", message => {
               if (maMember.roles.has(posRoles[j][1])) {
                 guildRole = posRoles[j][1];
                 grName = posRoles[j][0];
+              } else {
                 continue;
               }
             }
@@ -785,8 +786,7 @@ client.on("message", message => {
         }
         await removeRoles().then(() => {
           addRoles();
-        });              } else {
-
+        });
       } else {
         if (authorMember.roles.has("608708416478642227"))
           authorMember.removeRole("608708416478642227");
