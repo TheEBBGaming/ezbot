@@ -1,0 +1,51 @@
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+curl ifconfig.co
+curl https://ip-ranges.amazonaws.com/ip-ranges.json | jq -r '.prefixes[] | select(.region=="us-east-1") | select(.service=="EC2") | .ip_prefix'
+curl https://ip-ranges.amazonaws.com/ip-ranges.json | jq -r '.prefixes[] | select(.region=="us-east-1") | select(.service=="EC2") | .ip_prefix'
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+refresh
+git prune; git gc
