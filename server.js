@@ -2,35 +2,26 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const db = require("quick.db");
 const BrawlStars = require("brawlstars");
+const bsClient = new BrawlStars.Client({
+  token:
+    process.env.BSCLIENT_TOKEN
+});
 const vision = require("@google-cloud/vision");
 const visionClient = new vision.ImageAnnotatorClient();
 const cloudinary = require("cloudinary");
-const matchAll = require("match-all");
-require("events").EventEmitter.prototype._MaxListeners = 105;
 cloudinary.config({
   cloud_name: "stardustbs",
-  api_key: "167498976851882",
-  api_secret: "obEobf9il40RtiJ5YlkA4Z5cGew"
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 });
-const bsClient = new BrawlStars.Client({
-  token:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaXNjb3JkX3VzZXJfaWQiOiIyODg4NTMxNzYyMTAxNjE2NjYiLCJyZWFzb24iOiJTdGFyZHVzdEJTIEJvdCIsInZlcnNpb24iOjEsImlhdCI6MTU2NTE5NjcwMn0.JUsaN9ManYkAQQAF1H5jQUfZdSfuIJB7YB_2h7fNp54"
-});
-
+const matchAll = require("match-all");
+require("events").EventEmitter.prototype._MaxListeners = 105;
 const http = require("http");
 const rp = require("request-promise");
 const express = require("express");
-const app = express();
-app.get("/", (request, response) => {
-  response.sendStatus(200);
-});
-app.listen(process.env.PORT);
-setInterval(() => {
-  http.get(`http://lmntz.glitch.me/`);
-}, 80000);
 
 client.on("ready", () => {
-  console.log("DARUK'S PROTECTION IS READY TO ROLL");
+  console.log("ELEMENTZ IS READY TO ROLL");
   let ezguild = client.guilds.get("518276112040853515");
   let ezrole = ezguild.roles.get("536995863050846238");
   let mmrole = ezguild.roles.get("532723522045345812");
@@ -2076,5 +2067,5 @@ client.on("message", message => {
   }
 });
 
-client.login(process.env.TOKEN);
+client.login(process.env.DISCORD_TOKEN);
  
