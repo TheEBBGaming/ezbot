@@ -20,6 +20,7 @@ const http = require("http");
 const rp = require("request-promise");
 const express = require("express");
 
+
 client.on("ready", () => {
   console.log("ELEMENTZ IS READY TO ROLL");
   let ezguild = client.guilds.get("518276112040853515");
