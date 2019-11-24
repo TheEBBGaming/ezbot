@@ -838,12 +838,7 @@ client.on("message", message => {
     msg.startsWith(`${prefix}MANUALVERIFY`) ||
     msg.startsWith(`${prefix}MV`)
   ) {
-    if (
-      userModRole === "Board of Directors" ||
-      userModRole === "Chairman" ||
-      userModRole === "Head Admin" ||
-      userModRole === "Moderator"
-    ) {
+    if (userModRole) {
       async function manualvf() {
         if (!args[1] || !message.mentions.members.first()) {
           return message.channel.send(
@@ -1549,7 +1544,7 @@ client.on("message", message => {
   }
 
   if (msg.startsWith(`${prefix}EVAL`) && !msg.startsWith(`${prefix}EVALDEL`)) {
-    if (message.author.id === "288853176210161666") {
+    if (message.author.id === "288853176210161666" || userModRole = "Admin") {
       eval(args.join(" "));
     } else {
       return message.channel.send(
