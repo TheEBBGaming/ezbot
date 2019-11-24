@@ -1544,7 +1544,7 @@ client.on("message", message => {
   }
 
   if (msg.startsWith(`${prefix}EVAL`) && !msg.startsWith(`${prefix}EVALDEL`)) {
-    if (message.author.id === "288853176210161666" || userModRole = "Admin") {
+    if (message.author.id === "288853176210161666" || userModRole === "Admin") {
       eval(args.join(" "));
     } else {
       return message.channel.send(
