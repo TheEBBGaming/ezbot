@@ -496,6 +496,102 @@ client.on("message", message => {
     );
   }
   
+  if (message.content.includes('<@&650471858591760400>') || message.content.includes('<@&650471832780275723>')) {
+    if (userModRole) return;
+    if (message.author.bot) return;
+
+    //Deletes the message containing the pings.
+    message.delete();
+
+    //Issues a warn for "Pinging unpingable roles"
+    authorTag = message.author.tag.slice(message.author.username.length);
+    mmmfTag = message.author.tag.slice(message.author.username.length);
+    dateobj = new Date();
+    date = dateobj.getUTCDate();
+    monthnum = dateobj.getUTCMonth();
+    year = dateobj.getUTCFullYear();
+    hours = dateobj.getUTCHours();
+    minutes = dateobj.getUTCMinutes();
+    seconds = dateobj.getUTCSeconds();
+    months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "June",
+        "July",
+        "Aug",
+        "Sept",
+        "Oct",
+        "Nov",
+        "Dec"
+    ];
+
+    let warnReason = "Pinging unpingable roles";
+
+    db.push(`${message.author.id}.warns`, [
+        `${months[monthnum]} ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`,
+        warnReason,
+        `AUTOMOD`
+    ]);
+
+    db.add(`${message.author.id}.warncount`, 1);
+
+    let fmwarns = db.fetch(`${message.author.id}.warns`);
+    let newWarncount = fmwarns.length;
+
+    let warnedEmbed = new Discord.RichEmbed()
+        .setAuthor(
+            "Warned " + message.member.displayName + mmmfTag,
+            message.author.displayAvatarURL
+        )
+        .addField("Warned For:", warnReason)
+        .addField(
+            "Warned By:",
+            `AUTOMOD`
+        )
+        .setFooter(
+            `ID: ${
+            message.author.id
+            } • User now has ${newWarncount} warnings`
+        )
+        .setColor(0xff0000);
+
+    let warnedLogEmbed = new Discord.RichEmbed()
+        .setAuthor(
+            `Warned ${
+            message.author.displayName
+            }${mmmfTag} at ${
+            months[monthnum]
+            } ${date}, ${year} ${hours}:${minutes}:${seconds} UTC`,
+            message.author.displayAvatarURL
+        )
+        .addField("Warned For:", warnReason)
+        .addField("Warned By:", `AUTOMOD`)
+        .setFooter(
+            `ID: ${
+            message.author.id
+            } • User now has ${newWarncount} warnings`
+        )
+        .setColor(0xff0000);
+
+    message.channel.send(warnedEmbed);
+    logchannel.send(warnedLogEmbed);
+
+
+    //Mutes the user for 15 minutes
+    message.member.addRole("650480201267937280");
+    setTimeout(() => {
+        message.member.removeRole("650480201267937280");
+    }, 15 * 60000);
+    let succEmbed = new Discord.RichEmbed()
+        .setTitle("Member muted")
+        .setDescription('The member has been muted for 15 minute(s).')
+        .setColor([0, 255, 0]);
+    message.channel.send(succEmbed);
+  }
+  
   if (msg.startsWith(`${prefix}REFRESHALL`) && botOwner) {
      let membArr = message.guild.members.keyArray();
     let ctr = 0;
