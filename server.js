@@ -581,9 +581,9 @@ client.on("message", message => {
 
 
     //Mutes the user for 15 minutes
-    message.member.addRole("650480201267937280");
+    message.member.addRole("518892881382080512");
     setTimeout(() => {
-        message.member.removeRole("650480201267937280");
+        message.member.removeRole("518892881382080512");
     }, 15 * 60000);
     let succEmbed = new Discord.RichEmbed()
         .setTitle("Member muted")
