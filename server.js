@@ -1880,7 +1880,7 @@ client.on("message", message => {
         );
       let warnsEmbed = new Discord.RichEmbed().setColor(0x0000ff);
       async function sendEmbeds() {
-        for (let i = 0; i < warnings.length; i++) {
+        for (let i = 0; i < warnCount; i++) {
           if (i === 24) {
             message.channel.send(warnsEmbed);
             warnsEmbed = new Discord.RichEmbed().setColor(0x0000ff);
