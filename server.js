@@ -496,7 +496,7 @@ client.on("message", message => {
     );
   }
   
-  if (message.content.includes('<@&650471858591760400>') || message.content.includes('<@&650471832780275723>')) {
+  if (message.content.includes('<@&649015258148503552>') || message.content.includes('<@&560576366232469514>') || message.content.includes('<@&560576306996051969>')) {
     if (userModRole) return;
     if (message.author.bot) return;
 
