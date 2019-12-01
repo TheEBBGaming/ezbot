@@ -467,7 +467,7 @@ client.on("message", message => {
     let theBank = db.fetch(`${firstMentioned.id}.money`);
     if (theBank === null) theBank = 0;
     warnings = db.fetch(`${firstMentioned.id}.warns`);
-    warncount = db.fetch(`${firstMentioned.id}.warncount`);
+    warncount = warnings.length;
     if ((warncount = null)) warncount = 0;
     mmmfTag = message.mentions.members
       .first()
@@ -1880,7 +1880,7 @@ client.on("message", message => {
         );
       let warnsEmbed = new Discord.RichEmbed().setColor(0x0000ff);
       async function sendEmbeds() {
-        for (let i = 0; i < warnCount; i++) {
+        for (let i = 0; i < warncount; i++) {
           if (i === 24) {
             message.channel.send(warnsEmbed);
             warnsEmbed = new Discord.RichEmbed().setColor(0x0000ff);
