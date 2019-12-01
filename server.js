@@ -1792,7 +1792,7 @@ client.on("message", message => {
   if (msg.startsWith(`${prefix}WARNINGS`)) {
     if (userModRole === null) return;
     warnings = db.fetch(`${message.mentions.members.first().id}.warns`);
-    if (warnings.length === 0 || warnings === null) {
+    if (!warnings) {
       authorTag = message.author.tag.slice(message.author.username.length);
       let warningsEmbed = new Discord.RichEmbed()
         .setColor(0xffff00)
