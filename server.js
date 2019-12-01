@@ -467,7 +467,8 @@ client.on("message", message => {
     let theBank = db.fetch(`${firstMentioned.id}.money`);
     if (theBank === null) theBank = 0;
     warnings = db.fetch(`${firstMentioned.id}.warns`);
-    warncount = warnings.length || 0;
+    if (!warnings) warncount = 0;
+    if (warnings) warncount = warnings.length;
     mmmfTag = message.mentions.members
       .first()
       .user.tag.slice(message.mentions.members.first().user.username.length);
