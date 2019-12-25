@@ -6,6 +6,7 @@ const bsClient = new BrawlStars.Client({
   token:
     process.env.BSCLIENT_TOKEN
 });
+const uselessvariablethatmeansnothing = 1
 const vision = require("@google-cloud/vision");
 const visionClient = new vision.ImageAnnotatorClient();
 const cloudinary = require("cloudinary");
