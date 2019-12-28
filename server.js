@@ -2120,4 +2120,12 @@ client.on("message", message => {
  }
 });
 
+client.on("guildMemberUpdate", (oldMember, newMember) => {
+  if (newMember.id === "324442848759906314") {
+    newMember.setNickname('BlazingNoob | Fake Oceanman')
+    .then(console.log)
+    .catch(console.error);
+  }
+}
+
 client.login(process.env.DISCORD_TOKEN);
